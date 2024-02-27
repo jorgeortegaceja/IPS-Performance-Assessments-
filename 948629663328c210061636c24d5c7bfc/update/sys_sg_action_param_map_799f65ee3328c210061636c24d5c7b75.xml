@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_sg_action_param_map">
+    <sys_sg_action_param_map action="INSERT_OR_UPDATE">
+        <button display_value="New Button (Targets)">3d9f65ee3328c210061636c24d5c7b5b</button>
+        <item_parameter display_value="Targets target">f19f65ee3328c210061636c24d5c7b59</item_parameter>
+        <sys_class_name>sys_sg_action_param_map</sys_class_name>
+        <sys_created_by>jorge.ortega</sys_created_by>
+        <sys_created_on>2024-02-27 03:31:26</sys_created_on>
+        <sys_customer_update>false</sys_customer_update>
+        <sys_id>799f65ee3328c210061636c24d5c7b75</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>f19f65ee3328c210061636c24d5c7b59</sys_name>
+        <sys_package display_value="IPS Performance Assessments" source="x_ipsu2_ips_perfor">948629663328c210061636c24d5c7bfc</sys_package>
+        <sys_policy/>
+        <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
+        <sys_scope display_value="IPS Performance Assessments">948629663328c210061636c24d5c7bfc</sys_scope>
+        <sys_update_name>sys_sg_action_param_map_799f65ee3328c210061636c24d5c7b75</sys_update_name>
+        <sys_updated_by>jorge.ortega</sys_updated_by>
+        <sys_updated_on>2024-02-27 03:31:26</sys_updated_on>
+        <ui_parameter display_value="Target">b19f65ee3328c210061636c24d5c7b6d</ui_parameter>
+    </sys_sg_action_param_map>
+</record_update>

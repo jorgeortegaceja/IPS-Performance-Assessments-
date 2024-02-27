@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="b3b234dd0fe6ee006dc98fbce1050e6e" table="sys_app_application">
+    <sys_app_application action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <category display_value="">Custom Applications</category>
+        <description/>
+        <device_type>browser</device_type>
+        <hint/>
+        <name/>
+        <order/>
+        <roles>x_ipsu2_ips_perfor.admin,x_ipsu2_ips_perfor.user,x_ipsu2_ips_perfor.manager,x_ipsu2_ips_perfor.rh</roles>
+        <sys_class_name>sys_app_application</sys_class_name>
+        <sys_created_by>jorge.ortega</sys_created_by>
+        <sys_created_on>2024-02-27 03:31:49</sys_created_on>
+        <sys_customer_update>false</sys_customer_update>
+        <sys_domain>b3b234dd0fe6ee006dc98fbce1050e6e</sys_domain>
+        <sys_domain_path>!!!/!!!/</sys_domain_path>
+        <sys_id>6bafe9ae3328c210061636c24d5c7bec</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>IPS Performance Evaluations</sys_name>
+        <sys_overrides/>
+        <sys_package display_value="IPS Performance Assessments" source="x_ipsu2_ips_perfor">948629663328c210061636c24d5c7bfc</sys_package>
+        <sys_policy/>
+        <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
+        <sys_scope display_value="IPS Performance Assessments">948629663328c210061636c24d5c7bfc</sys_scope>
+        <sys_update_name>sys_app_application_6bafe9ae3328c210061636c24d5c7bec</sys_update_name>
+        <sys_updated_by>jorge.ortega</sys_updated_by>
+        <sys_updated_on>2024-02-27 03:31:49</sys_updated_on>
+        <title>IPS Performance Evaluations</title>
+        <view_name/>
+    </sys_app_application>
+</record_update>

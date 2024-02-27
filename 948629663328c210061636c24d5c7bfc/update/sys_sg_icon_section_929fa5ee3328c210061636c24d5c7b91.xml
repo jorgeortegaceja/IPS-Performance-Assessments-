@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_sg_icon_section">
+    <sys_sg_icon_section action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <applets>0e9fa5ee3328c210061636c24d5c7b1b</applets>
+        <card_size/>
+        <column_count/>
+        <custom_height/>
+        <custom_width/>
+        <data_item/>
+        <display_feed_count>false</display_feed_count>
+        <hide_header>false</hide_header>
+        <hide_section_if_empty>false</hide_section_if_empty>
+        <is_custom_size>false</is_custom_size>
+        <is_hidden_preference_name/>
+        <orientation>horizontal</orientation>
+        <required_roles>x_ipsu2_ips_perfor.admin,x_ipsu2_ips_perfor.user,x_ipsu2_ips_perfor.manager,x_ipsu2_ips_perfor.rh</required_roles>
+        <row_count/>
+        <sys_class_name>sys_sg_icon_section</sys_class_name>
+        <sys_created_by>jorge.ortega</sys_created_by>
+        <sys_created_on>2024-02-27 03:31:27</sys_created_on>
+        <sys_customer_update>false</sys_customer_update>
+        <sys_id>929fa5ee3328c210061636c24d5c7b91</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Initiatives</sys_name>
+        <sys_package display_value="IPS Performance Assessments" source="x_ipsu2_ips_perfor">948629663328c210061636c24d5c7bfc</sys_package>
+        <sys_policy/>
+        <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
+        <sys_scope display_value="IPS Performance Assessments">948629663328c210061636c24d5c7bfc</sys_scope>
+        <sys_update_name>sys_sg_icon_section_929fa5ee3328c210061636c24d5c7b91</sys_update_name>
+        <sys_updated_by>jorge.ortega</sys_updated_by>
+        <sys_updated_on>2024-02-27 03:31:27</sys_updated_on>
+        <table/>
+        <title>Initiatives</title>
+        <visible_condition/>
+        <wide_column_count/>
+    </sys_sg_icon_section>
+</record_update>

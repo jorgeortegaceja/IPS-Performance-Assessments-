@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_sg_item_parameter">
+    <sys_sg_item_parameter action="INSERT_OR_UPDATE">
+        <default_value/>
+        <name>Performance Assessments evaluator</name>
+        <parent>519f25ee3328c210061636c24d5c7b52</parent>
+        <parent_table>sys_sg_write_back_action_item</parent_table>
+        <sys_class_name>sys_sg_item_parameter</sys_class_name>
+        <sys_created_by>jorge.ortega</sys_created_by>
+        <sys_created_on>2024-02-27 03:31:24</sys_created_on>
+        <sys_customer_update>false</sys_customer_update>
+        <sys_id>519f25ee3328c210061636c24d5c7b56</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Performance Assessments evaluator</sys_name>
+        <sys_package display_value="IPS Performance Assessments" source="x_ipsu2_ips_perfor">948629663328c210061636c24d5c7bfc</sys_package>
+        <sys_policy/>
+        <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
+        <sys_scope display_value="IPS Performance Assessments">948629663328c210061636c24d5c7bfc</sys_scope>
+        <sys_update_name>sys_sg_item_parameter_519f25ee3328c210061636c24d5c7b56</sys_update_name>
+        <sys_updated_by>jorge.ortega</sys_updated_by>
+        <sys_updated_on>2024-02-27 03:31:24</sys_updated_on>
+        <type>string</type>
+    </sys_sg_item_parameter>
+</record_update>

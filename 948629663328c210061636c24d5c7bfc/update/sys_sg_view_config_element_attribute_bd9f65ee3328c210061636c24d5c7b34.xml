@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_sg_view_config_element_attribute">
+    <sys_sg_view_config_element_attribute action="INSERT_OR_UPDATE">
+        <description/>
+        <name display_value="FieldValue">c2eed5c2b7321010df65f6efce11a9cf</name>
+        <sys_class_name>sys_sg_view_config_element_attribute</sys_class_name>
+        <sys_created_by>jorge.ortega</sys_created_by>
+        <sys_created_on>2024-02-27 03:31:25</sys_created_on>
+        <sys_customer_update>false</sys_customer_update>
+        <sys_id>bd9f65ee3328c210061636c24d5c7b34</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>c2eed5c2b7321010df65f6efce11a9cf</sys_name>
+        <sys_package display_value="IPS Performance Assessments" source="x_ipsu2_ips_perfor">948629663328c210061636c24d5c7bfc</sys_package>
+        <sys_policy/>
+        <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
+        <sys_scope display_value="IPS Performance Assessments">948629663328c210061636c24d5c7bfc</sys_scope>
+        <sys_update_name>sys_sg_view_config_element_attribute_bd9f65ee3328c210061636c24d5c7b34</sys_update_name>
+        <sys_updated_by>jorge.ortega</sys_updated_by>
+        <sys_updated_on>2024-02-27 03:31:25</sys_updated_on>
+        <translated_value/>
+        <value>priority</value>
+        <view_config_element display_value="priority-FieldValue">f59f65ee3328c210061636c24d5c7b32</view_config_element>
+    </sys_sg_view_config_element_attribute>
+</record_update>

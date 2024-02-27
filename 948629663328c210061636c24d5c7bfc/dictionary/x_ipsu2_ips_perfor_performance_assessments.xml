@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element db_object_id="9b4ca9ea3328c210061636c24d5c7bae" label="Performance Assessments" max_length="40" name="x_ipsu2_ips_perfor_performance_assessments" type="collection">
+        <element label="Active" max_length="40" name="active" type="boolean"/>
+        <element attributes="edge_encryption_enabled=true" choice="1" label="Classification" max_length="40" name="classification" type="choice">
+            <choice>
+                <element inactive_on_update="false" label="1. Non Achiever" value="1"/>
+                <element inactive_on_update="false" label="2. Underperformer" value="2"/>
+                <element inactive_on_update="false" label="3. Performer" value="3"/>
+                <element inactive_on_update="false" label="4. High performer&#9;" value="4"/>
+                <element inactive_on_update="false" label="5. Overachiever" value="5"/>
+                <element inactive_on_update="false" label="6. Outlier" value="6"/>
+            </choice>
+        </element>
+        <element attributes="edge_encryption_enabled=true" label="Collaborator settings" max_length="800" name="collaborator_settings" type="string"/>
+        <element attributes="edge_encryption_enabled=true" label="Comments" max_length="4000" name="comments" type="journal"/>
+        <element attributes="edge_encryption_enabled=true" label="Download Self-assessment" max_length="1024" name="download_self_assessment" type="url"/>
+        <element attributes="edge_encryption_enabled=true" label="Due date" mandatory="true" max_length="40" name="due_date" type="glide_date_time"/>
+        <element attributes="encode_utf8=false" label="Evaluator" mandatory="true" max_length="32" name="evaluator" reference="sys_user" type="reference"/>
+        <element attributes="edge_encryption_enabled=true" label="Manager settings" max_length="800" name="manager_settings" type="string"/>
+        <element attributes="edge_encryption_enabled=true" label="MY Colaborator Actions/Objectives patch" max_length="600" name="my_colaborator_actions_objectives_patch" type="string"/>
+        <element attributes="edge_encryption_enabled=true" label="MY Colaborator Comments" max_length="600" name="my_colaborator_comments" type="string"/>
+        <element attributes="edge_encryption_enabled=true" label="MY Manager Actions/Objectives patch" max_length="600" name="my_manager_actions_objectives_patch" type="string"/>
+        <element attributes="edge_encryption_enabled=true" label="MY Manager Comments" max_length="600" name="my_manager_comments" type="string"/>
+        <element attributes="edge_encryption_enabled=true" label="Message Mid-year evaluation (Colaborator)" max_length="80" name="m_my_evaluation_colaborator" type="string"/>
+        <element attributes="edge_encryption_enabled=true" label="Message Mid-year evaluation (Leader)" max_length="80" name="m_my_evaluation_leader" type="string"/>
+        <element attributes="edge_encryption_enabled=true" label="Message reason for rejection" max_length="80" name="m_reason_for_rejection" type="string"/>
+        <element attributes="edge_encryption_enabled=true" label="Message Year evaluation (Colaborator)" max_length="80" name="m_ye_evaluation_colaborator" type="string"/>
+        <element attributes="edge_encryption_enabled=true" label="Message Year evaluation (Leader)" max_length="80" name="m_ye_evaluation_leader" type="string"/>
+        <element attributes="edge_encryption_enabled=true" label="Number" max_length="40" name="number" type="string"/>
+        <element attributes="edge_encryption_enabled=true" default="javascript:global.getNextObjNumberPadded();" label="Number 2" max_length="40" name="number_2" type="string"/>
+        <element attributes="encode_utf8=false" label="Opend by" mandatory="true" max_length="32" name="opend_by" reference="sys_user" type="reference"/>
+        <element attributes="edge_encryption_enabled=true" label="Performance assessment year" max_length="40" name="performance_assessment_year" type="glide_date"/>
+        <element attributes="edge_encryption_enabled=true" label="Reason for rejection" max_length="600" name="reason_for_rejection" type="string"/>
+        <element attributes="edge_encryption_enabled=true" choice="1" label="State" max_length="40" name="state" type="choice">
+            <choice>
+                <element inactive_on_update="false" label="Authorization" value="authorization"/>
+                <element inactive_on_update="false" label="Cancel" value="cancel"/>
+                <element inactive_on_update="false" label="Complete" value="complete"/>
+                <element inactive_on_update="false" label="Mid-year Performance Assessment" value="mid_year_performance_assessment"/>
+                <element inactive_on_update="false" label="Mid-year Self Assessment" value="mid_year_self_assessment"/>
+                <element inactive_on_update="false" label="New" value="new"/>
+                <element inactive_on_update="false" label="Target Capture" value="target_capture"/>
+                <element inactive_on_update="false" label="Target correction" value="target_correction"/>
+                <element inactive_on_update="false" label="Year Performance Assessment" value="year_performance_assessment"/>
+                <element inactive_on_update="false" label="Year Self Assessment" value="mid_year_self_assessment"/>
+            </choice>
+        </element>
+        <element default="javascript:current.getTableName();" label="Class" max_length="80" name="sys_class_name" type="sys_class_name"/>
+        <element label="Domain" max_length="32" name="sys_domain" type="domain_id"/>
+        <element attributes="case_sensitive=true" label="Domain Path" max_length="255" name="sys_domain_path" type="domain_path"/>
+        <element attributes="edge_encryption_enabled=true" label="Work Notes" max_length="4000" name="work_notes" type="journal"/>
+        <element attributes="edge_encryption_enabled=true" label="YE Colaborator Comments" max_length="600" name="ye_colaborator_comments" type="string"/>
+        <element attributes="edge_encryption_enabled=true" label="YE Manager Comments" max_length="600" name="ye_manager_comments" type="string"/>
+        <index name="index">
+            <element name="evaluator"/>
+        </index>
+        <index name="index2">
+            <element name="opend_by"/>
+        </index>
+        <index name="index3">
+            <element name="sys_class_name"/>
+        </index>
+        <index name="index4">
+            <element name="sys_domain"/>
+        </index>
+        <index name="index5">
+            <element name="sys_domain_path"/>
+        </index>
+    </element>
+</database>
