@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update>
+    <sys_documentation element="collaborator_actions_objectives_patch" label="Collaborator Actions/Objectives patch" language="en" table="x_ipsu2_ips_perfor_goals">
+        <sys_documentation action="INSERT_OR_UPDATE">
+            <element>collaborator_actions_objectives_patch</element>
+            <help/>
+            <hint/>
+            <label>Collaborator Actions/Objectives patch</label>
+            <language>en</language>
+            <name>x_ipsu2_ips_perfor_goals</name>
+            <plural>Collaborator Actions/Objectives patches</plural>
+            <sys_class_name>sys_documentation</sys_class_name>
+            <sys_created_by>jorge.ortega</sys_created_by>
+            <sys_created_on>2024-04-27 21:12:21</sys_created_on>
+            <sys_customer_update>false</sys_customer_update>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_name>Collaborator Actions/Objectives patch</sys_name>
+            <sys_package display_value="IPS Performance Assessments" source="x_ipsu2_ips_perfor">948629663328c210061636c24d5c7bfc</sys_package>
+            <sys_policy/>
+            <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
+            <sys_scope display_value="IPS Performance Assessments">948629663328c210061636c24d5c7bfc</sys_scope>
+            <sys_update_name>sys_documentation_x_ipsu2_ips_perfor_goals_collaborator_actions_objectives_patch_en</sys_update_name>
+            <sys_updated_by>jorge.ortega</sys_updated_by>
+            <sys_updated_on>2024-04-27 21:12:21</sys_updated_on>
+            <url/>
+            <url_target/>
+        </sys_documentation>
+    </sys_documentation>
+</record_update>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_dependency">
+    <sp_dependency action="INSERT_OR_UPDATE">
+        <module>ips_my_self_assessments</module>
+        <name>Bootstrap</name>
+        <page_load>false</page_load>
+        <sp_portals/>
+        <sys_class_name>sp_dependency</sys_class_name>
+        <sys_created_by>jorge.ortega</sys_created_by>
+        <sys_created_on>2024-04-28 16:47:35</sys_created_on>
+        <sys_customer_update>false</sys_customer_update>
+        <sys_id>76ae2a1ac3390a101d04d6ff05013184</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_name>Bootstrap</sys_name>
+        <sys_package display_value="IPS Performance Assessments" source="x_ipsu2_ips_perfor">948629663328c210061636c24d5c7bfc</sys_package>
+        <sys_policy/>
+        <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
+        <sys_scope display_value="IPS Performance Assessments">948629663328c210061636c24d5c7bfc</sys_scope>
+        <sys_update_name>sp_dependency_76ae2a1ac3390a101d04d6ff05013184</sys_update_name>
+        <sys_updated_by>jorge.ortega</sys_updated_by>
+        <sys_updated_on>2024-04-28 17:11:40</sys_updated_on>
+    </sp_dependency>
+</record_update>

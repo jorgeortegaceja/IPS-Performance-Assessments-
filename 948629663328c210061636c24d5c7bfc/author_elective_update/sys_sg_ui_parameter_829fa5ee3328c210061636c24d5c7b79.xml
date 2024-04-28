@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_sg_ui_parameter">
+    <sys_sg_ui_parameter action="DELETE">
+        <button display_value="Edit Button (Initiatives)">4a9fa5ee3328c210061636c24d5c7b72</button>
+        <button_parent_table>x_ipsu2_ips_perfor_initiatives</button_parent_table>
+        <carried>false</carried>
+        <constant/>
+        <default_value/>
+        <default_value_type>source_field</default_value_type>
+        <field_name>number</field_name>
+        <input_source>user</input_source>
+        <input_style>inline</input_style>
+        <input_type>text</input_type>
+        <mandatory>false</mandatory>
+        <max_entries/>
+        <multi_entry>false</multi_entry>
+        <multi_select>false</multi_select>
+        <name>Number</name>
+        <order/>
+        <parameter_type>button</parameter_type>
+        <placeholder/>
+        <screen/>
+        <search_type>starts_with</search_type>
+        <source_field>number</source_field>
+        <sys_class_name>sys_sg_ui_parameter</sys_class_name>
+        <sys_created_by>jorge.ortega</sys_created_by>
+        <sys_created_on>2024-02-27 03:31:27</sys_created_on>
+        <sys_customer_update>false</sys_customer_update>
+        <sys_id>829fa5ee3328c210061636c24d5c7b79</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Number</sys_name>
+        <sys_package display_value="IPS Performance Evaluations" source="x_ipsu2_ips_perfor">948629663328c210061636c24d5c7bfc</sys_package>
+        <sys_policy/>
+        <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
+        <sys_scope display_value="IPS Performance Evaluations">948629663328c210061636c24d5c7bfc</sys_scope>
+        <sys_update_name>sys_sg_ui_parameter_829fa5ee3328c210061636c24d5c7b79</sys_update_name>
+        <sys_updated_by>jorge.ortega</sys_updated_by>
+        <sys_updated_on>2024-02-27 03:31:27</sys_updated_on>
+        <table_name>x_ipsu2_ips_perfor_initiatives</table_name>
+        <virtual_field_value>false</virtual_field_value>
+    </sys_sg_ui_parameter>
+    <sys_update_version action="INSERT_OR_UPDATE">
+        <action>DELETE</action>
+        <application display_value="IPS Performance Assessments">948629663328c210061636c24d5c7bfc</application>
+        <file_path/>
+        <instance_id>4d0a6ffc6fae9ac0869e7b2f5d3ee49b</instance_id>
+        <instance_name>myplatform</instance_name>
+        <name>sys_sg_ui_parameter_829fa5ee3328c210061636c24d5c7b79</name>
+        <payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_sg_ui_parameter"><sys_sg_ui_parameter action="INSERT_OR_UPDATE"><button display_value="Edit Button (Initiatives)">4a9fa5ee3328c210061636c24d5c7b72</button><button_parent_table>x_ipsu2_ips_perfor_initiatives</button_parent_table><carried>false</carried><constant/><default_value/><default_value_type>source_field</default_value_type><field_name>number</field_name><input_source>user</input_source><input_style>inline</input_style><input_type>text</input_type><mandatory>false</mandatory><max_entries/><multi_entry>false</multi_entry><multi_select>false</multi_select><name>Number</name><order/><parameter_type>button</parameter_type><placeholder/><screen/><search_type>starts_with</search_type><source_field>number</source_field><sys_class_name>sys_sg_ui_parameter</sys_class_name><sys_created_by>jorge.ortega</sys_created_by><sys_created_on>2024-02-27 03:31:27</sys_created_on><sys_customer_update>false</sys_customer_update><sys_id>829fa5ee3328c210061636c24d5c7b79</sys_id><sys_mod_count>0</sys_mod_count><sys_name>Number</sys_name><sys_package display_value="IPS Performance Evaluations" source="x_ipsu2_ips_perfor">948629663328c210061636c24d5c7bfc</sys_package><sys_policy/><sys_replace_on_upgrade>false</sys_replace_on_upgrade><sys_scope display_value="IPS Performance Evaluations">948629663328c210061636c24d5c7bfc</sys_scope><sys_update_name>sys_sg_ui_parameter_829fa5ee3328c210061636c24d5c7b79</sys_update_name><sys_updated_by>jorge.ortega</sys_updated_by><sys_updated_on>2024-02-27 03:31:27</sys_updated_on><table_name>x_ipsu2_ips_perfor_initiatives</table_name><virtual_field_value>false</virtual_field_value></sys_sg_ui_parameter></record_update>]]></payload>
+        <payload_hash>-453913307</payload_hash>
+        <record_name>Number</record_name>
+        <reverted_from/>
+        <source>5c8629663328c210061636c24d5c7bfe</source>
+        <source_table>sys_update_set</source_table>
+        <state>previous</state>
+        <sys_created_by>jorge.ortega</sys_created_by>
+        <sys_created_on>2024-02-27 03:31:34</sys_created_on>
+        <sys_id>f39fa9ee3328c210061636c24d5c7b67</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_recorded_at>18de89e234d0000001</sys_recorded_at>
+        <sys_updated_by>jorge.ortega</sys_updated_by>
+        <sys_updated_on>2024-02-27 03:31:34</sys_updated_on>
+        <type>UI parameter</type>
+        <update_guid>7b9fa9ee1d28c210a7f8ee5845e13966</update_guid>
+        <update_guid_history>7b9fa9ee1d28c210a7f8ee5845e13966:-453913307</update_guid_history>
+    </sys_update_version>
+    <sys_metadata_delete action="INSERT_OR_UPDATE">
+        <sys_audit_delete/>
+        <sys_class_name>sys_metadata_delete</sys_class_name>
+        <sys_created_by>jorge.ortega</sys_created_by>
+        <sys_created_on>2024-04-27 20:33:30</sys_created_on>
+        <sys_customer_update>false</sys_customer_update>
+        <sys_db_object display_value="" name="sys_sg_ui_parameter">sys_sg_ui_parameter</sys_db_object>
+        <sys_id>c00e03686cdd4e18b09e4cf4b5262490</sys_id>
+        <sys_metadata>829fa5ee3328c210061636c24d5c7b79</sys_metadata>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Number</sys_name>
+        <sys_package display_value="IPS Performance Assessments" source="x_ipsu2_ips_perfor">948629663328c210061636c24d5c7bfc</sys_package>
+        <sys_parent/>
+        <sys_policy/>
+        <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
+        <sys_scope display_value="IPS Performance Assessments">948629663328c210061636c24d5c7bfc</sys_scope>
+        <sys_scope_delete display_value="">2ca5452e23e4451ca60ab6cf0b82cec9</sys_scope_delete>
+        <sys_update_name>sys_sg_ui_parameter_829fa5ee3328c210061636c24d5c7b79</sys_update_name>
+        <sys_update_version display_value="sys_sg_ui_parameter_829fa5ee3328c210061636c24d5c7b79">f39fa9ee3328c210061636c24d5c7b67</sys_update_version>
+        <sys_updated_by>jorge.ortega</sys_updated_by>
+        <sys_updated_on>2024-04-27 20:33:30</sys_updated_on>
+    </sys_metadata_delete>
+</record_update>

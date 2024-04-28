@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?><record_update table="sys_sg_item_stream_m2m_master_item">
     <sys_sg_item_stream_m2m_master_item action="INSERT_OR_UPDATE">
         <item_stream display_value="Performance Assessments Item Stream">d19f25ee3328c210061636c24d5c7b3c</item_stream>
-        <master_item display_value="Performance Assessments master_item">9d9f25ee3328c210061636c24d5c7b3d</master_item>
+        <master_item/>
         <sys_class_name>sys_sg_item_stream_m2m_master_item</sys_class_name>
         <sys_created_by>jorge.ortega</sys_created_by>
         <sys_created_on>2024-02-27 03:31:24</sys_created_on>

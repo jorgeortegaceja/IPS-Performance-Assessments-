@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_security_acl_role">
+    <sys_security_acl_role action="DELETE">
+        <sys_class_name>sys_security_acl_role</sys_class_name>
+        <sys_created_by>jorge.ortega</sys_created_by>
+        <sys_created_on>2024-02-27 03:17:11</sys_created_on>
+        <sys_customer_update>false</sys_customer_update>
+        <sys_id>c55c6dea3328c210061636c24d5c7b00</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>x_ipsu2_ips_perfor_performance_assessments.x_ipsu2_ips_perfor.admin</sys_name>
+        <sys_package display_value="IPS Performance Evaluations" source="x_ipsu2_ips_perfor">948629663328c210061636c24d5c7bfc</sys_package>
+        <sys_policy/>
+        <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
+        <sys_scope display_value="IPS Performance Evaluations">948629663328c210061636c24d5c7bfc</sys_scope>
+        <sys_security_acl display_value="x_ipsu2_ips_perfor_performance_assessments">815c2dea3328c210061636c24d5c7bfc</sys_security_acl>
+        <sys_update_name>sys_security_acl_role_c55c6dea3328c210061636c24d5c7b00</sys_update_name>
+        <sys_updated_by>jorge.ortega</sys_updated_by>
+        <sys_updated_on>2024-02-27 03:17:11</sys_updated_on>
+        <sys_user_role display_value="x_ipsu2_ips_perfor.admin" name="x_ipsu2_ips_perfor.admin">60a621a63328c210061636c24d5c7bf2</sys_user_role>
+    </sys_security_acl_role>
+    <sys_update_version action="INSERT_OR_UPDATE">
+        <action>DELETE</action>
+        <application display_value="IPS Performance Assessments">948629663328c210061636c24d5c7bfc</application>
+        <file_path/>
+        <instance_id>4d0a6ffc6fae9ac0869e7b2f5d3ee49b</instance_id>
+        <instance_name>myplatform</instance_name>
+        <name>sys_security_acl_role_c55c6dea3328c210061636c24d5c7b00</name>
+        <payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_security_acl_role"><sys_security_acl_role action="INSERT_OR_UPDATE"><sys_class_name>sys_security_acl_role</sys_class_name><sys_created_by>jorge.ortega</sys_created_by><sys_created_on>2024-02-27 03:17:11</sys_created_on><sys_customer_update>false</sys_customer_update><sys_id>c55c6dea3328c210061636c24d5c7b00</sys_id><sys_mod_count>0</sys_mod_count><sys_name>x_ipsu2_ips_perfor_performance_assessments.x_ipsu2_ips_perfor.admin</sys_name><sys_package display_value="IPS Performance Evaluations" source="x_ipsu2_ips_perfor">948629663328c210061636c24d5c7bfc</sys_package><sys_policy/><sys_replace_on_upgrade>false</sys_replace_on_upgrade><sys_scope display_value="IPS Performance Evaluations">948629663328c210061636c24d5c7bfc</sys_scope><sys_security_acl display_value="x_ipsu2_ips_perfor_performance_assessments">815c2dea3328c210061636c24d5c7bfc</sys_security_acl><sys_update_name>sys_security_acl_role_c55c6dea3328c210061636c24d5c7b00</sys_update_name><sys_updated_by>jorge.ortega</sys_updated_by><sys_updated_on>2024-02-27 03:17:11</sys_updated_on><sys_user_role display_value="x_ipsu2_ips_perfor.admin" name="x_ipsu2_ips_perfor.admin">60a621a63328c210061636c24d5c7bf2</sys_user_role></sys_security_acl_role></record_update>]]></payload>
+        <payload_hash>1309998689</payload_hash>
+        <record_name>x_ipsu2_ips_perfor_performance_assessments.x_ipsu2_ips_perfor.admin</record_name>
+        <reverted_from/>
+        <source>5c8629663328c210061636c24d5c7bfe</source>
+        <source_table>sys_update_set</source_table>
+        <state>previous</state>
+        <sys_created_by>jorge.ortega</sys_created_by>
+        <sys_created_on>2024-02-27 03:17:11</sys_created_on>
+        <sys_id>415c6dea3328c210061636c24d5c7b1d</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_recorded_at>18de890f8f30000001</sys_recorded_at>
+        <sys_updated_by>jorge.ortega</sys_updated_by>
+        <sys_updated_on>2024-02-27 03:17:11</sys_updated_on>
+        <type>Access Roles</type>
+        <update_guid>455c6dea7c28c21023822b17d450f31c</update_guid>
+        <update_guid_history>455c6dea7c28c21023822b17d450f31c:1309998689</update_guid_history>
+    </sys_update_version>
+    <sys_metadata_delete action="INSERT_OR_UPDATE">
+        <sys_audit_delete display_value="Record deleted 2024-04-27 14:31:55">138896c6c3b9c6101d04d6ff05013138</sys_audit_delete>
+        <sys_class_name>sys_metadata_delete</sys_class_name>
+        <sys_created_by>jorge.ortega</sys_created_by>
+        <sys_created_on>2024-04-27 20:31:55</sys_created_on>
+        <sys_customer_update>false</sys_customer_update>
+        <sys_db_object display_value="" name="sys_security_acl_role">sys_security_acl_role</sys_db_object>
+        <sys_id>5ef23ca1161d4f4488e55aa835870190</sys_id>
+        <sys_metadata>c55c6dea3328c210061636c24d5c7b00</sys_metadata>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>x_ipsu2_ips_perfor_performance_assessments.x_ipsu2_ips_perfor.admin</sys_name>
+        <sys_package display_value="IPS Performance Assessments" source="x_ipsu2_ips_perfor">948629663328c210061636c24d5c7bfc</sys_package>
+        <sys_parent display_value="">815c2dea3328c210061636c24d5c7bfc</sys_parent>
+        <sys_policy/>
+        <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
+        <sys_scope display_value="IPS Performance Assessments">948629663328c210061636c24d5c7bfc</sys_scope>
+        <sys_scope_delete display_value="">2ca5452e23e4451ca60ab6cf0b82cec9</sys_scope_delete>
+        <sys_update_name>sys_security_acl_role_c55c6dea3328c210061636c24d5c7b00</sys_update_name>
+        <sys_update_version display_value="sys_security_acl_role_c55c6dea3328c210061636c24d5c7b00">415c6dea3328c210061636c24d5c7b1d</sys_update_version>
+        <sys_updated_by>jorge.ortega</sys_updated_by>
+        <sys_updated_on>2024-04-27 20:31:55</sys_updated_on>
+    </sys_metadata_delete>
+</record_update>

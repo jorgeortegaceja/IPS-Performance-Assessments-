@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?><record_update table="sys_sg_item_stream">
     <sys_sg_item_stream action="INSERT_OR_UPDATE">
-        <data_item display_value="IPS Performance Evaluations Initiatives">f99f65ee3328c210061636c24d5c7bad</data_item>
+        <data_item/>
         <interleaved_field/>
         <name>Initiatives Item Stream</name>
         <sys_class_name>sys_sg_item_stream</sys_class_name>

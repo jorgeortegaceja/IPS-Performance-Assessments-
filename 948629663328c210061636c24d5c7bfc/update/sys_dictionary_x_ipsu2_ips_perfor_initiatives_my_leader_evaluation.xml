@@ -2,13 +2,18 @@
     <sys_dictionary action="INSERT_OR_UPDATE" element="my_leader_evaluation" table="x_ipsu2_ips_perfor_initiatives">
         <active>true</active>
         <array>false</array>
-        <attributes>edge_encryption_enabled=true</attributes>
+        <attributes/>
         <audit>false</audit>
-        <calculation/>
+        <calculation><![CDATA[(function calculatedFieldValue(current) {
+
+	// Add your code here
+	return '';  // return the calculated value
+
+})(current);]]></calculation>
         <choice>1</choice>
         <choice_field/>
         <choice_table/>
-        <column_label>MY Leader Evaluation</column_label>
+        <column_label>MY Leader evaluation</column_label>
         <comments/>
         <create_roles/>
         <default_value/>
@@ -46,16 +51,16 @@
         <staged>false</staged>
         <sys_class_name>sys_dictionary</sys_class_name>
         <sys_created_by>jorge.ortega</sys_created_by>
-        <sys_created_on>2024-02-27 03:30:44</sys_created_on>
+        <sys_created_on>2024-04-27 22:20:48</sys_created_on>
         <sys_customer_update>false</sys_customer_update>
-        <sys_name>MY Leader Evaluation</sys_name>
+        <sys_name>MY Leader evaluation</sys_name>
         <sys_package display_value="IPS Performance Assessments" source="x_ipsu2_ips_perfor">948629663328c210061636c24d5c7bfc</sys_package>
         <sys_policy/>
         <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
         <sys_scope display_value="IPS Performance Assessments">948629663328c210061636c24d5c7bfc</sys_scope>
         <sys_update_name>sys_dictionary_x_ipsu2_ips_perfor_initiatives_my_leader_evaluation</sys_update_name>
         <sys_updated_by>jorge.ortega</sys_updated_by>
-        <sys_updated_on>2024-02-27 03:30:46</sys_updated_on>
+        <sys_updated_on>2024-04-27 22:20:48</sys_updated_on>
         <table_reference>false</table_reference>
         <text_index>false</text_index>
         <unique>false</unique>

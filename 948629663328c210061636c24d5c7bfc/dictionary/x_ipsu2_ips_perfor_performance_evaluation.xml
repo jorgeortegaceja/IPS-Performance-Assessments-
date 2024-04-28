@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element attributes="live_feed=true,update_synch=true" db_object_id="adb17e8ec3f9c6101d04d6ff050131f8" extends="dl_matcher" label="Performance evaluation" max_length="40" name="x_ipsu2_ips_perfor_performance_evaluation" type="collection">
+        <element label="Actions/Objectives patch Colaborator" max_length="5000" name="actions_objectives_patch_colaborator" type="string_full_utf8"/>
+        <element label="Actions/Objectives patch Leader" max_length="5000" name="actions_objectives_patch_leader" type="string_full_utf8"/>
+        <element label="Assigned to" max_length="32" name="assigned_to" reference="sys_user" type="reference"/>
+        <element choice="1" label="Clasification Assessment" max_length="40" name="clasification_assessment" type="choice">
+            <choice/>
+        </element>
+        <element label="Click on the following link" max_length="250" name="click_on_the_following_link" type="string_full_utf8"/>
+        <element label="Collaborator averange evaluation" max_length="40" name="collaborator_averange_evaluation" type="float"/>
+        <element label="Collaborator settings" max_length="5000" name="collaborator_settings" type="string_full_utf8"/>
+        <element label="Commnets" max_length="4000" name="commnets" type="journal"/>
+        <element label="Download Self-assessment" max_length="255" name="download_self_assessment" type="string_full_utf8"/>
+        <element label="Due date" max_length="40" name="due_date" type="glide_date_time"/>
+        <element label="Is Active" max_length="40" name="is_active" type="boolean"/>
+        <element label="Leader" max_length="32" name="leader" reference="sys_user" type="reference"/>
+        <element label="Leader averange evaluation" max_length="40" name="leader_averange_evaluation" type="float"/>
+        <element label="Leader settings" max_length="5000" name="leader_settings" type="string_full_utf8"/>
+        <element label="MY Colaborator comments" max_length="5000" name="my_colaborator_comments" type="string_full_utf8"/>
+        <element choice="1" label="MY evaluation (Collaborator)" max_length="250" name="my_evaluation_collaborator" type="choice">
+            <choice>
+                <element inactive_on_update="false" label="Aún no ha iniciado, o está en stand by, o por decisión de negocio se canceló" language="es" value="40"/>
+                <element inactive_on_update="false" label="Reporta avance en línea con el plan de acuerdo al KPI y fecha definidos. Aún no concluye al momento" language="es" value="20"/>
+                <element inactive_on_update="false" label="Retraso en el cumplimiento de la iniciativa, de acuerdo al KPI y fecha definidos. Definir plan de ac" language="es" value="30"/>
+                <element inactive_on_update="false" label="Se concluyó la iniciativa al 100% de acuerdo con el KPI y fecha definidos" language="es" value="10"/>
+                <element inactive_on_update="false" label="The initiative was completed 100% in accordance with the defined KPI and date" sequence="0" value="10"/>
+                <element inactive_on_update="false" label="Reports progress in line with the plan according to the defined KPI and date. It is not yet finished" sequence="1" value="20"/>
+                <element inactive_on_update="false" label="Delay in compliance with the initiative, according to the defined KPI and date. Define AC plan" sequence="2" value="30"/>
+                <element inactive_on_update="false" label="It has not started yet, or it is on standby, or due to a business decision it was canceled" sequence="3" value="40"/>
+            </choice>
+        </element>
+        <element choice="1" choice_field="my_evaluation_collaborator" choice_table="x_ipsu2_ips_perfor_performance_evaluation" label="MY evaluation (Leader)" max_length="250" name="my_evaluation_leader" type="choice">
+            <choice/>
+        </element>
+        <element label="MY Leader comments" max_length="5000" name="my_leader_comments" type="string_full_utf8"/>
+        <element attributes="ignore_filter_on_new=true" default="javascript:global.getNextObjNumberPadded();" label="Number" max_length="40" name="number" type="string"/>
+        <element label="Performance evaluation" max_length="5000" name="performance_evaluation" type="string_full_utf8"/>
+        <element label="Show instructions" max_length="40" name="show_instructions" type="boolean"/>
+        <element label="Show leader information" max_length="40" name="show_leader_information" type="boolean"/>
+        <element choice="1" label="State" max_length="40" name="state" type="choice">
+            <choice>
+                <element inactive_on_update="false" label="New" sequence="0" value="10"/>
+                <element inactive_on_update="false" label="Goal correction" sequence="1" value="20"/>
+                <element inactive_on_update="false" label="Authorization" sequence="2" value="30"/>
+                <element inactive_on_update="false" label="MY evaluation (collaborator)" sequence="3" value="40"/>
+                <element inactive_on_update="false" label="MY evaluation (leader)" sequence="4" value="50"/>
+                <element inactive_on_update="false" label="YE evaluation (collaborator)" sequence="5" value="60"/>
+                <element inactive_on_update="false" label="YE evaluation (leader)" sequence="6" value="70"/>
+                <element inactive_on_update="false" label="Complete" sequence="7" value="80"/>
+                <element inactive_on_update="false" label="Cancel" sequence="8" value="90"/>
+            </choice>
+        </element>
+        <element label="Work Notes" max_length="4000" name="work_notes" type="journal"/>
+        <element label="YE Colaborator Comments" max_length="5000" name="ye_colaborator_comments" type="string_full_utf8"/>
+        <element label="YE evaluation (Collaborator)" max_length="250" name="ye_evaluation_collaborator" type="string_full_utf8"/>
+        <element label="YE evaluation (Leader)" max_length="250" name="ye_evaluation_leader" type="string_full_utf8"/>
+        <element label="YE Leader Comments" max_length="5000" name="ye_leader_comments" type="string_full_utf8"/>
+        <index name="index">
+            <element name="assigned_to"/>
+        </index>
+        <index name="index2">
+            <element name="leader"/>
+        </index>
+    </element>
+</database>

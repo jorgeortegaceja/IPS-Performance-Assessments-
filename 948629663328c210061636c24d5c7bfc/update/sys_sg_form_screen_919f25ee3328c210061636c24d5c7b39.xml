@@ -39,6 +39,6 @@
         <sys_updated_on>2024-02-27 03:31:24</sys_updated_on>
         <table>x_ipsu2_ips_perfor_performance_assessments</table>
         <use_view_config>true</use_view_config>
-        <view_config display_value="Performance Assessments Detail Screen View Config">d59f25ee3328c210061636c24d5c7b07</view_config>
+        <view_config/>
     </sys_sg_form_screen>
 </record_update>

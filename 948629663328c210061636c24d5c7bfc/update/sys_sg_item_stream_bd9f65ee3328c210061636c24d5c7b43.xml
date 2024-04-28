@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?><record_update table="sys_sg_item_stream">
     <sys_sg_item_stream action="INSERT_OR_UPDATE">
-        <data_item display_value="IPS Performance Evaluations Targets">659f25ee3328c210061636c24d5c7bec</data_item>
+        <data_item/>
         <interleaved_field/>
         <name>Targets Item Stream</name>
         <sys_class_name>sys_sg_item_stream</sys_class_name>

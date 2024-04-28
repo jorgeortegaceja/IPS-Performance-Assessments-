@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_sg_view_config_element">
+    <sys_sg_view_config_element action="DELETE">
+        <name>priority-FieldValue</name>
+        <sys_class_name>sys_sg_view_config_element</sys_class_name>
+        <sys_created_by>jorge.ortega</sys_created_by>
+        <sys_created_on>2024-02-27 03:31:25</sys_created_on>
+        <sys_customer_update>false</sys_customer_update>
+        <sys_id>299f65ee3328c210061636c24d5c7b0e</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>priority-FieldValue</sys_name>
+        <sys_package display_value="IPS Performance Evaluations" source="x_ipsu2_ips_perfor">948629663328c210061636c24d5c7bfc</sys_package>
+        <sys_policy/>
+        <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
+        <sys_scope display_value="IPS Performance Evaluations">948629663328c210061636c24d5c7bfc</sys_scope>
+        <sys_update_name>sys_sg_view_config_element_299f65ee3328c210061636c24d5c7b0e</sys_update_name>
+        <sys_updated_by>jorge.ortega</sys_updated_by>
+        <sys_updated_on>2024-02-27 03:31:25</sys_updated_on>
+        <view_config display_value="Targets List Screen View Config">a19f25ee3328c210061636c24d5c7bed</view_config>
+        <view_template_slot display_value="text_05">b4f4c13041275010f877183fc9b8be56</view_template_slot>
+    </sys_sg_view_config_element>
+    <sys_update_version action="INSERT_OR_UPDATE">
+        <action>DELETE</action>
+        <application display_value="IPS Performance Assessments">948629663328c210061636c24d5c7bfc</application>
+        <file_path/>
+        <instance_id>4d0a6ffc6fae9ac0869e7b2f5d3ee49b</instance_id>
+        <instance_name>myplatform</instance_name>
+        <name>sys_sg_view_config_element_299f65ee3328c210061636c24d5c7b0e</name>
+        <payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_sg_view_config_element"><sys_sg_view_config_element action="INSERT_OR_UPDATE"><name>priority-FieldValue</name><sys_class_name>sys_sg_view_config_element</sys_class_name><sys_created_by>jorge.ortega</sys_created_by><sys_created_on>2024-02-27 03:31:25</sys_created_on><sys_customer_update>false</sys_customer_update><sys_id>299f65ee3328c210061636c24d5c7b0e</sys_id><sys_mod_count>0</sys_mod_count><sys_name>priority-FieldValue</sys_name><sys_package display_value="IPS Performance Evaluations" source="x_ipsu2_ips_perfor">948629663328c210061636c24d5c7bfc</sys_package><sys_policy/><sys_replace_on_upgrade>false</sys_replace_on_upgrade><sys_scope display_value="IPS Performance Evaluations">948629663328c210061636c24d5c7bfc</sys_scope><sys_update_name>sys_sg_view_config_element_299f65ee3328c210061636c24d5c7b0e</sys_update_name><sys_updated_by>jorge.ortega</sys_updated_by><sys_updated_on>2024-02-27 03:31:25</sys_updated_on><view_config display_value="Targets List Screen View Config">a19f25ee3328c210061636c24d5c7bed</view_config><view_template_slot display_value="text_05">b4f4c13041275010f877183fc9b8be56</view_template_slot></sys_sg_view_config_element></record_update>]]></payload>
+        <payload_hash>-1450073360</payload_hash>
+        <record_name>priority-FieldValue</record_name>
+        <reverted_from/>
+        <source>5c8629663328c210061636c24d5c7bfe</source>
+        <source_table>sys_update_set</source_table>
+        <state>current</state>
+        <sys_created_by>jorge.ortega</sys_created_by>
+        <sys_created_on>2024-02-27 03:31:25</sys_created_on>
+        <sys_id>659f65ee3328c210061636c24d5c7b10</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_recorded_at>18de89dfff10000001</sys_recorded_at>
+        <sys_updated_by>jorge.ortega</sys_updated_by>
+        <sys_updated_on>2024-02-27 03:31:25</sys_updated_on>
+        <type>Card element</type>
+        <update_guid>699f65ee3928c2109e3d0e86636c3c0f</update_guid>
+        <update_guid_history>699f65ee3928c2109e3d0e86636c3c0f:-1450073360</update_guid_history>
+    </sys_update_version>
+    <sys_metadata_delete action="INSERT_OR_UPDATE">
+        <sys_audit_delete/>
+        <sys_class_name>sys_metadata_delete</sys_class_name>
+        <sys_created_by>jorge.ortega</sys_created_by>
+        <sys_created_on>2024-04-27 20:32:37</sys_created_on>
+        <sys_customer_update>false</sys_customer_update>
+        <sys_db_object display_value="" name="sys_sg_view_config_element">sys_sg_view_config_element</sys_db_object>
+        <sys_id>221c4cdb4a8547088fc4b3b25a254e40</sys_id>
+        <sys_metadata>299f65ee3328c210061636c24d5c7b0e</sys_metadata>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>priority-FieldValue</sys_name>
+        <sys_package display_value="IPS Performance Assessments" source="x_ipsu2_ips_perfor">948629663328c210061636c24d5c7bfc</sys_package>
+        <sys_parent/>
+        <sys_policy/>
+        <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
+        <sys_scope display_value="IPS Performance Assessments">948629663328c210061636c24d5c7bfc</sys_scope>
+        <sys_scope_delete display_value="">2ca5452e23e4451ca60ab6cf0b82cec9</sys_scope_delete>
+        <sys_update_name>sys_sg_view_config_element_299f65ee3328c210061636c24d5c7b0e</sys_update_name>
+        <sys_update_version display_value="sys_sg_view_config_element_299f65ee3328c210061636c24d5c7b0e">659f65ee3328c210061636c24d5c7b10</sys_update_version>
+        <sys_updated_by>jorge.ortega</sys_updated_by>
+        <sys_updated_on>2024-04-27 20:32:37</sys_updated_on>
+    </sys_metadata_delete>
+</record_update>

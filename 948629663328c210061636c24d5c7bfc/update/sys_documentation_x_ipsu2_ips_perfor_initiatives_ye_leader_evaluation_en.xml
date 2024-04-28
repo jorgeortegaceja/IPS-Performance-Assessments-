@@ -1,26 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?><record_update>
-    <sys_documentation element="ye_leader_evaluation" label="YE Leader Evaluation" language="en" table="x_ipsu2_ips_perfor_initiatives">
+    <sys_documentation element="ye_leader_evaluation" label="YE Leader evaluation" language="en" table="x_ipsu2_ips_perfor_initiatives">
         <sys_documentation action="INSERT_OR_UPDATE">
             <element>ye_leader_evaluation</element>
             <help/>
             <hint/>
-            <label>YE Leader Evaluation</label>
+            <label>YE Leader evaluation</label>
             <language>en</language>
             <name>x_ipsu2_ips_perfor_initiatives</name>
-            <plural>YE Leader Evaluations</plural>
+            <plural>YE Leader evaluations</plural>
             <sys_class_name>sys_documentation</sys_class_name>
             <sys_created_by>jorge.ortega</sys_created_by>
-            <sys_created_on>2024-02-27 03:30:43</sys_created_on>
+            <sys_created_on>2024-04-27 22:20:50</sys_created_on>
             <sys_customer_update>false</sys_customer_update>
             <sys_mod_count>0</sys_mod_count>
-            <sys_name>YE Leader Evaluation</sys_name>
+            <sys_name>YE Leader evaluation</sys_name>
             <sys_package display_value="IPS Performance Assessments" source="x_ipsu2_ips_perfor">948629663328c210061636c24d5c7bfc</sys_package>
             <sys_policy/>
             <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
             <sys_scope display_value="IPS Performance Assessments">948629663328c210061636c24d5c7bfc</sys_scope>
             <sys_update_name>sys_documentation_x_ipsu2_ips_perfor_initiatives_ye_leader_evaluation_en</sys_update_name>
             <sys_updated_by>jorge.ortega</sys_updated_by>
-            <sys_updated_on>2024-02-27 03:30:43</sys_updated_on>
+            <sys_updated_on>2024-04-27 22:20:50</sys_updated_on>
             <url/>
             <url_target/>
         </sys_documentation>

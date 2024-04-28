@@ -73,7 +73,7 @@
         <type>write_back</type>
         <unhighlighted_icons/>
         <use_overlay>false</use_overlay>
-        <write_back_action_item display_value="New (Targets)">b99f65ee3328c210061636c24d5c7b54</write_back_action_item>
+        <write_back_action_item display_value="">b99f65ee3328c210061636c24d5c7b54</write_back_action_item>
         <zombified_screens/>
     </sys_sg_button>
 </record_update>
