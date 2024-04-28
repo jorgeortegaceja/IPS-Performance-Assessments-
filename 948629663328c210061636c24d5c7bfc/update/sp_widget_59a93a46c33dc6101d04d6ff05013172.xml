@@ -7,43 +7,43 @@
   /* widget controller */
   var c = this;
 
-  $rootScope.server = c.server;
-  $rootScope.data = c.data;
+  // $rootScope.server = c.server;
+  // $rootScope.data = c.data;
 
 
-	
-	console.log(top.NOW.guided_tours.events.on());
-	
-	
-  c.createPerfomanceEvaluation = function () {
-    $scope.modalInstance = $uibModal.open({
-      templateUrl: 'modalTemplate',
-      scope: $scope
-    });
-  }
 
-  $scope.closeModal = function () {
-    $scope.modalInstance.close();
-  }
-
-  $scope.crete = function () {
-    $scope.modalInstance.close();
-    c.createEvaluation();
-  }
-
-  c.createEvaluation = async function () {
-    var res = await c.server.get({
-      action: 'create_evaluation',
-      data: c.data.create_new_evaluation
-    });
+  // console.log(top.NOW.guided_tours.events.on());
 
 
-    window.location = '/esc?sys_id=' + res.data.create_new_evaluation.evaluation.sys_id + '&view=sp&id=ticket&table=u_aliat_evaluacion_de_desempeno';
-    // c.data.evaluations.number_evaluations = 1;
-    // c.data.evaluation = res.data.create_new_evaluation;
-    // c.data.evaluation.objective_select = res.data.create_new_evaluation.evaluation.objectives[0];
-    // c.data.evaluation.initiaitive_select = res.data.create_new_evaluation.evaluation.objectives[0].iniciatives[0];
-  }
+  // c.createPerfomanceEvaluation = function () {
+  //   $scope.modalInstance = $uibModal.open({
+  //     templateUrl: 'modalTemplate',
+  //     scope: $scope
+  //   });
+  // }
+
+  // $scope.closeModal = function () {
+  //   $scope.modalInstance.close();
+  // }
+
+  // $scope.crete = function () {
+  //   $scope.modalInstance.close();
+  //   c.createEvaluation();
+  // }
+
+  // c.createEvaluation = async function () {
+  //   var res = await c.server.get({
+  //     action: 'create_evaluation',
+  //     data: c.data.create_new_evaluation
+  //   });
+
+
+  //   window.location = '/esc?sys_id=' + res.data.create_new_evaluation.evaluation.sys_id + '&view=sp&id=ticket&table=u_aliat_evaluacion_de_desempeno';
+  //   // c.data.evaluations.number_evaluations = 1;
+  //   // c.data.evaluation = res.data.create_new_evaluation;
+  //   // c.data.evaluation.objective_select = res.data.create_new_evaluation.evaluation.objectives[0];
+  //   // c.data.evaluation.initiaitive_select = res.data.create_new_evaluation.evaluation.objectives[0].iniciatives[0];
+  // }
 
 };]]></client_script>
         <controller_as>c</controller_as>
@@ -66,13 +66,17 @@
   /* e.g., data.table = $sp.getValue('table'); */
 
   data.options = JSON.parse(options.widget_parameters | '');
+
+
   var paginator = {
     current_page: 0,
     next_page: 1,
     previus_page: 0,
-    records_per_page: 10
+    records_per_page: 3
   };
-  var ipsPerformanceEvaluation = new x_ipsu2_ips_perfor.IPSPerformanceEvaluation(data.options);
+
+
+  var ipsPerformanceEvaluation = new IPSPerformanceEvaluation(paginator);
   data.evaluations = ipsPerformanceEvaluation.getEvaluations(paginator);
 
 
@@ -82,17 +86,15 @@
         <sys_class_name>sp_widget</sys_class_name>
         <sys_created_by>jorge.ortega</sys_created_by>
         <sys_created_on>2024-04-27 22:56:30</sys_created_on>
-        <sys_customer_update>false</sys_customer_update>
         <sys_id>59a93a46c33dc6101d04d6ff05013172</sys_id>
-        <sys_mod_count>39</sys_mod_count>
+        <sys_mod_count>50</sys_mod_count>
         <sys_name>My self assessments</sys_name>
         <sys_package display_value="IPS Performance Assessments" source="x_ipsu2_ips_perfor">948629663328c210061636c24d5c7bfc</sys_package>
         <sys_policy/>
-        <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
         <sys_scope display_value="IPS Performance Assessments">948629663328c210061636c24d5c7bfc</sys_scope>
         <sys_update_name>sp_widget_59a93a46c33dc6101d04d6ff05013172</sys_update_name>
-        <sys_updated_by>jorge.ortega</sys_updated_by>
-        <sys_updated_on>2024-04-28 19:34:28</sys_updated_on>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2024-04-28 21:33:48</sys_updated_on>
         <template><![CDATA[<style>
   .card {
     padding: 2.4rem !important;
@@ -116,10 +118,10 @@
   </header>
 
   <article>
+    <pre>{{ data | json }}</pre>
     <div class="ips-card-body row">
-
       <main class="col col-md-12">
-        <div class="card" ng-if="!data.evaluation.state">
+        <div class="card">
           <div class="row">
             <div class="col col-md-12">
 
@@ -164,8 +166,7 @@
                 <div class="d-flex jutify-center my-2">
                   <div>
 
-                    <button class="btn btn-primary" ng-click="createNewEvaluationOpenModal()"
-                      ng-if="data.showPerfomanceEvaluation ">
+                    <button class="btn btn-primary" ng-click="createNewEvaluationOpenModal()">
                       ${Crear objetivos}
                     </button>
                   </div>
@@ -200,13 +201,9 @@
         </div>
 
 
-
-
-
-
       </main>
     </div>
-
-  </article>]]></template>
+  </article>
+</section>]]></template>
     </sp_widget>
 </record_update>

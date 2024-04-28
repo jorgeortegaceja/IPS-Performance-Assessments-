@@ -19,27 +19,41 @@ IPSPerformanceEvaluation.prototype = {
 
 
     getEvaluations: function (paginator) {
+        var p = this.getPaginator(paginator)
         var records = [];
-
         var evaluations = new GlideRecord('x_ipsu2_ips_perfor_performance_evaluation');
         evaluations.addQuery('assigned_to', gs.getUserID());
         evaluations.orderByDesc('opened_at');
 
         evaluations.query();
-        evaluations.setLocation(paginator);
+        evaluations.setLocation(p.setLocation);
         var count = 0;
 
 
-        while (evaluations.next()) {
-
-
+        while (evaluations.next() && count < p.last_record) {
             records.push(evaluation);
             count++;
-
         }
+
         return records;
     },
 
+    getPaginator: function (paginator) {
+        var p = {};
+
+        if (paginator.current_page <= 0) {
+            p.setLocation = -1;
+            p.last_record = paginator.records_per_page
+
+            return p;
+        }
+
+        p.setLocation = current_page * paginator.records_per_page;
+
+        p.last_record = ((current_page * paginator.records_per_page) + 1) + paginator.records_per_page;
+
+        return p;
+    },
 
 
     type: 'IPSPerformanceEvaluation'
@@ -47,16 +61,14 @@ IPSPerformanceEvaluation.prototype = {
         <sys_class_name>sys_script_include</sys_class_name>
         <sys_created_by>jorge.ortega</sys_created_by>
         <sys_created_on>2024-04-28 16:03:41</sys_created_on>
-        <sys_customer_update>false</sys_customer_update>
         <sys_id>77a4a212c3390a101d04d6ff050131d8</sys_id>
-        <sys_mod_count>3</sys_mod_count>
+        <sys_mod_count>8</sys_mod_count>
         <sys_name>IPSPerformanceEvaluation</sys_name>
         <sys_package display_value="IPS Performance Assessments" source="x_ipsu2_ips_perfor">948629663328c210061636c24d5c7bfc</sys_package>
         <sys_policy>read</sys_policy>
-        <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
         <sys_scope display_value="IPS Performance Assessments">948629663328c210061636c24d5c7bfc</sys_scope>
         <sys_update_name>sys_script_include_77a4a212c3390a101d04d6ff050131d8</sys_update_name>
-        <sys_updated_by>jorge.ortega</sys_updated_by>
-        <sys_updated_on>2024-04-28 19:34:03</sys_updated_on>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2024-04-28 21:33:54</sys_updated_on>
     </sys_script_include>
 </record_update>

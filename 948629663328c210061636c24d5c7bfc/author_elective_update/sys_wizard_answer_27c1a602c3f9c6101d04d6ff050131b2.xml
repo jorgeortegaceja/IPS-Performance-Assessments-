@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_wizard_answer">
+    <sys_wizard_answer action="DELETE">
+        <active>true</active>
+        <answer>Goals</answer>
+        <button_label/>
+        <dependent_value/>
+        <element/>
+        <name>Goals</name>
+        <next_question/>
+        <order>100</order>
+        <payload_name/>
+        <question display_value="Application File" name="Application File">ae134401db221200b5e25aa9bf9619d3</question>
+        <roles/>
+        <script/>
+        <sys_class_name>sys_wizard_answer</sys_class_name>
+        <sys_created_by>jorge.ortega</sys_created_by>
+        <sys_created_on>2024-04-27 21:12:21</sys_created_on>
+        <sys_customer_update>false</sys_customer_update>
+        <sys_id>27c1a602c3f9c6101d04d6ff050131b2</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Goals</sys_name>
+        <sys_package display_value="IPS Performance Assessments" source="x_ipsu2_ips_perfor">948629663328c210061636c24d5c7bfc</sys_package>
+        <sys_policy/>
+        <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
+        <sys_scope display_value="IPS Performance Assessments">948629663328c210061636c24d5c7bfc</sys_scope>
+        <sys_update_name>sys_wizard_answer_27c1a602c3f9c6101d04d6ff050131b2</sys_update_name>
+        <sys_updated_by>jorge.ortega</sys_updated_by>
+        <sys_updated_on>2024-04-27 21:12:21</sys_updated_on>
+        <table/>
+        <target_url>x_ipsu2_ips_perfor_goals.do</target_url>
+        <type>1</type>
+    </sys_wizard_answer>
+<sys_update_version action="INSERT_OR_UPDATE">
+        <action>DELETE</action>
+        <application display_value="IPS Performance Assessments">948629663328c210061636c24d5c7bfc</application>
+        <file_path/>
+        <instance_id>2f6503691bea791c6a85eb9b2d4bcb2c</instance_id>
+        <instance_name>dev213880</instance_name>
+        <name>sys_wizard_answer_27c1a602c3f9c6101d04d6ff050131b2</name>
+        <payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_wizard_answer">
+    <sys_wizard_answer action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <answer>Goals</answer>
+        <button_label/>
+        <dependent_value/>
+        <element/>
+        <name>Goals</name>
+        <next_question/>
+        <order>100</order>
+        <payload_name/>
+        <question display_value="Application File" name="Application File">ae134401db221200b5e25aa9bf9619d3</question>
+        <roles/>
+        <script/>
+        <sys_class_name>sys_wizard_answer</sys_class_name>
+        <sys_created_by>jorge.ortega</sys_created_by>
+        <sys_created_on>2024-04-27 21:12:21</sys_created_on>
+        <sys_customer_update>false</sys_customer_update>
+        <sys_id>27c1a602c3f9c6101d04d6ff050131b2</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Goals</sys_name>
+        <sys_package display_value="IPS Performance Assessments" source="x_ipsu2_ips_perfor">948629663328c210061636c24d5c7bfc</sys_package>
+        <sys_policy/>
+        <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
+        <sys_scope display_value="IPS Performance Assessments">948629663328c210061636c24d5c7bfc</sys_scope>
+        <sys_update_name>sys_wizard_answer_27c1a602c3f9c6101d04d6ff050131b2</sys_update_name>
+        <sys_updated_by>jorge.ortega</sys_updated_by>
+        <sys_updated_on>2024-04-27 21:12:21</sys_updated_on>
+        <table/>
+        <target_url>x_ipsu2_ips_perfor_goals.do</target_url>
+        <type>1</type>
+    </sys_wizard_answer>
+</record_update>]]></payload>
+        <payload_hash>-1171583979</payload_hash>
+        <record_name>Goals</record_name>
+        <reverted_from/>
+        <source>8891e756473102102d16d9ce316d4372</source>
+        <source_table>sys_upgrade_history</source_table>
+        <state>previous</state>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2024-04-28 20:30:04</sys_created_on>
+        <sys_id>8eb16b96473102102d16d9ce316d4381</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_recorded_at>18f266686900000001</sys_recorded_at>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2024-04-28 20:30:04</sys_updated_on>
+        <type>Answer</type>
+        <update_guid>4eb16b96ec3102100d8fee4f91128981</update_guid>
+        <update_guid_history>4eb16b96ec3102100d8fee4f91128981:-1171583979</update_guid_history>
+    </sys_update_version>
+    <sys_metadata_delete action="INSERT_OR_UPDATE">
+        <sys_audit_delete/>
+        <sys_class_name>sys_metadata_delete</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2024-04-28 20:33:00</sys_created_on>
+        <sys_db_object display_value="" name="sys_wizard_answer">sys_wizard_answer</sys_db_object>
+        <sys_id>283cfa176a354382aab29d5b3f51df24</sys_id>
+        <sys_metadata>27c1a602c3f9c6101d04d6ff050131b2</sys_metadata>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Goals</sys_name>
+        <sys_package display_value="IPS Performance Assessments" source="x_ipsu2_ips_perfor">948629663328c210061636c24d5c7bfc</sys_package>
+        <sys_parent/>
+        <sys_policy/>
+        <sys_scope display_value="IPS Performance Assessments">948629663328c210061636c24d5c7bfc</sys_scope>
+        <sys_scope_delete display_value="">2ca5452e23e4451ca60ab6cf0b82cec9</sys_scope_delete>
+        <sys_update_name>sys_wizard_answer_27c1a602c3f9c6101d04d6ff050131b2</sys_update_name>
+        <sys_update_version display_value="sys_wizard_answer_27c1a602c3f9c6101d04d6ff050131b2">8eb16b96473102102d16d9ce316d4381</sys_update_version>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2024-04-28 20:33:00</sys_updated_on>
+    </sys_metadata_delete>
+</record_update>
