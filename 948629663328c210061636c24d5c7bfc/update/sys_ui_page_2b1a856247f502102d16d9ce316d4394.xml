@@ -1,0 +1,711 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_ui_page">
+    <sys_ui_page action="INSERT_OR_UPDATE">
+        <category>general</category>
+        <client_script/>
+        <description/>
+        <direct>false</direct>
+        <endpoint>x_ipsu2_ips_perfor_IPS - Template Evaluation.do</endpoint>
+        <html><![CDATA[<?xml version="1.0" encoding="utf-8" ?>
+<j:jelly trim="false" xmlns:j="jelly:core" xmlns:g="glide" xmlns:j2="null" xmlns:g2="null">
+
+	<script type="text/javascript" src="x_ipsu2_ips_perfor.html2pdf.js.jsdbx"></script>
+	<script type="text/javascript" src="x_ipsu2_ips_perfor.dowload_pdf.js.jsdbx"></script>
+
+
+	<g:evaluate var="jvar_grProperties" jelly="true" object="true">
+		var grProperties = {
+		background: gs.getProperty('x_ipsu2_ips_perfor.ips.pdf.color.background'),
+		text: gs.getProperty('x_ipsu2_ips_perfor.ips.pdf.color.text'),
+		}
+		grProperties;
+	</g:evaluate>
+
+
+	<g:evaluate var="jvar_vealuation" jelly="true" object="true">
+
+
+		var vealuation = new GlideRecord('x_ipsu2_ips_perfor_performance_evaluation');
+		vealuation.get('6816f79cc0a8016401c5a33be04be441');
+		vealuation;
+	</g:evaluate>
+
+	<!-- Imprimir el recuento de filas correctamente -->
+	aqui: ${jvar_vealuation.getDisplayValue('number')}
+
+	<g:evaluate var="jvar_grUAI" jelly="true" object="true">
+		var sysparm_id = gs.action.getGlideURI().getMap().get('sysparm_sys_id');
+
+		var grUAI = new GlideRecordSecure('x_ipsu2_ips_perfor_goal');
+		grUAI.addQuery("u_performance_evaluation",sysparm_id);
+		grUAI.orderBy('u_no_objective');
+		grUAI.setLimit(5);
+		grUAI.query();
+		grUAI;
+
+	</g:evaluate>
+
+	<g:evaluate var="jvar_SumObj" jelly="true" object="true">
+		var sumatoria = 0;
+		var sysparm_id = gs.action.getGlideURI().getMap().get('sysparm_sys_id');
+
+		var grUAI2 = new GlideRecordSecure('x_ipsu2_ips_perfor_initiatives');
+		grUAI2.addQuery("u_performance_evaluation",sysparm_id);
+		grUAI2.orderBy('u_no_objective');
+		grUAI2.setLimit(5);
+		grUAI2.query();
+		while(grUAI2.next()){
+		sumatoria = sumatoria + parseInt(grUAI2.u_objetive_weight);
+		}
+		sumatoria;
+	</g:evaluate>
+
+	<style>
+		.title {
+			font-size: medium;
+
+			color: $ {
+				jvar_grProperties.text
+			}
+
+			;
+		}
+
+		.text-right {
+			text-align: right;
+		}
+
+		td {
+			padding: .8rem;
+		}
+
+		.border {
+			border-top: 1px solid #7f7f7f !important;
+			border-bottom: 1px solid #7f7f7f !important;
+			border-left: 1px solid #7f7f7f !important;
+			border-right: 1px solid #7f7f7f !important
+		}
+
+		.text-white {
+			color: #fff !important;
+		}
+
+		.text-blue {
+			color: $ {
+				jvar_grProperties.text
+			}
+
+			;
+		}
+
+		.text-black {
+			color: #000;
+		}
+
+		.text-dark-blue {
+			margin-right: 5px;
+			color: rgb(44, 98, 110)
+		}
+	</style>
+
+	<input id="title" type="hidden"
+		value="OBJETIVOS INDIVIDUALES ${ jvar_grUAEDD.getDisplayValue('sys_created_on') }" />
+	<div id="pdf">
+
+
+		<div>
+			<img style="display: block; margin: auto;" src="/x_ipsu2_ips_perfor.ipsum.jpg" width="400" />
+		</div>
+
+		<div>
+			<h3 class="text-center text-blue">
+
+				${ jvar_grUAEDD.getDisplayValue('performance_evaluation') }
+			</h3>
+			<h4 class="text-center text-blue">
+				OBJETIVOS INDIVIDUALES ${ jvar_grUAEDD.getDisplayValue('sys_created_on') }
+			</h4>
+		</div>
+
+
+
+
+		<div class="row" style="display: flex; flex-direction: row;  align-items: flex-end; width: ">
+			<div class="col-6" style="width: 50%;">
+				<table>
+					<tr>
+						<td class="title text-right">
+							<strong>Nombre Colaborador:</strong>
+						</td>
+						<td style="padding-left: 10px; border-bottom:1pt solid black;">
+							${jvar_grUAEDD.getDisplayValue("assigned_to")}
+						</td>
+					</tr>
+					<tr>
+						<td class="title text-right">
+							<strong>Posición:</strong>
+						</td>
+						<td style="padding-left: 10px ; border-bottom:1pt solid black;">
+							${jvar_grUAEDD.getDisplayValue("assigned_to.title")}
+						</td>
+					</tr>
+					<tr>
+						<td class="title text-right">
+							<strong>Líder Directo:</strong>
+						</td>
+						<td style="padding-left: 10px; border-bottom:1pt solid black; ">
+							${jvar_grUAEDD.getDisplayValue("assigned_to.manager")}
+						</td>
+					</tr>
+
+				</table>
+			</div>
+			<div class="col-6"
+				style="width: 50%; display: flex; align-items: end; text-align: right; justify-content: end;">
+				<div>
+					<table class="table" width="8.33%">
+						<tr>
+							<td align="center">
+								<b class="text-blue">RATING</b>
+							</td>
+						</tr>
+						<tr>
+							<td align="center" class="border">
+
+
+
+								<b>${jvar_grUAEDD.getDisplayValue("u_averange_evaluation") } %</b>
+
+							</td>
+						</tr>
+					</table>
+				</div>
+			</div>
+		</div>
+
+
+		<table class="table table-bordered" style="margin-top: 3rem;">
+			<thead>
+				<tr>
+					<th scope="col" width="25%">
+						<h5 class="text-center text-blue">
+							<strong>OBJETIVOS / INICIATIVAS</strong>
+						</h5>
+					</th>
+					<th scope="col" width="25%">
+						<h5 class="text-center text-blue">
+							<strong>ENTREGABLES</strong>
+						</h5>
+					</th>
+					<th scope="col" width="8.33%">
+						<h5 class="text-center text-blue">
+							<strong>FECHA DE ENTREGA</strong>
+						</h5>
+					</th>
+					<th scope="col" width="25%">
+						<h5 class="text-center text-blue">
+							<strong>AVANCE DE OBJETIVOS</strong>
+						</h5>
+					</th>
+					<th scope="col" width="8.33%" style="padding: 0;">
+						<table width="100%" class="text-center text-white">
+							<tr>
+								<td bgcolor="${ jvar_grProperties.background }" class="text-white">Peso</td>
+							</tr>
+							<tr>
+								<td class="text-black">
+									<b>
+										${jvar_SumObj}%
+									</b>
+								</td>
+							</tr>
+						</table>
+					</th>
+					<th scope="col" width="8.33%" style="padding: 0; background: ${ jvar_grProperties.background };"
+						class="text-center text-white">
+						<strong class="text-white">Evaluación</strong>
+					</th>
+				</tr>
+			</thead>
+			<j:if test="${jvar_grUAI.next()}">
+				<tbody>
+					<tr>
+						<td bgcolor="${ jvar_grProperties.background }" colspan="4" class="text-white">
+							<b>
+								${jvar_grUAI.getDisplayValue('u_no_objective')}.-
+								${jvar_grUAI.getDisplayValue("short_description")}
+							</b>
+						</td>
+						<td align="center">
+							<b>
+								${ jvar_grUAI.getDisplayValue('u_objetive_weight') }%
+							</b>
+						</td>
+						<td align="center">
+							<b>
+								${jvar_grUAI.getDisplayValue("u_evaluation")}%
+							</b>
+						</td>
+					</tr>
+
+					<g:evaluate var="jvar_grIni" jelly="true" object="true">
+						var grIni = new GlideRecordSecure('u_aliat_iniciativas_jl');
+						grIni.addQuery("u_objetivo",grUAI.sys_id);
+						grIni.orderBy('u_no_iniciativa');
+						grIni.setLimit(5);
+						grIni.query();
+						grIni;
+					</g:evaluate>
+
+
+
+					<j:while test="${jvar_grIni.next()}">
+
+						<tr>
+
+							<td rowspan="4">
+								<b>${jvar_grIni.getDisplayValue("u_no_iniciativa")}</b>.-
+								${jvar_grIni.getDisplayValue("short_description")}
+							</td>
+							<td rowspan="4">
+								${jvar_grIni.getDisplayValue("description")}
+							</td>
+							<td rowspan="4">
+								${jvar_grIni.getDisplayValue('u_work_end')}
+							</td>
+							<td rowspan="1">
+								<b class="text-dark-blue">Colaborador MY: </b>${' '}
+								${jvar_grIni.getDisplayValue("u_my_contributor_comment")}
+							</td>
+
+							<td rowspan="4" align="center">
+								<b>
+									${jvar_grIni.getDisplayValue("u_initiative_weight")}%
+								</b>
+							</td>
+
+
+							<td rowspan="1" align="center">
+								<j:if test="${jvar_grIni.getValue('u_my_contributor_evaluation') == 1}">
+									<div align="center"
+										style="height: 15px; width: 15px; background-color: #41A317; border-radius: 50%; display: inline-block;">
+									</div>
+								</j:if>
+								<j:if test="${jvar_grIni.getValue('u_my_contributor_evaluation') == 2}">
+									<div align="center"
+										style="height: 15px; width: 15px; background-color: #FFE87C; border-radius: 50%; display: inline-block;">
+									</div>
+								</j:if>
+								<j:if test="${jvar_grIni.getValue('u_my_contributor_evaluation') == 3}">
+									<div align="center"
+										style="height: 15px; width: 15px; background-color: #7C0A02; border-radius: 50%; display: inline-block;">
+									</div>
+								</j:if>
+								<j:if test="${jvar_grIni.getValue('u_my_contributor_evaluation') == 4}">
+									<div align="center"
+										style="height: 15px; width: 15px; background-color: #808080; border-radius: 50%; display: inline-block;">
+									</div>
+								</j:if>
+								<j:if test="${jvar_grIni.getValue('u_my_contributor_evaluation') == '' }">
+									<b>
+										N/A
+									</b>
+								</j:if>
+							</td>
+						</tr>
+						<tr>
+
+							<td rowspan="1">
+								<b class="text-dark-blue">Líder MY:</b>
+								${jvar_grIni.getDisplayValue("u_my_leader_comment")}
+							</td>
+
+							<td rowspan="1" align="center">
+								<j:if test="${jvar_grIni.getDisplayValue('u_my_leader_evaluation') == 1}">
+									<div
+										style="height: 15px; width: 15px; background-color: #41A317; border-radius: 50%; display: inline-block;">
+									</div>
+								</j:if>
+								<j:if test="${jvar_grIni.getDisplayValue('u_my_leader_evaluation') == 2}">
+									<div
+										style="height: 15px; width: 15px; background-color: #FFE87C; border-radius: 50%; display: inline-block;">
+									</div>
+								</j:if>
+								<j:if test="${jvar_grIni.getDisplayValue('u_my_leader_evaluation') == 3}">
+									<div
+										style="height: 15px; width: 15px; background-color: #7C0A02; border-radius: 50%; display: inline-block;">
+									</div>
+								</j:if>
+								<j:if test="${jvar_grIni.getDisplayValue('u_my_leader_evaluation') == 4}">
+									<div
+										style="height: 15px; width: 15px; background-color: #808080; border-radius: 50%; display: inline-block;">
+									</div>
+								</j:if>
+								<j:if test="${jvar_grIni.getValue('u_my_leader_evaluation') == ''}">
+									<b>N/A</b>
+								</j:if>
+							</td>
+						</tr>
+						<tr>
+
+							<td rowspan="1">
+								<b class="text-dark-blue">Colaborador YE:</b>
+								${jvar_grIni.getDisplayValue("u_ye_contributor_comment")}
+							</td>
+
+							<td rowspan="1" align="center">
+								<b>
+									<j:if test="${jvar_grIni.getValue('u_ye_contributor_evaluation') == ''}">
+										0%
+									</j:if>
+									<j:if test="${jvar_grIni.getValue('u_ye_contributor_evaluation') != ''}">
+										${jvar_grIni.getDisplayValue("u_ye_contributor_evaluation")}%
+									</j:if>
+								</b>
+
+							</td>
+						</tr>
+						<tr>
+
+							<td rowspan="1">
+								<b class="text-dark-blue">Líder YE:</b>
+								${jvar_grIni.getDisplayValue("u_ye_leader_comment")}
+							</td>
+
+							<td rowspan="1" align="center">
+								<b>${jvar_grIni.getDisplayValue("u_ye_leader_evaluation")}%</b>
+							</td>
+						</tr>
+
+					</j:while>
+				</tbody>
+			</j:if>
+		</table>
+
+
+		<div class="html2pdf__page-break"></div>
+
+
+		<j:while test="${jvar_grUAI.next()}">
+			<table class="table table-bordered" style="margin-top: 2rem;">
+				<thead style="visibility: collapse;">
+					<tr>
+						<th scope="col" width="25%">
+						</th>
+						<th scope="col" width="25%">
+						</th>
+						<th scope="col" width="8.33%">
+						</th>
+						<th scope="col" width="25%">
+						</th>
+						<th scope="col" width="8.33%" style="padding: 0;">
+						</th>
+						<th scope="col" width="8.33%" style="padding: 0; background: ${ jvar_grProperties.background };"
+							class="text-center text-white">
+						</th>
+					</tr>
+				</thead>
+
+
+
+				<tbody>
+					<tr>
+						<td bgcolor="${ jvar_grProperties.background }" colspan="4">
+							<b class="text-white">
+								${jvar_grUAI.getDisplayValue('u_no_objective')}
+								.- ${jvar_grUAI.getDisplayValue("short_description")}
+							</b>
+
+						</td>
+						<td align="center">
+
+
+							${ jvar_grUAI.getDisplayValue('u_objetive_weight') }%
+						</td>
+						<td align="center">
+							${jvar_grUAI.getDisplayValue("u_evaluation")}%
+						</td>
+					</tr>
+
+					<g:evaluate var="jvar_grIni" jelly="true" object="true">
+						var grIni = new GlideRecordSecure('u_aliat_iniciativas_jl');
+						grIni.addQuery("u_objetivo",grUAI.sys_id);
+						grIni.orderBy('u_no_iniciativa');
+						grIni.setLimit(5);
+						grIni.query();
+						grIni;
+					</g:evaluate>
+
+
+
+					<j:while test="${jvar_grIni.next()}">
+
+						<tr>
+							<td rowspan="4">
+								<b>${jvar_grIni.getDisplayValue("u_no_iniciativa")}</b>.-
+								${jvar_grIni.getDisplayValue("short_description")}
+							</td>
+							<td rowspan="4">
+								${jvar_grIni.getDisplayValue("description")}
+							</td>
+							<td rowspan="4">
+								${jvar_grIni.getDisplayValue('u_work_end')}
+							</td>
+							<td rowspan="1">
+								<b class="text-dark-blue">Colaborador MY:</b>
+								${jvar_grIni.getDisplayValue("u_my_contributor_comment")}
+							</td>
+							<td rowspan="4" align="center">
+								<b>
+									${jvar_grIni.getDisplayValue("u_initiative_weight")}%
+								</b>
+							</td>
+							<td rowspan="1" align="center">
+								<j:if test="${jvar_grIni.getValue('u_my_contributor_evaluation') == 1}">
+									<div align="center"
+										style="height: 15px; width: 15px; background-color: #41A317; border-radius: 50%; display: inline-block;">
+									</div>
+								</j:if>
+								<j:if test="${jvar_grIni.getValue('u_my_contributor_evaluation') == 2}">
+									<div align="center"
+										style="height: 15px; width: 15px; background-color: #FFE87C; border-radius: 50%; display: inline-block;">
+									</div>
+								</j:if>
+								<j:if test="${jvar_grIni.getValue('u_my_contributor_evaluation') == 3}">
+									<div align="center"
+										style="height: 15px; width: 15px; background-color: #7C0A02; border-radius: 50%; display: inline-block;">
+									</div>
+								</j:if>
+								<j:if test="${jvar_grIni.getValue('u_my_contributor_evaluation') == 4}">
+									<div align="center"
+										style="height: 15px; width: 15px; background-color: #808080; border-radius: 50%; display: inline-block;">
+									</div>
+								</j:if>
+								<j:if test="${jvar_grIni.getValue('u_my_contributor_evaluation') == ''}">
+									<b>
+										N/A
+									</b>
+								</j:if>
+							</td>
+						</tr>
+						<tr>
+							<td rowspan="1">
+								<b class="text-dark-blue">Líder MY:</b>
+								${jvar_grIni.getDisplayValue("u_my_leader_comment")}
+							</td>
+							<td rowspan="1" align="center">
+								<j:if test="${jvar_grIni.getDisplayValue('u_my_leader_evaluation') == 1}">
+									<div
+										style="height: 15px; width: 15px; background-color: #41A317; border-radius: 50%; display: inline-block;">
+									</div>
+								</j:if>
+								<j:if test="${jvar_grIni.getDisplayValue('u_my_leader_evaluation') == 2}">
+									<div
+										style="height: 15px; width: 15px; background-color: #FFE87C; border-radius: 50%; display: inline-block;">
+									</div>
+								</j:if>
+								<j:if test="${jvar_grIni.getDisplayValue('u_my_leader_evaluation') == 3}">
+									<div
+										style="height: 15px; width: 15px; background-color: #7C0A02; border-radius: 50%; display: inline-block;">
+									</div>
+								</j:if>
+								<j:if test="${jvar_grIni.getDisplayValue('u_my_leader_evaluation') == 4}">
+									<div
+										style="height: 15px; width: 15px; background-color: #808080; border-radius: 50%; display: inline-block;">
+									</div>
+								</j:if>
+								<j:if test="${jvar_grIni.getValue('u_my_leader_evaluation') == ''}">
+									<b>N/A</b>
+								</j:if>
+							</td>
+
+						</tr>
+						<tr>
+							<td rowspan="1">
+								<b class="text-dark-blue">Colaborador YE:</b>
+								${jvar_grIni.getDisplayValue("u_ye_contributor_comment")}
+							</td>
+							<td rowspan="1" align="center">
+								<b>
+
+									<j:if test="${jvar_grIni.getDisplayValue('u_ye_contributor_evaluation') == ''}">
+										0%
+									</j:if>
+									<j:if test="${jvar_grIni.getDisplayValue('u_ye_contributor_evaluation') != ''}">
+										${jvar_grIni.getDisplayValue("u_ye_contributor_evaluation")}%
+									</j:if>
+								</b>
+							</td>
+
+						</tr>
+						<tr>
+							<td rowspan="1">
+								<b class="text-dark-blue">Líder YE:</b>
+								${jvar_grIni.getDisplayValue("u_ye_leader_comment")}
+							</td>
+							<td rowspan="1" align="center">
+								<b>${jvar_grIni.getDisplayValue("u_ye_leader_evaluation")}%</b>
+							</td>
+
+						</tr>
+
+					</j:while>
+				</tbody>
+			</table>
+			<j:if test="${jvar_grUAI.hasNext()}">
+				<div class="html2pdf__page-break"></div>
+
+			</j:if>
+		</j:while>
+
+		<br />
+		<br />
+		<br />
+
+
+		<h4 class="text-center text-blue">
+			APROBACIONES
+		</h4>
+
+		<br />
+
+		<div style="display: flex; justify-content: center;">
+			<div style="padding-right: 3rem; width: 350px; text-align: center;">
+				<hr
+					style="margin-end: 0px; border: 2px solid RGB(var(--now-color_border--secondary,var(--now-color--neutral-5,172,180,181)));" />
+				<b>
+					${jvar_grUAI.getDisplayValue("u_performance_evaluation.assigned_to")}
+				</b>
+			</div>
+			<div style="padding-left: 3rem; width: 350px; text-align: center;">
+				<hr
+					style="margin-end: 0px; border: 2px solid RGB(var(--now-color_border--secondary,var(--now-color--neutral-5,172,180,181)));" />
+				<b>
+					${jvar_grUAI.getDisplayValue("u_performance_evaluation.assigned_to.manager")}
+				</b>
+			</div>
+		</div>
+
+		<div class="html2pdf__page-break"></div>
+
+		<table width="100%" style="margin-top: 3rem;">
+			<tr>
+				<td bgcolor="${ jvar_grProperties.background }">
+					<h4 class="text-white text-center">
+						REVISION DE MEDIO AÑO (MY)
+					</h4>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<h4 class="text-blue text-center">
+						COMENTARIOS
+					</h4>
+				</td>
+			</tr>
+			<tr>
+				<td align="left" valign="top" height="133" class="border">
+					<b>Colaborador:</b> ${jvar_grUAEDD.getDisplayValue("u_my_colaborator_comments")}
+				</td>
+			</tr>
+			<tr>
+				<td align="left" valign="top" height="133" class="border">
+					<b>Jefe inmediato:</b> ${jvar_grUAEDD.getDisplayValue("u_my_thecnical_leader_comments")}
+				</td>
+			</tr>
+
+			<tr>
+				<td>
+					<h4 class="text-blue text-center">
+						ACCIONES/AJUSTES A OBJETIVOS
+					</h4>
+				</td>
+			</tr>
+
+			<tr>
+				<td align="left" valign="top" height="133" class="border">
+					<b>Colaborador:</b> ${jvar_grUAEDD.getDisplayValue("u_actions_objectives_patch_colaborator")}
+				</td>
+			</tr>
+			<tr>
+				<td align="left" valign="top" height="133" class="border">
+					<b>Jefe inmediato:</b>
+					${jvar_grUAEDD.getDisplayValue("u_actions_objectives_patch_thecnical_leader")}
+				</td>
+			</tr>
+		</table>
+
+		<table width="100%" style="margin-top: 3rem;">
+			<tr>
+				<td bgcolor="${ jvar_grProperties.background }">
+					<h4 class="text-white text-center">
+						REVISION DE MEDIO AÑO (MY)
+					</h4>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<h4 class="text-blue text-center">
+						COMENTARIOS
+					</h4>
+				</td>
+			</tr>
+			<tr>
+				<td align="left" valign="top" height="133" class="border">
+					<b>Colaborador:</b> ${jvar_grUAEDD.getDisplayValue("u_ye_colaborator_comments")}
+				</td>
+			</tr>
+			<tr>
+				<td align="left" valign="top" height="133" class="border">
+					<b>Jefe inmediato:</b> ${jvar_grUAEDD.getDisplayValue("u_ye_thecnical_leader_comments")}
+				</td>
+			</tr>
+
+
+		</table>
+
+
+
+
+
+
+		<div class="html2pdf__page-break"></div>
+		<div>
+			<h2>Historial de cambios</h2>
+
+			<pre>
+							${ grUAEDD.comments.getJournalEntry(1).replace('code', '') }
+						
+						</pre>
+			<pre>
+							${ grUAEDD.comments.getJournalEntry(2).replace('code', '') }
+						</pre>
+			<pre>
+							${ grUAEDD.comments.getJournalEntry(3).replace('code', '') }
+						</pre>
+
+		</div>
+		<h3>Para ver el historial completo, por favor ingresa a la pestaña de actividad ubicada en la pantalla principal
+			de tu evaluación de desempeño.</h3>
+		<a
+			href="/esc?sys_id=${gs.action.getGlideURI().getMap().get('sysparm_sys_id')}${AMP}view=sp${AMP}id=ticket${AMP}table=u_aliat_evaluacion_de_desempeno">
+			Da clic aquí para ver tu evaluación de desempeño
+		</a>
+	</div>
+
+</j:jelly>]]></html>
+        <name>IPS - Template Evaluation</name>
+        <processing_script/>
+        <sys_class_name>sys_ui_page</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2024-04-29 04:07:34</sys_created_on>
+        <sys_id>2b1a856247f502102d16d9ce316d4394</sys_id>
+        <sys_mod_count>35</sys_mod_count>
+        <sys_name>IPS - Template Evaluation</sys_name>
+        <sys_package display_value="IPS Performance Assessments" source="x_ipsu2_ips_perfor">948629663328c210061636c24d5c7bfc</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="IPS Performance Assessments">948629663328c210061636c24d5c7bfc</sys_scope>
+        <sys_update_name>sys_ui_page_2b1a856247f502102d16d9ce316d4394</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2024-04-29 05:25:12</sys_updated_on>
+    </sys_ui_page>
+</record_update>

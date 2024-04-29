@@ -1,53 +1,378 @@
 <?xml version="1.0" encoding="UTF-8"?><record_update table="sp_widget">
     <sp_widget action="INSERT_OR_UPDATE">
         <category>custom</category>
-        <client_script><![CDATA[api.controller = function ($rootScope, $scope, $uibModal) {
+        <client_script><![CDATA[api.controller = function ($location, $window, $scope, $uibModal) {
 
 
   /* widget controller */
   var c = this;
 
-  // $rootScope.server = c.server;
-  // $rootScope.data = c.data;
+  c.loader = false;
+  c.real_data = {};
+  c.real_data = c.data;
+  $scope.selectedOption = c.data.paginator.records_per_page + '';
+
+  c.status = function () {
+
+    if (!c.data.settings_evaluation.state) {
+      return false
+    }
+
+    for (let i = 0; i < c.data.evaluations.length; i++) {
+      const evaluation = c.data.evaluations[i];
+
+      if (!'80,90'.includes(evaluation.state.value))
+        return false
+    }
+    return true
+  }
+
+  c.getOldEvaluation = async function () {
+    var res = await c.server.get({
+      action: 'updatePaginator',
+      records_per_page: c.data.paginator.records_per_page,
+      current_page: c.data.paginator.current_page + 1
+    });
+    c.data = res.data;
+    $scope.$apply();
+  };
+
+  c.getRecentEvaluation = async function () {
+    var res = await c.server.get({
+      action: 'updatePaginator',
+      records_per_page: c.data.paginator.records_per_page,
+      current_page: c.data.paginator.current_page - 1
+    });
+    c.data = res.data;
+    $scope.$apply();
+  };
+
+  c.updatePaginate = async function (paginate) {
+
+    var res = await c.server.get({
+      action: 'updatePaginator',
+      records_per_page: paginate,
+      current_page: c.data.paginator.current_page
+    });
+    c.data = res.data;
+    $scope.$apply();
+  };
+
+  c.navegateEvaluation = function (evaluation) {
+    $window.location = $location.path() + '?id=ticket&sys_id=' + evaluation.sys_id + '&view=sp&table=x_ipsu2_ips_perfor_performance_evaluation';
+  }
+
+
+  c.createNewEvaluationOpenModal = function () {
+    c.create_new_evaluation = {
+      collaborator: {
+        name: c.data.user.name,
+        sys_id: c.data.user.sys_id,
+      },
+      position: c.data.user.title,
+      leader: {
+        name: c.data.user.leader.name,
+        sys_id: c.data.user.leader.sys_id
+      }
+    }
+
+    $scope.modalInstance = $uibModal.open({
+      templateUrl: 'createNewEvaluation',
+      scope: $scope
+    });
+  }
+
+
+  c.closeModal = function () {
+    $scope.modalInstance.close();
+  }
 
 
 
-  // console.log(top.NOW.guided_tours.events.on());
+  c.createEvaluation = async function () {
+    c.loader = true;
+    var res = await c.server.get({
+      action: 'create_evaluation',
+      data: c.create_new_evaluation
+    });
 
+    c.closeModal();
+    c.loader = false;
 
-  // c.createPerfomanceEvaluation = function () {
-  //   $scope.modalInstance = $uibModal.open({
-  //     templateUrl: 'modalTemplate',
-  //     scope: $scope
-  //   });
-  // }
+    $window.location = $location.path() + '?id=ticket&sys_id=' + res.data.new_evaluation_sys_id + '&view=sp&table=x_ipsu2_ips_perfor_performance_evaluation';
 
-  // $scope.closeModal = function () {
-  //   $scope.modalInstance.close();
-  // }
-
-  // $scope.crete = function () {
-  //   $scope.modalInstance.close();
-  //   c.createEvaluation();
-  // }
-
-  // c.createEvaluation = async function () {
-  //   var res = await c.server.get({
-  //     action: 'create_evaluation',
-  //     data: c.data.create_new_evaluation
-  //   });
-
-
-  //   window.location = '/esc?sys_id=' + res.data.create_new_evaluation.evaluation.sys_id + '&view=sp&id=ticket&table=u_aliat_evaluacion_de_desempeno';
-  //   // c.data.evaluations.number_evaluations = 1;
-  //   // c.data.evaluation = res.data.create_new_evaluation;
-  //   // c.data.evaluation.objective_select = res.data.create_new_evaluation.evaluation.objectives[0];
-  //   // c.data.evaluation.initiaitive_select = res.data.create_new_evaluation.evaluation.objectives[0].iniciatives[0];
-  // }
+  }
 
 };]]></client_script>
         <controller_as>c</controller_as>
-        <css/>
+        <css>$primary: rgb(0, 112, 185);&#13;
+$info: rgb(80, 145, 205);&#13;
+$success: rgb(134, 223, 72);&#13;
+$secondary: rgb(188, 190, 192);&#13;
+$error: rgb(239, 68, 56);&#13;
+&#13;
+.bg-success {&#13;
+    background: $success;&#13;
+}&#13;
+&#13;
+&#13;
+&#13;
+#ips_ard {&#13;
+    padding: 2.4rem !important;&#13;
+    background-color: #ffffff;&#13;
+    border: 0.1rem solid #FFFFFF;&#13;
+    border-radius: 0.8rem;&#13;
+    box-shadow: 0 0.4rem 0.8rem 0 rgb(23 40 52 / 8%);&#13;
+}&#13;
+&#13;
+.pa-2 {&#13;
+    padding: 2rem !important;&#13;
+}&#13;
+&#13;
+.my-2 {&#13;
+    margin: 2rem 0 !important;&#13;
+}&#13;
+&#13;
+.d-flex {&#13;
+    display: flex !important;&#13;
+&#13;
+}&#13;
+&#13;
+.jutify-center {&#13;
+    justify-content: center !important;&#13;
+}&#13;
+&#13;
+.container::before {&#13;
+    content: '';&#13;
+    background: url('ips-mono.svg');&#13;
+}&#13;
+&#13;
+&#13;
+.justify-center {&#13;
+    justify-content: center !important;&#13;
+}&#13;
+&#13;
+.title {&#13;
+    position: relative;&#13;
+    display: flex;&#13;
+    justify-content: center;&#13;
+    align-items: center;&#13;
+    text-align: center;&#13;
+    margin: 0px 10px;&#13;
+}&#13;
+&#13;
+.hr {&#13;
+    height: 0.2rem;&#13;
+    background-color: $primary;&#13;
+    border: none;&#13;
+    width: 25%;&#13;
+}&#13;
+&#13;
+.active-evaluation-state {&#13;
+    color: $primary;&#13;
+    font-weight: 900;&#13;
+}&#13;
+&#13;
+.complete-step::before {&#13;
+    display: block;&#13;
+    content: "";&#13;
+    background: url('https://aliatdev.service-now.com/check-circle.svg');&#13;
+    color: $success;&#13;
+    width: 25px;&#13;
+    height: 25px;&#13;
+    background-repeat: no-repeat, repeat;&#13;
+    background-position: center;&#13;
+&#13;
+}&#13;
+&#13;
+.card-header {&#13;
+    padding: 10px;&#13;
+    position: relative;&#13;
+    text-align: center;&#13;
+    cursor: pointer;&#13;
+}&#13;
+&#13;
+.card-header:hover {&#13;
+    border: solid 1px $primary;&#13;
+}&#13;
+&#13;
+.card-header-close {&#13;
+    position: absolute;&#13;
+    right: 10px;&#13;
+    padding: 0px 2.4rem;&#13;
+    top: 10px;&#13;
+}&#13;
+&#13;
+.ips-button {&#13;
+    width: calc(100% - 20px);&#13;
+    background: transparent;&#13;
+    border: none;&#13;
+    text-align: left;&#13;
+    margin: 10px;&#13;
+    padding: 5px 15px;&#13;
+    display: flex;&#13;
+    justify-content: left;&#13;
+    align-items: center;&#13;
+    align-content: center;&#13;
+    border: solid 2px transparent;&#13;
+    border-radius: 10px;&#13;
+}&#13;
+&#13;
+.ips-button-circle {&#13;
+&#13;
+    text-align: center;&#13;
+    height: 35px;&#13;
+    width: 35px;&#13;
+    position: relative;&#13;
+    margin-right: 5px;&#13;
+    z-index: 2;&#13;
+    color: white;&#13;
+    display: flex;&#13;
+    justify-content: center;&#13;
+    align-items: center;&#13;
+    align-content: center;&#13;
+}&#13;
+&#13;
+.ips-button-circle::after {&#13;
+    content: '';&#13;
+    display: flex;&#13;
+    justify-content: center;&#13;
+    align-items: center;&#13;
+    align-content: center;&#13;
+    border-radius: 50%;&#13;
+    background: $secondary ;&#13;
+    color: white;&#13;
+    height: 35px;&#13;
+    width: 35px;&#13;
+    font-weight: 900;&#13;
+    position: absolute;&#13;
+    z-index: -1;&#13;
+}&#13;
+&#13;
+.ips-button-active {&#13;
+    &amp;&gt;.ips-button-circle::after {&#13;
+        background: $info ;&#13;
+    }&#13;
+&#13;
+    &amp;:hover {&#13;
+        border: solid 2px $info !important;&#13;
+    }&#13;
+&#13;
+    &amp;&gt;.ips-button-text {&#13;
+&#13;
+        &amp;&gt;h4 {&#13;
+            color: $info;&#13;
+        }&#13;
+&#13;
+        &amp;&gt;p {&#13;
+            color: $info;&#13;
+        }&#13;
+    }&#13;
+}&#13;
+&#13;
+.ips-button-text {&#13;
+    margin-left: 10px;&#13;
+&#13;
+    &amp;&gt;h4 {&#13;
+        color: $secondary;&#13;
+&#13;
+    }&#13;
+&#13;
+    &amp;&gt;p {&#13;
+        font-weight: 800;&#13;
+        color: $secondary;&#13;
+        font-size: 1.3rem;&#13;
+        opacity: .8;&#13;
+    }&#13;
+}&#13;
+&#13;
+.ips-button:hover {&#13;
+    border: solid 2px $secondary;&#13;
+    border-radius: 10px;&#13;
+}&#13;
+&#13;
+&#13;
+.ips-objectives-buttom {&#13;
+    display: flex;&#13;
+    justify-content: left;&#13;
+    align-items: center;&#13;
+    align-content: center;&#13;
+    margin-bottom: 15px;&#13;
+}&#13;
+&#13;
+.ips-objectives-btn {&#13;
+&#13;
+    width: 20%;&#13;
+&#13;
+    &amp;&gt;button {&#13;
+        width: 100%;&#13;
+        background: transparent;&#13;
+        border: none;&#13;
+        text-align: center;&#13;
+        padding: 5px 15px;&#13;
+        border: solid 2px transparent;&#13;
+        border-top-left-radius: 10px;&#13;
+        border-top-right-radius: 10px;&#13;
+        background: $secondary;&#13;
+        color: white;&#13;
+    }&#13;
+}&#13;
+&#13;
+.ips-objectives-btn-active {&#13;
+    &amp;&gt;button {&#13;
+        background: $info !important;&#13;
+    }&#13;
+}&#13;
+&#13;
+.disabled:hover {&#13;
+    border: none !important;&#13;
+    border-radius: 0px;&#13;
+}&#13;
+&#13;
+.btn-primary {&#13;
+    color: white;&#13;
+    background: $primary !important;&#13;
+}&#13;
+&#13;
+.btn-default {&#13;
+    color: $primary;&#13;
+    border: solid 1px $primary !important;&#13;
+}&#13;
+&#13;
+@media (max-width: 540px) {&#13;
+    .d-sm-none {&#13;
+        display: none;&#13;
+    }&#13;
+}&#13;
+&#13;
+@media (max-width: 993px) {&#13;
+    .d-md-none {&#13;
+        display: none;&#13;
+    }&#13;
+}&#13;
+&#13;
+.btn-error {&#13;
+    background: transparent&#13;
+}&#13;
+&#13;
+.btn-error:hover,&#13;
+.btn-error:active,&#13;
+.btn-error:focus {&#13;
+    border: solid 2px $error;&#13;
+    color: $error;&#13;
+}&#13;
+&#13;
+.text-white {&#13;
+    color: white !important;&#13;
+}&#13;
+&#13;
+.table {&#13;
+    font-size: 1rem !important;&#13;
+}&#13;
+&#13;
+.text-error {&#13;
+    color: $error !important;&#13;
+}</css>
         <data_table>sp_instance</data_table>
         <demo_data/>
         <description/>
@@ -66,20 +391,36 @@
   /* e.g., data.table = $sp.getValue('table'); */
 
   data.options = JSON.parse(options.widget_parameters | '');
-
-
-  var paginator = {
+  var ipsPerformanceEvaluation = new x_ipsu2_ips_perfor.IPSPerformanceEvaluation();
+  data.settings_evaluation = {
+    state: true
+  };
+  data.paginator = {
     current_page: 0,
-    next_page: 1,
-    previus_page: 0,
-    records_per_page: 3
+    records_per_page: 3,
+    total: ipsPerformanceEvaluation.getCountEvaluations()
   };
 
+  data.user = ipsPerformanceEvaluation.getUser();
 
-  var ipsPerformanceEvaluation = new IPSPerformanceEvaluation(paginator);
-  data.evaluations = ipsPerformanceEvaluation.getEvaluations(paginator);
+  data.evaluations = ipsPerformanceEvaluation.getEvaluations(data.paginator);
 
 
+  if (input) {
+
+    switch (input.action) {
+      case 'updatePaginator':
+        data.paginator = {
+          current_page: input.current_page,
+          records_per_page: input.records_per_page,
+          total: ipsPerformanceEvaluation.getCountEvaluations()
+        };
+        return data.evaluations = ipsPerformanceEvaluation.getEvaluations(data.paginator);
+
+      case 'create_evaluation':
+        return data.new_evaluation_sys_id = ipsPerformanceEvaluation.createNewEvaluation(input.data)
+    }
+  }
 
 })();]]></script>
         <servicenow>false</servicenow>
@@ -87,14 +428,14 @@
         <sys_created_by>jorge.ortega</sys_created_by>
         <sys_created_on>2024-04-27 22:56:30</sys_created_on>
         <sys_id>59a93a46c33dc6101d04d6ff05013172</sys_id>
-        <sys_mod_count>50</sys_mod_count>
+        <sys_mod_count>315</sys_mod_count>
         <sys_name>My self assessments</sys_name>
         <sys_package display_value="IPS Performance Assessments" source="x_ipsu2_ips_perfor">948629663328c210061636c24d5c7bfc</sys_package>
         <sys_policy/>
         <sys_scope display_value="IPS Performance Assessments">948629663328c210061636c24d5c7bfc</sys_scope>
         <sys_update_name>sp_widget_59a93a46c33dc6101d04d6ff05013172</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2024-04-28 21:33:48</sys_updated_on>
+        <sys_updated_on>2024-04-29 06:28:22</sys_updated_on>
         <template><![CDATA[<style>
   .card {
     padding: 2.4rem !important;
@@ -118,7 +459,6 @@
   </header>
 
   <article>
-    <pre>{{ data | json }}</pre>
     <div class="ips-card-body row">
       <main class="col col-md-12">
         <div class="card">
@@ -127,48 +467,69 @@
 
               <div class="text-center my-2">
                 <h2 class="font-weight-bold"> ${My Evaluations}</h2>
-                <p class="text-center">${Da clic sobre la evaluación de tu interés, para verla completa.}</p>
+                <p class="text-center">${Click on the evaluation of your interest to see it in full.}</p>
+              </div>
+              <div class="d-flex jutify-center my-2">
+
+
+                <!-- <select ng-model="selectedOption" ng-change="c.updatePaginate(selectedOption)">
+                  <option value="2">2</option>
+                  <option value="5">5</option>
+                  <option value="10">10</option>
+                </select> -->
               </div>
               <div class="">
-                <div class="d-flex jutify-center my-2" ng-repeat="evaluation in data.evaluations.record">
+                <div class="d-flex jutify-center my-2" ng-repeat="evaluation in c.data.evaluations">
                   <div class="text-center">
-                    <hr>
+
 
                     <p style="padding: 5px 10px; margin-bottom: 5px">
-                      <b>Estado:</b>
-                      {{ evaluation.state }}
+                      <b>${State}:</b> {{ evaluation.state.label }}
                       <br>
-                    <div ng-if="evaluation.user == evaluation.colaborador">
-                      <span
-                        ng-if="(evaluation.state_1 == '4' && evaluation.u_ye_colaborator_comments) || (evaluation.state_1 == '3' &&  evaluation.u_my_colaborator_comments)"
+                      <b>${Number}:</b> {{ evaluation.number }}
+                      <br>
+                      <b> Descripción:</b> {{ evaluation.performance_evaluation }}
+                      <br>
+                      <b> Due date:</b> {{ evaluation.due_date }}
+                      <br>
+                      <span ng-if="(evaluation.state.value == '30' || evaluation.state.value == '50')"
                         style="color: #0070b9 ">
-                        ${Esperando evaluación de } {{ evaluation.u_jefe_del_empleado }}
+                        ${Waiting for actions of } <b>{{ evaluation.leader.name }}</b>
                       </span>
-                    </div>
-
 
                     </p>
 
-                    <b> Descripción:</b> {{ evaluation.short_description }}
-                    <br>
-                    <button class="btn btn-default  text-infos" ng-click="showForm2(evaluation)">
+
+
+
+
+                    <button class="btn btn-default  text-infos" ng-click="c.navegateEvaluation(evaluation)">
                       Ver evaluación
                     </button>
 
-                    <a ng-if="(evaluation.state == 'Complete' || evaluation.state == 'Completada' )"
-                      class="btn btn-default  text-infos" target="_blank"
-                      href="/ui_page.do?sys_id=10761cac97db9910a0687cd11153af5b&sysparm_sys_id={{ evaluation.sys_id }}">
+                    <a class="btn btn-default  text-infos" target="_blank"
+                      href="/ui_page.do?sys_id=2b1a856247f502102d16d9ce316d4394&sysparm_sys_id={{ evaluation.sys_id }}">
                       Descargar PDF
                     </a>
-                    <hr>
+
                   </div>
                 </div>
                 <div class="d-flex jutify-center my-2">
-                  <div>
 
-                    <button class="btn btn-primary" ng-click="createNewEvaluationOpenModal()">
+                  <div ng-if="c.status()">
+                    <button class="btn btn-primary" ng-click="c.createNewEvaluationOpenModal()">
                       ${Crear objetivos}
                     </button>
+                  </div>
+                  <div ng-if="!c.status()">
+                    <ul>
+                      <li>
+                        ${If you have pending evaluations, be sure to finish them}
+                      </li>
+                      <li>
+                        ${Verify with your human resources staff that the evaluation period is active}
+                      </li>
+                    </ul>
                   </div>
                 </div>
 
@@ -177,16 +538,19 @@
 
                   <div class="row d-flex justify-cenetr">
 
+
                     <div class="col col-sm-6 col-md-6">
-                      <button class="btn btn-outline-primary" ng-click="getOldEvaluation()"
-                        ng-class="{'disabled': (data.evaluations.paginator.current_page + 5) >= data.evaluations.paginator.total}">
+                      <button
+                        ng-class="{'disabled': c.data.paginator.total < (c.data.paginator.records_per_page * c.data.paginator.current_page+1) }"
+                        class="btn btn-outline-primary" ng-click="c.getOldEvaluation()">
                         ${Old Evaluatios}
                       </button>
                     </div>
 
                     <div class="col col-sm-6 col-md-6">
-                      <button class="btn btn-outline-primary" ng-click="getRecentEvaluation()"
-                        ng-class="{'disabled': data.evaluations.paginator.current_page == -1}">
+
+                      <button class="btn btn-outline-primary" ng-click="c.getRecentEvaluation()"
+                        ng-class="{'disabled': (c.data.paginator.total - (c.data.paginator.records_per_page * c.data.paginator.current_page ))  >  (c.data.paginator.total - 1)}">
                         ${Recent Evaluations}
                       </button>
                     </div>

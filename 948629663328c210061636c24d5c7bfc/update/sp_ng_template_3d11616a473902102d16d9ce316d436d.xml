@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_ng_template">
+    <sp_ng_template action="INSERT_OR_UPDATE">
+        <id>createNewEvaluation</id>
+        <sp_widget display_value="My self assessments">59a93a46c33dc6101d04d6ff05013172</sp_widget>
+        <sys_class_name>sp_ng_template</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2024-04-29 05:46:46</sys_created_on>
+        <sys_id>3d11616a473902102d16d9ce316d436d</sys_id>
+        <sys_mod_count>20</sys_mod_count>
+        <sys_name>createNewEvaluation</sys_name>
+        <sys_package display_value="IPS Performance Assessments" source="x_ipsu2_ips_perfor">948629663328c210061636c24d5c7bfc</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="IPS Performance Assessments">948629663328c210061636c24d5c7bfc</sys_scope>
+        <sys_update_name>sp_ng_template_3d11616a473902102d16d9ce316d436d</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2024-04-29 06:19:53</sys_updated_on>
+        <template><![CDATA[<div class="panel panel-default">
+
+
+    <div class="text-center">
+
+        <h2>${Create new assement}</h2>
+    </div>
+    <p class="text-center">${Check that the data displayed is correct}</p>
+    <div style="padding: 10px 40px">
+        <div class="form-group row">
+            <label for="evaluation" class="col-sm-12 col-md-3 col-form-label">${Name Evaluation}</label>
+            <div class="col-sm-12 col-md-9">
+                <input type="text" ng-model="c.create_new_evaluation.evaluation" class="form-control" id="evaluation">
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="collaborator" class="col-sm-12 col-md-3 col-form-label">${Collaborator Name}</label>
+            <div class="col-sm-12 col-md-9">
+                <input type="text" class="form-control" ng-model="c.create_new_evaluation.collaborator.name"
+                    id="collaborator" disabled>
+                <input type="hidden" name="collaborator" ng-model="c.create_new_evaluation.collaborator.sys_id">
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="position" class="col-sm-12 col-md-3 col-form-label">${Position Job}</label>
+            <div class="col-sm-12 col-md-9">
+                <input type="text" class="form-control" ng-model="c.create_new_evaluation.position" id="position"
+                    disabled>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="technical_leader" class="col-sm-12 col-md-3 col-form-label">${Leader}</label>
+            <div class="col-sm-12 col-md-9">
+                <input type="text" class="form-control" ng-model="c.create_new_evaluation.leader.name"
+                    id="technical_leader" disabled>
+                <input type="hidden" class="form-control" ng-model="c.create_new_evaluation.leader.sys_id">
+            </div>
+        </div>
+
+        <br>
+        <p class="text-center">
+            ${If your data is incorrect, please contact your human capital.}
+        </p>
+    </div>
+
+
+
+    <div class="panel-footer text-center">
+        <button class="btn btn-danger" ng-click="c.closeModal()">${Cancel}</button>
+        <button class="btn btn-primary" ng-click="c.createEvaluation()" ng-disabled="c.loader">${Crear
+            objetivos}</button>
+    </div>
+
+
+</div>]]></template>
+    </sp_ng_template>
+</record_update>

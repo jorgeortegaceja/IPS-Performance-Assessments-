@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_angular_provider">
+    <sp_angular_provider action="INSERT_OR_UPDATE">
+        <name>ipsHttpServicice</name>
+        <script><![CDATA[function ipsHttpServicice($rootScope) {
+    this.update = async function (params) {
+        var res = await $rootScope.server.get(params);
+        return res.data;
+    }
+
+    this.createObjetive = async function (data) {
+        var res = await $rootScope.server.get({
+            action: 'create_objective',
+            data: data
+        });
+
+        console.log(res.data.response);
+        return res.data.response;
+    }
+
+
+    this.createEvaluation = async function (data) {
+        var res = await $rootScope.server.get({
+            action: 'create_evaluation',
+            data: data
+        });
+        return res;
+    }
+
+    this.createOrUpdateInitiative = async function (data) {
+
+
+        var res = await $rootScope.server.get({
+            action: 'create_or_update_initiative',
+            data: data
+        });
+
+        return res.data.response;
+    }
+
+    this.closeEvaluation = function () {
+        delete $rootScope.data.evaluation;
+        $rootScope.data = $rootScope.data
+
+    }
+
+    this.sendEvaluation = async function () {
+
+        var res = await $rootScope.server.get({
+            action: 'sendEvaluation',
+            data: $rootScope.data.evaluation
+        });
+
+        return res.data.response;
+
+    }
+
+}]]></script>
+        <sys_class_name>sp_angular_provider</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2024-04-29 02:14:49</sys_created_on>
+        <sys_id>3070b8a6477502102d16d9ce316d4359</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_name>ipsHttpServicice</sys_name>
+        <sys_package display_value="IPS Performance Assessments" source="x_ipsu2_ips_perfor">948629663328c210061636c24d5c7bfc</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="IPS Performance Assessments">948629663328c210061636c24d5c7bfc</sys_scope>
+        <sys_update_name>sp_angular_provider_3070b8a6477502102d16d9ce316d4359</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2024-04-29 02:14:57</sys_updated_on>
+        <type>service</type>
+    </sp_angular_provider>
+</record_update>
