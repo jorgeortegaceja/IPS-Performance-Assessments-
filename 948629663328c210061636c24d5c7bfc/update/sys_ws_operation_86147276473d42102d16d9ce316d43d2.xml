@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_ws_operation">
+    <sys_ws_operation action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <consumes>application/json,application/xml,text/xml</consumes>
+        <consumes_customized>false</consumes_customized>
+        <default_operation_uri>/api/x_ipsu2_ips_perfor/ips_assessments_evaluation/ips-get-stepper/{evaluation}</default_operation_uri>
+        <enforce_acl>cf9d01d3e73003009d6247e603f6a990</enforce_acl>
+        <http_method>GET</http_method>
+        <name>IPS Get Stepper</name>
+        <operation_script><![CDATA[(function process(/*RESTAPIRequest*/ request, /*RESTAPIResponse*/ response) {
+
+    var evaluation = new GlideRecord('x_ipsu2_ips_perfor_performance_evaluation');
+    if (!evaluation.get(request.pathParams.evaluation))
+        return response.setStatus(404)
+
+    var stepper = [
+        {
+            text: gs.getMessage('New Assessment'),
+            active: evaluation.state == 10 ? true : false,
+            complete: evaluation.state > 10 ? true : false,
+            is_last: false
+        },
+        {
+            text: gs.getMessage('Goal Correction'),
+            active: evaluation.state == 20 ? true : false,
+            complete: evaluation.state > 20 ? true : false,
+            is_last: false
+        },
+        {
+            text: gs.getMessage('Authorization'),
+            active: evaluation.state == 30 ? true : false,
+            complete: evaluation.state > 30 ? true : false,
+            is_last: false
+        },
+        {
+            text: gs.getMessage('MY evaluation (collaborator)'),
+            active: evaluation.state == 40 ? true : false,
+            complete: evaluation.state > 40 ? true : false,
+            is_last: false
+        },
+        {
+            text: gs.getMessage('MY evaluation (leader)'),
+            active: evaluation.state == 50 ? true : false,
+            complete: evaluation.state > 50 ? true : false,
+            is_last: false
+        },
+        {
+            text: gs.getMessage('YE evaluation (collaborator)'),
+            active: evaluation.state == 60 ? true : false,
+            complete: evaluation.state > 60 ? true : false,
+            is_last: false
+        },
+        {
+            text: gs.getMessage('YE evaluation (leader)'),
+            active: evaluation.state == 70 ? true : false,
+            complete: evaluation.state > 70 ? true : false,
+            is_last: false
+        },
+        {
+            text: gs.getMessage('Complete'),
+            active: true,
+            complete: true,
+            is_last: true
+        },
+        {
+            text: gs.getMessage('Cancel'),
+            active: true,
+            complete: false,
+            is_last: true
+        }
+
+    ];
+
+    var stepperIndices = {
+        '10': [0, 2, 3, 4],
+        '20': [1, 2, 3, 4],
+        '30': [0, 2, 3, 4],
+        '40': [2, 3, 4, 5],
+        '50': [3, 4, 5, 6],
+        '60': [4, 5, 6, 7],
+        '70': [4, 5, 6, 7],
+        '80': [4, 5, 6, 7],
+        '90': [4, 5, 6, 8]
+    };
+
+
+
+    var real = stepperIndices[evaluation.state + ''].map(function (index) {
+        return stepper[index];
+    });
+
+    if (real.length == 4) {
+        real[3].is_last = true;
+    }
+
+    return real
+
+
+
+
+})(request, response);]]></operation_script>
+        <operation_uri>/api/x_ipsu2_ips_perfor/v1/ips_assessments_evaluation/ips-get-stepper/{evaluation}</operation_uri>
+        <produces>application/json,application/xml,text/xml</produces>
+        <produces_customized>false</produces_customized>
+        <relative_path>/ips-get-stepper/{evaluation}</relative_path>
+        <request_example/>
+        <requires_acl_authorization>true</requires_acl_authorization>
+        <requires_authentication>true</requires_authentication>
+        <requires_snc_internal_role>true</requires_snc_internal_role>
+        <short_description/>
+        <sys_class_name>sys_ws_operation</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2024-04-30 06:28:04</sys_created_on>
+        <sys_id>86147276473d42102d16d9ce316d43d2</sys_id>
+        <sys_mod_count>16</sys_mod_count>
+        <sys_name>IPS Get Stepper</sys_name>
+        <sys_package display_value="IPS Performance Assessments" source="x_ipsu2_ips_perfor">948629663328c210061636c24d5c7bfc</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="IPS Performance Assessments">948629663328c210061636c24d5c7bfc</sys_scope>
+        <sys_update_name>sys_ws_operation_86147276473d42102d16d9ce316d43d2</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2024-04-30 07:24:27</sys_updated_on>
+        <web_service_definition display_value="IPS Assessments Evaluation">7782aaf247f942102d16d9ce316d43e5</web_service_definition>
+        <web_service_version display_value="v1">a9f2ee7247f942102d16d9ce316d43a9</web_service_version>
+    </sys_ws_operation>
+</record_update>

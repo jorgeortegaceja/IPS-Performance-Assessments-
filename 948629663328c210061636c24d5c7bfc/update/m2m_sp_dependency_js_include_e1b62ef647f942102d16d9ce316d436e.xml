@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="m2m_sp_dependency_js_include">
+    <m2m_sp_dependency_js_include action="INSERT_OR_UPDATE">
+        <order>100</order>
+        <sp_dependency display_value="react">fb66e6f647f942102d16d9ce316d43fe</sp_dependency>
+        <sp_js_include display_value="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js">01866af647f942102d16d9ce316d4360</sp_js_include>
+        <sys_class_name>m2m_sp_dependency_js_include</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2024-04-30 05:29:13</sys_created_on>
+        <sys_id>e1b62ef647f942102d16d9ce316d436e</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>react.https://unpkg.com/react-dom@18/umd/react-dom.production.min.js</sys_name>
+        <sys_package display_value="IPS Performance Assessments" source="x_ipsu2_ips_perfor">948629663328c210061636c24d5c7bfc</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="IPS Performance Assessments">948629663328c210061636c24d5c7bfc</sys_scope>
+        <sys_update_name>m2m_sp_dependency_js_include_e1b62ef647f942102d16d9ce316d436e</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2024-04-30 05:29:13</sys_updated_on>
+    </m2m_sp_dependency_js_include>
+</record_update>

@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_widget">
+    <sp_widget action="DELETE">
+        <category>custom</category>
+        <client_script><![CDATA[api.controller = function () {
+  /* widget controller */
+  var c = this;
+
+
+  "use strict";
+  const { useState } = React;
+  const steps = [
+    { id: 'step01', label: 'Captura de objetivos ]]>🤗<![CDATA[' },
+    { id: 'step02', label: 'Revision de objetivos ]]>🙂<![CDATA[' },
+    { id: 'step03', label: 'Correccion de objetivos ]]>😛<![CDATA[' },
+    { id: 'step04', label: 'Evaluacion medio año colaborador ]]>😎<![CDATA[' },
+    { id: 'step05', label: 'Evaluacion medio año Lider ]]>🥳<![CDATA[' },
+    { id: 'step05', label: 'Evaluacion anual colaborador ]]>🥳<![CDATA[' },
+    { id: 'step05', label: 'Evaluacion anual lider ]]>🥳<![CDATA[' },
+    { id: 'step05', label: 'Completada ]]>🥳<![CDATA[' }
+  ];
+  const StepProgressBar = ({ steps, currentStep, completedStep, disableNavigation, handleStepClicked }) => {
+    const isStepCurrent = (index) => index + 1 === currentStep;
+    const isStepCompleted = (index) => index + 1 !== currentStep && completedStep >= index + 1;
+    const isStepNavigable = (index) => completedStep >= index;
+    const getStepClassNames = (index) => {
+      let result = 'stepProgressBar__step';
+      if (isStepCurrent(index)) {
+        result = `${result} stepProgressBar__step--current`;
+      }
+      if (isStepCompleted(index)) {
+        result = `${result} stepProgressBar__step--completed`;
+      }
+      if (isStepNavigable(index)) {
+        result = `${result} stepProgressBar__step--navigable`;
+      }
+      return result;
+    };
+    return (React.createElement("ol", { className: 'stepProgressBar' }, steps.map((step, index) => React.createElement("li", { key: step.id, className: getStepClassNames(index) },
+      index > 0 && React.createElement("div", { className: "stepProgressBar__step__line" }),
+      React.createElement("button", { className: "stepProgressBar__step__button", type: "button", disabled: disableNavigation && !isStepNavigable(index), onClick: () => handleStepClicked(index + 1) },
+        React.createElement("span", { className: "stepProgressBar__step__button__indicator" }, isStepCompleted(index) && React.createElement("svg", { className: "stepProgressBar__step__button__indicator__icon-completed", width: "10", height: "7", viewBox: "0 0 12 9", fill: "currentColor" },
+          React.createElement("path", { d: "M1.05025 3.70714C1.44077 3.31661 2.07394 3.31661 2.46446 3.70714L5.29289 6.53556C5.68341 6.92609 5.68341 7.55925 5.29289 7.94978C4.90236 8.3403 4.2692 8.3403 3.87867 7.94978L1.05025 5.12135C0.659724 4.73083 0.659724 4.09766 1.05025 3.70714Z" }),
+          React.createElement("path", { d: "M10.9498 0.878709C11.3403 1.26923 11.3403 1.9024 10.9498 2.29292L5.29289 7.94978C4.90236 8.3403 4.2692 8.3403 3.87867 7.94978C3.48815 7.55925 3.48816 6.92609 3.87869 6.53556L9.53554 0.878709C9.92606 0.488184 10.5592 0.488184 10.9498 0.878709Z" }))),
+        React.createElement("span", { className: "stepProgressBar__step__button__label" }, step.label))))));
+  };
+  const App = () => {
+    const [currentStep, setCurrentStep] = useState(1);
+    const [completedStep, setCompletedStep] = useState(0);
+    const handleStepClicked = (value) => {
+      setCurrentStep(value);
+      if (value > completedStep) {
+        setCompletedStep(value - 1);
+      }
+    };
+    return (React.createElement("div", { className: "container" },
+      React.createElement(StepProgressBar, { steps: steps, currentStep: currentStep, completedStep: completedStep, disableNavigation: false, handleStepClicked: handleStepClicked })));
+  };
+  ReactDOM.render(React.createElement(App, null), document.getElementById("root"));
+
+
+
+};]]></client_script>
+        <controller_as>c</controller_as>
+        <css/>
+        <data_table>sp_instance</data_table>
+        <demo_data/>
+        <description/>
+        <docs/>
+        <field_list/>
+        <has_preview>false</has_preview>
+        <id>ips_stepper</id>
+        <internal>false</internal>
+        <link><![CDATA[function link(scope, element, attrs, controller) {  }]]></link>
+        <name>IPS Stepper</name>
+        <option_schema/>
+        <public>false</public>
+        <roles/>
+        <script><![CDATA[(function() {  /* populate the 'data' object */  /* e.g., data.table = $sp.getValue('table'); */})();]]></script>
+        <servicenow>false</servicenow>
+        <sys_class_name>sp_widget</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2024-04-30 05:23:39</sys_created_on>
+        <sys_id>b365263647f942102d16d9ce316d43fa</sys_id>
+        <sys_mod_count>4</sys_mod_count>
+        <sys_name>IPS Stepper</sys_name>
+        <sys_package display_value="IPS Performance Assessments" source="x_ipsu2_ips_perfor">948629663328c210061636c24d5c7bfc</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="IPS Performance Assessments">948629663328c210061636c24d5c7bfc</sys_scope>
+        <sys_update_name>sp_widget_b365263647f942102d16d9ce316d43fa</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2024-04-30 05:31:48</sys_updated_on>
+        <template><![CDATA[<div><!-- your widget template --></div>]]></template>
+    </sp_widget>
+    <sys_update_version action="INSERT_OR_UPDATE">
+        <action>DELETE</action>
+        <application display_value="IPS Performance Assessments">948629663328c210061636c24d5c7bfc</application>
+        <file_path/>
+        <instance_id>2f6503691bea791c6a85eb9b2d4bcb2c</instance_id>
+        <instance_name>dev213880</instance_name>
+        <name>sp_widget_b365263647f942102d16d9ce316d43fa</name>
+        <payload>&lt;?xml version="1.0" encoding="UTF-8"?&gt;&lt;record_update table="sp_widget"&gt;&lt;sp_widget action="INSERT_OR_UPDATE"&gt;&lt;category&gt;custom&lt;/category&gt;&lt;client_script&gt;&lt;![CDATA[api.controller = function () {
+  /* widget controller */
+  var c = this;
+
+
+  "use strict";
+  const { useState } = React;
+  const steps = [
+    { id: 'step01', label: 'Captura de objetivos ]]&gt;🤗&lt;![CDATA[' },
+    { id: 'step02', label: 'Revision de objetivos ]]&gt;🙂&lt;![CDATA[' },
+    { id: 'step03', label: 'Correccion de objetivos ]]&gt;😛&lt;![CDATA[' },
+    { id: 'step04', label: 'Evaluacion medio año colaborador ]]&gt;😎&lt;![CDATA[' },
+    { id: 'step05', label: 'Evaluacion medio año Lider ]]&gt;🥳&lt;![CDATA[' },
+    { id: 'step05', label: 'Evaluacion anual colaborador ]]&gt;🥳&lt;![CDATA[' },
+    { id: 'step05', label: 'Evaluacion anual lider ]]&gt;🥳&lt;![CDATA[' },
+    { id: 'step05', label: 'Completada ]]&gt;🥳&lt;![CDATA[' }
+  ];
+  const StepProgressBar = ({ steps, currentStep, completedStep, disableNavigation, handleStepClicked }) =&gt; {
+    const isStepCurrent = (index) =&gt; index + 1 === currentStep;
+    const isStepCompleted = (index) =&gt; index + 1 !== currentStep &amp;&amp; completedStep &gt;= index + 1;
+    const isStepNavigable = (index) =&gt; completedStep &gt;= index;
+    const getStepClassNames = (index) =&gt; {
+      let result = 'stepProgressBar__step';
+      if (isStepCurrent(index)) {
+        result = `${result} stepProgressBar__step--current`;
+      }
+      if (isStepCompleted(index)) {
+        result = `${result} stepProgressBar__step--completed`;
+      }
+      if (isStepNavigable(index)) {
+        result = `${result} stepProgressBar__step--navigable`;
+      }
+      return result;
+    };
+    return (React.createElement("ol", { className: 'stepProgressBar' }, steps.map((step, index) =&gt; React.createElement("li", { key: step.id, className: getStepClassNames(index) },
+      index &gt; 0 &amp;&amp; React.createElement("div", { className: "stepProgressBar__step__line" }),
+      React.createElement("button", { className: "stepProgressBar__step__button", type: "button", disabled: disableNavigation &amp;&amp; !isStepNavigable(index), onClick: () =&gt; handleStepClicked(index + 1) },
+        React.createElement("span", { className: "stepProgressBar__step__button__indicator" }, isStepCompleted(index) &amp;&amp; React.createElement("svg", { className: "stepProgressBar__step__button__indicator__icon-completed", width: "10", height: "7", viewBox: "0 0 12 9", fill: "currentColor" },
+          React.createElement("path", { d: "M1.05025 3.70714C1.44077 3.31661 2.07394 3.31661 2.46446 3.70714L5.29289 6.53556C5.68341 6.92609 5.68341 7.55925 5.29289 7.94978C4.90236 8.3403 4.2692 8.3403 3.87867 7.94978L1.05025 5.12135C0.659724 4.73083 0.659724 4.09766 1.05025 3.70714Z" }),
+          React.createElement("path", { d: "M10.9498 0.878709C11.3403 1.26923 11.3403 1.9024 10.9498 2.29292L5.29289 7.94978C4.90236 8.3403 4.2692 8.3403 3.87867 7.94978C3.48815 7.55925 3.48816 6.92609 3.87869 6.53556L9.53554 0.878709C9.92606 0.488184 10.5592 0.488184 10.9498 0.878709Z" }))),
+        React.createElement("span", { className: "stepProgressBar__step__button__label" }, step.label))))));
+  };
+  const App = () =&gt; {
+    const [currentStep, setCurrentStep] = useState(1);
+    const [completedStep, setCompletedStep] = useState(0);
+    const handleStepClicked = (value) =&gt; {
+      setCurrentStep(value);
+      if (value &gt; completedStep) {
+        setCompletedStep(value - 1);
+      }
+    };
+    return (React.createElement("div", { className: "container" },
+      React.createElement(StepProgressBar, { steps: steps, currentStep: currentStep, completedStep: completedStep, disableNavigation: false, handleStepClicked: handleStepClicked })));
+  };
+  ReactDOM.render(React.createElement(App, null), document.getElementById("root"));
+
+
+
+};]]&gt;&lt;/client_script&gt;&lt;controller_as&gt;c&lt;/controller_as&gt;&lt;css/&gt;&lt;data_table&gt;sp_instance&lt;/data_table&gt;&lt;demo_data/&gt;&lt;description/&gt;&lt;docs/&gt;&lt;field_list/&gt;&lt;has_preview&gt;false&lt;/has_preview&gt;&lt;id&gt;ips_stepper&lt;/id&gt;&lt;internal&gt;false&lt;/internal&gt;&lt;link&gt;&lt;![CDATA[function link(scope, element, attrs, controller) {  }]]&gt;&lt;/link&gt;&lt;name&gt;IPS Stepper&lt;/name&gt;&lt;option_schema/&gt;&lt;public&gt;false&lt;/public&gt;&lt;roles/&gt;&lt;script&gt;&lt;![CDATA[(function() {  /* populate the 'data' object */  /* e.g., data.table = $sp.getValue('table'); */})();]]&gt;&lt;/script&gt;&lt;servicenow&gt;false&lt;/servicenow&gt;&lt;sys_class_name&gt;sp_widget&lt;/sys_class_name&gt;&lt;sys_created_by&gt;admin&lt;/sys_created_by&gt;&lt;sys_created_on&gt;2024-04-30 05:23:39&lt;/sys_created_on&gt;&lt;sys_id&gt;b365263647f942102d16d9ce316d43fa&lt;/sys_id&gt;&lt;sys_mod_count&gt;4&lt;/sys_mod_count&gt;&lt;sys_name&gt;IPS Stepper&lt;/sys_name&gt;&lt;sys_package display_value="IPS Performance Assessments" source="x_ipsu2_ips_perfor"&gt;948629663328c210061636c24d5c7bfc&lt;/sys_package&gt;&lt;sys_policy/&gt;&lt;sys_scope display_value="IPS Performance Assessments"&gt;948629663328c210061636c24d5c7bfc&lt;/sys_scope&gt;&lt;sys_update_name&gt;sp_widget_b365263647f942102d16d9ce316d43fa&lt;/sys_update_name&gt;&lt;sys_updated_by&gt;admin&lt;/sys_updated_by&gt;&lt;sys_updated_on&gt;2024-04-30 05:31:48&lt;/sys_updated_on&gt;&lt;template&gt;&lt;![CDATA[&lt;div&gt;&lt;!-- your widget template --&gt;&lt;/div&gt;]]&gt;&lt;/template&gt;&lt;/sp_widget&gt;&lt;/record_update&gt;</payload>
+        <payload_hash>1484605649</payload_hash>
+        <record_name>IPS Stepper</record_name>
+        <reverted_from/>
+        <source>a3e1a316473102102d16d9ce316d43bd</source>
+        <source_table>sys_update_set</source_table>
+        <state>previous</state>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2024-04-30 05:31:48</sys_created_on>
+        <sys_id>df47e63a47f942102d16d9ce316d4397</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_recorded_at>18f2d7cdb480000001</sys_recorded_at>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2024-04-30 05:31:48</sys_updated_on>
+        <type>Widget</type>
+        <update_guid>9347a63ab9f9421014b60699c53da33b</update_guid>
+        <update_guid_history>9347a63ab9f9421014b60699c53da33b:1484605649,0a37e23a1ff94210258d365b0f54b5a0:-2049676827,d117e23aa3f94210a8d358a02db7f252:-1939698113,bc5626f61cf94210133f4839a91ad278:-1636758703,bb652636e2f94210da3bf6560cbbf7fb:953731739</update_guid_history>
+    </sys_update_version>
+    <sys_metadata_delete action="INSERT_OR_UPDATE">
+        <sys_audit_delete display_value="IPS Stepper">61d9aeba47f942102d16d9ce316d43e6</sys_audit_delete>
+        <sys_class_name>sys_metadata_delete</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2024-04-30 05:42:52</sys_created_on>
+        <sys_db_object display_value="" name="sp_widget">sp_widget</sys_db_object>
+        <sys_id>2464780b514f41988884c2827e5c8640</sys_id>
+        <sys_metadata>b365263647f942102d16d9ce316d43fa</sys_metadata>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>IPS Stepper</sys_name>
+        <sys_package display_value="IPS Performance Assessments" source="x_ipsu2_ips_perfor">948629663328c210061636c24d5c7bfc</sys_package>
+        <sys_parent/>
+        <sys_policy/>
+        <sys_scope display_value="IPS Performance Assessments">948629663328c210061636c24d5c7bfc</sys_scope>
+        <sys_scope_delete display_value="">2ca5452e23e4451ca60ab6cf0b82cec9</sys_scope_delete>
+        <sys_update_name>sp_widget_b365263647f942102d16d9ce316d43fa</sys_update_name>
+        <sys_update_version display_value="sp_widget_b365263647f942102d16d9ce316d43fa">df47e63a47f942102d16d9ce316d4397</sys_update_version>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2024-04-30 05:42:52</sys_updated_on>
+    </sys_metadata_delete>
+</record_update>
