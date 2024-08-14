@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_ws_operation">
+    <sys_ws_operation action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <consumes>application/json,application/xml,text/xml</consumes>
+        <consumes_customized>false</consumes_customized>
+        <default_operation_uri>/api/x_ipsu2_ips_perfor/ips_assessments_evaluation/save-iniciative</default_operation_uri>
+        <enforce_acl>cf9d01d3e73003009d6247e603f6a990</enforce_acl>
+        <http_method>POST</http_method>
+        <name>Create Iniciative</name>
+        <operation_script><![CDATA[(function process( /*RESTAPIRequest*/ request, /*RESTAPIResponse*/ response) {
+
+    var initiativeModel = new IPSInitiativesModel();
+
+    if (!request.body.data.sys_id) {
+        return initiativeModel.create(request.body.data)
+    }
+
+
+    var iniciative = initiativeModel.find(request.body.data.sys_id);
+    var evaluatioModel = new IPSEvaluationsModel();
+
+    evaluatioModel.update({
+        sys_id: iniciative.goal.evaluation.sys_id + '',
+        work_notes: 'Se modifico la iniciativa ' + iniciative.no_iniciative + '\n' +
+            ' Que pertenece al objetivo:  ' + iniciative.goal.no_goal + '.- ' + iniciative.goal.target +
+            '-------------------------\n' +
+            '\n\nEra: \n' +
+            'Iniciativa: ' + iniciative.no_iniciative + '.- ' + iniciative.iniciative + '\n' +
+            'Entregable: ' + iniciative.deliverable + '\n' +
+            'Fecha de entrega: ' + new GlideDateTime(iniciative.work_end).getDate() + '\n' +
+            'Peso de la iniciativa: ' + iniciative.collaborator_initiative_weight +
+            '\n-------------------------\n' +
+            '\n\nAhora es: ' +
+            'Iniciativa: ' + iniciative.no_iniciative + '.- ' + request.body.data.iniciative + '\n' +
+            'Entregable: ' + request.body.data.deliverable + '\n' +
+            'Fecha de entrega: ' + new GlideDateTime(request.body.data.work_end).getDate() + '\n' +
+            'Peso de la iniciativa: ' + request.body.data.collaborator_initiative_weight
+    });
+    return initiativeModel.update(request.body.data);
+
+})(request, response);]]></operation_script>
+        <operation_uri>/api/x_ipsu2_ips_perfor/v1/ips_assessments_evaluation/save-iniciative</operation_uri>
+        <produces>application/json,application/xml,text/xml</produces>
+        <produces_customized>false</produces_customized>
+        <relative_path>/save-iniciative</relative_path>
+        <request_example/>
+        <requires_acl_authorization>true</requires_acl_authorization>
+        <requires_authentication>true</requires_authentication>
+        <requires_snc_internal_role>true</requires_snc_internal_role>
+        <short_description/>
+        <sys_class_name>sys_ws_operation</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2024-08-12 05:30:51</sys_created_on>
+        <sys_id>905cce50478412102d16d9ce316d43b3</sys_id>
+        <sys_mod_count>26</sys_mod_count>
+        <sys_name>Create Iniciative</sys_name>
+        <sys_package display_value="IPS Performance Assessments" source="x_ipsu2_ips_perfor">948629663328c210061636c24d5c7bfc</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="IPS Performance Assessments">948629663328c210061636c24d5c7bfc</sys_scope>
+        <sys_update_name>sys_ws_operation_905cce50478412102d16d9ce316d43b3</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2024-08-12 16:02:52</sys_updated_on>
+        <web_service_definition display_value="IPS Assessments Evaluation">7782aaf247f942102d16d9ce316d43e5</web_service_definition>
+        <web_service_version display_value="v1">a9f2ee7247f942102d16d9ce316d43a9</web_service_version>
+    </sys_ws_operation>
+</record_update>

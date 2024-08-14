@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_ng_template">
+    <sp_ng_template action="INSERT_OR_UPDATE">
+        <id>modalIniciativa</id>
+        <sp_widget display_value="IPS selft Assesment">6d1e61e6477902102d16d9ce316d434b</sp_widget>
+        <sys_class_name>sp_ng_template</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2024-08-12 04:33:43</sys_created_on>
+        <sys_id>5a5ff514474412102d16d9ce316d433f</sys_id>
+        <sys_mod_count>4</sys_mod_count>
+        <sys_name>modalIniciativa</sys_name>
+        <sys_package display_value="IPS Performance Assessments" source="x_ipsu2_ips_perfor">948629663328c210061636c24d5c7bfc</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="IPS Performance Assessments">948629663328c210061636c24d5c7bfc</sys_scope>
+        <sys_update_name>sp_ng_template_5a5ff514474412102d16d9ce316d433f</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2024-08-12 15:32:44</sys_updated_on>
+        <template><![CDATA[<style>
+    .invalid-feedback {
+        color: #ff0000;
+    }
+
+    .list-group-item-primary {
+        background-color: rgb(0, 112, 185);
+        color: white;
+    }
+</style>
+<div>
+    <h3 class="text-center">
+        {{ c.createOrEditIniciative }}
+    </h3>
+
+    <div style="margin: 2rem;">
+        <h5 class="text-center">${Goal}</h5>
+        <ul class="list-group">
+            <li class="list-group-item list-group-item-primary">
+
+                <div class="row">
+                    <div class="col-sm-12 col-md-8">
+                        ${Description}
+                    </div>
+                    <div class="col-sm-12 col-md-3">
+                        ${Weight}
+                    </div>
+                </div>
+
+            </li>
+            <li class="list-group-item ">
+                <div class="row">
+                    <div class="col-sm-12 col-md-8">
+                        {{ c.iniciativeForm.objetivo.no_goal }}.- {{c.iniciativeForm.objetivo.target}}
+                    </div>
+                    <div class="col-sm-12 col-md-3">
+                        {{ c.iniciativeForm.objetivo.collaborator_goal_weight }}%
+                    </div>
+                </div>
+            </li>
+        </ul>
+        <div class="text-center">
+            <small class="form-text text-muted text-center ng-binding ng-scope">
+                ${La suma de las iniciativas es} <b>{{ c.iniciativeForm.suma || 0 }}%</b>. Resta <b>{{
+                    c.iniciativeForm.resta || 0
+                    }}%</b> para alcanzar el peso del objetivo.
+            </small>
+        </div>
+
+        <hr>
+        <form>
+            <div class="form-group">
+
+                <label for="objetivo">${Captura tu iniciativa}</label>
+                <input ng-model="c.iniciativeForm.fields.iniciativa" ng-model-options="{ debounce: 300 }"
+                    class="form-control" id="iniciativa" placeholder="${Captura tu iniciativa}">
+                <small class="invalid-feedback">
+                    {{ c.iniciativeForm.errors.iniciativa }}
+                </small>
+            </div>
+            <div class="form-group">
+                <label for="peso">${Captura tu entregable:} </label>
+                <input ng-model="c.iniciativeForm.fields.entregable" ng-model-options="{ debounce: 300 }"
+                    class="form-control is-invalid" id="entregable" placeholder="${Captura tu entregable}">
+                <small class="invalid-feedback">
+                    {{ c.iniciativeForm.errors.entregable }}
+                </small>
+            </div>
+            <div class="form-group">
+                <label for="fecha_entrega">${Captura la fecha de entrega:} </label>
+                <input type="date" ng-model="c.iniciativeForm.fields.fecha_entrega" ng-model-options="{ debounce: 300 }"
+                    class="form-control is-invalid" id="fecha_entrega" placeholder="${Captura la fecha de entrega:}">
+                <small class="invalid-feedback">
+                    {{ c.iniciativeForm.errors.fecha_entrega }}
+                </small>
+            </div>
+            <div class="form-group">
+                <label for="peso">${Captura el peso en porcentaje de tu iniciativa:} </label>
+                <input ng-model="c.iniciativeForm.fields.peso" ng-model-options="{ debounce: 300 }"
+                    class="form-control is-invalid" id="peso" placeholder="${Ejemplo: 25}">
+                <small class="invalid-feedback">
+                    {{ c.iniciativeForm.errors.peso }}
+                </small>
+            </div>
+
+        </form>
+
+        <div style="display: flex; justify-content: center;">
+            <button type="submit" class="btn btn-danger" style="margin: 5px"
+                ng-click="c.closeIniciative()">Cancelar</button>
+
+            <button type="submit" class="btn btn-primary" style="margin: 5px"
+                ng-disabled="c.iniciativeForm.status ||  c.iniciativeForm.errors.peso != '' || c.saveIniciativaLoader"
+                ng-click="c.saveIniciative(c.iniciativeForm.fields.numero)">
+
+                <i ng-if="c.saveIniciativaLoader" class="fa fa-circle-o-notch fa-spin"></i>
+
+                <span ng-if="!c.saveIniciativaLoader">Guardar</span>
+            </button>
+        </div>
+
+    </div>
+
+</div>]]></template>
+    </sp_ng_template>
+</record_update>

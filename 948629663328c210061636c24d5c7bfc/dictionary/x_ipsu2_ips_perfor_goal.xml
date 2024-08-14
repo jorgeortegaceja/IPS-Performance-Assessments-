@@ -3,6 +3,7 @@
         <element label="Collaborator evaluation" max_length="40" name="collaborator_evaluation" type="float"/>
         <element label="Collaborator goal weight" max_length="40" name="collaborator_goal_weight" type="float"/>
         <element label="Comments" max_length="4000" name="comments" type="journal"/>
+        <element label="Evaluation" max_length="32" name="evaluation" reference="x_ipsu2_ips_perfor_performance_evaluation" type="reference"/>
         <element label="Leader evaluation" max_length="40" name="leader_evaluation" type="float"/>
         <element label="Leader goal weight" max_length="40" name="leader_goal_weight" type="float"/>
         <element label="No Goal" max_length="40" name="no_goal" type="integer"/>
@@ -13,6 +14,10 @@
         <element choice="1" label="State" max_length="40" name="state" type="choice">
             <choice/>
         </element>
+        <element display="true" label="target" max_length="4500" name="target" type="string"/>
         <element label="Work notes" max_length="4000" name="work_notes" type="journal"/>
+        <index name="index">
+            <element name="evaluation"/>
+        </index>
     </element>
 </database>

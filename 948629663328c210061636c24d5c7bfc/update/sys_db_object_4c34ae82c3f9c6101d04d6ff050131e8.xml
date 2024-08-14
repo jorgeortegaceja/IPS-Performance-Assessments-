@@ -17,17 +17,15 @@
         <provider_class/>
         <read_access>true</read_access>
         <scriptable_table>false</scriptable_table>
-        <super_class display_value="Data Lookup Matcher Rules" name="dl_matcher">86aeb7f4db221200b5e25aa9bf961946</super_class>
+        <super_class display_value="Data Lookup Matcher Rules" name="dl_matcher">7319b0b17df1311076daf29f52070d1c</super_class>
         <sys_class_name>sys_db_object</sys_class_name>
         <sys_created_by>jorge.ortega</sys_created_by>
         <sys_created_on>2024-04-27 21:47:48</sys_created_on>
-        <sys_customer_update>false</sys_customer_update>
         <sys_id>4c34ae82c3f9c6101d04d6ff050131e8</sys_id>
         <sys_mod_count>1</sys_mod_count>
         <sys_name>Goals</sys_name>
         <sys_package display_value="IPS Performance Assessments" source="x_ipsu2_ips_perfor">948629663328c210061636c24d5c7bfc</sys_package>
         <sys_policy/>
-        <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
         <sys_scope display_value="IPS Performance Assessments">948629663328c210061636c24d5c7bfc</sys_scope>
         <sys_update_name>sys_db_object_4c34ae82c3f9c6101d04d6ff050131e8</sys_update_name>
         <sys_updated_by>jorge.ortega</sys_updated_by>

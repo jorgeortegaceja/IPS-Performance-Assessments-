@@ -3,6 +3,8 @@
         <actions_objectives_patch_colaborator/>
         <actions_objectives_patch_leader/>
         <active>true</active>
+        <approval/>
+        <approval_history/>
         <assigned_to display_value="System Administrator">6816f79cc0a8016401c5a33be04be441</assigned_to>
         <clasification_assessment/>
         <click_on_the_following_link/>
@@ -12,7 +14,7 @@
         <download_self_assessment/>
         <due_date>2025-04-28 22:51:27</due_date>
         <is_active>false</is_active>
-        <leader display_value="Abel Tuter">62826bf03710200044e0bfc8bcbe5df1</leader>
+        <leader display_value="Abel Tuter (Architect)">62826bf03710200044e0bfc8bcbe5df1</leader>
         <leader_averange_evaluation/>
         <leader_settings/>
         <my_colaborator_comments/>

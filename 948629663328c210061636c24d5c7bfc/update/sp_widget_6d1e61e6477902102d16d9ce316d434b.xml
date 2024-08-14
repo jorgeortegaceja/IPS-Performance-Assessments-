@@ -1,9 +1,955 @@
 <?xml version="1.0" encoding="UTF-8"?><record_update table="sp_widget">
     <sp_widget action="INSERT_OR_UPDATE">
         <category>custom</category>
-        <client_script><![CDATA[api.controller = function () {
+        <client_script><![CDATA[api.controller = function ($http, $uibModal, $scope, spModal, ipsValidator, $filter) {
   /* widget controller */
   var c = this;
+
+
+
+
+
+
+
+
+
+
+
+
+  /**
+   * Envia los objetivos a su aprobacion 
+   */
+  c.sendObjetives = async function () {
+
+
+    spModal.open({
+      title: '¿Estás seguro que deseas enviar los objetivos?',
+      message: 'Al enviar los objetivos, tu líder los recibirá para su aprobación',
+      buttons: [
+        { label: '✘ ${No}', cancel: true },
+        { label: '✔ ${Si}', primary: true }
+      ]
+    }).then(async function () {
+
+      await $http({
+        url: '/api/x_ipsu2_ips_perfor/v1/ips_assessments_evaluation/send-evaluation/' + c.data.evaluation_id,
+        method: 'POST',
+
+        headers: {
+          "Content-Type": "application/json"
+        }
+      });
+
+      spModal.open({
+        title: 'Se han eviado tus objetivos',
+        message: 'Se enviaron tus objetivos con éxito',
+        buttons: [
+          { label: '${Cerrar}', cancel: true },
+
+        ]
+      });
+      c.init();
+    }, function () {
+
+    })
+
+
+  }
+
+
+
+
+
+
+
+
+
+
+  /**
+   * funcionalidad de objetivos
+   */
+
+
+
+
+  /**
+   * objetivo
+   */
+  c.objetiveForm = {
+    fields: {
+      evaluacion_id: c.data.evaluation_id,
+      objetivo_id: null,
+      objetivo: '',
+      peso: null,
+      u_no_objective: null
+    },
+    validations: {
+      objetivo: ['required', 'required', 'string', 'min:3', 'max:600'],
+      peso: ['required', 'required', 'is_number', 'min:0', 'max:100']
+    },
+    errors: {},
+    status: false
+  }
+
+  /**
+   * Watcher de objetivos
+   */
+
+  /**
+   * Escucha el texto del objetivo 
+   */
+  $scope.$watch('c.objetiveForm.fields.objetivo', async function (newValue) {
+    c.objetiveForm.errors.objetivo = await ipsValidator.validate(c.objetiveForm.fields.objetivo, 'objetivo', c.objetiveForm.validations.objetivo);
+    c.activeSubmitObjetive();
+    $scope.$apply();
+  });
+
+  /**
+   * Escucha el peso del objetivo 
+   */
+  $scope.$watch('c.objetiveForm.fields.peso', async function (newValue) {
+
+    c.objetiveForm.errors.peso = await ipsValidator.validate(c.objetiveForm.fields.peso, 'peso', c.objetiveForm.validations.peso);
+    var suma = await c.calculatePesoObjetivos();
+    console.log(suma);
+    c.objetiveForm.errors.peso = c.calculatePesoObjetivoIniciativa(newValue);
+    c.progressBar.resta = 100 - suma;
+
+    if (suma > 100) {
+      c.objetiveForm.errors.peso = '${Los objetivos suman mas de 100%} ';
+    }
+
+    c.activeSubmitObjetive(suma);
+    $scope.$apply();
+  });
+
+  /**
+* Abre el modal de objetivos 
+*/
+  c.newObjective = function (objetive) {
+
+    c.createOrEditObejetive = "${Crear objetivo} " + (c.data.evaluation.objetives.length + 1);
+    c.objetiveForm.status = false
+    c.objetiveForm.type = 'newObjective';
+    c.objetiveForm.fields = {
+      evaluacion_id: c.data.evaluation_id,
+      objetivo_id: null,
+      objetivo: '',
+      peso: null,
+      u_no_objective: null,
+    };
+
+    c.objetiveForm.errors = {
+      objetivo: '',
+      peso: ''
+    };
+
+    c.modalObjetive = $uibModal.open({
+      templateUrl: 'modalCreateObjetive',
+      scope: $scope,
+      backdrop: 'static'
+    });
+  }
+
+  /**
+   * Muestra el modal de edicion de los objetivos
+   * @param {Objetc} objetivo 
+   * @param {Object} lider 
+   */
+  c.editarObjetive = function (objetivo, lider) {
+    c.createOrEditObejetive = "${Editar objetivo} " + objetivo.no_goal;
+    c.objetiveForm.lider = lider;
+    c.objetiveForm.status = false;
+    c.objetiveForm.type = 'editarObjetive;'
+
+    c.objetiveForm.fields = {
+      evaluacion_id: c.data.evaluation_id,
+      objetivo_id: objetivo.sys_id,
+      objetivo: objetivo.target,
+      peso: objetivo.collaborator_goal_weight,
+      u_no_objective: objetivo.no_goal,
+    };
+    c.objetiveForm.objetivo = objetivo;
+    c.objetiveForm.errors = {
+      objetivo: '',
+      peso: ''
+    };
+
+    c.modalObjetive = $uibModal.open({
+      templateUrl: 'modalCreateObjetive',
+      scope: $scope,
+      backdrop: 'static'
+    });
+  };
+
+
+
+  /**
+   * Guarda el objetivo
+   * @param {Numeric} u_no_objective 
+   * @returns 
+   */
+  c.saveObjetive = async function (u_no_objective) {
+    c.saveObjetivoLoader = true;
+    c.objetiveForm.errors.objetivo = await ipsValidator.validate(c.objetiveForm.fields.objetivo, 'objetivo', c.objetiveForm.validations.objetivo);
+    c.objetiveForm.errors.peso = await ipsValidator.validate(c.objetiveForm.fields.peso, 'peso', c.objetiveForm.validations.peso);
+    var suma = await c.calculatePesoObjetivos();
+    console.log(suma);
+    c.progressBar.resta = 100 - suma;
+    if (suma > 100) {
+      c.objetiveForm.errors.peso = '${La suma de los pesos de todos los objetivos no puede ser mayor a 100%}. La suma actual es de: ' + suma + '%';
+    }
+
+    c.activeSubmitObjetive();
+    if (c.objetiveForm.status) {
+      c.saveObjetivoLoader = false;
+
+      return;
+    }
+
+    c.objetiveForm.fields.u_no_objective = u_no_objective || c.data.evaluation.objetives.length + 1;
+
+
+    var res = await $http({
+      url: '/api/x_ipsu2_ips_perfor/v1/ips_assessments_evaluation/save-objetive',
+      method: 'POST',
+      data: {
+        ...c.objetiveForm.fields
+      },
+      headers: {
+        "Content-Type": "application/json"
+      }
+    });
+
+    await c.init();
+
+    c.closeObjetive();
+    c.saveObjetivoLoader = false;
+  }
+
+
+  /**
+   * elimina un objetivo
+   * @param {object} objetive 
+   */
+  c.deleteObjetive = function (objetive) {
+
+    var h = '<h4 class="invalid-feedback">Se eliminara el objetivo:</h4>' +
+      '<p>   <b>Número: </b>   ' + objetive.no_goal + '<br>' +
+      '  <b>Descripción: </b>   ' + objetive.target + '<br> ' +
+      '   <b>Peso: </b>   ' + objetive.collaborator_goal_weight + ' </p>';
+
+
+    if (objetive.initiatives.length > 0) {
+
+      h += '<hr> <h5 class="invalid-feedback"> Adicional se borraran las iniciativas: </h5>';
+      for (let i = 0; i < objetive.initiatives.length; i++) {
+        const ini = objetive.initiatives[i];
+        h += '<p>   <b>Número: </b>   ' + ini.no_iniciative + ' <br>' +
+          '<b>Iniciativa: </b>   ' + ini.iniciative + ' <br>' +
+          '<b>Entregable: </b>   ' + ini.deliverable + ' <br>' +
+          '<b>Fecha de entrega: </b>   ' + $filter('date')(ini.work_end, 'dd-MM-yyyy') + ' <br>' +
+          '<b>Peso Iniciativa: </b>   ' + ini.collaborator_initiative_weight + ' </p>';
+        h += '<br>';
+
+      }
+    }
+
+
+    // Line feeds added to the following lines for presentation formatting.
+
+    spModal.open({
+      title: '¿Estás seguro que deseas borar el objetivo?',
+      message: h,
+      buttons: [
+        { label: '✘ ${No}', cancel: true },
+        { label: '✔ ${Si}', primary: true }
+      ]
+    }).then(async function () {
+
+      var res = await $http({
+        url: '/api/x_ipsu2_ips_perfor/v1/ips_assessments_evaluation/delete-objetive/' + objetive.sys_id,
+        method: 'DELETE',
+
+        headers: {
+          "Content-Type": "application/json"
+        }
+      })
+      c.init();
+    }, function () {
+
+    })
+  }
+
+
+  /**
+   * Calcula la suma de los pesos de todos los objetivos
+   * @returns { Numeric }
+   */
+  c.calculatePesoObjetivos = function () {
+    var suma = 0;
+    for (let i = 0; i < c.data.evaluation.objetives.length; i++) {
+      const obj = c.data.evaluation.objetives[i];
+
+      if (obj.sys_id != c.objetiveForm.fields.objetivo_id) {
+
+        suma += parseFloat(obj.collaborator_goal_weight)
+      }
+    }
+    suma += parseFloat(c.objetiveForm.fields.peso) || 0;
+    $scope.$apply();
+    return suma;
+  }
+
+
+
+  /**
+   * cierra el modal de objetivos
+   */
+  c.closeObjetive = function () {
+    c.objetiveForm.status = false;
+    c.objetiveForm.fields = {
+      evaluacion_id: c.data.evaluation_id,
+      objetivo_id: null,
+      objetivo: '',
+      peso: null
+    };
+    c.objetiveForm.errors.objetivo = '';
+    c.objetiveForm.errors.peso = ''
+
+    c.modalObjetive.dismiss();
+    c.modalObjetive = null;
+    $scope.$apply();
+  };
+
+
+
+  /**
+   * 
+   * @param {Numeric} suma 
+   * @returns 
+   */
+
+  c.activeSubmitObjetive = function () {
+
+
+    if (c.objetiveForm.errors.peso || c.objetiveForm.errors.objetivo) {
+      return c.objetiveForm.status = true;
+    }
+    return c.objetiveForm.status = false;
+  }
+
+
+
+  /**
+   * Valida los objetivos
+   */
+
+  c.validateObjetives = async function () {
+
+    c.data.evaluation.state_valiadations = true;
+    c.progressBar.complete = 0;
+    c.progressBar.resta = 100;
+
+    for (let i = 0; i < c.data.evaluation.objetives.length; i++) {
+
+      const obj = c.data.evaluation.objetives[i];
+
+      c.data.evaluation.objetives[i].show_iniciatives = false;
+      c.data.evaluation.objetives[i].errors = [];
+
+
+      c.progressBar.complete += parseFloat(obj.collaborator_goal_weight);
+
+
+      var suma = 0;
+      if (obj.initiatives.length == 0) {
+        c.data.evaluation.objetives[i].errors.push('${Los objetivos deben de contener al menos una iniciativa}');
+        c.data.evaluation.state_valiadations = false;
+      }
+      if (obj.initiatives.length > 5) {
+        c.data.evaluation.objetives[i].errors.push('${Los objetivos no deben de contener más de 5 iniciativas}');
+        c.data.evaluation.state_valiadations = false;
+      }
+      for (let j = 0; j < obj.initiatives.length; j++) {
+        const ini = obj.initiatives[j];
+        console.log(obj.initiatives.length);
+        suma += parseFloat(ini.collaborator_initiative_weight);
+        c.data.evaluation.objetives[i].initiatives[j].work_end = new Date(c.data.evaluation.objetives[i].initiatives[j].work_end);
+        c.data.evaluation.objetives[i].initiatives[j].errors = await c.validateIniciativas(ini, obj);
+        if (c.data.evaluation.objetives[i].initiatives[j].errors.length > 0) {
+          if (c.data.evaluation.objetives[i].errors.indexOf('Alguna de las iniciativas tiene incidencias') < 0) {
+            c.data.evaluation.state_valiadations = false;
+            c.data.evaluation.objetives[i].errors.push('Alguna de las iniciativas tiene incidencias');
+          }
+        }
+      }
+      if (suma < obj.collaborator_goal_weight) {
+        c.data.evaluation.objetives[i].errors.push("${La suma de los pesos de las iniciativas deben sumar el peso del objetivo}");
+        c.data.evaluation.objetives[i].errors.push('${El peso del objetivo es de: }' + obj.collaborator_goal_weight + '%. ${Resta por asignar: }' + (obj.collaborator_goal_weight - suma) + "%");
+        c.data.evaluation.state_valiadations = false;
+      }
+
+
+      if (suma > obj.collaborator_goal_weight) {
+        c.data.evaluation.objetives[i].errors = [
+          "${La suma del peso de las iniciativas deben sumar el peso del objetivo}",
+          '${El peso del objetivo es de: }' + obj.collaborator_goal_weight + '%. ${Has excedido el peso de las iniciativas por: }' + (suma - obj.collaborator_goal_weight) + "%"
+        ];
+        c.data.evaluation.state_valiadations = false;
+      }
+      c.data.evaluation.objetives[i].suma = suma;
+    }
+
+    c.progressBar.resta -= c.progressBar.complete;
+
+
+  }
+
+
+
+  /**
+   * Calcula de los pesos de las iniciativas
+   * @returns { Numeric }
+   */
+  c.calculatePesoObjetivoIniciativa = function (newValue) {
+
+
+    if (!c.objetiveForm.objetivo || c.objetiveForm.objetivo.initiatives.length == 0)
+      return ''
+
+    var sum = 0;
+    for (let i = 0; i < c.objetiveForm.objetivo.initiatives.length; i++) {
+      const ini = c.objetiveForm.objetivo.initiatives[i];
+      sum += parseFloat(ini.collaborator_initiative_weight);
+    }
+
+    if (sum > newValue) {
+      return 'La suma de los pesos de las iniciativas, supera el peso del objetivo. Recuerda primero restar el peso a las iniciativas, para poder restar peso a los objetivos.'
+    }
+    return '';
+  }
+
+
+
+
+  /**
+    * finaliza funcionalidad de objetivos
+    */
+
+
+
+
+
+
+
+
+  /**
+   * funcionalidad de iniciativas
+   */
+
+
+  /**
+   *  Valida las iniciativas
+   * @param {Object} iniciativa 
+   * @param {Object} objetivo 
+   * @returns {Array} errors 
+   */
+  c.validateIniciativas = function (iniciativa, objetivo) {
+    var errors = [];
+
+    if (!iniciativa.iniciative) {
+      errors.push('La iniciativa es requerida');
+    }
+
+    if (!iniciativa.deliverable) {
+      errors.push('El entregable es requerido');
+    }
+
+    if (!iniciativa.work_end) {
+      errors.push('La fecha de entrega es requerida');
+    }
+
+    if (!iniciativa.collaborator_initiative_weight) {
+      errors.push('El peso de la iniciativa es requerido');
+    }
+
+    if (iniciativa.collaborator_initiative_weight == 0) {
+      errors.push('El peso de la iniciativa debe de ser mayor que 0%');
+    }
+
+    if (iniciativa.collaborator_initiative_weight > objetivo.collaborator_goal_weight) {
+      errors.push('El peso de la iniciativa debe de ser menor que el peso del objetivo');
+    }
+
+    // if (c.evaluacion.state == 3) {
+
+    //   if (!c.evaluacion.u_my_colaborator_comments && c.evaluacion.colaborador.sys_id == c.data.user_id) {
+
+    //     console.log();
+    //     if (!iniciativa.u_my_contributor_comment) {
+    //       errors.push('El comentario de la evaluacion de medio año es requerido');
+    //     }
+
+    //     if (!iniciativa.u_my_contributor_evaluation) {
+    //       errors.push('La evaluación de medio año es requerida');
+    //     }
+
+
+    //   }
+
+    //   if (c.evaluacion.liber.sys_id == c.data.user_id) {
+
+
+    //     if (c.evaluacion.u_my_colaborator_comments) {
+    //       if (!iniciativa.u_my_leader_comment) {
+    //         errors.push('El comentario de la evaluacion de medio año es requerido');
+    //       }
+
+    //       if (!iniciativa.u_my_leader_evaluation) {
+    //         errors.push('La evaluación de medio año es requerida');
+    //       }
+    //     } else {
+    //       errors.push('La evaluación de medio año, no esta disponible debido a que el colaborador no ha enviado su autoevaluación');
+    //     }
+
+
+    //   }
+    // }
+
+    // if (c.evaluacion.state == 4) {
+
+    //   if (!c.evaluacion.u_ye_colaborator_comments && c.evaluacion.colaborador.sys_id == c.data.user_id) {
+
+
+    //     if (!iniciativa.u_ye_contributor_comment) {
+    //       errors.push('El comentario de la evaluacion de anual es requerido');
+    //     }
+
+    //     if (!iniciativa.u_ye_contributor_evaluation) {
+    //       errors.push('La evaluación de anual es requerida');
+    //     }
+
+
+    //   }
+
+    //   if (c.evaluacion.liber.sys_id == c.data.user_id) {
+
+
+    //     if (c.evaluacion.u_ye_colaborator_comments) {
+    //       if (!iniciativa.u_ye_leader_comment) {
+    //         errors.push('El comentario de la evaluacion anual es requerido');
+    //       }
+
+    //       if (!iniciativa.u_ye_leader_evaluation) {
+    //         errors.push('La evaluación anual es requerida');
+    //       }
+
+    //     } else {
+    //       errors.push('La evaluación anual, no esta disponible debido a que el colaborador no ha enviado su autoevaluación');
+    //     }
+
+
+    //   }
+    // }
+
+    return errors;
+  }
+
+
+
+
+
+
+
+  /**
+   * Objeto de iniciativas
+   */
+  c.iniciativeForm = {
+    fields: {
+      objetivo_id: c.data.evaluation_id,
+      iniciativa: '',
+      entregable: null,
+      fecha_entrega: null,
+      peso: null,
+
+    },
+    validations: {
+      iniciativa: ['required', 'required', 'string', 'min:3', 'max:600'],
+      entregable: ['required', 'required', 'string', 'min:3', 'max:600'],
+      fecha_entrega: ['required', 'required', 'date'],
+      peso: ['required', 'required', 'is_number', 'min:0', 'max:101'],
+    },
+    errors: {
+
+    }
+  }
+  /**
+   * abre el modal para capturar una nueva iniciativa
+   * @param {objetc} objetive 
+   */
+  c.newIniciative = function (objetive) {
+    c.calculatePeso(objetive, '-1', null);
+    c.iniciativeForm.objetivo = objetive;
+    c.iniciativeForm.status = false;
+    c.iniciativeForm.type = 'new';
+    c.iniciativeForm.fields = {
+      objetivo_id: objetive.sys_id,
+      iniciativa_id: null,
+      iniciativa: '',
+      entregable: null,
+      fecha_entrega: null,
+      peso: null,
+      numero: objetive.initiatives.length + 1
+    };
+    c.iniciativeForm.errors = {
+      objetivo_id: '',
+      iniciativa: '',
+      entregable: '',
+      fecha_entrega: '',
+      peso: '',
+    };
+    c.createOrEditIniciative = "${Create Initiative} " + (objetive.initiatives.length + 1);
+
+    c.modalIniciative = $uibModal.open({
+      templateUrl: 'modalIniciativa',
+      scope: $scope,
+      backdrop: 'static'
+    });
+
+  }
+
+
+
+  /**
+   * escucha el cambio del campo iniciativa
+   */
+  $scope.$watch('c.iniciativeForm.fields.iniciativa', async function (newValue) {
+
+    c.iniciativeForm.errors.iniciativa = '';
+    c.iniciativeForm.errors.iniciativa = await ipsValidator.validate(c.iniciativeForm.fields.iniciativa, '${iniciativa}', c.iniciativeForm.validations.iniciativa);
+    c.activeSubmitIniciative();
+    $scope.$apply();
+  });
+
+  /**
+   * escucha el cambio del campo entregable
+   */
+  $scope.$watch('c.iniciativeForm.fields.entregable', async function (newValue) {
+    c.iniciativeForm.errors.entregable = '';
+    c.iniciativeForm.errors.entregable = await ipsValidator.validate(c.iniciativeForm.fields.entregable, '${entregable}', c.iniciativeForm.validations.entregable);
+    c.activeSubmitIniciative();
+    $scope.$apply();
+  });
+
+  /**
+   * escucha el cambio del campo fecha de entrega
+   */
+  $scope.$watch('c.iniciativeForm.fields.fecha_entrega', async function (newValue) {
+    c.iniciativeForm.errors.fecha_entrega = '';
+    c.iniciativeForm.errors.fecha_entrega = await ipsValidator.validate($filter('date')(newValue, 'yyyy-MM-dd'), '${fecha de entrega}', c.iniciativeForm.validations.fecha_entrega);
+    c.activeSubmitIniciative();
+    $scope.$apply();
+  });
+
+
+  /**
+   * escucha el cambio del campo peso
+   */
+  $scope.$watch('c.iniciativeForm.fields.peso', async function (newValue, oldValue) {
+    c.iniciativeForm.errors.peso = '';
+    c.iniciativeForm.errors.peso = await ipsValidator.validate(c.iniciativeForm.fields.peso, '${peso}', c.iniciativeForm.validations.peso);
+
+    var suma = await c.calculatePeso(
+      c.iniciativeForm.objetivo,
+      c.iniciativeForm.fields.iniciativa_id,
+      parseFloat(newValue | 0)
+    );
+
+
+    if (c.iniciativeForm.suma > c.iniciativeForm.objetivo.collaborator_goal_weight) {
+      c.iniciativeForm.errors.peso = '${El peso acumulado de las iniciativas no puede ser mayor al peso del objetivo}' + ". El peso acumulado es " + suma + '. Has sobrepaso el peso por ' + (-1 * c.iniciativeForm.resta);
+      $scope.$apply();
+      return
+    }
+
+    if (newValue > c.iniciativeForm.objetivo.collaborator_goal_weight) {
+      c.iniciativeForm.errors.peso = '${El peso de la iniciativa no puede ser mayor al peso del objetivo}'
+      $scope.$apply();
+      return;
+    }
+    c.activeSubmitIniciative();
+    $scope.$apply();
+  });
+
+  /**
+   * Activa o desactiva el boton de guardar
+   */
+  c.activeSubmitIniciative = function () {
+
+    if (
+      c.iniciativeForm.errors.peso == '' &&
+      !c.iniciativeForm.errors.fecha_entrega &&
+      !c.iniciativeForm.errors.entregable &&
+      !c.iniciativeForm.errors.iniciativa
+    ) {
+      c.iniciativeForm.status = false;
+    } else {
+      c.iniciativeForm.status = true;
+    }
+  }
+
+
+
+  /**
+   * Cierra el modal de iniciativas
+   */
+  c.closeIniciative = function () {
+    c.modalIniciative.dismiss();
+    c.modalIniciative = null;
+    c.iniciativeForm = {
+      fields: {
+        objetivo_id: c.data.evaluation_id,
+        iniciativa: '',
+        entregable: null,
+        fecha_entrega: null,
+        peso: null,
+
+      },
+      validations: {
+        iniciativa: ['required', 'required', 'string', 'min:3', 'max:600'],
+        entregable: ['required', 'required', 'string', 'min:3', 'max:600'],
+        fecha_entrega: ['required', 'required', 'date'],
+        peso: ['required', 'required', 'is_number', 'min:0', 'max:101'],
+      },
+      errors: {
+
+      }
+    }
+    $scope.$apply();
+  }
+
+
+  /**
+   * Guarda las iniciativas
+   * @param {*} numero 
+   * @returns {void}
+   */
+  c.saveIniciative = async function (numero) {
+
+
+    c.saveIniciativaLoader = true;
+    c.iniciativeForm.errors.iniciativa = await ipsValidator.validate(c.iniciativeForm.fields.iniciativa, 'iniciativa', c.iniciativeForm.validations.iniciativa);
+    c.iniciativeForm.errors.entregable = await ipsValidator.validate(c.iniciativeForm.fields.entregable, 'entregable', c.iniciativeForm.validations.entregable);
+
+    c.iniciativeForm.errors.fecha_entrega = await ipsValidator.validate(
+      $filter('date')(c.iniciativeForm.fields.fecha_entrega, 'yyyy-MM-dd'),
+      'fecha de entrega',
+      c.iniciativeForm.validations.fecha_entrega
+    );
+
+    c.iniciativeForm.errors.peso = await ipsValidator.validate(c.iniciativeForm.fields.peso, 'peso', c.iniciativeForm.validations.peso);
+
+    var suma = c.calculatePeso(
+      c.iniciativeForm.objetivo,
+      c.iniciativeForm.fields.iniciativa_id,
+      parseFloat(c.iniciativeForm.fields.peso)
+    );
+
+
+
+
+
+    if (c.iniciativeForm.suma > c.iniciativeForm.objetivo.collaborator_goal_weight) {
+      c.iniciativeForm.errors.peso = '${El peso acumulado de las iniciativas no puede ser mayor al peso del objetivo}' + ". El peso acumulado es " + suma + '. Has sobrepaso el peso por ' + (-1 * c.iniciativeForm.resta);
+      c.saveIniciativaLoader = false;
+      $scope.$apply();
+      return
+    }
+
+
+    await c.activeSubmitIniciative();
+
+    if (c.iniciativeForm.status) {
+      c.saveIniciativaLoader = false;
+
+      $scope.$apply();
+      return;
+    }
+
+
+
+    var res = await $http({
+      url: '/api/x_ipsu2_ips_perfor/v1/ips_assessments_evaluation/save-iniciative',
+      method: 'POST',
+      data: {
+        goal: c.iniciativeForm.fields.objetivo_id,
+        no_iniciative: c.iniciativeForm.fields.numero,
+        collaborator_initiative_weight: c.iniciativeForm.fields.peso,
+        iniciative: c.iniciativeForm.fields.iniciativa,
+        deliverable: c.iniciativeForm.fields.entregable,
+        work_end: $filter('date')(c.iniciativeForm.fields.fecha_entrega, 'yyyy-MM-dd'),
+        sys_id: c.iniciativeForm.fields.iniciativa_id
+      },
+      headers: {
+        "Content-Type": "application/json"
+      }
+    });
+
+
+
+
+    c.init();
+
+    c.closeIniciative();
+    c.saveIniciativaLoader = false;
+  }
+
+
+  /**
+   * abre el modal para editar una iniciativa 
+   * @param {object} objetive 
+   * @param {objetc} iniciativa 
+   * @param {string} lider 
+   */
+  c.editIniciative = function (objetive, iniciativa, lider) {
+    c.iniciativeForm.lider = lider;
+    c.iniciativeForm.suma = 0
+    c.iniciativeForm.resta = objetive.collaborator_goal_weight;
+    c.iniciativeForm.objetivo = objetive;
+    c.iniciativeForm.status = false;
+    c.iniciativeForm.type = 'new';
+    c.iniciativeForm.fields = {
+      objetivo_id: objetive.sys_id,
+      iniciativa_id: iniciativa.sys_id,
+      iniciativa: iniciativa.iniciative,
+      entregable: iniciativa.deliverable,
+      fecha_entrega: iniciativa.work_end,
+      peso: iniciativa.collaborator_initiative_weight,
+      numero: iniciativa.no_iniciative
+    };
+    c.iniciativeForm.errors = {
+      objetivo_id: '',
+      iniciativa: '',
+      entregable: '',
+      fecha_entrega: '',
+      peso: '',
+    };
+
+    c.createOrEditIniciative = "${Editar Iniciativa} " + iniciativa.no_iniciative;
+
+    c.calculatePeso(objetive, iniciativa.sys_id, iniciativa.collaborator_initiative_weight)
+
+    c.modalIniciative = $uibModal.open({
+      templateUrl: 'modalIniciativa',
+      scope: $scope,
+      backdrop: 'static'
+    });
+  }
+
+  /**
+   * Elimina una iniciativa
+   * @param {object} objetivo 
+   * @param {object} iniciativa 
+   */
+  c.deleteIniciative = async function (objetivo, iniciativa) {
+
+
+
+    // Line feeds added to the following lines for presentation formatting.
+
+    spModal.open({
+      title: '¿Estás seguro que deseas borar la iniciativa?',
+      message: '<h4 class="invalid-feedback">Se eliminara la iniciativa:</h4>' +
+        '<p>   <b>Número: </b>   ' + iniciativa.no_iniciative + '<br>' +
+        '  <b>Iniciativa: </b>   ' + iniciativa.iniciative + '<br> ' +
+        '   <b>Entregable: </b>   ' + iniciativa.deliverable + ' <br>' +
+        '   <b>Fecha de entrega: </b>   ' + $filter('date')(iniciativa.work_end, 'dd-MM-yyyy') + ' <br>' +
+        '   <b>Peso Iniciativa: </b>   ' + iniciativa.collaborator_initiative_weight + ' </p>',
+      buttons: [
+        { label: '✘ ${No}', cancel: true },
+        { label: '✔ ${Si}', primary: true }
+      ]
+    }).then(async function () {
+
+      var res = await $http({
+        url: '/api/x_ipsu2_ips_perfor/ips_assessments_evaluation/delete-iniciative/' + iniciativa.sys_id,
+        method: 'DELETE',
+        headers: {
+          "Content-Type": "application/json"
+        }
+      });
+
+      c.init();
+    }, function () {
+
+    })
+
+
+
+  }
+
+
+  /**
+   * Calcula los pesos que se han utilizado del objetivo
+   * @param {object} objetive 
+   * @returns {numeric}
+   */
+  c.calculatePeso = function (objetive, sys_id, newvalue) {
+    if (newvalue == NaN)
+      newvalue = 0;
+    var suma = 0;
+    var resta = objetive.collaborator_goal_weight;
+    for (let i = 0; i < objetive.initiatives.length; i++) {
+      const ini = objetive.initiatives[i];
+      if (sys_id != objetive.initiatives[i].sys_id)
+        suma += parseFloat(ini.collaborator_initiative_weight);
+
+    }
+    if (sys_id != '-1') {
+      suma += newvalue
+    }
+    console.log(objetive, sys_id, newvalue);
+    c.iniciativeForm.suma = suma;
+    c.iniciativeForm.resta = resta - suma;
+    return suma;
+  }
+
+
+
+  /**
+   * finaliza funcionalidad de iniciativas
+   */
+
+
+
+  c.init = async function () {
+    c.preloader = true;
+    const res = await $http({
+      url: '/api/x_ipsu2_ips_perfor/ips_assessments_evaluation/assesment-evaluation/' + c.data.evaluation_id,
+      method: 'post',
+      headers: {
+        "Content-Type": "application/json"
+      }
+    });
+
+    c.data.evaluation = res.data.result;
+    c.validateObjetives();
+    c.preloader = false;
+    $scope.$apply();
+  }
+
+  c.progressBar = {
+    complete: 0,
+    resta: 100,
+    suma: 0
+  };
+
+
+
+
+
+  c.init();
 };]]></client_script>
         <controller_as>c</controller_as>
         <css>$shadow: 0 2px 1px -1px var(--v-shadow-key-umbra-opacity, rgba(0, 0, 0, .2)),&#13;
@@ -77,6 +1023,13 @@ $success: rgb(134, 223, 72);&#13;
 $secondary: rgb(188, 190, 192);&#13;
 $error: rgb(239, 68, 56);&#13;
 &#13;
+#uiNotificationContainer {&#13;
+    z-index: 50000 !important;&#13;
+}&#13;
+&#13;
+.modal {&#13;
+    z-index: 2000 !important&#13;
+}&#13;
 &#13;
 &#13;
 .list-group-item-primary {&#13;
@@ -679,25 +1632,555 @@ $error: rgb(239, 68, 56);&#13;
   /* populate the 'data' object */
   /* e.g., data.table = $sp.getValue('table'); */
 
-  data.user_id = gs.getUserID();
+  data.current_user = gs.getUserID();
   data.evaluation_id = $sp.getParameter('sys_id');
+
+
 })();]]></script>
         <servicenow>false</servicenow>
         <sys_class_name>sp_widget</sys_class_name>
         <sys_created_by>admin</sys_created_by>
         <sys_created_on>2024-04-29 06:43:21</sys_created_on>
         <sys_id>6d1e61e6477902102d16d9ce316d434b</sys_id>
-        <sys_mod_count>30</sys_mod_count>
+        <sys_mod_count>434</sys_mod_count>
         <sys_name>IPS selft Assesment</sys_name>
         <sys_package display_value="IPS Performance Assessments" source="x_ipsu2_ips_perfor">948629663328c210061636c24d5c7bfc</sys_package>
         <sys_policy/>
         <sys_scope display_value="IPS Performance Assessments">948629663328c210061636c24d5c7bfc</sys_scope>
         <sys_update_name>sp_widget_6d1e61e6477902102d16d9ce316d434b</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2024-04-30 07:11:31</sys_updated_on>
+        <sys_updated_on>2024-08-13 23:51:23</sys_updated_on>
         <template><![CDATA[<div>
+
+    <style>
+        #uiNotificationContainer {
+            z-index: 50000 !important;
+        }
+
+        .modal {
+            z-index: 2000 !important
+        }
+    </style>
+    <!-- preloader -->
+    <div ng-style="{'display': c.preloader ?  'flex' : 'none'}"
+        style="display: flex; justify-content: center; align-items: center; align-content: center; flex-direction: column; margin: 5rem;">
+        <p class="text-center">
+            <i class="fa fa-spinner fa-pulse fa-3x fa-fw" style="font-size: 3rem; color: #006bb0"
+                aria-hidden="true"></i>
+            <br>
+            ${Cargando}...
+        </p>
+    </div>
+    <!-- preloader -->
+
+
     <ips-stepper assessment="data.evaluation_id"></ips-stepper>
 
+
+    <div ng-if="c.data.evaluation.state == 10 || c.data.evaluation.state == 20 || c.data.evaluation.state == 40">
+        <hr>
+        <div class="text-center ">
+            Se ha capturado el: {{ c.progressBar.complete }}%
+        </div>
+        <uib-progressbar style="margin: 0px;" animate="false" value="c.progressBar.complete" type="success">
+            <b>{{c.progressBar.complete}}%</b>
+        </uib-progressbar>
+
+        <div class="text-center has-error" ng-if="c.progressBar.complete < 100">
+            Falta por capturar {{ 100 - c.progressBar.complete }}% en tus objetivos
+        </div>
+        <hr>
+    </div>
+
+
+
+
+
+    <div ng-if="c.data.evaluation.objetives.length > 0">
+        <ul class="list-group">
+            <li class="list-group-item">
+                <div class="row">
+                    <div class="col-sm-12 col-md-2 " style="font-size: 1.25rem;">
+                        objetives / Iniciatives
+                    </div>
+                    <div class="col-sm-12 col-md-2 " style="font-size: 1.25rem;">
+                        Entregables
+                    </div>
+                    <div class="col-sm-12 col-md-2 " style="font-size: 1.25rem;">
+                        Fecha de Entrega
+                    </div>
+                    <div class="col-sm-12 col-md-3 " style="font-size: 1.25rem;">
+                        Avance de objetives
+                    </div>
+                    <div class="col-sm-12 col-md-1 " style="font-size: 1.25rem;">
+                        Peso
+                    </div>
+                    <div class="col-sm-12 col-md-1 " style="font-size: 1.20rem;">
+                        Evaluación
+                        <small ng-if="c.data.evaluation.user.sys_id == c.data.current_user">Colaborador</small>
+                        <small ng-if="c.data.evaluation.lead.sys_id == c.data.current_user">Líder</small>
+                    </div>
+                    <div class="col-sm-12 col-md-1 " style="font-size: 1.20rem;">
+                        Actions
+
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+
+
+    <ul class="list-group" ng-repeat="objetive in c.data.evaluation.objetives">
+
+        <li class="list-group-item list-group-item-primary">
+
+            <div class="row">
+                <div class="col-sm-12 col-md-9">
+                    {{ objetive.no_goal}}.- {{ objetive.target }}
+                </div>
+                <div class="col-sm-12 col-md-1 text-center">
+                    <strong>{{ objetive.collaborator_goal_weight}} %</strong>
+                </div>
+                <div class="col-sm-12 col-md-1 text-center">
+
+                    <strong ng-if="c.data.evaluation.user.sys_id == c.data.current_user">
+                        {{ objetive.collaborator_evaluation }}%
+                    </strong>
+                    <strong ng-if="c.data.evaluation.lead.sys_id == c.data.current_user">
+                        {{ objetive.leader_evaluation }} %
+                    </strong>
+                </div>
+                <div class="col-sm-12 col-md-1  d-flex "
+                    style="justify-content: center; align-items: center; flex-direction: column;">
+
+                    <button style="position: relative;"
+                        tooltip-placement="{{ objetive.show_iniciatives ? '${Ver iniviativas}' : '${Ocultar iniciatives}' }}"
+                        uib-tooltip="{{ objetive.show_iniciatives ? '${Ver iniviativas}' : '${Ocultar iniciatives}' }}"
+                        type="button" class="btn btn-default"
+                        ng-click="objetive.show_iniciatives = !objetive.show_iniciatives"
+                        ng-disabled="objetive.initiatives.length == 0" style="margin-right: .5rem;">
+
+                        <i class="fa fa-eye" aria-hidden="true" ng-if="objetive.show_iniciatives"></i>
+
+
+                        <i class="fa fa-eye-slash" aria-hidden="true" ng-if="!objetive.show_iniciatives"></i>
+                        <div ng-if="objetive.initiatives.length > 0 && objetive.show_iniciatives"
+                            style="position: absolute; top: -10px; right: -10px;">
+                            <span class="badge badge-light">{{ objetive.initiatives.length }}</span>
+
+                        </div>
+
+                        <!-- {{ objetive.show_iniciatives ? 'Mostrar' : 'Ocultar'}} -->
+
+                    </button>
+
+                    <!-- Botones de Edicion objetives de colaborador -->
+
+
+                    <section ng-if="
+                          c.data.evaluation.user.sys_id == c.data.current_user && 
+                          ((c.data.evaluation.state == 10 ||  c.data.evaluation.state == 20  ) ||
+                          (c.data.evaluation.state == 40 ) )"
+                        style="display: flex; justify-content: center; align-items: center; align-content: center; flex-direction: column;">
+
+                        <button
+                            ng-if="(objetive.initiatives.length < 5 && objetive.sum < objetive.collaborator_goal_weight)"
+                            tooltip-placement="${Crear iniciative}" uib-tooltip="${Crear iniciative}" type="button"
+                            class="btn btn-default mx-1" ng-click="c.newIniciative(objetive)">
+                            <i class="fa fa-plus" aria-hidden="true"></i>
+                            <!-- ${Crear} -->
+                        </button>
+
+                        <button tooltip-placement="${Editar objetive}" uib-tooltip="${Editar objetive}" type="button"
+                            class="btn btn-default my-1" ng-click="c.editarObjetive(objetive, false)">
+                            <i class="fa fa-pencil" aria-hidden="true"></i>
+                            <!-- ${Editar} -->
+                        </button>
+
+                        <button tooltip-placement="${Borrar objetive}" uib-tooltip="${Borrar objetive}" type="button"
+                            class="btn btn-default my-1" ng-click="c.deleteObjetive(objetive)">
+                            <i class="fa fa-trash" aria-hidden="true"></i>
+                            <!-- ${Borrar} -->
+                        </button>
+
+                    </section>
+                    <!-- Botones de Edicion objetives de colaborador -->
+
+                    <!-- Botones de Edicion objetives de lider -->
+
+                    <section
+                        ng-if="c.data.evaluation.liber.sys_id == c.data.user_id && (c.data.evaluation.state == 2 || c.data.evaluation.state == 3)">
+
+                        <button ng-if="(objetive.initiative.length < 5 && objetive.suma < objetive.u_objetive_weight)"
+                            tooltip-placement="${Crear iniciative}" uib-tooltip="${Crear iniciative}" type="button"
+                            class="btn btn-default mx-1" ng-click="c.newIniciative(objetive)">
+                            <i class="fa fa-plus" aria-hidden="true"></i>
+                        </button>
+
+                        <button tooltip-placement="${Editar objetive}" uib-tooltip="${Editar objetive}" type="button"
+                            class="btn btn-default mx-1" ng-click="c.editarObjetive(objetive, true)">
+                            <i class="fa fa-pencil" aria-hidden="true"></i>
+                        </button>
+                        <button tooltip-placement="${Borrar objetive}" uib-tooltip="${Borrar objetive}" type="button"
+                            class="btn btn-default mx-1" ng-click="c.deleteObjetive(objetive)">
+                            <i class="fa fa-trash" aria-hidden="true"></i>
+                        </button>
+                    </section>
+                    <!-- Botones de Edicion objetives de lider -->
+
+                </div>
+            </div>
+
+        </li>
+
+        <li class="list-group-item" style="padding: 0; ">
+
+            <div class="row">
+
+                <div class="col-sm-12 col-md-10">
+                    <small id="emailHelp" class="form-text text-muted mx-1" ng-if="objetive.show_iniciatives">
+                        Se han capturado {{ objetive.initiatives.length }} iniciatives
+                    </small>
+
+                    <!-- errores -->
+                    <div ng-if="objetive.errors.length > 0" class="invalid-feedback mx-1">
+                        ${Notas del objetive:}
+                        <ul>
+                            <li class="invalid-feedback" ng-repeat="error in objetive.errors track by $index">
+                                {{ error }}
+                            </li>
+                        </ul>
+                    </div>
+                    <!-- errores -->
+                </div>
+
+
+
+
+                <!-- Acciones -->
+            </div>
+
+
+
+
+            <!-- iniciatives -->
+            <div uib-collapse="objetive.show_iniciatives">
+                <div class="" style="background: white; ">
+
+                    <ul class="list-group" style="margin-bottom: 0px;">
+
+                        <li class="list-group-item" ng-repeat="iniciative in objetive.initiatives">
+                            <div class="row d-flex" style="align-items: center; padding-bottom: 0px;">
+                                <div class="col-sm-12 col-md-2">
+                                    <small>{{ iniciative.no_iniciative }}.- {{
+                                        iniciative.iniciative }}</small>
+                                </div>
+                                <div class="col-sm-12 col-md-2">
+                                    <small>{{ iniciative.deliverable }}</small>
+                                </div>
+                                <div class="col-sm-12 col-md-2">
+                                    <small>{{ iniciative.work_end | date:'dd-MM-yyyy' }}</small>
+                                </div>
+                                <div class="col-sm-12 col-md-3">
+                                    <small>
+                                        <div id="my-colaborador-{{iniciative.sys_id}}">
+                                            <strong style="color: #0070b9">Colaborador MY:</strong> {{
+                                            iniciative.my_contributor_comment }}
+                                        </div>
+                                        <hr style="margin-top: 0; margin-bottom: 0;">
+                                        <div id="my-lider-{{iniciative.sys_id}}">
+                                            <strong style="color: #0070b9">Líder MY:</strong> {{
+                                            iniciative.my_leader_comment }}
+                                        </div>
+                                        <hr style="margin-top: 0; margin-bottom: 0;">
+                                        <div id="ye-colaborador-{{iniciative.sys_id}}">
+                                            <strong style="color: #0070b9">Colaborador YE:</strong> {{
+                                            iniciative.ye_contributor_comment }}
+                                        </div>
+                                        <hr style="margin-top: 0; margin-bottom: 0;">
+                                        <div id="ye-lider-{{iniciative.sys_id}}">
+                                            <strong style="color: #0070b9">Líder YE: </strong> {{
+                                            iniciative.ye_leader_comment }}
+                                        </div>
+                                    </small>
+                                </div>
+                                <div class="col-sm-12 col-md-1 text-center">
+                                    <strong>
+                                        {{ iniciative.collaborator_initiative_weight }} %
+                                    </strong>
+                                </div>
+                                <div class="col-sm-12 col-md-1 text-center">
+                                    <div style="display: flex; align-items: center; justify-content: center;"
+                                        ng-style="{ height: c.getHeight('my-colaborador-' + iniciative.sys_id) }">
+                                        <small ng-if="!iniciative.my_collaborator_evaluation">N/A</small>
+                                        <span ng-if="iniciative.my_collaborator_evaluation == 1" style="color: #7EA639;"
+                                            class="fa fa-circle"></span>
+                                        <span ng-if="iniciative.my_collaborator_evaluation == 2" style="color: #D6C849;"
+                                            class="fa fa-circle"></span>
+                                        <span ng-if="iniciative.my_collaborator_evaluation == 3" style="color: #9F1A31;"
+                                            class="fa fa-circle"></span>
+                                        <span ng-if="iniciative.my_collaborator_evaluation == 4" style="color: #7F7F7F;"
+                                            class="fa fa-circle"></span>
+                                    </div>
+                                    <hr style="margin-top: 0; margin-bottom: 0;">
+                                    <div style="display: flex; align-items: center; justify-content: center;"
+                                        ng-style="{ height: c.getHeight('my-lider-'+iniciative.sys_id) }">
+
+                                        <small ng-if="!iniciative.my_leader_evaluation">N/A</small>
+
+                                        <span ng-if="iniciative.my_leader_evaluation == 1" style="color: #7EA639;"
+                                            class="fa fa-circle"></span>
+                                        <span ng-if="iniciative.my_leader_evaluation == 2" style="color: #D6C849;"
+                                            class="fa fa-circle"></span>
+                                        <span ng-if="iniciative.my_leader_evaluation == 3" style="color: #9F1A31;"
+                                            class="fa fa-circle"></span>
+                                        <span ng-if="iniciative.my_leader_evaluation == 4" style="color: #7F7F7F;"
+                                            class="fa fa-circle"></span>
+                                    </div>
+                                    <hr style="margin-top: 0; margin-bottom: 0;">
+                                    <div ng-style="{ height: c.getHeight('ye-colaborador-'+iniciative.sys_id) }">
+                                        <strong>{{ iniciative.ye_collaborator_evaluation }}%</strong>
+                                    </div>
+                                    <hr style="margin-top: 0; margin-bottom: 0;">
+                                    <div ng-style="{ height: c.getHeight('ye-lider-'+iniciative.sys_id) }">
+
+                                        <strong>{{ iniciative.ye_leader_evaluation }}%</strong>
+                                    </div>
+
+
+
+                                </div>
+
+                                <!-- Botones de Edicion iniciatives de Colaborador -->
+
+                                <div class="col-sm-12 col-md-1 "
+                                    ng-if="c.data.evaluation.user.sys_id == c.data.current_user && 
+                                         (c.data.evaluation.state == 10 ||  c.data.evaluation.state == 20 || c.data.evaluation.state == 30  || c.data.evaluation.state == 40  )"
+                                    style="display: flex; justify-content: center; align-items: center; flex-direction: column;">
+
+                                    <!-- Boton de edicion -->
+
+                                    <button ng-if="c.data.evaluation.state != 40"
+                                        tooltip-placement="${Editar iniciative}" uib-tooltip="${Editar iniciative}"
+                                        type="button" class="btn btn-default"
+                                        ng-click="c.editIniciative(objetive, iniciative)">
+                                        <i class="fa fa-pencil" aria-hidden="true"></i>
+                                        <!-- ${Editar} -->
+                                    </button>
+
+                                    <!-- Boton de borrado -->
+                                    <button ng-if="c.data.evaluation.state != 40"
+                                        tooltip-placement="${Borrar iniciative}" uib-tooltip="${Borrar iniciative}"
+                                        type="button" class="btn btn-default"
+                                        ng-click="c.deleteIniciative(objetive, iniciative)">
+                                        <i class="fa fa-trash" aria-hidden="true"></i>
+                                        <!-- ${Borrar} -->
+                                    </button>
+
+                                    <!-- Boton evaluacion medio año -->
+                                    <button tooltip-placement="${Evaluar Iniciative}"
+                                        uib-tooltip="${Evaluar Iniciative}" type="button" class="btn btn-success"
+                                        ng-click="c.evaluarMedioAno(iniciative)" ng-if="c.data.evaluation.state == 40">
+                                        <img src="task.png" width="20" height="auto" />
+                                        <!-- ${Evaluar MY} -->
+                                        esta
+                                    </button>
+
+                                    <!-- boton evaluacion de año -->
+                                    <button tooltip-placement="${Evaluar Iniciative}"
+                                        uib-tooltip="${Evaluar Iniciative}" type="button" class="btn btn-success"
+                                        ng-click="c.evaluarYE(iniciative)" ng-if="c.data.evaluation.state == '60'  ">
+                                        <img src="task.png" width="20" height="auto" />
+                                        <!-- ${Evaluar YE} -->
+                                    </button>
+
+
+                                </div>
+                                <!-- Botones de Edicion iniciatives de Colaborador -->
+
+                                <!-- Botones de Edicion iniciatives de lider -->
+                                <div class="col-sm-12 col-md-1"
+                                    ng-if="c.data.evaluation.lead.sys_id == c.data.current_user">
+
+
+                                    <button tooltip-placement=" ${Editar iniciative}" uib-tooltip="${Editar iniciative}"
+                                        type="button" class="btn btn-default"
+                                        ng-click="c.editIniciative(objetive, iniciative, true)"
+                                        ng-if="c.evaluacion.state == 2 || c.evaluacion.state == 3">
+                                        <i class="fa fa-pencil" aria-hidden="true"></i>
+                                        <!-- ${Editar} -->
+                                    </button>
+
+
+                                    <button tooltip-placement="${Borrar iniciative}" uib-tooltip="${Borrar iniciative}"
+                                        type="button" ng-if="c.evaluacion.state == 2 || c.evaluacion.state == 3"
+                                        class="btn btn-default" ng-click="c.deleteIniciative(objetive, iniciative)">
+                                        <i class="fa fa-trash" aria-hidden="true"></i>
+                                        <!-- ${Borrar} -->
+                                    </button>
+                                    <!-- Boton evaluacion medio año -->
+                                    <button tooltip-placement="${Evaluar Iniciative}"
+                                        uib-tooltip="${Evaluar Iniciative}" type="button" class="btn btn-success"
+                                        ng-click="c.evaluarMedioAno(iniciative)"
+                                        ng-if="c.evaluacion.state == '50' && c.evaluacion.u_my_colaborator_comments ">
+                                        <img src="task.png" width="20" height="auto" />
+                                        <!-- ${Evaluar MY} -->
+                                    </button>
+
+
+                                    <!-- boton evaluacion de año -->
+                                    <button tooltip-placement="${Evaluar Iniciative}"
+                                        uib-tooltip="${Evaluar Iniciative}" type="button" class="btn btn-success"
+                                        ng-click="c.evaluarYE(iniciative)"
+                                        ng-if="c.evaluacion.state == '70' && c.evaluacion.u_ye_colaborator_comments ">
+                                        <img src="task.png" width="20" height="auto" />
+                                        <!-- ${Evaluar YE} -->
+                                    </button>
+
+
+                                </div>
+                            </div>
+
+                            <!-- errores -->
+                            <div ng-if="iniciative.errors.length > 0">
+                                ${Notas de la iniciative:}
+                                <ul>
+                                    <li class="invalid-feedback" ng-repeat="error in iniciative.errors track by $index">
+                                        {{ error }}
+                                    </li>
+                                </ul>
+                            </div>
+                            <!-- errores -->
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <!-- iniciatives -->
+
+        </li>
+
+
+
+    </ul>
+
+    <br><br>
+    <div class="d-flex justify-center">
+        <button tooltip-placement="${Crear objetivo}" uib-tooltip="${Crear objetivo}" type="button"
+            class="btn btn-default" ng-click="c.newObjective()"
+            ng-disabled="c.data.evaluation.objetives.length >= 5 || c.progressBar.complete == 100">
+            <i class="fa fa-plus" aria-hidden="true"></i> Crear nuevo objetivo
+        </button>
+    </div>
+    <br>
+    <div class="text-center has-error " ng-if="c.progressBar.complete < 100">
+        Falta por capturar {{ 100 - c.progressBar.complete }}% en tus objetivos
+    </div>
+
+    <div class="row d-flex" style="    justify-content: center;
+        align-items: center;
+        align-content: center;
+        flex-direction: row;
+    ">
+
+        <div class="mx-1" ng-if="c.evaluacion.state == 4 || c.evaluacion.state == 5 "
+            style="display: flex; justify-content: center; align-items: center; flex-direction: column;">
+            <h3 class="">Rating Colaborador</h3>
+
+            <ips-rating type="1" averange-colaborador="c.evaluacion.u_averange_colaborador"></ips-rating>
+
+        </div>
+        <div class="mx-1"
+            ng-if="(c.evaluacion.state == 4 || c.evaluacion.state == 5) && c.evaluacion.u_averange_evaluation > 0"
+            style="display: flex; justify-content: center; align-items: center; flex-direction: column;">
+            <h3 class="">Rating Líder</h3>
+
+            <ips-rating averange-evaluation="c.evaluacion.u_averange_evaluation" type="2"></ips-rating>
+
+        </div>
+    </div>
+    <hr>
+    <div class="d-flex justify-center">
+
+
+
+        <!-- botones de evaluacion colaborador -->
+
+        <section ng-if="c.data.evaluation.user.sys_id == c.data.current_user">
+
+            <button ng-if=" c.data.evaluation.state == '10' || c.data.evaluation.state == '20'"
+                tooltip-placement="${Enviar objetivos para su aprobación}"
+                uib-tooltip="${Enviar objetivos para su aprobación}" type="button" class="btn btn-primary mx-1"
+                ng-click="c.sendObjetives()"
+                ng-disabled="!c.data.evaluation.state_valiadations || c.progressBar.complete < 100">
+                Enviar objetivos
+            </button>
+
+
+            <button ng-if=" c.data.evaluation.state == '4' && !c.data.evaluation.u_ye_colaborator_comments "
+                tooltip-placement="${Envia tu evaluación anual}" uib-tooltip="${Envia tu evaluación anual}"
+                type="button" class="btn btn-primary mx-1" ng-click="c.senddata.evaluationYE()"
+                ng-disabled="!c.data.evaluation.state_valiadations || c.progressBar.complete < 100">
+                Enviar autoevaluación YE
+            </button>
+
+            <button ng-if=" c.data.evaluation.state == '3' && !c.data.evaluation.u_my_colaborator_comments "
+                tooltip-placement="${Envia tu eveluación de medio año}"
+                uib-tooltip="${Envia tu eveluación de medio año}" type="button" class="btn btn-primary mx-1"
+                ng-click="c.senddata.evaluationMy()"
+                ng-disabled="!c.data.evaluation.state_valiadations || c.progressBar.complete < 100">
+                Enviar autoevaluación MY
+            </button>
+
+
+
+        </section>
+        <!-- botones de data.evaluation colaborador -->
+
+        <!-- botones de data.evaluation lider -->
+
+        <section ng-if="c.data.evaluation.lead.sys_id == c.data.user_id">
+
+            <button ng-if=" c.data.evaluation.state == '4' && c.data.evaluation.u_ye_colaborator_comments != ''"
+                tooltip-placement="${Enviar evaluación anual}" uib-tooltip="${Enviar evaluación anual}" type="button"
+                class="btn btn-primary mx-1" ng-click="c.senddata.evaluationYE()"
+                ng-disabled="!c.data.evaluation.state_valiadations || c.progressBar.complete < 100">
+                Enviar evaluación YE
+            </button>
+
+            <button ng-if="c.data.evaluation.state == '3' && c.data.evaluation.u_my_colaborator_comments != ''"
+                tooltip-placement="${Enviar evaluación de medio año}" uib-tooltip="${Enviar evaluación de medio año}"
+                type="button" class="btn btn-primary mx-1" ng-click="c.senddata.evaluationMy()"
+                ng-disabled="!c.data.evaluation.state_valiadations || c.progressBar.complete < 100">
+                Enviar data.evaluation MY
+            </button>
+
+
+            <button ng-if=" c.data.evaluation.state == '2' "
+                tooltip-placement="${Con este botón puedes aprobar o regresar los objetivos al colaborador}"
+                uib-tooltip="${Con este botón puedes aprobar o regresar los objetivos al colaborador}" type="button"
+                class="btn btn-primary mx-1" ng-click="c.aprobarRechazar()"
+                ng-disabled="!c.data.evaluation.state_valiadations || c.progressBar.complete < 100">
+                ${Aprobar / Regresar al colaborador}
+            </button>
+
+        </section>
+        <!-- botones de data.evaluation lider -->
+        <a tooltip-placement="${Exporta a PDF la evaluación}" uib-tooltip="${Exporta a PDF la evaluación}" type="button"
+            class="btn btn-primary mx-1" ng-disabled="!c.data.evaluation.state_valiadations"
+            ng-href="/ui_page.do?sys_id=10761cac97db9910a0687cd11153af5b&sysparm_sys_id={{c.data.evaluation_id}}"
+            target="_blank">
+            Exportar a PDF
+        </a>
+        <!-- ng-disabled="!(c.data.evaluation.state == 4 || c.data.evaluation.state == 5 ) || ((!c.data.evaluation.state_valiadations ||
+    c.progressBar.complete < 100) && c.evaluacion.state !=4)" -->
+        <button tooltip-placement="${Mostrar las instrucciones para la captura de la evaluación de desempeño}"
+            uib-tooltip="${Mostrar las instrucciones para la captura de la evaluación de desempeño}" type="button"
+            class="btn btn-primary mx-1" ng-click="c.showIntrucciones()">
+            Instrucciones
+        </button>
+    </div>
+
+    <br><br>
 
 
     <pre>{{ data | json}}</pre>

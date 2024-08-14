@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_ui_message">
+    <sys_ui_message action="INSERT_OR_UPDATE">
+        <application/>
+        <code/>
+        <commented_message/>
+        <key>Waiting for actions of</key>
+        <language>es</language>
+        <message>Esperando acciones de</message>
+        <sys_class_name>sys_ui_message</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2024-08-09 19:09:53</sys_created_on>
+        <sys_id>7f1b61eb473b02102d16d9ce316d432b</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Waiting for actions of</sys_name>
+        <sys_package display_value="IPS Performance Assessments" source="x_ipsu2_ips_perfor">948629663328c210061636c24d5c7bfc</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="IPS Performance Assessments">948629663328c210061636c24d5c7bfc</sys_scope>
+        <sys_update_name>sys_ui_message_7f1b61eb473b02102d16d9ce316d432b</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2024-08-09 19:09:53</sys_updated_on>
+    </sys_ui_message>
+</record_update>

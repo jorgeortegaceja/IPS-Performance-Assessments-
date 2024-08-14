@@ -40,6 +40,7 @@
         <vendor_prefix/>
         <version>1.0.0</version>
     </sys_app>
+    <sys_translated_text action="delete_multiple" query="documentkey=948629663328c210061636c24d5c7bfc"/>
     <sys_attachment action="INSERT_OR_UPDATE">
         <average_image_color/>
         <chunk_size_bytes>700000</chunk_size_bytes>
@@ -54,8 +55,6 @@
         <state>available</state>
         <sys_created_by>jorge.ortega</sys_created_by>
         <sys_created_on>2024-02-27 02:51:45</sys_created_on>
-        <sys_domain>b3b234dd0fe6ee006dc98fbce1050e6e</sys_domain>
-        <sys_domain_path>!!!/!!!/</sys_domain_path>
         <sys_id>a086e1263328c210061636c24d5c7bee</sys_id>
         <sys_mod_count>1</sys_mod_count>
         <sys_updated_by>system</sys_updated_by>

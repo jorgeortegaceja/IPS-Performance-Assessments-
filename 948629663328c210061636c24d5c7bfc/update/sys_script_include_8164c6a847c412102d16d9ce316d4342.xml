@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_script_include">
+    <sys_script_include action="INSERT_OR_UPDATE">
+        <access>package_private</access>
+        <active>true</active>
+        <api_name>x_ipsu2_ips_perfor.IPSModelFactory</api_name>
+        <caller_access/>
+        <client_callable>false</client_callable>
+        <description/>
+        <name>IPSModelFactory</name>
+        <script><![CDATA[var IPSModelFactory = Class.create();
+IPSModelFactory.prototype = {
+
+    find: function (id) {
+        var initiative = new GlideRecord(this.table);
+        initiative.get(id);
+        return initiative;
+    },
+
+    create: function (data) {
+        var iniciative = new GlideRecord(this.table);
+        iniciative.initialize();
+        for (var id in data) {
+            iniciative[id] = data[id];
+        }
+        return iniciative.insert();
+    },
+
+    update: function (data) {
+        var iniciative = new GlideRecord(this.table);
+        iniciative.get(data.sys_id);
+        for (var id in data) {
+            iniciative[id] = data[id];
+        }
+        return iniciative.update();
+    },
+
+    delete: function (id) {
+        var iniciative = new GlideRecord(this.table);
+        iniciative.get(id);
+        return iniciative.deleteRecord();
+    },
+
+    where: function (field, condition, value) {
+        this.iniciative = new GlideRecord(this.table);
+        if (typeof value === 'undefined') {
+            this.iniciative.addQuery(field, condition);
+            return this;
+        }
+        this.iniciative.addQuery(field, condition, value);
+        return this;
+    },
+
+    query: function () {
+        this.iniciative.query();
+        return this.iniciative;
+    },
+
+    type: 'IPSModelFactory'
+};]]></script>
+        <sys_class_name>sys_script_include</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2024-08-12 23:34:23</sys_created_on>
+        <sys_id>8164c6a847c412102d16d9ce316d4342</sys_id>
+        <sys_mod_count>11</sys_mod_count>
+        <sys_name>IPSModelFactory</sys_name>
+        <sys_package display_value="IPS Performance Assessments" source="x_ipsu2_ips_perfor">948629663328c210061636c24d5c7bfc</sys_package>
+        <sys_policy>read</sys_policy>
+        <sys_scope display_value="IPS Performance Assessments">948629663328c210061636c24d5c7bfc</sys_scope>
+        <sys_update_name>sys_script_include_8164c6a847c412102d16d9ce316d4342</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2024-08-13 19:02:54</sys_updated_on>
+    </sys_script_include>
+</record_update>

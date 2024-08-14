@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update>
+    <sys_choice action="INSERT_OR_UPDATE" field="my_leader_evaluation" table="x_ipsu2_ips_perfor_initiatives" version="3">
+        <sys_choice_set action="INSERT_OR_UPDATE">
+            <element>my_leader_evaluation</element>
+            <name>x_ipsu2_ips_perfor_initiatives</name>
+            <sys_class_name>sys_choice_set</sys_class_name>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2024-08-12 14:48:43</sys_created_on>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_name>my_leader_evaluation</sys_name>
+            <sys_package display_value="IPS Performance Assessments" source="x_ipsu2_ips_perfor">948629663328c210061636c24d5c7bfc</sys_package>
+            <sys_policy/>
+            <sys_scope display_value="IPS Performance Assessments">948629663328c210061636c24d5c7bfc</sys_scope>
+            <sys_update_name>sys_choice_x_ipsu2_ips_perfor_initiatives_my_leader_evaluation</sys_update_name>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2024-08-12 14:48:43</sys_updated_on>
+        </sys_choice_set>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>my_leader_evaluation</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>The initiative is completed 100% in accordance with the defined KPI and date</label>
+            <language>en</language>
+            <name>x_ipsu2_ips_perfor_initiatives</name>
+            <sequence>100</sequence>
+            <synonyms/>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2024-08-12 14:48:43</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2024-08-12 14:48:43</sys_updated_on>
+            <value>1</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>my_leader_evaluation</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Se concluyó la iniciativa al 100% de acuerdo con el KPI y fecha definidos</label>
+            <language>es</language>
+            <name>x_ipsu2_ips_perfor_initiatives</name>
+            <sequence>100</sequence>
+            <synonyms/>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2024-08-12 14:48:57</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2024-08-12 14:48:57</sys_updated_on>
+            <value>1</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>my_leader_evaluation</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Reports progress in line with the plan according to the defined KPI and date. Not yet completed at</label>
+            <language>en</language>
+            <name>x_ipsu2_ips_perfor_initiatives</name>
+            <sequence>200</sequence>
+            <synonyms/>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2024-08-12 14:48:47</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2024-08-12 14:48:47</sys_updated_on>
+            <value>2</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>my_leader_evaluation</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Reporta avance en línea con el plan de acuerdo al KPI y fecha definidos. Aún no concluye al</label>
+            <language>es</language>
+            <name>x_ipsu2_ips_perfor_initiatives</name>
+            <sequence>200</sequence>
+            <synonyms/>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2024-08-12 14:49:00</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2024-08-12 14:49:00</sys_updated_on>
+            <value>2</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>my_leader_evaluation</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Delay in compliance with the initiative, according to the defined KPI and date. Define action plan</label>
+            <language>en</language>
+            <name>x_ipsu2_ips_perfor_initiatives</name>
+            <sequence>300</sequence>
+            <synonyms/>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2024-08-12 14:48:50</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2024-08-12 14:48:50</sys_updated_on>
+            <value>3</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>my_leader_evaluation</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Retraso en el cumplimiento de la iniciativa, de acuerdo al KPI y fecha definidos. Definir plan</label>
+            <language>es</language>
+            <name>x_ipsu2_ips_perfor_initiatives</name>
+            <sequence>300</sequence>
+            <synonyms/>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2024-08-12 14:49:03</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2024-08-12 14:49:03</sys_updated_on>
+            <value>3</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>my_leader_evaluation</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>It has not started yet, or it is on standby, or due to a business decision it was canceled</label>
+            <language>en</language>
+            <name>x_ipsu2_ips_perfor_initiatives</name>
+            <sequence>400</sequence>
+            <synonyms/>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2024-08-12 14:48:53</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2024-08-12 14:48:53</sys_updated_on>
+            <value>4</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>my_leader_evaluation</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Aún no ha iniciado, o está en stand by, o por decisión de negocio se canceló</label>
+            <language>es</language>
+            <name>x_ipsu2_ips_perfor_initiatives</name>
+            <sequence>400</sequence>
+            <synonyms/>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2024-08-12 14:49:06</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2024-08-12 14:49:06</sys_updated_on>
+            <value>4</value>
+        </sys_choice>
+    </sys_choice>
+</record_update>

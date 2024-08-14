@@ -99,7 +99,6 @@
         <sys_class_name>sys_metadata_delete</sys_class_name>
         <sys_created_by>jorge.ortega</sys_created_by>
         <sys_created_on>2024-04-27 20:32:39</sys_created_on>
-        <sys_customer_update>false</sys_customer_update>
         <sys_db_object display_value="" name="sys_dictionary">sys_dictionary</sys_db_object>
         <sys_id>0f79bc5003bf44708a3edc51f85e93b1</sys_id>
         <sys_metadata>02bde16e3328c210061636c24d5c7b0d</sys_metadata>
@@ -108,7 +107,6 @@
         <sys_package display_value="IPS Performance Assessments" source="x_ipsu2_ips_perfor">948629663328c210061636c24d5c7bfc</sys_package>
         <sys_parent display_value="">e9bd616e3328c210061636c24d5c7bf0</sys_parent>
         <sys_policy/>
-        <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
         <sys_scope display_value="IPS Performance Assessments">948629663328c210061636c24d5c7bfc</sys_scope>
         <sys_scope_delete display_value="">2ca5452e23e4451ca60ab6cf0b82cec9</sys_scope_delete>
         <sys_update_name>sys_dictionary_x_ipsu2_ips_perfor_targets_priority</sys_update_name>

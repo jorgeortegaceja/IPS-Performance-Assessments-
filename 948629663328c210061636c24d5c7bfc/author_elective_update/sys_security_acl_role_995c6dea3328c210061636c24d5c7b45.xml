@@ -43,11 +43,10 @@
         <update_guid_history>995c6dea4428c2101df14ff57d487448:450555804</update_guid_history>
     </sys_update_version>
     <sys_metadata_delete action="INSERT_OR_UPDATE">
-        <sys_audit_delete display_value="Record deleted 2024-04-27 14:31:55">538896c6c3b9c6101d04d6ff0501316b</sys_audit_delete>
+        <sys_audit_delete display_value="">538896c6c3b9c6101d04d6ff0501316b</sys_audit_delete>
         <sys_class_name>sys_metadata_delete</sys_class_name>
         <sys_created_by>jorge.ortega</sys_created_by>
         <sys_created_on>2024-04-27 20:31:55</sys_created_on>
-        <sys_customer_update>false</sys_customer_update>
         <sys_db_object display_value="" name="sys_security_acl_role">sys_security_acl_role</sys_db_object>
         <sys_id>04e7a72aa0ae4534804ff3b892ed50c4</sys_id>
         <sys_metadata>995c6dea3328c210061636c24d5c7b45</sys_metadata>
@@ -56,7 +55,6 @@
         <sys_package display_value="IPS Performance Assessments" source="x_ipsu2_ips_perfor">948629663328c210061636c24d5c7bfc</sys_package>
         <sys_parent display_value="">955c6dea3328c210061636c24d5c7b41</sys_parent>
         <sys_policy/>
-        <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
         <sys_scope display_value="IPS Performance Assessments">948629663328c210061636c24d5c7bfc</sys_scope>
         <sys_scope_delete display_value="">2ca5452e23e4451ca60ab6cf0b82cec9</sys_scope_delete>
         <sys_update_name>sys_security_acl_role_995c6dea3328c210061636c24d5c7b45</sys_update_name>

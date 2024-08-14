@@ -532,6 +532,34 @@
             <sys_user/>
             <type/>
         </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>approval</element>
+            <position>38</position>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2024-08-13 23:58:57</sys_created_on>
+            <sys_id>c5a39bfc478852102d16d9ce316d43d7</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_ipsu2_ips_perfor_performance_evaluation" sys_domain="global" view="Default view">de2f9b12c3f90a101d04d6ff05013126</sys_ui_section>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2024-08-13 23:58:57</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>approval_history</element>
+            <position>39</position>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2024-08-13 23:59:26</sys_created_on>
+            <sys_id>04c35ffc478852102d16d9ce316d435b</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_ipsu2_ips_perfor_performance_evaluation" sys_domain="global" view="Default view">de2f9b12c3f90a101d04d6ff05013126</sys_ui_section>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2024-08-13 23:59:26</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
         <sys_ui_section action="INSERT_OR_UPDATE">
             <caption/>
             <header>false</header>
@@ -540,7 +568,6 @@
             <sys_class_name>sys_ui_section</sys_class_name>
             <sys_created_by>jorge.ortega</sys_created_by>
             <sys_created_on>2024-04-28 20:18:53</sys_created_on>
-            <sys_customer_update>false</sys_customer_update>
             <sys_domain>global</sys_domain>
             <sys_domain_path>/</sys_domain_path>
             <sys_id>de2f9b12c3f90a101d04d6ff05013126</sys_id>
@@ -549,7 +576,6 @@
             <sys_overrides/>
             <sys_package display_value="IPS Performance Assessments" source="x_ipsu2_ips_perfor">948629663328c210061636c24d5c7bfc</sys_package>
             <sys_policy/>
-            <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
             <sys_scope display_value="IPS Performance Assessments">948629663328c210061636c24d5c7bfc</sys_scope>
             <sys_update_name>sys_ui_section_de2f9b12c3f90a101d04d6ff05013126</sys_update_name>
             <sys_updated_by>jorge.ortega</sys_updated_by>

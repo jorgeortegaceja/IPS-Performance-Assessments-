@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_script_include">
+    <sys_script_include action="INSERT_OR_UPDATE">
+        <access>package_private</access>
+        <active>true</active>
+        <api_name>x_ipsu2_ips_perfor.IPSObjetiveModel</api_name>
+        <caller_access/>
+        <client_callable>false</client_callable>
+        <description/>
+        <name>IPSObjetiveModel</name>
+        <script><![CDATA[var IPSObjetiveModel = Class.create();
+
+IPSObjetiveModel.prototype = Object.extendsObject(IPSModelFactory, {
+    objetives: [],
+
+    table: 'x_ipsu2_ips_perfor_goal',
+    initiative: null,
+
+    initialize: function () {
+        this.initiative = new IPSInitiativesModel();
+    },
+
+    /**
+    * Get Objetives  
+    * @param {string} id 
+    * @returns 
+    */
+    getObjetives: function (id) {
+        var objetive = new GlideRecord(this.table)
+        objetive.addQuery('evaluation', id);
+        objetive.orderBy('no_goal');
+        objetive.query();
+        while (objetive.next()) {
+            this.objetives.push(this.getObjetive(objetive.sys_id));
+        }
+
+        return this;
+    },
+
+    getObjetive: function (sys_id) {
+        var objetive = new GlideRecord(this.table)
+        objetive.get(sys_id);
+        return objetive;
+    },
+
+
+    /**
+  * This function get all relations name function 
+  * @param {string} relation 
+  * @returns 
+  */
+    withRelationShip: function (relation) {
+        for (var i = 0; i < this.objetives.length; i++) {
+            var objetive = this.objetives[i];
+            gs.info('ips: ' + objetive.sys_id)
+            this.objetives[i][relation] = this.initiative['getRelation_' + relation](objetive.sys_id + '');
+        }
+        return this;
+    },
+
+    get: function () {
+        var objetives = []
+        var keys = '';
+        for (var i = 0; i < this.objetives.length; i++) {
+            var objetive = this.objetives[i];
+            if (!keys.includes(objetive.sys_id + '')) {
+
+                objetives.push({
+                    sys_id: objetive.sys_id + '',
+                    number: objetive.number + '',
+                    no_goal: parseFloat(objetive.no_goal + ''),
+                    collaborator_evaluation: objetive.collaborator_evaluation + '',
+                    collaborator_goal_weight: parseFloat(objetive.collaborator_goal_weight + ''),
+                    target: objetive.target + '',
+                    initiatives: this.initiative.getInitiatives(objetive.sys_id + ''),
+                    state: objetive.state + '',
+                    show_iniciatives: false,
+                    sum: this.initiative.getInitiativesSum(objetive.sys_id + '')
+                });
+            }
+        }
+        return objetives;
+    },
+
+
+    createOrUpdateObjetive: function (data) {
+        var comments = '';
+        var objetive = new GlideRecord(this.table);
+        if (!data.sys_id)
+            objetive.initialize();
+        else {
+            objetive.get(data.sys_id);
+            if (objetive.u_performance_evaluation.state != 0) {
+
+                comments = 'Se modifico el Objetivo   ' + objetive.u_no_objective + '' +
+                    '\n\nEra: \n' +
+                    '-------------------------\n' +
+                    'Objetivo ' + objetive.u_no_objective + '' + ' : ' + objetive.short_description + '' + '\n' +
+                    'Peso del objetivo: ' + objetive.u_objetive_weight + '' + '\n'
+
+            }
+        }
+
+        for (var i in data) {
+            if (i != 'number' || i != 'sys_id')
+                objetive[i] = data[i];
+        }
+
+        if (!data.sys_id)
+            objetive.insert();
+        else {
+
+            objetive.update();
+            if (objetive.u_performance_evaluation.state != 0) {
+                var evaluation = new GlideRecord('u_aliat_evaluacion_de_desempeno');
+                evaluation.get(objetive.u_performance_evaluation + '');
+
+                evaluation.comments.setJournalEntry(
+                    comments + '\n\nAhora es: ' +
+                    '\n-------------------------\n' +
+                    'Objetivo ' + objetive.u_no_objective + '' + ' : ' + objetive.short_description + '' + '\n' +
+                    'Peso del objetivo: ' + objetive.u_objetive_weight + '' + '\n\n' +
+                    'Modificado el: ' + (new GlideDateTime()).getDisplayValue()
+                );
+                evaluation.update();
+            }
+        }
+
+        return {
+            sys_id: objetive.sys_id + '',
+            number: objetive.number + '',
+            u_no_objective: parseFloat(objetive.u_no_objective + ''),
+            u_evaluation: objetive.u_evaluation + '',
+            u_objetive_weight: parseFloat(objetive.u_objetive_weight + ''),
+            short_description: objetive.short_description + '',
+            u_performance_evaluation: objetive.u_performance_evaluation + '',
+            state: objetive.state + '',
+            comments: objetive.comments.getJournalEntry(1)
+        }
+    },
+
+
+
+
+
+
+
+
+    addCommentObjetive: function (data) {
+        var objetive = new GlideRecord(this.table);
+        objetive.get(data.sys_id);
+        objetive.state = -5;
+        objetive.comments.setJournalEntry(data.comments);
+        objetive.update();
+
+        var evaluation = new GlideRecord('u_aliat_evaluacion_de_desempeno');
+        evaluation.get(objetive.u_performance_evaluation + '');
+        evaluation.comments.setJournalEntry('Se agrego un comentario para el objetivo ' + objetive.u_no_objective + '' +
+            '\n' + 'Captura tu objetivo ' + objetive.u_no_objective + '' + ' : ' + objetive.short_description + '' + '\n' +
+            '\n' + ' Captura el peso en porcentaje del objetivo: ' + objetive.u_objetive_weight + '' + '\n' +
+            'Comentario: ' + '\n' +
+            data.comments);
+        evaluation.update();
+        return {
+            sys_id: objetive.sys_id + '',
+            number: objetive.number + '',
+            u_no_objective: parseFloat(objetive.u_no_objective + ''),
+            u_evaluation: objetive.u_evaluation + '',
+            u_objetive_weight: parseFloat(objetive.u_objetive_weight + ''),
+            short_description: objetive.short_description + '',
+            u_performance_evaluation: objetive.u_performance_evaluation + '',
+            state: objetive.state + '',
+            comments: objetive.comments.getJournalEntry(1)
+        }
+    },
+
+    deleteObjetivo: function (sys_id) {
+        try {
+
+
+            var objetive = new GlideRecord(this.table);
+            objetive.get(sys_id);
+
+
+            var comments = 'Se elimina el Objetivo   ' + objetive.u_no_objective + '' +
+                '\n\n' + 'Objetivo ' + objetive.u_no_objective + '' + ' : ' + objetive.short_description + '' + '\n' +
+                'Peso del objetivo: ' + objetive.u_objetive_weight + '' + '\n' +
+                'Fecha de eliminación: ' + (new GlideDateTime()).getDisplayValue() + '\ndicional se eliminan las iniciativas asocioadas\n';
+
+
+
+
+
+            var iniciativas = new GlideRecord('u_aliat_iniciativas_jl');
+            iniciativas.addQuery('u_objetivo', objetive.sys_id);
+            iniciativas.orderBy('u_no_iniciativa');
+            iniciativas.query();
+
+
+
+            while (iniciativas.next()) {
+                var fecha = iniciativas.work_end + '' ? initiative.work_end + ''.split(' ')[0].split('-').reverse().join('/') : '';
+                comments += '----------------------------------------\nSe elimina la Iniciativa   ' + iniciativas.u_no_iniciativa + '' +
+                    '\n\n' + 'Iniciativa ' + iniciativas.u_no_iniciativa + '' + ' : ' + iniciativas.short_description + '' + '\n' +
+                    'Entregable: ' + iniciativas.description + '' + '\n' +
+                    'Fecha de entrega: ' + fecha + '\n' +
+                    'Peso de la iniciativa: ' + iniciativas.u_initiative_weight + '' + '\n' +
+                    'Fecha de eliminación: ' + (new GlideDateTime()).getDisplayValue() + '\n';
+                iniciativas.deleteRecord();
+            }
+
+            var evaluation = new GlideRecord('u_aliat_evaluacion_de_desempeno');
+            evaluation.get(objetive.u_performance_evaluation + '');
+
+            evaluation.comments.setJournalEntry(comments);
+            evaluation.update();
+
+            objetive.deleteRecord();
+        } catch (error) {
+            gs.addInfoMessage(error);
+        }
+    },
+
+    type: 'IPSObjetiveModel'
+});
+]]></script>
+        <sys_class_name>sys_script_include</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2024-08-12 03:09:02</sys_created_on>
+        <sys_id>c8fb2150470412102d16d9ce316d43e1</sys_id>
+        <sys_mod_count>23</sys_mod_count>
+        <sys_name>IPSObjetiveModel</sys_name>
+        <sys_package display_value="IPS Performance Assessments" source="x_ipsu2_ips_perfor">948629663328c210061636c24d5c7bfc</sys_package>
+        <sys_policy>read</sys_policy>
+        <sys_scope display_value="IPS Performance Assessments">948629663328c210061636c24d5c7bfc</sys_scope>
+        <sys_update_name>sys_script_include_c8fb2150470412102d16d9ce316d43e1</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2024-08-12 23:40:29</sys_updated_on>
+    </sys_script_include>
+</record_update>

@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?><record_update table="sys_sg_form_screen">
     <sys_sg_form_screen action="INSERT_OR_UPDATE">
         <alert/>
-        <application_roles/>
         <available_offline>true</available_offline>
         <data_item/>
         <description/>
@@ -9,30 +8,24 @@
         <empty_state/>
         <fetch_type>not_required</fetch_type>
         <filter/>
-        <hidden>false</hidden>
         <hide_filters>false</hide_filters>
         <hide_screen_name>false</hide_screen_name>
         <icon display_value="icon-Chart-Bar">819f296e3328c210061636c24d5c7bef</icon>
         <item_view/>
         <name>Initiatives Form Screen</name>
-        <order/>
         <override_context_with_data_item>false</override_context_with_data_item>
         <parameter_screen/>
-        <parent/>
-        <parent_table/>
         <roles_override/>
         <segments_height>medium</segments_height>
         <segments_min_width>medium</segments_min_width>
         <sys_class_name>sys_sg_form_screen</sys_class_name>
         <sys_created_by>jorge.ortega</sys_created_by>
         <sys_created_on>2024-02-27 03:31:27</sys_created_on>
-        <sys_customer_update>false</sys_customer_update>
         <sys_id>869fa5ee3328c210061636c24d5c7b1c</sys_id>
         <sys_mod_count>0</sys_mod_count>
         <sys_name>Initiatives Form Screen</sys_name>
         <sys_package display_value="IPS Performance Assessments" source="x_ipsu2_ips_perfor">948629663328c210061636c24d5c7bfc</sys_package>
         <sys_policy/>
-        <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
         <sys_scope display_value="IPS Performance Assessments">948629663328c210061636c24d5c7bfc</sys_scope>
         <sys_update_name>sys_sg_form_screen_869fa5ee3328c210061636c24d5c7b1c</sys_update_name>
         <sys_updated_by>jorge.ortega</sys_updated_by>
@@ -41,4 +34,5 @@
         <use_view_config>true</use_view_config>
         <view_config/>
     </sys_sg_form_screen>
+    <sys_translated_text action="delete_multiple" query="documentkey=869fa5ee3328c210061636c24d5c7b1c"/>
 </record_update>

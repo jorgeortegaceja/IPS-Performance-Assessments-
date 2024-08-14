@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_script_include">
+    <sys_script_include action="INSERT_OR_UPDATE">
+        <access>package_private</access>
+        <active>true</active>
+        <api_name>x_ipsu2_ips_perfor.IPSEvaluationsModel</api_name>
+        <caller_access/>
+        <client_callable>false</client_callable>
+        <description/>
+        <name>IPSEvaluationsModel</name>
+        <script><![CDATA[var IPSEvaluationsModel = Class.create();
+IPSEvaluationsModel.prototype = Object.extendsObject(IPSModelFactory, {
+    fields: [],
+    hidden: [],
+    table: 'x_ipsu2_ips_perfor_performance_evaluation',
+    primaryKey: 'sys_id',
+
+
+    type: 'IPSEvaluationsModel'
+});]]></script>
+        <sys_class_name>sys_script_include</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2024-08-10 04:43:59</sys_created_on>
+        <sys_id>f26e6b2b47ff02102d16d9ce316d432b</sys_id>
+        <sys_mod_count>8</sys_mod_count>
+        <sys_name>IPSEvaluationsModel</sys_name>
+        <sys_package display_value="IPS Performance Assessments" source="x_ipsu2_ips_perfor">948629663328c210061636c24d5c7bfc</sys_package>
+        <sys_policy>read</sys_policy>
+        <sys_scope display_value="IPS Performance Assessments">948629663328c210061636c24d5c7bfc</sys_scope>
+        <sys_update_name>sys_script_include_f26e6b2b47ff02102d16d9ce316d432b</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2024-08-13 18:24:23</sys_updated_on>
+    </sys_script_include>
+</record_update>

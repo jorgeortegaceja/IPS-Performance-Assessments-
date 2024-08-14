@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="x_ipsu2_ips_perfor_initiatives">
+    <x_ipsu2_ips_perfor_initiatives action="DELETE">
+        <active>true</active>
+        <collaborator_initiative_weight>5</collaborator_initiative_weight>
+        <comments/>
+        <deliverable>asd asdasd</deliverable>
+        <goal display_value="objetivo 1">952d2150470412102d16d9ce316d43e8</goal>
+        <iniciative>sdasda sdasd</iniciative>
+        <leader_initiative_weight/>
+        <my_collaborator_evaluation/>
+        <my_contributor_comment/>
+        <my_leader_comment/>
+        <my_leader_evaluation/>
+        <no_iniciative>2</no_iniciative>
+        <number>INI00000021</number>
+        <order>100</order>
+        <priority/>
+        <state/>
+        <sys_class_name>x_ipsu2_ips_perfor_initiatives</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2024-08-12 06:44:03</sys_created_on>
+        <sys_id>e32d9ad047c412102d16d9ce316d4399</sys_id>
+        <sys_mod_count>4</sys_mod_count>
+        <sys_name/>
+        <sys_package display_value="IPS Performance Assessments" source="x_ipsu2_ips_perfor">948629663328c210061636c24d5c7bfc</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="IPS Performance Assessments">948629663328c210061636c24d5c7bfc</sys_scope>
+        <sys_update_name>x_ipsu2_ips_perfor_initiatives_e32d9ad047c412102d16d9ce316d4399</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2024-08-12 18:51:02</sys_updated_on>
+        <word_start/>
+        <work_end>2024-08-12</work_end>
+        <work_notes/>
+        <ye_collaborator_evaluation/>
+        <ye_contributor_comment/>
+        <ye_leader_comment/>
+        <ye_leader_evaluation/>
+    </x_ipsu2_ips_perfor_initiatives>
+    <sys_update_version action="INSERT_OR_UPDATE">
+        <action>DELETE</action>
+        <application display_value="IPS Performance Assessments">948629663328c210061636c24d5c7bfc</application>
+        <file_path/>
+        <instance_id>2f6503691bea791c6a85eb9b2d4bcb2c</instance_id>
+        <instance_name>dev213880</instance_name>
+        <name>x_ipsu2_ips_perfor_initiatives_e32d9ad047c412102d16d9ce316d4399</name>
+        <payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update table="x_ipsu2_ips_perfor_initiatives"><x_ipsu2_ips_perfor_initiatives action="INSERT_OR_UPDATE"><active>true</active><collaborator_initiative_weight>5</collaborator_initiative_weight><comments/><deliverable>asd asdasd</deliverable><goal display_value="objetivo 1">952d2150470412102d16d9ce316d43e8</goal><iniciative>sdasda sdasd</iniciative><leader_initiative_weight/><my_collaborator_evaluation/><my_contributor_comment/><my_leader_comment/><my_leader_evaluation/><no_iniciative>2</no_iniciative><number>INI00000021</number><order>100</order><priority/><state/><sys_class_name>x_ipsu2_ips_perfor_initiatives</sys_class_name><sys_created_by>admin</sys_created_by><sys_created_on>2024-08-12 06:44:03</sys_created_on><sys_id>e32d9ad047c412102d16d9ce316d4399</sys_id><sys_mod_count>4</sys_mod_count><sys_name/><sys_package display_value="IPS Performance Assessments" source="x_ipsu2_ips_perfor">948629663328c210061636c24d5c7bfc</sys_package><sys_policy/><sys_scope display_value="IPS Performance Assessments">948629663328c210061636c24d5c7bfc</sys_scope><sys_update_name>x_ipsu2_ips_perfor_initiatives_e32d9ad047c412102d16d9ce316d4399</sys_update_name><sys_updated_by>admin</sys_updated_by><sys_updated_on>2024-08-12 18:51:02</sys_updated_on><word_start/><work_end>2024-08-12</work_end><work_notes/><ye_collaborator_evaluation/><ye_contributor_comment/><ye_leader_comment/><ye_leader_evaluation/></x_ipsu2_ips_perfor_initiatives></record_update>]]></payload>
+        <payload_hash>-1255963339</payload_hash>
+        <record_name/>
+        <reverted_from/>
+        <source>a3e1a316473102102d16d9ce316d43bd</source>
+        <source_table>sys_update_set</source_table>
+        <state>previous</state>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2024-08-12 18:51:02</sys_created_on>
+        <sys_id>419385e847c012102d16d9ce316d43d2</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_recorded_at>19147edf5020000001</sys_recorded_at>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2024-08-12 18:51:02</sys_updated_on>
+        <type>Initiatives</type>
+        <update_guid>099385e8b9c01210f309eec16fe800d1</update_guid>
+        <update_guid_history>099385e8b9c01210f309eec16fe800d1:-1255963339,ec0f9c6842401210495bcb0ba3920292:-505539279,92d95024304012100a5039108132290a:-1255963339,c8931caca1001210c5c0bfb1c55ddb92:-1699764193,ab2d9ad0d4c412106fdcb650fb48099a:1094354983</update_guid_history>
+    </sys_update_version>
+    <sys_metadata_delete action="INSERT_OR_UPDATE">
+        <sys_audit_delete display_value="">6d8605ac47c012102d16d9ce316d43d2</sys_audit_delete>
+        <sys_class_name>sys_metadata_delete</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2024-08-12 19:03:54</sys_created_on>
+        <sys_db_object display_value="" name="x_ipsu2_ips_perfor_initiatives">x_ipsu2_ips_perfor_initiatives</sys_db_object>
+        <sys_id>1983340890ec4dca8cfb6d5c684dcd24</sys_id>
+        <sys_metadata>e32d9ad047c412102d16d9ce316d4399</sys_metadata>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package display_value="IPS Performance Assessments" source="x_ipsu2_ips_perfor">948629663328c210061636c24d5c7bfc</sys_package>
+        <sys_parent/>
+        <sys_policy/>
+        <sys_scope display_value="IPS Performance Assessments">948629663328c210061636c24d5c7bfc</sys_scope>
+        <sys_scope_delete display_value="">2ca5452e23e4451ca60ab6cf0b82cec9</sys_scope_delete>
+        <sys_update_name>x_ipsu2_ips_perfor_initiatives_e32d9ad047c412102d16d9ce316d4399</sys_update_name>
+        <sys_update_version display_value="x_ipsu2_ips_perfor_initiatives_e32d9ad047c412102d16d9ce316d4399">419385e847c012102d16d9ce316d43d2</sys_update_version>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2024-08-12 19:03:54</sys_updated_on>
+    </sys_metadata_delete>
+</record_update>

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_ws_operation">
+    <sys_ws_operation action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <consumes>application/json,application/xml,text/xml</consumes>
+        <consumes_customized>false</consumes_customized>
+        <default_operation_uri>/api/x_ipsu2_ips_perfor/ips_assessments_evaluation/validate-fields</default_operation_uri>
+        <enforce_acl>cf9d01d3e73003009d6247e603f6a990</enforce_acl>
+        <http_method>POST</http_method>
+        <name>ValidateFields</name>
+        <operation_script><![CDATA[(function process( /*RESTAPIRequest*/ request, /*RESTAPIResponse*/ response) {
+    var ipsValidate = new IPSValidate();
+    var fields = {};
+    fields[request.body.data.field] = request.body.data.value;
+    var validations = {};
+    validations[request.body.data.field] = request.body.data.validations;
+    return ipsValidate.make(fields, validations);
+})(request, response);]]></operation_script>
+        <operation_uri>/api/x_ipsu2_ips_perfor/v1/ips_assessments_evaluation/validate-fields</operation_uri>
+        <produces>application/json,application/xml,text/xml</produces>
+        <produces_customized>false</produces_customized>
+        <relative_path>/validate-fields</relative_path>
+        <request_example/>
+        <requires_acl_authorization>true</requires_acl_authorization>
+        <requires_authentication>true</requires_authentication>
+        <requires_snc_internal_role>true</requires_snc_internal_role>
+        <short_description/>
+        <sys_class_name>sys_ws_operation</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2024-08-12 04:59:36</sys_created_on>
+        <sys_id>f8254e98474412102d16d9ce316d434c</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>ValidateFields</sys_name>
+        <sys_package display_value="IPS Performance Assessments" source="x_ipsu2_ips_perfor">948629663328c210061636c24d5c7bfc</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="IPS Performance Assessments">948629663328c210061636c24d5c7bfc</sys_scope>
+        <sys_update_name>sys_ws_operation_f8254e98474412102d16d9ce316d434c</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2024-08-12 04:59:36</sys_updated_on>
+        <web_service_definition display_value="IPS Assessments Evaluation">7782aaf247f942102d16d9ce316d43e5</web_service_definition>
+        <web_service_version display_value="v1">a9f2ee7247f942102d16d9ce316d43a9</web_service_version>
+    </sys_ws_operation>
+</record_update>

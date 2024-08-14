@@ -57,13 +57,11 @@
         <sys_class_name>sys_sg_button</sys_class_name>
         <sys_created_by>jorge.ortega</sys_created_by>
         <sys_created_on>2024-02-27 03:31:25</sys_created_on>
-        <sys_customer_update>false</sys_customer_update>
         <sys_id>3d9f65ee3328c210061636c24d5c7b5b</sys_id>
         <sys_mod_count>0</sys_mod_count>
         <sys_name>New Button (Targets)</sys_name>
         <sys_package display_value="IPS Performance Assessments" source="x_ipsu2_ips_perfor">948629663328c210061636c24d5c7bfc</sys_package>
         <sys_policy/>
-        <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
         <sys_scope display_value="IPS Performance Assessments">948629663328c210061636c24d5c7bfc</sys_scope>
         <sys_update_name>sys_sg_button_3d9f65ee3328c210061636c24d5c7b5b</sys_update_name>
         <sys_updated_by>jorge.ortega</sys_updated_by>
@@ -76,4 +74,5 @@
         <write_back_action_item display_value="">b99f65ee3328c210061636c24d5c7b54</write_back_action_item>
         <zombified_screens/>
     </sys_sg_button>
+    <sys_translated_text action="delete_multiple" query="documentkey=3d9f65ee3328c210061636c24d5c7b5b"/>
 </record_update>

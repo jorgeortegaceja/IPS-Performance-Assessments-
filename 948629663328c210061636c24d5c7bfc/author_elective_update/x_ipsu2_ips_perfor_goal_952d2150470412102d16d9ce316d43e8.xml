@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="x_ipsu2_ips_perfor_goal">
+    <x_ipsu2_ips_perfor_goal action="DELETE">
+        <active>true</active>
+        <collaborator_evaluation/>
+        <collaborator_goal_weight>25</collaborator_goal_weight>
+        <comments/>
+        <evaluation display_value="Mi evaluacion 2023">151eee2b473f02102d16d9ce316d43d6</evaluation>
+        <leader_evaluation/>
+        <leader_goal_weight/>
+        <no_goal>1</no_goal>
+        <number>GOA00000018</number>
+        <order>100</order>
+        <priority/>
+        <state/>
+        <sys_class_name>x_ipsu2_ips_perfor_goal</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2024-08-12 03:16:25</sys_created_on>
+        <sys_id>952d2150470412102d16d9ce316d43e8</sys_id>
+        <sys_mod_count>8</sys_mod_count>
+        <sys_name>objetivo 1 de evaluacion</sys_name>
+        <sys_package display_value="IPS Performance Assessments" source="x_ipsu2_ips_perfor">948629663328c210061636c24d5c7bfc</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="IPS Performance Assessments">948629663328c210061636c24d5c7bfc</sys_scope>
+        <sys_update_name>x_ipsu2_ips_perfor_goal_952d2150470412102d16d9ce316d43e8</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2024-08-13 18:29:26</sys_updated_on>
+        <target>objetivo 1 de evaluacion</target>
+        <work_notes/>
+    </x_ipsu2_ips_perfor_goal>
+    <sys_update_version action="INSERT_OR_UPDATE">
+        <action>DELETE</action>
+        <application display_value="IPS Performance Assessments">948629663328c210061636c24d5c7bfc</application>
+        <file_path/>
+        <instance_id>2f6503691bea791c6a85eb9b2d4bcb2c</instance_id>
+        <instance_name>dev213880</instance_name>
+        <name>x_ipsu2_ips_perfor_goal_952d2150470412102d16d9ce316d43e8</name>
+        <payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update table="x_ipsu2_ips_perfor_goal"><x_ipsu2_ips_perfor_goal action="INSERT_OR_UPDATE"><active>true</active><collaborator_evaluation/><collaborator_goal_weight>25</collaborator_goal_weight><comments/><evaluation display_value="Mi evaluacion 2023">151eee2b473f02102d16d9ce316d43d6</evaluation><leader_evaluation/><leader_goal_weight/><no_goal>1</no_goal><number>GOA00000018</number><order>100</order><priority/><state/><sys_class_name>x_ipsu2_ips_perfor_goal</sys_class_name><sys_created_by>admin</sys_created_by><sys_created_on>2024-08-12 03:16:25</sys_created_on><sys_id>952d2150470412102d16d9ce316d43e8</sys_id><sys_mod_count>8</sys_mod_count><sys_name>objetivo 1 de evaluacion</sys_name><sys_package display_value="IPS Performance Assessments" source="x_ipsu2_ips_perfor">948629663328c210061636c24d5c7bfc</sys_package><sys_policy/><sys_scope display_value="IPS Performance Assessments">948629663328c210061636c24d5c7bfc</sys_scope><sys_update_name>x_ipsu2_ips_perfor_goal_952d2150470412102d16d9ce316d43e8</sys_update_name><sys_updated_by>admin</sys_updated_by><sys_updated_on>2024-08-13 18:29:26</sys_updated_on><target>objetivo 1 de evaluacion</target><work_notes/></x_ipsu2_ips_perfor_goal></record_update>]]></payload>
+        <payload_hash>1380634474</payload_hash>
+        <record_name>objetivo 1 de evaluacion</record_name>
+        <reverted_from/>
+        <source>a3e1a316473102102d16d9ce316d43bd</source>
+        <source_table>sys_update_set</source_table>
+        <state>previous</state>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2024-08-13 18:29:26</sys_created_on>
+        <sys_id>96384638478452102d16d9ce316d43ba</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_recorded_at>1914d0088f90000001</sys_recorded_at>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2024-08-13 18:29:26</sys_updated_on>
+        <type>Goals</type>
+        <update_guid>5e384638a1845210266d15294fa318b9</update_guid>
+        <update_guid_history>5e384638a1845210266d15294fa318b9:1380634474,ce18c2383a8452105e7dc822090b8054:-189487190,210842385084521033de4024a0e05bd1:1642436816,5bf7023803845210a04e881bd921f8fd:-189487190,28f70238c48452108ac66189978b3227:1642436816,f4b70ef4e8845210877f086d38397780:-189487190,49978af4d484521090fbf1d16e5df2bc:1642436816,fe14cd6cc5401210ba4efe59fed3a7cc:-189487190,12ade99039041210f48e114e178bad35:-1818813477</update_guid_history>
+    </sys_update_version>
+    <sys_metadata_delete action="INSERT_OR_UPDATE">
+        <sys_audit_delete display_value="objetivo 1 de evaluacion">bd50defc478452102d16d9ce316d437e</sys_audit_delete>
+        <sys_class_name>sys_metadata_delete</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2024-08-13 19:04:54</sys_created_on>
+        <sys_db_object display_value="" name="x_ipsu2_ips_perfor_goal">x_ipsu2_ips_perfor_goal</sys_db_object>
+        <sys_id>1438099f8b484cc981dff33c5ea9c981</sys_id>
+        <sys_metadata>952d2150470412102d16d9ce316d43e8</sys_metadata>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>objetivo 1 de evaluacion</sys_name>
+        <sys_package display_value="IPS Performance Assessments" source="x_ipsu2_ips_perfor">948629663328c210061636c24d5c7bfc</sys_package>
+        <sys_parent/>
+        <sys_policy/>
+        <sys_scope display_value="IPS Performance Assessments">948629663328c210061636c24d5c7bfc</sys_scope>
+        <sys_scope_delete display_value="">2ca5452e23e4451ca60ab6cf0b82cec9</sys_scope_delete>
+        <sys_update_name>x_ipsu2_ips_perfor_goal_952d2150470412102d16d9ce316d43e8</sys_update_name>
+        <sys_update_version display_value="x_ipsu2_ips_perfor_goal_952d2150470412102d16d9ce316d43e8">96384638478452102d16d9ce316d43ba</sys_update_version>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2024-08-13 19:04:54</sys_updated_on>
+    </sys_metadata_delete>
+</record_update>

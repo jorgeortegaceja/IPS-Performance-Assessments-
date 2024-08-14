@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_ws_operation">
+    <sys_ws_operation action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <consumes>application/json,application/xml,text/xml</consumes>
+        <consumes_customized>false</consumes_customized>
+        <default_operation_uri>/api/x_ipsu2_ips_perfor/ips_assessments_evaluation/delete-iniciative/{sys_id}</default_operation_uri>
+        <enforce_acl>cf9d01d3e73003009d6247e603f6a990</enforce_acl>
+        <http_method>DELETE</http_method>
+        <name>Delete Iniciativa</name>
+        <operation_script><![CDATA[(function process( /*RESTAPIRequest*/ request, /*RESTAPIResponse*/ response) {
+
+    var initiativeModel = new IPSInitiativesModel();
+    var evaluationModel = new IPSEvaluationsModel();
+
+    var iniciativa = initiativeModel.find(request.pathParams.sys_id);
+
+    evaluationModel.update({
+        sys_id: iniciativa.goal.evaluation.sys_id + '',
+        work_notes: 'Se elimina la iniciativa   ' + iniciativa.no_iniciative +
+            '\nQue pertenece al objetivo:  ' + iniciativa.goal.no_goal + '.- ' + iniciativa.goal.target +
+            '\n\n' + 'Iniciativa: ' + iniciativa.no_iniciative + '.- ' + iniciativa.iniciative + '\n' +
+            'Entregable: ' + iniciativa.deliverable + '\n' +
+            'Fecha de entrega: ' + new GlideDateTime(iniciativa.work_end).getDate() + '\n' +
+            'Peso de la iniciativa: ' + iniciativa.collaborator_initiative_weight + '\n' +
+            'Fecha de eliminación: ' + (new GlideDateTime()).getDisplayValue()
+    });
+
+
+    initiativeModel.delete(request.pathParams.sys_id);
+    return request.pathParams.sys_id;
+
+
+
+
+
+
+
+})(request, response);]]></operation_script>
+        <operation_uri>/api/x_ipsu2_ips_perfor/v1/ips_assessments_evaluation/delete-iniciative/{sys_id}</operation_uri>
+        <produces>application/json,application/xml,text/xml</produces>
+        <produces_customized>false</produces_customized>
+        <relative_path>/delete-iniciative/{sys_id}</relative_path>
+        <request_example/>
+        <requires_acl_authorization>true</requires_acl_authorization>
+        <requires_authentication>true</requires_authentication>
+        <requires_snc_internal_role>true</requires_snc_internal_role>
+        <short_description/>
+        <sys_class_name>sys_ws_operation</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2024-08-12 16:18:19</sys_created_on>
+        <sys_id>8360a4e8474012102d16d9ce316d433c</sys_id>
+        <sys_mod_count>3</sys_mod_count>
+        <sys_name>Delete Iniciativa</sys_name>
+        <sys_package display_value="IPS Performance Assessments" source="x_ipsu2_ips_perfor">948629663328c210061636c24d5c7bfc</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="IPS Performance Assessments">948629663328c210061636c24d5c7bfc</sys_scope>
+        <sys_update_name>sys_ws_operation_8360a4e8474012102d16d9ce316d433c</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2024-08-12 16:29:39</sys_updated_on>
+        <web_service_definition display_value="IPS Assessments Evaluation">7782aaf247f942102d16d9ce316d43e5</web_service_definition>
+        <web_service_version display_value="v1">a9f2ee7247f942102d16d9ce316d43a9</web_service_version>
+    </sys_ws_operation>
+</record_update>

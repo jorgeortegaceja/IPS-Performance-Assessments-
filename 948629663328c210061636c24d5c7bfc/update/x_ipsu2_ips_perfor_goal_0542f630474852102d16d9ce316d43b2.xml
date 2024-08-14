@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="x_ipsu2_ips_perfor_goal">
+    <x_ipsu2_ips_perfor_goal action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <collaborator_evaluation/>
+        <collaborator_goal_weight>50</collaborator_goal_weight>
+        <comments/>
+        <evaluation display_value="Mi evaluacion 2023">151eee2b473f02102d16d9ce316d43d6</evaluation>
+        <leader_evaluation/>
+        <leader_goal_weight/>
+        <no_goal>2</no_goal>
+        <number>GOA00000045</number>
+        <order>100</order>
+        <priority/>
+        <state/>
+        <sys_class_name>x_ipsu2_ips_perfor_goal</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2024-08-13 21:33:08</sys_created_on>
+        <sys_id>0542f630474852102d16d9ce316d43b2</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>hola mundo 4</sys_name>
+        <sys_package display_value="IPS Performance Assessments" source="x_ipsu2_ips_perfor">948629663328c210061636c24d5c7bfc</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="IPS Performance Assessments">948629663328c210061636c24d5c7bfc</sys_scope>
+        <sys_update_name>x_ipsu2_ips_perfor_goal_0542f630474852102d16d9ce316d43b2</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2024-08-13 21:33:08</sys_updated_on>
+        <target>hola mundo 4</target>
+        <work_notes/>
+    </x_ipsu2_ips_perfor_goal>
+</record_update>

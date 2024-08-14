@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_ws_operation">
+    <sys_ws_operation action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <consumes>application/json,application/xml,text/xml</consumes>
+        <consumes_customized>false</consumes_customized>
+        <default_operation_uri>/api/x_ipsu2_ips_perfor/ips_assessments_evaluation/delete-objetive/{sys_id}</default_operation_uri>
+        <enforce_acl>cf9d01d3e73003009d6247e603f6a990</enforce_acl>
+        <http_method>DELETE</http_method>
+        <name>Delete Objetive</name>
+        <operation_script><![CDATA[(function process(/*RESTAPIRequest*/ request, /*RESTAPIResponse*/ response) {
+
+    var evaluationModel = new IPSEvaluationsModel();
+    var objetiveModel = new IPSObjetiveModel();
+    var iniciativeModel = new IPSInitiativesModel();
+    var date = new GlideDateTime();
+
+    var objetive = objetiveModel.find(request.pathParams.sys_id);
+
+    var comments = 'Se elimina el Objetivo   ' + objetive.no_goal +
+        '\n\n' + 'Objetivo ' + objetive.no_goal + ' : ' + objetive.target + '\n' +
+        'Peso del objetivo: ' + objetive.collaborator_goal_weight + '\n' +
+        'Fecha de eliminación: ' + date.getDisplayValue() + '\nAdicional se eliminan las iniciativas asocioadas\n';
+
+    var iniciatives = iniciativeModel.where('goal', objetive.sys_id).query();
+
+    while (iniciatives.next()) {
+
+        comments += '----------------------------------------\nSe elimina la Iniciativa   ' + iniciatives.u_no_iniciativa +
+            '\n\n' + 'Iniciativa ' + iniciatives.u_no_iniciativa + ' : ' + iniciatives.short_description + '\n' +
+            'Entregable: ' + iniciatives.description + '\n' +
+            'Fecha de entrega: ' + iniciatives.work_end + '\n' +
+            'Peso de la iniciativa: ' + iniciatives.u_initiative_weight + '\n' +
+            'Fecha de eliminación: ' + date.getDisplayValue() + '\n';
+        iniciatives.deleteRecord();
+    }
+
+    objetive.deleteRecord();
+
+    return evaluationModel.update({
+        sys_id: objetive.sys_id,
+        work_notes: comments
+    });
+
+
+})(request, response);]]></operation_script>
+        <operation_uri>/api/x_ipsu2_ips_perfor/v1/ips_assessments_evaluation/delete-objetive/{sys_id}</operation_uri>
+        <produces>application/json,application/xml,text/xml</produces>
+        <produces_customized>false</produces_customized>
+        <relative_path>/delete-objetive/{sys_id}</relative_path>
+        <request_example/>
+        <requires_acl_authorization>true</requires_acl_authorization>
+        <requires_authentication>true</requires_authentication>
+        <requires_snc_internal_role>true</requires_snc_internal_role>
+        <short_description/>
+        <sys_class_name>sys_ws_operation</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2024-08-13 18:33:25</sys_created_on>
+        <sys_id>a9098a38478452102d16d9ce316d430f</sys_id>
+        <sys_mod_count>4</sys_mod_count>
+        <sys_name>Delete Objetive</sys_name>
+        <sys_package display_value="IPS Performance Assessments" source="x_ipsu2_ips_perfor">948629663328c210061636c24d5c7bfc</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="IPS Performance Assessments">948629663328c210061636c24d5c7bfc</sys_scope>
+        <sys_update_name>sys_ws_operation_a9098a38478452102d16d9ce316d430f</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2024-08-13 19:04:43</sys_updated_on>
+        <web_service_definition display_value="IPS Assessments Evaluation">7782aaf247f942102d16d9ce316d43e5</web_service_definition>
+        <web_service_version display_value="v1">a9f2ee7247f942102d16d9ce316d43a9</web_service_version>
+    </sys_ws_operation>
+</record_update>

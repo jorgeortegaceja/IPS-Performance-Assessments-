@@ -1,0 +1,349 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_script_include">
+    <sys_script_include action="INSERT_OR_UPDATE">
+        <access>package_private</access>
+        <active>true</active>
+        <api_name>x_ipsu2_ips_perfor.IPSValidations</api_name>
+        <caller_access/>
+        <client_callable>false</client_callable>
+        <description/>
+        <name>IPSValidations</name>
+        <script><![CDATA[var IPSValidations = Class.create();
+IPSValidations.prototype = {
+    methods: [],
+ 
+    min: function(field, value, args, validations) {
+		var type = [
+			validations.indexOf('string') >= 0 ? validations.indexOf('string') : 100, // 0 string
+			validations.indexOf('is_number') >= 0 ? validations.indexOf('is_number') : 100, // 1 numerico
+			validations.indexOf('array') >= 0 ? validations.indexOf('array') : 100 // 2 array
+		];
+		var real_type = type.indexOf(Math.min.apply(null, type));
+		
+
+        switch (real_type) {
+            case 1:
+                return {
+                    status: value > parseFloat(args) ? true : false,
+                        message: gs.getMessage('The given data was invalid'),
+                        errors: gs.getMessage('The {0} must be greater than {1}', [gs.getMessage(field), args])
+                };
+            case 0:
+                return {
+                    status: value.length > args ? true : false,
+                        message: gs.getMessage('The given data was invalid'),
+                        errors: gs.getMessage('The {0} must have more than {1} characters', [gs.getMessage(field), args])
+                };
+            case 2:
+                return {
+                    status: value.length > args ? true : false,
+                        message: gs.getMessage('The given data was invalid'),
+                        errors: gs.getMessage('The {0} must have more than {1} items', [gs.getMessage(field), args])
+                };
+
+            default:
+                throw new Error('The data type is unknown');
+                break;
+        }
+    },
+
+    max: function(field, value, args, validations) {
+		var type = [
+			validations.indexOf('string') >= 0 ? validations.indexOf('string') : 100, // 0 string
+			validations.indexOf('is_number') >= 0 ? validations.indexOf('is_number') : 100, // 1 numerico
+			validations.indexOf('array') >= 0 ? validations.indexOf('array') : 100 // 2 array
+		];
+		var real_type = type.indexOf(Math.min.apply(null, type));
+		
+        
+        switch (real_type) {
+            case 1:
+                return {
+                    status: parseFloat(value) <= parseFloat(args) ? true : false,
+                        message: gs.getMessage('The given data was invalid'),
+                        errors: gs.getMessage('The {0} must not be greater than {1}', [gs.getMessage(field), args])
+                };
+            case 0:
+                return {
+                    status: value.length <= args ? true : false,
+                        message: gs.getMessage('The given data was invalid'),
+                        errors: gs.getMessage('The {0} must not be greater than {1} characters', [gs.getMessage(field), args])
+                };
+            case 2:
+                return {
+                    status: value.length <= args ? true : false,
+                        message: gs.getMessage('The given data was invalid'),
+                        errors: gs.getMessage('The {0} must not have more than {1} items', [gs.getMessage(field), args])
+                };
+
+            default:
+                throw new Error('The data type is unknown');
+                break;
+        }
+
+
+
+    },
+
+    initialize: function() {
+        for (var funcName in this) {
+            this.methods.push(funcName);
+        }
+    },
+
+    required: function(field, value, args) {
+        gs.info(field ? value ? true : false : false, 'dev.ipsum')
+        return {
+            status: field ? value ? true : false : false,
+            message: gs.getMessage('The given data was invalid'),
+            errors: gs.getMessage('The {0} field is required', [gs.getMessage(field)])
+        }
+    },
+    is_rfc: function(field, value, args) {
+        _rfc_pattern_pm = "^(([A-ZÑ&]{3})([0-9]{2})([0][13578]|[1][02])(([0][1-9]|[12][\\d])|[3][01])([A-Z0-9]{3}))|" +
+            "(([A-ZÑ&]{3})([0-9]{2})([0][13456789]|[1][012])(([0][1-9]|[12][\\d])|[3][0])([A-Z0-9]{3}))|" +
+            "(([A-ZÑ&]{3})([02468][048]|[13579][26])[0][2]([0][1-9]|[12][\\d])([A-Z0-9]{3}))|" +
+            "(([A-ZÑ&]{3})([0-9]{2})[0][2]([0][1-9]|[1][0-9]|[2][0-8])([A-Z0-9]{3}))$";
+        _rfc_pattern_pf = "^(([A-ZÑ&]{4})([0-9]{2})([0][13578]|[1][02])(([0][1-9]|[12][\\d])|[3][01])([A-Z0-9]{3}))|" +
+            "(([A-ZÑ&]{4})([0-9]{2})([0][13456789]|[1][012])(([0][1-9]|[12][\\d])|[3][0])([A-Z0-9]{3}))|" +
+            "(([A-ZÑ&]{4})([02468][048]|[13579][26])[0][2]([0][1-9]|[12][\\d])([A-Z0-9]{3}))|" +
+            "(([A-ZÑ&]{4})([0-9]{2})[0][2]([0][1-9]|[1][0-9]|[2][0-8])([A-Z0-9]{3}))$";
+        return {
+            status: value.match(_rfc_pattern_pm) || value.match(_rfc_pattern_pf) ? true : false,
+            message: gs.getMessage('The given data was invalid'),
+            errors: gs.getMessage('The {0} must be an valid RFC', [gs.getMessage(field)])
+        }
+    },
+    is_curp: function(field, curp, args) {
+        var re = /^([A-Z][AEIOUX][A-Z]{2}\d{2}(?:0[1-9]|1[0-2])(?:0[1-9]|[12]\d|3[01])[HM](?:AS|B[CS]|C[CLMSH]|D[FG]|G[TR]|HG|JC|M[CNS]|N[ETL]|OC|PL|Q[TR]|S[PLR]|T[CSL]|VZ|YN|ZS)[B-DF-HJ-NP-TV-Z]{3}[A-Z\d])(\d)$/,
+            validado = curp.match(re);
+
+        if (!validado) //Coincide con el formato general?
+            return {
+                status: !validado,
+                message: gs.getMessage('The given data was invalid'),
+                errors: gs.getMessage('The {0} must be an valid CRUP', [gs.getMessage(field)])
+            }
+
+        //Validar que coincida el dígito verificador
+        function digitoVerificador(curp17) {
+            //Fuente https://consultas.curp.gob.mx/CurpSP/
+            var diccionario = "0123456789ABCDEFGHIJKLMNÑOPQRSTUVWXYZ",
+                lngSuma = 0.0,
+                lngDigito = 0.0;
+            for (var i = 0; i < 17; i++)
+                lngSuma = lngSuma + diccionario.indexOf(curp17.charAt(i)) * (18 - i);
+            lngDigito = 10 - lngSuma % 10;
+            if (lngDigito == 10) return 0;
+            return lngDigito;
+        }
+
+
+        return {
+            status: !(validado[2] != digitoVerificador(validado[1])) ? true : false,
+            message: gs.getMessage('The given data was invalid'),
+            errors: gs.getMessage('The {0} must be an valid CRUP', [gs.getMessage(field)])
+        }
+    },
+
+    is_number: function(field, value, args) {
+
+        var exp_numeric = /^[0-9]*(\.?)[ 0-9]+$/;
+
+        return {
+            status: exp_numeric.test(value) ? true : false,
+            message: gs.getMessage('The given data was invalid'),
+            errors: gs.getMessage('The {0} must be an numeric', [gs.getMessage(field)])
+        }
+    },
+
+
+
+    email: function(field, value, args) {
+        var emailRegex = /^[-\w.%+]{1,64}@(?:[A-Z0-9-]{1,63}\.){1,125}[A-Z]{2,63}$/i;
+        return {
+            status: emailRegex.test(value) ? true : false,
+            message: gs.getMessage('The given data was invalid'),
+            errors: gs.getMessage('The {0} must be a valid email address.', [gs.getMessage(field)])
+        }
+    },
+
+    exists: function(field, value, args) {
+        var parameters = args.split(',');
+        var manager = new GlideRecord(parameters[0]);
+        return {
+            status: manager.get(parameters[1], value) ? true : false,
+            message: gs.getMessage('The given data was invalid'),
+            errors: gs.getMessage('The selected value in {0} not exists.', [gs.getMessage(field)])
+        }
+    },
+
+    date: function(field, value, args) {
+        var dateRegex = /^(19[0-9]{2}|2[0-9]{3})\-(0[1-9]|1[012])\-([123]0|[012][1-9]|31)$/;
+        return {
+            status: dateRegex.test(value) ? true : false,
+            message: gs.getMessage('The given data was invalid'),
+            errors: gs.getMessage('The {0} is not a valid date.', [gs.getMessage(field)])
+        }
+    },
+
+    url: function(field, value, args) {
+
+    },
+
+    between: function(field, value, args) {
+
+    },
+
+    is_boolean: function(field, value, args) {
+
+    },
+
+    confirmed: function(field, value, args) {
+
+    },
+
+    different: function(field, value, args) {
+
+    },
+
+    digits: function(field, value, args) {
+
+    },
+
+    in_args: function(field, value, args) {
+
+    },
+
+    in_array: function(field, value, args) {
+        return {
+            status: (args.split(',')).indexOf(value) > -1 ? true : false,
+            message: gs.getMessage('The given data was invalid'),
+            errors: gs.getMessage('The value of the {0} field does not exist in {1}', [gs.getMessage(field), args])
+        }
+    },
+
+    integer: function(field, value, args) {
+
+    },
+
+    nullable: function(field, value, args) {
+
+    },
+
+
+
+
+
+    required_if: function(field, value, args) {
+        var parameters = args.split(',');
+        return {
+            status: this.params[parameters[0]] == parameters[1] ? value ? true : false : true,
+            message: gs.getMessage('The given data was invalid'),
+            errors: gs.getMessage('The {0} field is required when {1} is {2}', [gs.getMessage(field), parameters[0], parameters[1]])
+        }
+    },
+
+    required_unless: function(field, value, args) {
+
+    },
+
+    required_with: function(field, value, args) {
+
+    },
+
+    required_with_all: function(field, value, args) {
+
+    },
+
+    required_with_out: function(field, value, args) {
+
+    },
+
+    required_with_out_all: function(field, value, args) {
+
+    },
+
+    same: function(field, value, args) {
+
+    },
+
+    sometimes: function(field, value, args) {
+        return {
+            status: true,
+            message: gs.getMessage('The given data was invalid'),
+            errors: gs.getMessage('The {0} must be a string', [gs.getMessage(field)])
+        };
+    },
+
+    starts_with: function(field, value, args) {
+
+    },
+
+    string: function(field, value, args) {
+        return {
+            status: (typeof value) == 'string' ? true : false,
+            message: gs.getMessage('The given data was invalid'),
+            errors: gs.getMessage('The {0} must be a string', [gs.getMessage(field)])
+        };
+    },
+
+    is_latitude: function(field, value, args) {
+        return {
+            status: (isFinite(value) && Math.abs(value) <= 90) ? true : false,
+            message: gs.getMessage('The given data was invalid'),
+            errors: gs.getMessage('The {0} must be contain a valid value', [gs.getMessage(field)])
+        };
+    },
+
+    is_longitude: function(field, value, args) {
+        return {
+            status: (isFinite(value) && Math.abs(value) <= 180) ? true : false,
+            message: gs.getMessage('The given data was invalid'),
+            errors: gs.getMessage('The {0} must be contain a valid value', [gs.getMessage(field)])
+        };
+
+    },
+
+    unique_record: function(field, value, args) {
+        var parameters = args.split(',');
+        var table = new GlideRecord(parameters[0]);
+        return {
+            status: table.get((parameters[1] || field), value) ? false : true,
+            message: gs.getMessage('The given data was invalid'),
+            errors: gs.getMessage('The {0} has already been taken.', [gs.getMessage(field)])
+        }
+    },
+
+    sys_id: function(field, value, args) {
+
+    },
+
+    uuid: function(field, value, args) {
+
+    },
+
+    is_on_of: function(field, value, args) {
+        return {
+            status: args.includes(value),
+            message: gs.getMessage('The given data was invalid'),
+            errors: gs.getMessage('The selected {0} is invalid', [gs.getMessage(field)])
+        }
+    },
+
+
+    type: 'IPSValidations'
+};]]></script>
+        <sys_class_name>sys_script_include</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2024-08-12 05:01:19</sys_created_on>
+        <sys_id>b79502d8474412102d16d9ce316d4394</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_name>IPSValidations</sys_name>
+        <sys_package display_value="IPS Performance Assessments" source="x_ipsu2_ips_perfor">948629663328c210061636c24d5c7bfc</sys_package>
+        <sys_policy>read</sys_policy>
+        <sys_scope display_value="IPS Performance Assessments">948629663328c210061636c24d5c7bfc</sys_scope>
+        <sys_update_name>sys_script_include_b79502d8474412102d16d9ce316d4394</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2024-08-12 05:17:22</sys_updated_on>
+    </sys_script_include>
+</record_update>

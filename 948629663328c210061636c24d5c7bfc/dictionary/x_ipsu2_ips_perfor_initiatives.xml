@@ -2,13 +2,35 @@
     <element attributes="live_feed=true,update_synch=true" db_object_id="ce7aaa0ac3f9c6101d04d6ff05013162" extends="dl_matcher" label="Initiatives" max_length="40" name="x_ipsu2_ips_perfor_initiatives" type="collection">
         <element label="Collaborator initiative weight" max_length="40" name="collaborator_initiative_weight" type="float"/>
         <element label="Comments" max_length="4000" name="comments" type="journal"/>
+        <element label="Deliverable" max_length="4500" name="deliverable" type="string_full_utf8"/>
         <element label="Goal" max_length="32" name="goal" reference="x_ipsu2_ips_perfor_goal" type="reference"/>
+        <element label="Iniciative" max_length="4500" name="iniciative" type="string_full_utf8"/>
         <element label="Leader initiative weight" max_length="40" name="leader_initiative_weight" type="float"/>
         <element choice="1" label="MY Collaborator evaluation" max_length="40" name="my_collaborator_evaluation" type="choice">
-            <choice/>
+            <choice>
+                <element inactive_on_update="false" label="Se concluyó la iniciativa al 100% de acuerdo con el KPI y fecha definidos" language="es" sequence="100" value="1"/>
+                <element inactive_on_update="false" label="The initiative is completed 100% in accordance with the defined KPI and date" sequence="100" value="1"/>
+                <element inactive_on_update="false" label="Reporta avance en línea con el plan de acuerdo al KPI y fecha definidos. Aún no concluye al" language="es" sequence="200" value="2"/>
+                <element inactive_on_update="false" label="Reports progress in line with the plan according to the defined KPI and date. Not yet completed at" sequence="200" value="2"/>
+                <element inactive_on_update="false" label="Delay in compliance with the initiative, according to the defined KPI and date. Define action plan" sequence="300" value="3"/>
+                <element inactive_on_update="false" label="Retraso en el cumplimiento de la iniciativa, de acuerdo al KPI y fecha definidos. Definir plan" language="es" sequence="300" value="3"/>
+                <element inactive_on_update="false" label="Aún no ha iniciado, o está en stand by, o por decisión de negocio se canceló" language="es" sequence="400" value="4"/>
+                <element inactive_on_update="false" label="It has not started yet, or it is on standby, or due to a business decision it was canceled" sequence="400" value="4"/>
+            </choice>
         </element>
+        <element label="MY Contributor Comment" max_length="4500" name="my_contributor_comment" type="string_full_utf8"/>
+        <element label="MY Leader Comment" max_length="4500" name="my_leader_comment" type="string_full_utf8"/>
         <element choice="1" label="MY Leader evaluation" max_length="40" name="my_leader_evaluation" type="choice">
-            <choice/>
+            <choice>
+                <element inactive_on_update="false" label="Se concluyó la iniciativa al 100% de acuerdo con el KPI y fecha definidos" language="es" sequence="100" value="1"/>
+                <element inactive_on_update="false" label="The initiative is completed 100% in accordance with the defined KPI and date" sequence="100" value="1"/>
+                <element inactive_on_update="false" label="Reporta avance en línea con el plan de acuerdo al KPI y fecha definidos. Aún no concluye al" language="es" sequence="200" value="2"/>
+                <element inactive_on_update="false" label="Reports progress in line with the plan according to the defined KPI and date. Not yet completed at" sequence="200" value="2"/>
+                <element inactive_on_update="false" label="Delay in compliance with the initiative, according to the defined KPI and date. Define action plan" sequence="300" value="3"/>
+                <element inactive_on_update="false" label="Retraso en el cumplimiento de la iniciativa, de acuerdo al KPI y fecha definidos. Definir plan" language="es" sequence="300" value="3"/>
+                <element inactive_on_update="false" label="Aún no ha iniciado, o está en stand by, o por decisión de negocio se canceló" language="es" sequence="400" value="4"/>
+                <element inactive_on_update="false" label="It has not started yet, or it is on standby, or due to a business decision it was canceled" sequence="400" value="4"/>
+            </choice>
         </element>
         <element label="No Iniciative" max_length="40" name="no_iniciative" type="integer"/>
         <element attributes="ignore_filter_on_new=true" default="javascript:global.getNextObjNumberPadded();" label="Number" max_length="40" name="number" type="string"/>
@@ -18,8 +40,12 @@
         <element choice="1" label="State" max_length="40" name="state" type="choice">
             <choice/>
         </element>
+        <element label="Word Start" max_length="40" name="word_start" type="glide_date"/>
+        <element label="Work end" max_length="40" name="work_end" type="glide_date"/>
         <element label="Work Notes" max_length="4000" name="work_notes" type="journal"/>
         <element label="YE Collaborator evaluation" max_length="40" name="ye_collaborator_evaluation" type="float"/>
+        <element label="YE Contributor Comment" max_length="4500" name="ye_contributor_comment" type="string_full_utf8"/>
+        <element label="YE Leader Comment" max_length="4500" name="ye_leader_comment" type="string_full_utf8"/>
         <element label="YE Leader evaluation" max_length="40" name="ye_leader_evaluation" type="float"/>
         <index name="index">
             <element name="goal"/>

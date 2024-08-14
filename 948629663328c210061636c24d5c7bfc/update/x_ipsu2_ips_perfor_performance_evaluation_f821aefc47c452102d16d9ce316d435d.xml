@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="x_ipsu2_ips_perfor_performance_evaluation">
+    <x_ipsu2_ips_perfor_performance_evaluation action="INSERT_OR_UPDATE">
+        <actions_objectives_patch_colaborator/>
+        <actions_objectives_patch_leader/>
+        <active>true</active>
+        <approval/>
+        <approval_history/>
+        <assigned_to/>
+        <clasification_assessment/>
+        <click_on_the_following_link/>
+        <collaborator_averange_evaluation/>
+        <collaborator_settings/>
+        <commnets/>
+        <download_self_assessment/>
+        <due_date/>
+        <is_active>false</is_active>
+        <leader/>
+        <leader_averange_evaluation/>
+        <leader_settings/>
+        <my_colaborator_comments/>
+        <my_evaluation_collaborator/>
+        <my_evaluation_leader/>
+        <my_leader_comments/>
+        <number>EVA00000043</number>
+        <order>100</order>
+        <performance_evaluation/>
+        <show_instructions>false</show_instructions>
+        <show_leader_information>false</show_leader_information>
+        <state/>
+        <sys_class_name>x_ipsu2_ips_perfor_performance_evaluation</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2024-08-13 21:25:38</sys_created_on>
+        <sys_id>f821aefc47c452102d16d9ce316d435d</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package display_value="IPS Performance Assessments" source="x_ipsu2_ips_perfor">948629663328c210061636c24d5c7bfc</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="IPS Performance Assessments">948629663328c210061636c24d5c7bfc</sys_scope>
+        <sys_update_name>x_ipsu2_ips_perfor_performance_evaluation_f821aefc47c452102d16d9ce316d435d</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2024-08-13 21:25:38</sys_updated_on>
+        <work_notes/>
+        <ye_colaborator_comments/>
+        <ye_evaluation_collaborator/>
+        <ye_evaluation_leader/>
+        <ye_leader_comments/>
+    </x_ipsu2_ips_perfor_performance_evaluation>
+</record_update>

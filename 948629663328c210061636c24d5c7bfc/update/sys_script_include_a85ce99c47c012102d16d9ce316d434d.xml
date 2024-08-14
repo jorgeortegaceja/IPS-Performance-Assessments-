@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_script_include">
+    <sys_script_include action="INSERT_OR_UPDATE">
+        <access>package_private</access>
+        <active>true</active>
+        <api_name>x_ipsu2_ips_perfor.IPSInitiativesModel</api_name>
+        <caller_access/>
+        <client_callable>false</client_callable>
+        <description/>
+        <name>IPSInitiativesModel</name>
+        <script><![CDATA[var IPSInitiativesModel = Class.create();
+IPSInitiativesModel.prototype = Object.extendsObject(IPSModelFactory, {
+    table: 'x_ipsu2_ips_perfor_initiatives',
+
+    initiatives: [],
+
+    initialize: function () { },
+
+    /**
+     * this function get all initiative nelons to objective
+     * @param {string} objective_id 
+     * @returns 
+     */
+    getRelation_initiatives: function (objective_id) {
+
+        var initiatives = new GlideRecord(this.table)
+        initiatives.addQuery('goal', objective_id);
+        initiatives.orderBy('no_iniciative');
+        initiatives.query();
+        while (initiatives.next()) {
+            this.initiatives.push(this.getInitiative(initiatives.sys_id))
+        }
+        return this.initiatives;
+    },
+    getInitiative: function (sys_id) {
+        var initiative = new GlideRecord(this.table);
+        initiative.get(sys_id);
+        return initiative;
+    },
+
+
+
+    createOrUpdateObjetive: function (data) {
+        var comments = '';
+        var iniciative = new GlideRecord(this.table);
+        if (!data.sys_id)
+            iniciative.initialize();
+        else {
+            iniciative.get(data.sys_id);
+            if (iniciative.goal.u_performance_evaluation.state != 0) {
+
+                comments = 'Se modifico la Iniciativa   ' + iniciative.u_no_iniciativa +
+                    '\n Era: \n-------------------------------------------------\n' +
+                    'Iniciativa ' + iniciative.u_no_iniciativa + ' : ' + iniciative.short_description + '\n' +
+                    'Entregable: ' + iniciative.description + '\n' +
+                    'Fecha de entrega: ' + fecha + '\n' +
+                    'Peso de la iniciativa: ' + iniciative.u_initiative_weight + '\n'
+            }
+        }
+
+        for (var i in data) {
+            if (i != 'number' || i != 'sys_id')
+                iniciative[i] = data[i];
+        }
+
+
+        if (!data.sys_id)
+            iniciative.insert();
+        else {
+            iniciative.update();
+            if (iniciative.goal.u_performance_evaluation.state != 0) {
+                var evaluation = new GlideRecord('u_aliat_evaluacion_de_desempeno');
+                evaluation.get(iniciative.goal.u_performance_evaluation.sys_id);
+
+                var fecha = iniciative.work_end ? iniciative.work_end.split(' ')[0].split('-').reverse().join('/') : '';
+                evaluation.comments.setJournalEntry(comments + '\nAhora es: \n-------------------------------------------------\n' +
+                    'Iniciativa ' + iniciative.u_no_iniciativa + ' : ' + iniciative.short_description + '\n' +
+                    'Entregable: ' + iniciative.description + '\n' +
+                    'Fecha de entrega: ' + fecha + '\n' +
+                    'Peso de la iniciativa: ' + iniciative.u_initiative_weight + '\n' +
+                    ' \n\n' +
+                    "Fecha de modificación: " + (new GlideDateTime()).getDisplayValue()
+                );
+                evaluation.update();
+            }
+        }
+
+        return {
+            sys_id: iniciative.sys_id,
+            number: iniciative.number,
+            u_no_iniciativa: parseFloat(iniciative.u_no_iniciativa),
+            u_evaluation: iniciative.u_evaluation,
+            u_initiative_weight: parseFloat(iniciative.u_initiative_weight),
+            short_description: iniciative.short_description,
+            description: iniciative.description,
+            work_end: iniciative.work_end,
+            u_work_end_local: iniciative.u_work_end_local,
+            goal: iniciative.goal
+        }
+
+
+    },
+
+
+
+
+    getInitiative: function (sys_id) {
+        var initiative = new GlideRecord(this.table);
+        initiative.get(sys_id);
+        return initiative;
+    },
+
+    getInitiatives: function (sys_id) {
+        var initiatives = [];
+        for (var i = 0; i < this.initiatives.length; i++) {
+            var initiative = this.initiatives[i];
+            if (sys_id == initiative.goal) {
+                initiatives.push({
+                    state: initiative.state + '',
+                    sys_id: initiative.sys_id + '',
+                    number: initiative.number + '',
+                    goal: initiative.goal + '',
+                    no_iniciative: initiative.no_iniciative + '',
+                    collaborator_initiative_weight: initiative.collaborator_initiative_weight + '',
+                    iniciative: initiative.iniciative + '',
+                    deliverable: initiative.deliverable + '',
+                    word_start: (new GlideDateTime(initiative.word_start)).getDisplayValue(),
+                    work_end: initiative.work_end.getDisplayValue(),
+                    my_contributor_comment: initiative.my_contributor_comment + '',
+                    my_collaborator_evaluation: initiative.my_collaborator_evaluation + '',
+                    my_leader_comment: initiative.my_leader_comment + '',
+                    my_leader_evaluation: initiative.my_leader_evaluation + '',
+                    ye_contributor_comment: initiative.ye_contributor_comment + '',
+                    ye_collaborator_evaluation: initiative.ye_collaborator_evaluation + '',
+                    ye_leader_comment: initiative.ye_leader_comment + '',
+                    ye_leader_evaluation: initiative.ye_leader_evaluation + ''
+
+                });
+            }
+        }
+        return initiatives
+    },
+    getInitiativesSum: function (sys_id) {
+        var sum = 0;
+        for (var i = 0; i < this.initiatives.length; i++) {
+            var initiative = this.initiatives[i];
+            if (sys_id == initiative.goal) {
+                sum += parseFloat(initiative.collaborator_initiative_weight);
+            }
+        }
+        return sum;
+
+    },
+    deleteIniciative: function (sys_id) {
+        var initiative = new GlideRecord('u_aliat_iniciativas_jl');
+        initiative.get(sys_id);
+
+        var evaluation = new GlideRecord('u_aliat_evaluacion_de_desempeno');
+        evaluation.get(initiative.goal.u_performance_evaluation);
+
+        var fecha = initiative.work_end ? initiative.work_end.split(' ')[0].split('-').reverse().join('/') : '';
+        evaluation.comments.setJournalEntry('Se elimino la  Iniciativa   ' + initiative.u_no_iniciativa +
+            '\n\n' + ' Iniciativa ' + initiative.u_no_iniciativa + ' : ' + initiative.short_description + '\n' +
+            ' Entregable: ' + initiative.description + '\n' +
+            ' Fecha de entrega: ' + fecha + '\n' +
+            ' Peso de la iniciativa: ' + initiative.u_initiative_weight + '\n' +
+            ' Fecha de eliminación: ' + (new GlideDateTime()).getDisplayValue());
+
+
+
+        var user_data = JSON.parse(evaluation.u_collaborator_settings);
+        for (var i = 0; i < user_data.objetive.initiative.length; i++) {
+            var element = user_data.objetive.initiative[i];
+            if (element.sys_id == sys_id) {
+                user_data.objetive.initiative.splice(i, 1);
+            }
+        }
+
+        evaluation.u_collaborator_settings = JSON.stringify(user_data);
+
+
+
+
+        evaluation.update();
+
+
+        return initiative.deleteRecord();
+    },
+
+    addCommentInitiative: function (data, evaluation_id) {
+        var initiative = new GlideRecord('u_aliat_iniciativas_jl');
+        initiative.get(data.sys_id);
+        initiative.state = -5;
+        initiative.comments.setJournalEntry(data.comments);
+        initiative.update();
+
+        var evaluation = new GlideRecord('u_aliat_evaluacion_de_desempeno');
+        evaluation.get(evaluation_id);
+
+        var fecha = initiative.work_end ? initiative.work_end.split(' ')[0].split('-').reverse().join('/') : '';
+        evaluation.comments.setJournalEntry('Se agrego un comentario para la Iniciativa   ' + initiative.u_no_iniciativa +
+            '\n\n' + 'Iniciativa ' + initiative.u_no_iniciativa + ' : ' + initiative.short_description + '\n' +
+            'Entregable: ' + initiative.description + '\n' +
+            'Fecha de entrega: ' + fecha + '\n' +
+            'Peso de la iniciativa: ' + initiative.u_initiative_weight + '\n' +
+            'Comentario: ' +
+            data.comments);
+        evaluation.update();
+
+        return {
+            sys_id: initiative.sys_id,
+            number: initiative.number,
+            short_description: initiative.short_description,
+            u_no_iniciativa: parseFloat(initiative.u_no_iniciativa),
+            work_end: initiative.work_end,
+            u_initiative_weight: parseFloat(initiative.u_initiative_weight),
+            goal: initiative.goal,
+            state: initiative.state,
+            comments: initiative.comments.getJournalEntry(1),
+            u_my_contributor_comment: initiative.u_my_contributor_comment + 'test ',
+            u_my_contributor_evaluation: initiative.u_my_contributor_evaluation,
+            u_my_leader_comment: initiative.u_my_leader_comment,
+            u_my_leader_evaluation: initiative.u_my_leader_evaluation,
+
+            u_ye_contributor_comment: initiative.u_my_contributor_comment,
+            u_ye_contributor_evaluation: initiative.u_my_contributor_evaluation,
+            u_ye_leader_comment: initiative.u_my_leader_comment,
+            u_ye_leader_evaluation: initiative.u_my_leader_evaluation,
+        }
+    },
+    type: 'IPSInitiativesModel'
+});]]></script>
+        <sys_class_name>sys_script_include</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2024-08-12 03:10:38</sys_created_on>
+        <sys_id>a85ce99c47c012102d16d9ce316d434d</sys_id>
+        <sys_mod_count>57</sys_mod_count>
+        <sys_name>IPSInitiativesModel</sys_name>
+        <sys_package display_value="IPS Performance Assessments" source="x_ipsu2_ips_perfor">948629663328c210061636c24d5c7bfc</sys_package>
+        <sys_policy>read</sys_policy>
+        <sys_scope display_value="IPS Performance Assessments">948629663328c210061636c24d5c7bfc</sys_scope>
+        <sys_update_name>sys_script_include_a85ce99c47c012102d16d9ce316d434d</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2024-08-12 23:48:11</sys_updated_on>
+    </sys_script_include>
+</record_update>

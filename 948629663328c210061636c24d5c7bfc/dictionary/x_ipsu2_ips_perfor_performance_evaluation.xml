@@ -2,6 +2,8 @@
     <element attributes="live_feed=true,update_synch=true" db_object_id="adb17e8ec3f9c6101d04d6ff050131f8" extends="dl_matcher" label="Performance evaluation" max_length="40" name="x_ipsu2_ips_perfor_performance_evaluation" type="collection">
         <element label="Actions/Objectives patch Colaborator" max_length="5000" name="actions_objectives_patch_colaborator" type="string_full_utf8"/>
         <element label="Actions/Objectives patch Leader" max_length="5000" name="actions_objectives_patch_leader" type="string_full_utf8"/>
+        <element label="Approval" max_length="40" name="approval" type="string"/>
+        <element label="Approval history" max_length="4000" name="approval_history" type="journal"/>
         <element label="Assigned to" max_length="32" name="assigned_to" reference="sys_user" type="reference"/>
         <element choice="1" label="Clasification Assessment" max_length="40" name="clasification_assessment" type="choice">
             <choice/>
@@ -34,7 +36,7 @@
         </element>
         <element label="MY Leader comments" max_length="5000" name="my_leader_comments" type="string_full_utf8"/>
         <element attributes="ignore_filter_on_new=true" default="javascript:global.getNextObjNumberPadded();" label="Number" max_length="40" name="number" type="string"/>
-        <element label="Performance evaluation" max_length="5000" name="performance_evaluation" type="string_full_utf8"/>
+        <element display="true" label="Performance evaluation" max_length="5000" name="performance_evaluation" type="string_full_utf8"/>
         <element label="Show instructions" max_length="40" name="show_instructions" type="boolean"/>
         <element label="Show leader information" max_length="40" name="show_leader_information" type="boolean"/>
         <element choice="1" label="State" max_length="40" name="state" type="choice">

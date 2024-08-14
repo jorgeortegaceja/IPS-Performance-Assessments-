@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_script_include">
+    <sys_script_include action="INSERT_OR_UPDATE">
+        <access>package_private</access>
+        <active>true</active>
+        <api_name>x_ipsu2_ips_perfor.IPSValidator</api_name>
+        <caller_access/>
+        <client_callable>false</client_callable>
+        <description/>
+        <name>IPSValidator</name>
+        <script><![CDATA[var IPSValidator = Class.create();
+
+
+IPSValidator.prototype = Object.extendsObject(IPSValidations, {
+
+    validates: null,
+    params: null,
+
+    data: {
+        message: null,
+        errors: {}
+    },
+
+    make: function(params, validates) {
+        this.normalizeValidates(validates);
+        this.normalizeParams(params);
+        this.startValidationProcess();
+        return this.data;
+    },
+
+    status: function() {
+        return this.data.message;
+    },
+
+    startValidationProcess: function() {
+
+        for (var key in this.validates) {
+            var validate = this.validates[key];
+
+            switch (validate.type) {
+                case 'stric':
+                    this.validateStric(validate.field, validate.validations);
+                    break;
+                case 'bail':
+                    this.validateBail(validate.field, validate.validations);
+                    break;
+            }
+
+        }
+    },
+
+    validateStric: function(field, validations) {
+        if (!(validations[0] == 'sometimes' && !this.params[field] && this.params[field] != '')) {
+
+            validations.shift();
+            for (var i = 0; i < validations.length; i++) {
+                var func = this.getFunc(validations[i]);
+                if (this.methods.indexOf(func.name) === -1)
+                    throw new Error('this method "' + func.name + '" is undefined');
+                var response = this[func.name].call(this, field, this.params[field], func.args, validations);
+                if (!response.status) {
+                    this.data.message = response.message;
+                    if (this.data.errors.hasOwnProperty(field)) {
+                        this.data.errors[field].push(response.errors);
+                    } else {
+                        if (response.errors) {
+
+                            this.data.errors[field] = [response.errors];
+                        }
+                    }
+                    i = validations.length;
+                }
+            }
+
+        }
+    },
+
+    validateBail: function(field, validations) {
+        if (!(validations[0] == 'sometimes' && !this.params[field] && this.params[field] != '')) {
+            for (var i = 0; i < validations.length; i++) {
+
+                var func = this.getFunc(validations[i]);
+
+                if (!this.methods.includes(func.name))
+                    throw new Error('this method "' + func.name + '" is undefined');
+
+                var response = this[func.name].call(this, field, this.params[field], func.args);
+
+                if (!response.status) {
+                    this.data.status = response.status;
+                    this.data.message = response.message;
+
+                    if (this.data.errors.hasOwnProperty(field)) {
+                        this.data.errors[field].push(response.errors);
+                    } else {
+                        this.data.errors[field] = [response.errors];
+                    }
+
+
+                }
+            }
+
+        }
+
+    },
+
+    getFunc: function(validation) {
+        return validation.includes(':') ? {
+            name: validation.split(':')[0],
+            args: validation.split(':')[1]
+        } : {
+            name: validation,
+            args: null
+        };
+    },
+
+
+    destroy: function() {
+        this.validates = null;
+        this.params = null;
+        this.data = {
+            success: false,
+            message: null,
+            errors: {}
+        };
+    },
+
+    normalizeParams: function(params) {
+        gs.info(Object.entries(params).length)
+        if (!(typeof params === 'object' && Object.entries(params).length))
+            throw new Error(
+                'the normalizeParams function expects an array'
+            );
+        this.params = params;
+    },
+
+    normalizeValidates: function(validations) {
+        if (typeof validations != 'object' || Array.isArray(validations))
+            throw new Error(
+                'The normalizeValidates function expects an object and instead a ' +
+                (Array.isArray(validations) ? 'array' : typeof validations)
+            );
+
+        var _validations = [];
+
+        for (var validates in validations) {
+            if (!(Array.isArray(validations[validates]) || typeof validations[validates] == 'string')) {
+                throw new Error(
+                    'The function normalizeValidates expects a string or an' +
+                    ' array as the second parameter in validates, instead it was received ' +
+                    typeof validations[validates] + '; field: ' + validates +
+                    '; validation: ' + validations[validates]
+                );
+            }
+
+            if (typeof validations[validates] == 'string') {
+                _validations.push({
+                    'field': validates,
+                    'validations': (validations[validates]).split('|'),
+                    'type': 'bail'
+                });
+            } else {
+                _validations.push({
+                    'field': validates,
+                    'validations': validations[validates],
+                    'type': 'stric'
+                });
+            }
+
+        }
+
+        this.validates = _validations;
+    },
+
+
+    type: 'IPSValidator'
+});]]></script>
+        <sys_class_name>sys_script_include</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2024-08-12 05:00:52</sys_created_on>
+        <sys_id>6e65ce98474412102d16d9ce316d43bd</sys_id>
+        <sys_mod_count>6</sys_mod_count>
+        <sys_name>IPSValidator</sys_name>
+        <sys_package display_value="IPS Performance Assessments" source="x_ipsu2_ips_perfor">948629663328c210061636c24d5c7bfc</sys_package>
+        <sys_policy>read</sys_policy>
+        <sys_scope display_value="IPS Performance Assessments">948629663328c210061636c24d5c7bfc</sys_scope>
+        <sys_update_name>sys_script_include_6e65ce98474412102d16d9ce316d43bd</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2024-08-12 05:16:51</sys_updated_on>
+    </sys_script_include>
+</record_update>
