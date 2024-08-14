@@ -5,7 +5,7 @@
         <active>true</active>
         <advanced>false</advanced>
         <description_field>performance_evaluation</description_field>
-        <info_fields>assigned_to,leader,due_date</info_fields>
+        <info_fields>assigned_to,leader,due_date,approval</info_fields>
         <info_widget/>
         <info_widget_param/>
         <show_description>always</show_description>
@@ -16,7 +16,7 @@
         <sys_domain>global</sys_domain>
         <sys_domain_path>/</sys_domain_path>
         <sys_id>387bade2477902102d16d9ce316d43e3</sys_id>
-        <sys_mod_count>7</sys_mod_count>
+        <sys_mod_count>8</sys_mod_count>
         <sys_name>x_ipsu2_ips_perfor_performance_evaluation</sys_name>
         <sys_overrides/>
         <sys_package display_value="IPS Performance Assessments" source="x_ipsu2_ips_perfor">948629663328c210061636c24d5c7bfc</sys_package>
@@ -24,7 +24,7 @@
         <sys_scope display_value="IPS Performance Assessments">948629663328c210061636c24d5c7bfc</sys_scope>
         <sys_update_name>ticket_configuration_387bade2477902102d16d9ce316d43e3</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2024-04-29 06:40:00</sys_updated_on>
+        <sys_updated_on>2024-08-14 00:56:15</sys_updated_on>
         <table>x_ipsu2_ips_perfor_performance_evaluation</table>
     </ticket_configuration>
 </record_update>
