@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sn_ex_sp_todo_config_detail">
+    <sn_ex_sp_todo_config_detail action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <conditions table="sysapproval_approver">source_table=x_ipsu2_ips_perfor_performance_evaluation^state=requested^EQ<item endquery="false" field="source_table" goto="false" newquery="false" operator="=" or="false" value="x_ipsu2_ips_perfor_performance_evaluation"/>
+            <item display_value="Requested" endquery="false" field="state" goto="false" newquery="false" operator="=" or="false" value="requested"/>
+            <item endquery="true" field="" goto="false" newquery="false" operator="=" or="false" value=""/>
+        </conditions>
+        <description>document_id</description>
+        <field_1>due_date</field_1>
+        <field_2/>
+        <image/>
+        <order>100</order>
+        <source_table>sysapproval_approver</source_table>
+        <sys_class_name>sn_ex_sp_todo_config_detail</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2024-08-14 05:31:19</sys_created_on>
+        <sys_id>b52f100d47cc52102d16d9ce316d4331</sys_id>
+        <sys_mod_count>6</sys_mod_count>
+        <sys_name/>
+        <sys_package display_value="IPS Performance Assessments" source="x_ipsu2_ips_perfor">948629663328c210061636c24d5c7bfc</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="IPS Performance Assessments">948629663328c210061636c24d5c7bfc</sys_scope>
+        <sys_update_name>sn_ex_sp_todo_config_detail_b52f100d47cc52102d16d9ce316d4331</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2024-08-14 21:19:59</sys_updated_on>
+        <table>sysapproval_approver</table>
+        <title>document_id</title>
+        <todo_config display_value="Approvals">f731400d474c52102d16d9ce316d4354</todo_config>
+        <todo_target>document_id</todo_target>
+    </sn_ex_sp_todo_config_detail>
+</record_update>

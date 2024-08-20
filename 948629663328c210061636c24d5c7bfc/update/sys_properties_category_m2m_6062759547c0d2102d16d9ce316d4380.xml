@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_properties_category_m2m">
+    <sys_properties_category_m2m action="INSERT_OR_UPDATE">
+        <category display_value="Performance Evaluation State">bd62759547c0d2102d16d9ce316d43f6</category>
+        <order>1</order>
+        <property display_value="x_ipsu2_ips_perfor.active_period.target_capture" name="x_ipsu2_ips_perfor.active_period.target_capture">26eb6ea7473f02102d16d9ce316d4315</property>
+        <sys_class_name>sys_properties_category_m2m</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2024-08-15 06:12:53</sys_created_on>
+        <sys_id>6062759547c0d2102d16d9ce316d4380</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>x_ipsu2_ips_perfor.active_period.target_capture.Performance Evaluation State</sys_name>
+        <sys_package display_value="IPS Performance Assessments" source="x_ipsu2_ips_perfor">948629663328c210061636c24d5c7bfc</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="IPS Performance Assessments">948629663328c210061636c24d5c7bfc</sys_scope>
+        <sys_update_name>sys_properties_category_m2m_6062759547c0d2102d16d9ce316d4380</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2024-08-15 06:12:53</sys_updated_on>
+    </sys_properties_category_m2m>
+</record_update>

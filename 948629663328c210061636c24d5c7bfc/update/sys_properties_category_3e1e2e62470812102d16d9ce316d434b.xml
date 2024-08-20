@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_properties_category">
+    <sys_properties_category action="INSERT_OR_UPDATE">
+        <name>Year evaluation</name>
+        <sys_class_name>sys_properties_category</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2024-08-19 07:44:20</sys_created_on>
+        <sys_id>3e1e2e62470812102d16d9ce316d434b</sys_id>
+        <sys_mod_count>2</sys_mod_count>
+        <sys_name>Year evaluation</sys_name>
+        <sys_package display_value="IPS Performance Assessments" source="x_ipsu2_ips_perfor">948629663328c210061636c24d5c7bfc</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="IPS Performance Assessments">948629663328c210061636c24d5c7bfc</sys_scope>
+        <sys_update_name>sys_properties_category_3e1e2e62470812102d16d9ce316d434b</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2024-08-19 07:53:17</sys_updated_on>
+        <title><![CDATA[<p><strong><span style="font-size: 16pt;">Year evaluation</span> </strong></p>
+<p><span style="font-size: 12pt;">In this stage, the final progress of the goals and initiatives is graded.</span></p>]]></title>
+    </sys_properties_category>
+    <sys_translated_text action="delete_multiple" query="documentkey=3e1e2e62470812102d16d9ce316d434b"/>
+</record_update>

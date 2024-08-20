@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_properties_category">
+    <sys_properties_category action="INSERT_OR_UPDATE">
+        <name>Performance_Evaluation</name>
+        <sys_class_name>sys_properties_category</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2024-08-15 18:03:11</sys_created_on>
+        <sys_id>98fe339547c8d2102d16d9ce316d4361</sys_id>
+        <sys_mod_count>4</sys_mod_count>
+        <sys_name>Performance_Evaluation</sys_name>
+        <sys_package display_value="IPS Performance Assessments" source="x_ipsu2_ips_perfor">948629663328c210061636c24d5c7bfc</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="IPS Performance Assessments">948629663328c210061636c24d5c7bfc</sys_scope>
+        <sys_update_name>sys_properties_category_98fe339547c8d2102d16d9ce316d4361</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2024-08-15 18:43:28</sys_updated_on>
+        <title><![CDATA[<p> </p>
+<p> </p>
+<p> </p>
+<div style="display: flex; justify-content: start; aling-content: center;">
+<div style="max-width: 80%;">
+<p style="text-align: center;"><strong><span style="font-size: 18pt;">Performance Evaluation</span></strong></p>
+<p><img style="display: block; margin-left: auto; margin-right: auto;" src="/sys_attachment.do?sys_id&#61;9d2fbf5547c8d2102d16d9ce316d439a" width="624" height="403" /></p>
+<p><span style="font-size: 12pt;">Performance evaluation is a system designed by Ipsumtechnology, which allows you to evaluate the performance of collaborators. </span></p>
+<p><span style="font-size: 12pt;">The system is designed to carry out 3 stages.</span></p>
+<ol style="list-style-position: inside;"><li style="font-size: 12pt;"><span style="font-size: 8pt;"><span style="font-size: 12pt;">Goal Capture</span><br /><span style="font-size: 12pt;">2. Mid-year evaluation (MY)</span><br /></span><span style="font-size: 12pt;">3. Year evaluation (YE)</span></li></ol>
+<p><span style="font-size: 12pt;">The evaluation contemplates the capture of 5 goals with 5 initiatives.</span><span style="font-size: 12pt;">100% of the evaluation is distributed on the goals. </span></p>
+<p><span style="font-size: 12pt;">Each goal can contain up to 5 initiatives, and 100% of the percentage that the goal can accumulate is distributed among the initiatives.</span></p>
+<p><span style="font-size: 12pt;">stages:</span></p>
+<p><strong><span style="font-size: 12pt;">Target capture. </span></strong></p>
+<p><span style="font-size: 12pt;">It is a period of time that is activated, where collaborators can capture their goals and initiatives </span></p>
+<p><strong><span style="font-size: 12pt;">Goal approval</span></strong></p>
+<p><span style="font-size: 12pt;">Period in which the leaders of the collaborators review and approve the goals of the collaborators</span></p>
+<p><strong><span style="font-size: 12pt;">Mid-year evaluation </span></strong></p>
+<p><span style="font-size: 12pt;">This evaluation grades progress on goals and initiatives.</span></p>
+<p><strong><span style="font-size: 12pt;">Year evaluation </span></strong></p>
+<p><span style="font-size: 12pt;">In this stage, the final progress of the goals and initiatives is graded.</span></p>
+<hr /></div>
+<div> </div>
+</div>]]></title>
+    </sys_properties_category>
+    <sys_translated_text action="delete_multiple" query="documentkey=98fe339547c8d2102d16d9ce316d4361"/>
+</record_update>

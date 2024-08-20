@@ -1,0 +1,303 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_widget">
+    <sp_widget action="INSERT_OR_UPDATE">
+        <category>custom</category>
+        <client_script><![CDATA[function todosApprovalController($scope, spModal) {
+    /* widget controller */
+    var c = this;
+
+    c.error_message = '';
+    c.accep_objetives = false;
+    c.data.comments = c.data.document.leader_settings.comments || "${In agreement}";
+
+    $scope.onActionClick = function (state, comment) {
+        c.error_message = '';
+
+
+        if (state === 'rejected' && !c.data.comments) {
+
+            c.error_message = '${El campo comentario es requerido cuando regresas los objetivos}'
+            return;
+        }
+
+        if (state === c.data.CONST.REJECT_STATE) {
+            if (c.data.requireRejectionComment && !c.data.useCommentBox) {
+                // Create an input popup
+
+                sendUpdateRequest(state, true, c.data.CONST.ACTION, comment);
+
+            } else
+                sendUpdateRequest(state, true, c.data.CONST.ACTION, c.data.comments);
+        } else if (state === c.data.CONST.APPROVED_STATE)
+            sendUpdateRequest(state, false, c.data.CONST.ACTION, c.data.comments);
+        return false; //prevents the form from submitting when the dialog first loads
+    };
+
+    function sendUpdateRequest(state, reject, action, comment) {
+        $scope.data.state = state;
+        $scope.data.reject = reject;
+        $scope.data.action = action;
+        $scope.data.request = {
+            state: c.data.state,
+            comments: comment
+        };
+        $scope.server.update();
+    }
+}]]></client_script>
+        <controller_as>c</controller_as>
+        <css/>
+        <data_table>sp_instance</data_table>
+        <demo_data/>
+        <description/>
+        <docs/>
+        <field_list/>
+        <has_preview>false</has_preview>
+        <id>ips-to-do-preformance-assessment</id>
+        <internal>false</internal>
+        <link><![CDATA[function link(scope, element, attrs, controller) {
+  
+}]]></link>
+        <name>IPS To do Performance Assessment</name>
+        <option_schema/>
+        <public>false</public>
+        <roles/>
+        <script><![CDATA[(function () {
+    data.CONST = {
+        i18n: {
+            PLACEHOLDER_MESSAGE: gs.getMessage("If you are rejecting the request, provide the reason here."),
+            REJECT_MODAL_TITLE: gs.getMessage("Reject Request"),
+            REJECT_MODAL_MESSAGE: gs.getMessage("Please provide a reason for rejecting the request"),
+            REJECT_MODAL_CANCEL: gs.getMessage("Cancel"),
+            REJECT_MODAL_SUBMIT: gs.getMessage("Reject Request"),
+            OK: gs.getMessage("In agreement")
+        },
+        ACTION: "updateApprovals",
+        REJECT_STATE: "rejected",
+        APPROVED_STATE: "approved",
+        REQUESTED_STATE: "requested",
+        APPROVAL_TABLE: "sysapproval_approver"
+    };
+
+    var approvalGr = null;
+    var commentGr = null;
+    // getPostApprovalInfo();
+
+    if (input && input.action === data.CONST.ACTION) {
+        approvalGr = getTargetRecord(input.approvalId, data.CONST.APPROVAL_TABLE);
+        commentGr = getTargetRecord(input.commentId, input.commentTable);
+        data.isPosted = false;
+        data.requireRejectionComment = checkRejectionCommentRequired(commentGr);
+        data.useCommentBox = input.useCommentBox && data.requireRejectionComment;
+        if (updateApprovalAndComment(input.request) && commentGr)
+            getPostApprovalInfo();
+    } else if (options && options.sysId && options.commentId && options.commentTable) {
+        approvalGr = getTargetRecord(options.sysId, data.CONST.APPROVAL_TABLE);
+        commentGr = getTargetRecord(options.commentId, options.commentTable);
+        data.isPosted = false;
+        data.approvalId = options.sysId;
+        data.commentId = options.commentId;
+        data.commentTable = options.commentTable;
+        data.requireRejectionComment = checkRejectionCommentRequired(commentGr);
+        data.useCommentBox = options.useCommentBox && data.requireRejectionComment;
+        data.document = {
+            number: approvalGr.document_id.number.getDisplayValue(),
+            state_appro: approvalGr.state.getDisplayValue(),
+            evaluation: approvalGr.document_id.performance_evaluation.getDisplayValue(),
+            state_eva: approvalGr.document_id.state.getDisplayValue(),
+            assigned_to: approvalGr.document_id.assigned_to.getDisplayValue(),
+            pdf: approvalGr.document_id.download_self_assessment.getDisplayValue(),
+            link: "/esc?id=ticket&sys_id=" + approvalGr.document_id + "&view=sp&table=x_ipsu2_ips_perfor_performance_evaluation",
+            requested_at: approvalGr.sys_created_on.getDisplayValue(),
+            leader_settings: approvalGr.document_id.leader_settings.getDisplayValue() ? JSON.parse(approvalGr.document_id.leader_settings.getDisplayValue()) : { comments: '' },
+            instructions: gs.getMessage("Download your collaborator's objectives format by clicking on the Download Download performance assessment button. If you agree with your collaborator's objectives, click approve. If you wish to request that the collaborator make any modifications to their objectives or wish to add any modifications, please click on the Review Objectives button."),
+        }
+        if (approvalGr && commentGr && approvalGr.state.toString() !== data.CONST.REQUESTED_STATE)
+            getPostApprovalInfo();
+    }
+
+    /**
+     * Gets the approval record given a sys id
+     * @param {String} sysId The sys_id of the approval record
+     * @param {String} tableName The name of the record's table
+     * @return {GlideRecord} A glide record with the approval
+     */
+    function getTargetRecord(sysId, tableName) {
+        var targetGr = new GlideRecord(tableName);
+        data.shortDescription = "";
+        if (targetGr.get(sysId) && targetGr.canWrite())
+            return targetGr;
+        else {
+            gs.error("Could not find approval record");
+            return null;
+        }
+    }
+
+    /**
+     * Checks user write permissions to determine whether or not a rejection comment
+     * is required from them to update the approval state
+     * @param {GlideRecord} activityStreamGr The record to check if comments can be written
+     * @return {Boolean} True if comment is required, false otherwise
+     */
+    function checkRejectionCommentRequired(activityStreamGr) {
+        if (!activityStreamGr) {
+            gs.error("Could not find Activity Stream record");
+            return false;
+        }
+        return typeof activityStreamGr.comments != 'undefined' && activityStreamGr.comments.canWrite();
+    }
+
+    /**
+     * Updates the state of the approval
+     * @param {Object} request An object describing the update request
+     * @return {Boolean} Returns true on successful update, false otherwise
+     */
+    function updateApprovalAndComment(request) {
+        var evaluationModel = new IPSEvaluationsModel();
+        var send_notifications = JSON.parse(gs.getProperty('x_ipsu2_ips_perfor.ips.status_my_evaluation_notifications'));
+        var today = new GlideDateTime();
+        var start_my = new GlideDateTime(gs.getProperty('x_ipsu2_ips_perfor.ips.evaluation_period.my_start') + ' 00:00:00');
+        var end_my = new GlideDateTime(gs.getProperty('x_ipsu2_ips_perfor.ips.evaluation_period.my_end') + ' 00:00:00');
+        var is_active = false;
+
+        if (send_notifications && today.compareTo(start_my) >= 0 && today.compareTo(end_my) <= 0) {
+            is_active = true;
+        }
+
+        if (request.state === data.CONST.REJECT_STATE) {
+            if (data.requireRejectionComment && data.useCommentBox && !request.comments) {
+                gs.addErrorMessage(gs.getMessage("Provide the reason you are rejecting the request in the comments field."));
+                return false;
+            } else if (request.comments) {
+                commentGr.comments = gs.getMessage('Reason for rejection: {0}', request.comments);
+                commentGr.update();
+            }
+
+            evaluationModel.update({
+                sys_id: commentGr.document_id.sys_id,
+                is_active: is_active,
+                state: 20,
+                work_notes: gs.getMessage("Rejected for: {0}", gs.getUserName()) + '\n\n' + gs.getMessage('Comment: {0}', request.comments)
+            });
+            var displayMessage = gs.getMessage("You rejected this request");
+        } else if (request.state === data.CONST.APPROVED_STATE) {
+            if (request.comments) {
+                commentGr.comments = gs.getMessage('Reason for approval: {0}', request.comments);
+                commentGr.update();
+            }
+
+
+
+
+            evaluationModel.update({
+                sys_id: commentGr.document_id.sys_id,
+                is_active: is_active,
+                state: 40,
+                work_notes: gs.getMessage("Approved for: {0}", gs.getUserName()) + '\n\n' + gs.getMessage('Comment: {0}', request.comments)
+            });
+            var displayMessage = gs.getMessage("You approved this request");
+        } else
+            return false;
+
+        // Set state and update
+        approvalGr.state = request.state;
+        if (approvalGr.update()) {
+            gs.addInfoMessage(displayMessage);
+            return true;
+        } else {
+            gs.addErrorMessage(gs.getMessage("Could not update approval record."));
+            return false;
+        }
+    }
+
+    /**
+     * Sets the last comments and timestamp of the approval to data
+     */
+    function getPostApprovalInfo() {
+        data.isPosted = true;
+        data.caption = gs.getMessage("The request was {0}", approvalGr.state.getDisplayValue());
+        var dateRE = /^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}.*\n/;
+        if (commentGr.comments) {
+            var journalEntryComment = commentGr.comments.getJournalEntry(1);
+            data.comment = journalEntryComment.replace(dateRE, '').toString();
+        }
+        data.timeStamp = approvalGr.sys_updated_on.toString();
+    }
+})();]]></script>
+        <servicenow>false</servicenow>
+        <sys_class_name>sp_widget</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2024-08-14 05:05:58</sys_created_on>
+        <sys_id>d5c9588547cc52102d16d9ce316d4342</sys_id>
+        <sys_mod_count>102</sys_mod_count>
+        <sys_name>IPS To do Performance Assessment</sys_name>
+        <sys_package display_value="IPS Performance Assessments" source="x_ipsu2_ips_perfor">948629663328c210061636c24d5c7bfc</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="IPS Performance Assessments">948629663328c210061636c24d5c7bfc</sys_scope>
+        <sys_update_name>sp_widget_d5c9588547cc52102d16d9ce316d4342</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2024-08-19 02:33:39</sys_updated_on>
+        <template><![CDATA[<div>
+    <div ng-if="!data.isPosted">
+
+
+        <div style="font-size: 1.6rem !important">
+            <strong style="font-size: 1.6rem !important">${Performan Evaluation}</strong>: {{ c.data.document.number }}
+            <br>
+            <strong style="font-size: 1.6rem !important">${Requested For}</strong>: {{ c.data.document.assigned_to }}
+            <br>
+            <strong style="font-size: 1.6rem !important">${State Performan Evaluation}</strong>: {{
+            c.data.document.state_eva }}
+            <br>
+            <strong style="font-size: 1.6rem !important">${State Approve}</strong>: {{ c.data.document.state_appro }}
+            <br>
+            <strong style="font-size: 1.6rem !important">${Requested On}</strong>: {{ c.data.document.requested_at }}
+            <br>
+
+            <p style="font-size: 1.6rem !important">
+
+                <strong style="font-size: 1.6rem !important">${instructions}</strong>: {{ c.data.document.instructions
+                }}
+
+            </p>
+
+            <br>
+            <a style="font-size: 1.6rem !important" class="btn btn-primary" ng-href="{{ c.data.document.link }}">
+                ${Review Objectives} </a>
+            <a style="font-size: 1.6rem !important" class="btn btn-primary" target="_blank"
+                ng-href="{{ c.data.document.pdf }}" href="{{ c.data.document.pdf }}">
+                ${Download performance assessment}</a>
+            <br> <br>
+        </div>
+
+
+        <div class="form-group form-check" id="todo-acceptance-panel-textboxdiv" style="margin-bottom: 1.5rem">
+            <label for="comments">${Do you want to approve/reject the following}: ${performance assessment}? </label>
+            <textarea aria-label="${comments}" class="form-control" aria-label="${comments}" type="text" id="comments"
+                name="comments" ng-model="c.data.comments" placeholder='{{data.CONST.PLACEHOLDER_MESSAGE}}'></textarea>
+            <small style="color: red">{{ c.error_message }} </small>
+        </div>
+        <div class="form-group form-check">
+            <input type="checkbox" class="form-check-input" id="exampleCheck1" ng-model="c.accep_objetives">
+            <label class="form-check-label" for="exampleCheck1">${I confirm that the objectives and initiatives were
+                reviewed}
+            </label>
+        </div>
+
+        <div id="todo-approval-panel-reject" class="approval-buttons btn-toolbar">
+            <button aria-label="${Reject}" class="btn btn-default button-width" name="submit" value=${Submit}
+                ng-click="$event.stopPropagation();onActionClick('rejected')" ng-disabled="!c.accep_objetives">
+                ${Reject}
+            </button>
+            <button aria-label="${Approve}" class="btn btn-primary button-width" name="accept"
+                ng-click="$event.stopPropagation();onActionClick('approved')" type="button"
+                id="hr-acceptance-panel-Acceptance"
+                ng-disabled="!c.accep_objetives || c.data.document.leader_settings.comments">
+                ${Approve}
+            </button>
+        </div>
+    </div>
+    <div ng-if="data.isPosted" class="approval-completion">
+        <task-action caption="{{c.data.caption}}" small_caption="{{data.comment}}" time_stamp="{{data.timeStamp}}" />
+    </div>
+</div>]]></template>
+    </sp_widget>
+</record_update>

@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_angular_provider">
+    <sp_angular_provider action="INSERT_OR_UPDATE">
+        <name>ipsRating</name>
+        <script><![CDATA[function ipsRating() {
+
+    return {
+        restrict: 'E',
+        scope: {
+            averangeEvaluation: '<',
+            type: '<',
+            averangeColaborador: '<',
+        },
+        link: function (scope) {
+            scope.averange = 0;
+            if (scope.type == 1) {
+
+                scope.averangeEvaluationInteger = 0;
+                scope.$watch('averangeColaborador', function (newValue) {
+                    scope.averange = newValue || 0;
+
+                    var porcentaje = parseInt(newValue) || 0;
+                    if (porcentaje < 0) {
+
+                        scope.averangeEvaluationInteger = 0
+                    } else if (porcentaje > 100) {
+                        scope.averangeEvaluationInteger = 100;
+                    }
+                    else {
+                        scope.averangeEvaluationInteger = porcentaje;
+                    }
+                });
+            }
+
+            if (scope.type == 2) {
+
+                scope.averangeEvaluationInteger = 0;
+                scope.$watch('averangeEvaluation', function (newValue) {
+                    scope.averange = newValue || 0;
+                    var porcentaje = parseInt(newValue) || 0;
+                    if (porcentaje < 0) {
+
+                        scope.averangeEvaluationInteger = 0
+                    } else if (porcentaje > 100) {
+                        scope.averangeEvaluationInteger = 100;
+                    }
+                    else {
+                        scope.averangeEvaluationInteger = porcentaje;
+                    }
+                });
+            }
+
+
+
+
+        },
+
+
+
+        templateUrl: 'IPSRating'
+    };
+}]]></script>
+        <sys_class_name>sp_angular_provider</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2024-08-19 09:48:17</sys_created_on>
+        <sys_id>d87a0326478812102d16d9ce316d4390</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>ipsRating</sys_name>
+        <sys_package display_value="IPS Performance Assessments" source="x_ipsu2_ips_perfor">948629663328c210061636c24d5c7bfc</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="IPS Performance Assessments">948629663328c210061636c24d5c7bfc</sys_scope>
+        <sys_update_name>sp_angular_provider_d87a0326478812102d16d9ce316d4390</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2024-08-19 09:48:17</sys_updated_on>
+        <type>directive</type>
+    </sp_angular_provider>
+</record_update>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?><database>
-    <element attributes="live_feed=true,update_synch=true" db_object_id="adb17e8ec3f9c6101d04d6ff050131f8" extends="dl_matcher" label="Performance evaluation" max_length="40" name="x_ipsu2_ips_perfor_performance_evaluation" type="collection">
+    <element attributes="live_feed=true,update_synch=true" audit="true" db_object_id="adb17e8ec3f9c6101d04d6ff050131f8" extends="dl_matcher" label="Performance evaluation" max_length="40" name="x_ipsu2_ips_perfor_performance_evaluation" type="collection">
         <element label="Actions/Objectives patch Colaborator" max_length="5000" name="actions_objectives_patch_colaborator" type="string_full_utf8"/>
         <element label="Actions/Objectives patch Leader" max_length="5000" name="actions_objectives_patch_leader" type="string_full_utf8"/>
         <element label="Approval" max_length="40" name="approval" type="string"/>
@@ -12,7 +12,7 @@
         <element label="Collaborator averange evaluation" max_length="40" name="collaborator_averange_evaluation" type="float"/>
         <element label="Collaborator settings" max_length="5000" name="collaborator_settings" type="string_full_utf8"/>
         <element label="Commnets" max_length="4000" name="commnets" type="journal"/>
-        <element label="Download Self-assessment" max_length="255" name="download_self_assessment" type="string_full_utf8"/>
+        <element label="Download Self-assessment" max_length="255" name="download_self_assessment" read_only="true" type="url"/>
         <element label="Due date" max_length="40" name="due_date" type="glide_date_time"/>
         <element label="Is Active" max_length="40" name="is_active" type="boolean"/>
         <element label="Leader" max_length="32" name="leader" reference="sys_user" type="reference"/>

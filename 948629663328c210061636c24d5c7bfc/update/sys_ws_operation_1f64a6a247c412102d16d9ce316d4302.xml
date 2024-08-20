@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_ws_operation">
+    <sys_ws_operation action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <consumes>application/json,application/xml,text/xml</consumes>
+        <consumes_customized>false</consumes_customized>
+        <default_operation_uri>/api/x_ipsu2_ips_perfor/ips_assessments_evaluation/send-evaluation-my/{sys_id}</default_operation_uri>
+        <enforce_acl>cf9d01d3e73003009d6247e603f6a990</enforce_acl>
+        <http_method>POST</http_method>
+        <name>Send Evaluation MY</name>
+        <operation_script><![CDATA[(function process(/*RESTAPIRequest*/ request, /*RESTAPIResponse*/ response) {
+
+
+    var evaluationModel = new IPSEvaluationsModel();
+
+    var data = {
+        sys_id: request.pathParams.sys_id,
+        my_colaborator_comments: request.body.data.my_colaborator_comments,
+        actions_objectives_patch_colaborator: request.body.data.actions_objectives_patch_colaborator,
+        my_leader_comments: request.body.data.my_leader_comments,
+        actions_objectives_patch_leader: request.body.data.actions_objectives_patch_leader,
+        state: 50
+    };
+
+
+    if (
+        !request.body.data.colaborator
+    ) {
+        var today = new GlideDateTime();
+        var send_notifications = JSON.parse(gs.getProperty('x_ipsu2_ips_perfor.ips.status_ye_evaluation_notifications'));
+        var start_my = new GlideDateTime(gs.getProperty('x_ipsu2_ips_perfor.ips.evaluation_period.ye_start') + ' 00:00:00');
+        var end_my = new GlideDateTime(gs.getProperty('x_ipsu2_ips_perfor.ips.evaluation_period.ye_end') + ' 00:00:00');
+        if (send_notifications && today.compareTo(start_my) >= 0 && today.compareTo(end_my) <= 0) {
+            data.is_active = true;
+        }
+
+        data.state = 60;
+    }
+
+    evaluationModel.update(data);
+
+    return 'okey';
+
+})(request, response);]]></operation_script>
+        <operation_uri>/api/x_ipsu2_ips_perfor/v1/ips_assessments_evaluation/send-evaluation-my/{sys_id}</operation_uri>
+        <produces>application/json,application/xml,text/xml</produces>
+        <produces_customized>false</produces_customized>
+        <relative_path>/send-evaluation-my/{sys_id}</relative_path>
+        <request_example/>
+        <requires_acl_authorization>true</requires_acl_authorization>
+        <requires_authentication>true</requires_authentication>
+        <requires_snc_internal_role>true</requires_snc_internal_role>
+        <short_description/>
+        <sys_class_name>sys_ws_operation</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2024-08-19 07:02:37</sys_created_on>
+        <sys_id>1f64a6a247c412102d16d9ce316d4302</sys_id>
+        <sys_mod_count>7</sys_mod_count>
+        <sys_name>Send Evaluation MY</sys_name>
+        <sys_package display_value="IPS Performance Assessments" source="x_ipsu2_ips_perfor">948629663328c210061636c24d5c7bfc</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="IPS Performance Assessments">948629663328c210061636c24d5c7bfc</sys_scope>
+        <sys_update_name>sys_ws_operation_1f64a6a247c412102d16d9ce316d4302</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2024-08-19 07:59:15</sys_updated_on>
+        <web_service_definition display_value="IPS Assessments Evaluation">7782aaf247f942102d16d9ce316d43e5</web_service_definition>
+        <web_service_version display_value="v1">a9f2ee7247f942102d16d9ce316d43a9</web_service_version>
+    </sys_ws_operation>
+</record_update>

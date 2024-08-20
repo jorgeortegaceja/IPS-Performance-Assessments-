@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_ng_template">
+    <sp_ng_template action="INSERT_OR_UPDATE">
+        <id>modalAprobarRechazar</id>
+        <sp_widget display_value="IPS selft Assesment">6d1e61e6477902102d16d9ce316d434b</sp_widget>
+        <sys_class_name>sp_ng_template</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2024-08-15 02:05:24</sys_created_on>
+        <sys_id>bf1ab8514700d2102d16d9ce316d43b1</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>modalAprobarRechazar</sys_name>
+        <sys_package display_value="IPS Performance Assessments" source="x_ipsu2_ips_perfor">948629663328c210061636c24d5c7bfc</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="IPS Performance Assessments">948629663328c210061636c24d5c7bfc</sys_scope>
+        <sys_update_name>sp_ng_template_bf1ab8514700d2102d16d9ce316d43b1</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2024-08-15 02:05:24</sys_updated_on>
+        <template><![CDATA[<style>
+    .ma-3 {
+        margin: 3rem;
+    }
+
+    .d-flex {
+        display: flex;
+    }
+
+    .justify-center {
+        justify-content: center;
+    }
+
+    .mr-1 {
+        margin-right: 1rem;
+    }
+
+    .mx-1 {
+        margin-right: 1rem;
+        margin-left: 1rem;
+    }
+
+    .invalid-feedback {
+        font-size: 11px;
+        color: #ff0000;
+    }
+</style>
+<div class="ma-3 ">
+    <h2 class="text-center">
+        Aprobar o regresar objetivos al colaborador
+    </h2>
+    <form>
+        <div class="form-group">
+            <label for="comentarios">${Comentarios}</label>
+            <textarea class="form-control" id="comentarios" rows="6" ng-model="c.last_comment"
+                ng-model-options="{ debounce: 300 }"></textarea>
+            <small class="invalid-feedback">{{c.last_comment_error}}</small>
+        </div>
+    </form>
+
+    <div class="d-flex justify-center">
+        <button class="mr-1 btn btn-success" ng-click="c.sendAprobarRechazar('Aprobado')"
+            ng-disabled="c.updates != ''">Aprobar</button>
+
+        <button class="mx-1 btn btn-danger" ng-click="c.sendAprobarRechazar('Regresado los objetivos al colaborador')"
+            ng-disabled="c.last_comment_error">Regresar al colaborador</button>
+
+
+    </div>
+
+    <div ng-if="c.updates != ''" class="text-center">
+        <small class="invalid-feedback">
+            No puedes aprobar los objetivos porque hay modificaciones que el colaborador tendrá que conocer.
+        </small>
+    </div>
+    <hr>
+    <div class="d-flex justify-center">
+        <button class="btn btn-default" ng-click="c.closeAprobarRechazar()">Cerrar</button>
+    </div>
+</div>]]></template>
+    </sp_ng_template>
+</record_update>

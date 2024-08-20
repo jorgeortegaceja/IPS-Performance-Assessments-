@@ -1,0 +1,369 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_ng_template">
+    <sp_ng_template action="INSERT_OR_UPDATE">
+        <id>modalEvaluacionMedioAno</id>
+        <sp_widget display_value="IPS selft Assesment">6d1e61e6477902102d16d9ce316d434b</sp_widget>
+        <sys_class_name>sp_ng_template</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2024-08-19 05:44:18</sys_created_on>
+        <sys_id>1a925a26478412102d16d9ce316d43de</sys_id>
+        <sys_mod_count>20</sys_mod_count>
+        <sys_name>modalEvaluacionMedioAno</sys_name>
+        <sys_package display_value="IPS Performance Assessments" source="x_ipsu2_ips_perfor">948629663328c210061636c24d5c7bfc</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="IPS Performance Assessments">948629663328c210061636c24d5c7bfc</sys_scope>
+        <sys_update_name>sp_ng_template_1a925a26478412102d16d9ce316d43de</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2024-08-19 08:08:17</sys_updated_on>
+        <template><![CDATA[<style>
+    .ma-3 {
+        margin: 3rem;
+    }
+
+    .d-flex {
+        display: flex;
+    }
+
+    .justify-center {
+        justify-content: center;
+    }
+
+    .mr-1 {
+        margin-right: 1rem;
+    }
+
+    .mx-1 {
+        margin-right: 1rem;
+        margin-left: 1rem;
+    }
+
+    .invalid-feedback {
+        font-size: 11px;
+        color: #ff0000;
+    }
+
+    #dropdownMenuButton:disabled {
+        background: #f6f6f8 !important;
+    }
+</style>
+
+<div class="ma-3 " ng-if="c.data.evaluation.user.sys_id == c.data.current_user">
+    <h2 class="text-center">
+        Evaluación de medio año
+    </h2>
+
+
+    <form>
+
+
+
+        <div class=" form-group">
+
+
+
+
+            <br><br>
+
+            <div class="row">
+                <div class="col-sm-12 col-md-5 "><strong>Objetivos / Iniciativas</strong></div>
+                <div class="col-sm-12 col-md-4 "><strong>Entregables</strong></div>
+                <div class="col-sm-12 col-md-3 "><strong>Fecha de Entrega</strong></div>
+            </div>
+            <hr style="margin: 0px 0px;">
+
+            <div class="row">
+                <div class="col-sm-12 col-md-5">
+                    {{ c.formIniciativeMy.initiative.no_iniciative}} -
+                    {{c.formIniciativeMy.initiative.initiative}}
+                </div>
+                <div class="col-sm-12 col-md-4">
+                    {{c.formIniciativeMy.initiative.deliverable}}
+                </div>
+                <div class="col-sm-12 col-md-3">
+                    {{c.formIniciativeMy.initiative.work_end | date:'dd-MM-yyyy' }}
+                </div>
+            </div>
+            <br><br>
+            <label for="caliciacion_medio_a">${Evaluacion MY de iniciativa }</label>
+            <div class="dropdown">
+                <button class="btn-secondary-outlined btn-block dropdown-toggle w-100 text-left" type="button"
+                    id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+                    style=" background: transparent !important; border: .1rem solid #8790A1;">
+                    <span ng-if="c.formIniciativeMy.fields.my_collaborator_evaluation == 1">
+
+                        <span style="color: #7EA639;" class="fa fa-circle"></span>
+                        ${Se concluyó la iniciativa al 100% de acuerdo con el KPI y fecha definidos}
+
+                    </span>
+                    <span ng-if="c.formIniciativeMy.fields.my_collaborator_evaluation == 2">
+
+                        <span style="color: #D6C849;" class="fa fa-circle"></span>
+                        ${Reporta avance en línea con el plan de acuerdo al KPI y fecha definidos. Aún no concluye al
+                        momento de la revisión}
+
+                    </span>
+                    <span ng-if="c.formIniciativeMy.fields.my_collaborator_evaluation == 3">
+
+                        <span style="color: #9F1A31;" class="fa fa-circle"></span>
+                        ${Retraso en el cumplimiento de la iniciativa, de acuerdo al KPI y fecha definidos. Definir plan
+                        de acción para asegurar cumplimiento de iniciativa.}
+
+                    </span>
+                    <span ng-if="c.formIniciativeMy.fields.my_collaborator_evaluation == 4">
+
+                        <span style="color: #7F7F7F;" class="fa fa-circle"></span>
+                        ${Aún no ha iniciado, o está en stand by, o por decisión de negocio se canceló}
+
+                    </span>
+                    <span ng-if="!c.formIniciativeMy.fields.my_collaborator_evaluation">
+                        ${ Selecciona una respuesta }
+                    </span>
+
+                    <div style="position: absolute; right: 5px; top: 2px;">
+                        <i class="fa fa-chevron-down" aria-hidden="true"></i>
+                    </div>
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <button class="btn-block w-100 text-left dropdown-item"
+                        ng-click="c.formIniciativeMy.fields.my_collaborator_evaluation = 1;">
+                        <span style="color: #7EA639;" class="fa fa-circle"></span>
+                        ${Se concluyó la iniciativa al 100% de acuerdo con el KPI y fecha definidos}
+                    </button>
+                    <button class="btn-block w-100 text-left dropdown-item"
+                        ng-click="c.formIniciativeMy.fields.my_collaborator_evaluation = 2;">
+                        <span style="color: #D6C849;" class="fa fa-circle"></span>
+                        ${Reporta avance en línea con el plan de acuerdo al KPI y fecha definidos. Aún no
+                        concluye
+                        al momento de la revisión}
+                    </button>
+                    <button class="btn-block w-100 text-left dropdown-item"
+                        ng-click="c.formIniciativeMy.fields.my_collaborator_evaluation = 3;">
+                        <span style="color: #9F1A31;" class="fa fa-circle"></span>
+                        ${Retraso en el cumplimiento de la iniciativa, de acuerdo al KPI y fecha definidos. Definir plan
+                        de acción para asegurar cumplimiento de iniciativa.}
+                    </button>
+                    <button class="btn-block w-100 text-left dropdown-item"
+                        ng-click="c.formIniciativeMy.fields.my_collaborator_evaluation = 4;">
+                        <span style="color: #7F7F7F;" class="fa fa-circle"></span>
+                        ${Aún no ha iniciado, o está en stand by, o por decisión de negocio se canceló}
+                    </button>
+
+                </div>
+                <small class="invalid-feedback">{{c.formIniciativeMy.errors.my_collaborator_evaluation}}</small>
+            </div>
+
+        </div>
+
+
+        <div class="form-group">
+            <label for="comentarios My">${Comentarios}</label>
+            <textarea class="form-control" id="comentarios My" rows="3" ng-model-options="{ debounce: 300 }"
+                ng-model="c.formIniciativeMy.fields.my_contributor_comment"></textarea>
+            <small class="invalid-feedback">{{c.formIniciativeMy.errors.my_contributor_comment}}</small>
+        </div>
+
+
+
+    </form>
+
+    <div class="d-flex justify-center">
+        <button class="btn btn-default" ng-click="c.closeEvaluacionMy()">Cerrar</button>
+
+        <button class="mr-1 btn btn-success" ng-click="c.saveEvaluacionMy()"
+            ng-disabled="c.formIniciativeMy.state">Guardar</button>
+
+
+
+    </div>
+
+
+
+</div>
+
+
+<div class="ma-3 " ng-if="c.data.evaluation.lead.sys_id == c.data.current_user">
+    <h2 class="text-center">
+        Evaluación de medio año
+    </h2>
+    <form>
+
+
+
+        <div class=" form-group">
+            <br><br>
+
+            <div class="row">
+                <div class="col-sm-12 col-md-5 "><strong>Objetivos / Iniciativas</strong></div>
+                <div class="col-sm-12 col-md-4 "><strong>Entregables</strong></div>
+                <div class="col-sm-12 col-md-3 "><strong>Fecha de Entrega</strong></div>
+            </div>
+            <hr style="margin: 0px 0px;">
+            <div class="row">
+                <div class="col-sm-12 col-md-5">
+                    {{ c.formIniciativeMy.initiative.no_iniciative}} -
+                    {{c.formIniciativeMy.initiative.iniciative}}
+                </div>
+                <div class="col-sm-12 col-md-4">
+                    {{c.formIniciativeMy.initiative.deliverable}}
+                </div>
+                <div class="col-sm-12 col-md-3">
+                    {{c.formIniciativeMy.initiative.work_end | date:'dd-MM-yyyy' }}
+                </div>
+            </div>
+            <br><br>
+
+            <h3>Autoevaluación del colaborador</h3>
+            <label for="caliciacion_medio_a">${Autoevaluacion de colaborador }</label>
+
+            <div class="dropdown">
+                <button disabled class="btn-secondary-outlined btn-block dropdown-toggle w-100 text-left" type="button"
+                    id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+                    style=" background: transparent; border: .1rem solid #8790A1;">
+                    <span ng-if="c.formIniciativeMy.fields.my_collaborator_evaluation == 1">
+
+                        <span style="color: #7EA639;" class="fa fa-circle"></span>
+                        ${Se concluyó la iniciativa al 100% de acuerdo con el KPI y fecha definidos}
+
+                    </span>
+                    <span ng-if="c.formIniciativeMy.fields.my_collaborator_evaluation == 2">
+
+                        <span style="color: #D6C849;" class="fa fa-circle"></span>
+                        ${Reporta avance en línea con el plan de acuerdo al KPI y fecha definidos. Aún no concluye al
+                        momento de la revisión}
+
+                    </span>
+                    <span ng-if="c.formIniciativeMy.fields.my_collaborator_evaluation == 3">
+
+                        <span style="color: #9F1A31;" class="fa fa-circle"></span>
+                        ${Retraso en el cumplimiento de la iniciativa, de acuerdo al KPI y fecha definidos. Definir plan
+                        de acción para asegurar cumplimiento de iniciativa.}
+
+                    </span>
+                    <span ng-if="c.formIniciativeMy.fields.my_collaborator_evaluation == 4">
+
+                        <span style="color: #7F7F7F;" class="fa fa-circle"></span>
+                        ${Aún no ha iniciado, o está en stand by, o por decisión de negocio se canceló}
+
+                    </span>
+
+                    <span ng-if="!c.formIniciativeMy.fields.my_collaborator_evaluation">
+                        ${ Selecciona una respuesta }
+                    </span>
+
+                    <div style="position: absolute; right: 5px; top: 2px;">
+                        <i class="fa fa-chevron-down" aria-hidden="true"></i>
+                    </div>
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <div class="form-group">
+            <label for="comentarios My">${Comentarios de autoevaluación}</label>
+            <textarea disabled class="form-control" id="comentarios My" rows="3" ng-model-options="{ debounce: 300 }"
+                ng-model="c.formIniciativeMy.fields.my_contributor_comment"></textarea>
+        </div>
+
+
+        <hr>
+        <h3>Evaluación de medio año (Lider)</h3>
+        <div class=" form-group">
+
+            <label for="caliciacion_medio_a">${Evaluacion MY }</label>
+
+            <div class="dropdown">
+                <button class="btn-secondary-outlined btn-block dropdown-toggle w-100 text-left" type="button"
+                    id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+                    style=" background: transparent !important; border: .1rem solid #8790A1;">
+                    <span ng-if="c.formIniciativeMy.fields.my_leader_evaluation == 1">
+
+                        <span style="color: #7EA639;" class="fa fa-circle"></span>
+                        ${Se concluyó la iniciativa al 100% de acuerdo con el KPI y fecha definidos}
+
+                    </span>
+                    <span ng-if="c.formIniciativeMy.fields.my_leader_evaluation == 2">
+
+                        <span style="color: #D6C849;" class="fa fa-circle"></span>
+                        ${Reporta avance en línea con el plan de acuerdo al KPI y fecha definidos. Aún no concluye al
+                        momento de la revisión}
+
+                    </span>
+                    <span ng-if="c.formIniciativeMy.fields.my_leader_evaluation == 3">
+
+                        <span style="color: #9F1A31;" class="fa fa-circle"></span>
+                        ${Retraso en el cumplimiento de la iniciativa, de acuerdo al KPI y fecha definidos. Definir plan
+                        de acción para asegurar cumplimiento de iniciativa.}
+
+                    </span>
+                    <span ng-if="c.formIniciativeMy.fields.my_leader_evaluation == 4">
+
+                        <span style="color: #7F7F7F;" class="fa fa-circle"></span>
+                        ${Aún no ha iniciado, o está en stand by, o por decisión de negocio se canceló}
+
+                    </span>
+
+                    <span ng-if="!c.formIniciativeMy.fields.my_leader_evaluation">
+                        ${ Selecciona una respuesta }
+                    </span>
+
+                    <div style="position: absolute; right: 5px; top: 2px;">
+                        <i class="fa fa-chevron-down" aria-hidden="true"></i>
+                    </div>
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <button class="btn-block w-100 text-left dropdown-item"
+                        ng-click="c.formIniciativeMy.fields.my_leader_evaluation = 1;">
+                        <span style="color: #7EA639;" class="fa fa-circle"></span>
+                        ${Se concluyó la iniciativa al 100% de acuerdo con el KPI y fecha definidos}
+                    </button>
+                    <button class="btn-block w-100 text-left dropdown-item"
+                        ng-click="c.formIniciativeMy.fields.my_leader_evaluation = 2;">
+                        <span style="color: #D6C849;" class="fa fa-circle"></span>
+                        ${Reporta avance en línea con el plan de acuerdo al KPI y fecha definidos. Aún no
+                        concluye
+                        al momento de la revisión}
+                    </button>
+                    <button class="btn-block w-100 text-left dropdown-item"
+                        ng-click="c.formIniciativeMy.fields.my_leader_evaluation = 3;">
+                        <span style="color: #9F1A31;" class="fa fa-circle"></span>
+                        ${Retraso en el cumplimiento de la iniciativa, de acuerdo al KPI y fecha definidos. Definir plan
+                        de acción para asegurar cumplimiento de iniciativa.}
+                    </button>
+                    <button class="btn-block w-100 text-left dropdown-item"
+                        ng-click="c.formIniciativeMy.fields.my_leader_evaluation = 4;">
+                        <span style="color: #7F7F7F;" class="fa fa-circle"></span>
+                        ${Aún no ha iniciado, o está en stand by, o por decisión de negocio se canceló}
+                    </button>
+
+                </div>
+                <small class="invalid-feedback">{{c.formIniciativeMy.errors.my_leader_evaluation}}</small>
+            </div>
+
+        </div>
+
+
+        <div class="form-group">
+            <label for="comentarios My">${Comentarios de autoevaluación}</label>
+            <textarea class="form-control" id="comentarios My" rows="3" ng-model-options="{ debounce: 300 }"
+                ng-model="c.formIniciativeMy.fields.my_leader_comment"></textarea>
+            <small class="invalid-feedback">{{c.formIniciativeMy.errors.my_leader_comment}}</small>
+        </div>
+
+    </form>
+
+    <div class="d-flex justify-center">
+        <button class="btn btn-default" ng-click="c.closeEvaluacionMy()">Cerrar</button>
+
+        <button class="mr-1 btn btn-success" ng-click="c.saveEvaluacionMy()"
+            ng-disabled="c.formIniciativeMy.state">Guardar</button>
+
+
+
+    </div>
+
+
+
+</div>]]></template>
+    </sp_ng_template>
+</record_update>

@@ -13,11 +13,10 @@
 
     return evaluationModel.update({
         sys_id: request.pathParams.sys_id,
-        u_motivo_de_rechazo: '',
-        u_manager_settings: '',
+        leader_settings: JSON.stringify({ comments: '' }),
+        collaborator_settings: JSON.stringify({ reject_reason: '' }),
         state: 30
     });
-
 
 })(request, response);]]></operation_script>
         <operation_uri>/api/x_ipsu2_ips_perfor/v1/ips_assessments_evaluation/send-evaluation/{sys_id}</operation_uri>
@@ -33,14 +32,14 @@
         <sys_created_by>admin</sys_created_by>
         <sys_created_on>2024-08-13 23:17:37</sys_created_on>
         <sys_id>ae0a037c474852102d16d9ce316d43c7</sys_id>
-        <sys_mod_count>2</sys_mod_count>
+        <sys_mod_count>7</sys_mod_count>
         <sys_name>Send Evaluation</sys_name>
         <sys_package display_value="IPS Performance Assessments" source="x_ipsu2_ips_perfor">948629663328c210061636c24d5c7bfc</sys_package>
         <sys_policy/>
         <sys_scope display_value="IPS Performance Assessments">948629663328c210061636c24d5c7bfc</sys_scope>
         <sys_update_name>sys_ws_operation_ae0a037c474852102d16d9ce316d43c7</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2024-08-13 23:42:57</sys_updated_on>
+        <sys_updated_on>2024-08-19 02:47:44</sys_updated_on>
         <web_service_definition display_value="IPS Assessments Evaluation">7782aaf247f942102d16d9ce316d43e5</web_service_definition>
         <web_service_version display_value="v1">a9f2ee7247f942102d16d9ce316d43a9</web_service_version>
     </sys_ws_operation>

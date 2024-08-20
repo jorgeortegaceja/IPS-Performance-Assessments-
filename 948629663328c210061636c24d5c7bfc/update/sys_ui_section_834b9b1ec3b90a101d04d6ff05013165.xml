@@ -3,70 +3,42 @@
         <sys_ui_element action="INSERT_OR_UPDATE">
             <element>ye_colaborator_comments</element>
             <position>0</position>
-            <sys_created_by>jorge.ortega</sys_created_by>
-            <sys_created_on>2024-04-28 20:02:04</sys_created_on>
-            <sys_id>fb4b9b1ec3b90a101d04d6ff050131f2</sys_id>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2024-08-20 03:39:55</sys_created_on>
+            <sys_id>58cffaf6470852102d16d9ce316d437b</sys_id>
             <sys_mod_count>0</sys_mod_count>
             <sys_ui_formatter/>
             <sys_ui_section caption="Year Evaluation" display_value="Year Evaluation" name="x_ipsu2_ips_perfor_performance_evaluation" sys_domain="b3b234dd0fe6ee006dc98fbce1050e6e" view="Default view">834b9b1ec3b90a101d04d6ff05013165</sys_ui_section>
-            <sys_updated_by>jorge.ortega</sys_updated_by>
-            <sys_updated_on>2024-04-28 20:02:04</sys_updated_on>
-            <sys_user/>
-            <type/>
-        </sys_ui_element>
-        <sys_ui_element action="INSERT_OR_UPDATE">
-            <element>ye_evaluation_leader</element>
-            <position>1</position>
-            <sys_created_by>jorge.ortega</sys_created_by>
-            <sys_created_on>2024-04-28 20:02:04</sys_created_on>
-            <sys_id>ff4b9b1ec3b90a101d04d6ff050131f2</sys_id>
-            <sys_mod_count>0</sys_mod_count>
-            <sys_ui_formatter/>
-            <sys_ui_section caption="Year Evaluation" display_value="Year Evaluation" name="x_ipsu2_ips_perfor_performance_evaluation" sys_domain="b3b234dd0fe6ee006dc98fbce1050e6e" view="Default view">834b9b1ec3b90a101d04d6ff05013165</sys_ui_section>
-            <sys_updated_by>jorge.ortega</sys_updated_by>
-            <sys_updated_on>2024-04-28 20:02:04</sys_updated_on>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2024-08-20 03:39:55</sys_updated_on>
             <sys_user/>
             <type/>
         </sys_ui_element>
         <sys_ui_element action="INSERT_OR_UPDATE">
             <element>.split</element>
-            <position>2</position>
-            <sys_created_by>jorge.ortega</sys_created_by>
-            <sys_created_on>2024-04-28 20:02:04</sys_created_on>
-            <sys_id>f34b9b1ec3b90a101d04d6ff050131f3</sys_id>
+            <position>1</position>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2024-08-20 03:39:55</sys_created_on>
+            <sys_id>5ccffaf6470852102d16d9ce316d437b</sys_id>
             <sys_mod_count>0</sys_mod_count>
             <sys_ui_formatter/>
             <sys_ui_section caption="Year Evaluation" display_value="Year Evaluation" name="x_ipsu2_ips_perfor_performance_evaluation" sys_domain="b3b234dd0fe6ee006dc98fbce1050e6e" view="Default view">834b9b1ec3b90a101d04d6ff05013165</sys_ui_section>
-            <sys_updated_by>jorge.ortega</sys_updated_by>
-            <sys_updated_on>2024-04-28 20:02:04</sys_updated_on>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2024-08-20 03:39:55</sys_updated_on>
             <sys_user/>
             <type>.split</type>
         </sys_ui_element>
         <sys_ui_element action="INSERT_OR_UPDATE">
-            <element>ye_evaluation_collaborator</element>
-            <position>3</position>
-            <sys_created_by>jorge.ortega</sys_created_by>
-            <sys_created_on>2024-04-28 20:02:04</sys_created_on>
-            <sys_id>f74b9b1ec3b90a101d04d6ff050131f3</sys_id>
-            <sys_mod_count>0</sys_mod_count>
-            <sys_ui_formatter/>
-            <sys_ui_section caption="Year Evaluation" display_value="Year Evaluation" name="x_ipsu2_ips_perfor_performance_evaluation" sys_domain="b3b234dd0fe6ee006dc98fbce1050e6e" view="Default view">834b9b1ec3b90a101d04d6ff05013165</sys_ui_section>
-            <sys_updated_by>jorge.ortega</sys_updated_by>
-            <sys_updated_on>2024-04-28 20:02:04</sys_updated_on>
-            <sys_user/>
-            <type/>
-        </sys_ui_element>
-        <sys_ui_element action="INSERT_OR_UPDATE">
             <element>ye_leader_comments</element>
-            <position>4</position>
-            <sys_created_by>jorge.ortega</sys_created_by>
-            <sys_created_on>2024-04-28 20:02:04</sys_created_on>
-            <sys_id>fb4b9b1ec3b90a101d04d6ff050131f3</sys_id>
+            <position>2</position>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2024-08-20 03:39:55</sys_created_on>
+            <sys_id>50cffaf6470852102d16d9ce316d437c</sys_id>
             <sys_mod_count>0</sys_mod_count>
             <sys_ui_formatter/>
             <sys_ui_section caption="Year Evaluation" display_value="Year Evaluation" name="x_ipsu2_ips_perfor_performance_evaluation" sys_domain="b3b234dd0fe6ee006dc98fbce1050e6e" view="Default view">834b9b1ec3b90a101d04d6ff05013165</sys_ui_section>
-            <sys_updated_by>jorge.ortega</sys_updated_by>
-            <sys_updated_on>2024-04-28 20:02:04</sys_updated_on>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2024-08-20 03:39:55</sys_updated_on>
             <sys_user/>
             <type/>
         </sys_ui_element>

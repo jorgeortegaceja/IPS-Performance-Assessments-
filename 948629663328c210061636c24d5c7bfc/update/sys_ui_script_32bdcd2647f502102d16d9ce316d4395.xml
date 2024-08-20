@@ -11,15 +11,11 @@
     var $elementoParaConvertir = document.body;
 
     html2pdf().set({
-            margin: 0.2,
+            margin: [.2, -.422, 1, 0],
             filename: 'documento.pdf',
-            image: {
-                type: 'jpeg',
-                quality: 1
-            },
-            html2canvas: {
-                scale: 2, // A mayor escala, mejores gráficos, pero más peso
-                letterRendering: true,
+            enableLinks: true,
+            pagebreak: {
+                mode: ['avoid-all', 'css', 'legacy']
             },
             jsPDF: {
                 unit: "in",
@@ -37,14 +33,14 @@
         <sys_created_by>admin</sys_created_by>
         <sys_created_on>2024-04-29 04:22:37</sys_created_on>
         <sys_id>32bdcd2647f502102d16d9ce316d4395</sys_id>
-        <sys_mod_count>1</sys_mod_count>
+        <sys_mod_count>32</sys_mod_count>
         <sys_name>x_ipsu2_ips_perfor.dowload_pdf.js</sys_name>
         <sys_package display_value="IPS Performance Assessments" source="x_ipsu2_ips_perfor">948629663328c210061636c24d5c7bfc</sys_package>
         <sys_policy/>
         <sys_scope display_value="IPS Performance Assessments">948629663328c210061636c24d5c7bfc</sys_scope>
         <sys_update_name>sys_ui_script_32bdcd2647f502102d16d9ce316d4395</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2024-04-29 04:22:45</sys_updated_on>
+        <sys_updated_on>2024-08-20 02:35:52</sys_updated_on>
         <ui_type>10</ui_type>
         <use_scoped_format>false</use_scoped_format>
     </sys_ui_script>

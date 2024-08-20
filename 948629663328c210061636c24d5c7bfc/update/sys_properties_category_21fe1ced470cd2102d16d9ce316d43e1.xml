@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_properties_category">
+    <sys_properties_category action="INSERT_OR_UPDATE">
+        <name>Mid-year evaluation</name>
+        <sys_class_name>sys_properties_category</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2024-08-15 18:44:59</sys_created_on>
+        <sys_id>21fe1ced470cd2102d16d9ce316d43e1</sys_id>
+        <sys_mod_count>3</sys_mod_count>
+        <sys_name>Mid-year evaluation</sys_name>
+        <sys_package display_value="IPS Performance Assessments" source="x_ipsu2_ips_perfor">948629663328c210061636c24d5c7bfc</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="IPS Performance Assessments">948629663328c210061636c24d5c7bfc</sys_scope>
+        <sys_update_name>sys_properties_category_21fe1ced470cd2102d16d9ce316d43e1</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2024-08-19 07:51:30</sys_updated_on>
+        <title><![CDATA[<p><span style="font-size: 16pt;"><strong>Mid-year evaluation </strong></span></p>
+<p><span style="font-size: 12pt;">This evaluation grades progress on goals and initiatives.</span></p>]]></title>
+    </sys_properties_category>
+    <sys_translated_text action="delete_multiple" query="documentkey=21fe1ced470cd2102d16d9ce316d43e1"/>
+</record_update>

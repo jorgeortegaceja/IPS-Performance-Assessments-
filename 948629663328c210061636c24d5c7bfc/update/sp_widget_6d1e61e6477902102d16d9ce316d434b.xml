@@ -8,6 +8,661 @@
 
 
 
+  /**
+    * Evaluacion anual
+    * 
+    */
+
+
+  c.sendEvaluacionYE = function () {
+    c.modalSendEvaluacionYe = $uibModal.open({
+      templateUrl: 'modalSendEvaluacionAnual',
+      scope: $scope,
+      backdrop: 'static',
+      size: 'md'
+    });
+  }
+
+
+
+
+  $scope.$watch('c.data.evaluation.ye_colaborator_comments', async function (newValue) {
+    c.data.evaluation.ye_colaborator_comments_error = await ipsValidator.validate(newValue, 'comentario', ['required', 'required', 'min:3']);
+  })
+
+  $scope.$watch('c.data.evaluation.ye_leader_comments', async function (newValue) {
+    c.data.evaluation.ye_leader_comments_error = await ipsValidator.validate(newValue, 'comentario', ['required', 'required', 'min:3']);
+  })
+
+  c.closeModalSendEvaluacionYe = function () {
+    c.modalSendEvaluacionYe.dismiss();
+  }
+
+
+  c.saveEvaluationYe = async function (collaborator) {
+
+
+    if (collaborator) {
+
+      c.data.evaluation.ye_colaborator_comments_error = await ipsValidator.validate(
+        c.data.evaluation.ye_colaborator_comments, 'comentario', ['required', 'required', 'min:3']);
+
+      if (c.data.evaluation.ye_colaborator_comments_error) {
+        $scope.$apply();
+        return;
+      }
+    }
+
+
+    if (!collaborator) {
+      c.data.evaluation.ye_leader_comments_error = await ipsValidator.validate(
+        c.data.evaluation.ye_leader_comments, 'comentario', ['required', 'required', 'min:3']);
+
+      if (c.data.evaluation.ye_leader_comments_error) {
+        $scope.$apply();
+        return;
+      }
+    }
+
+    alert();
+    var res = await $http({
+      url: '/api/x_ipsu2_ips_perfor/v1/ips_assessments_evaluation/send-evaluation-ye/' + c.data.evaluation_id,
+      method: 'POST',
+      data: {
+        collaborator: collaborator,
+        ye_colaborator_comments: c.data.evaluation.ye_colaborator_comments,
+        ye_leader_comments: c.data.evaluation.ye_leader_comments
+      },
+      headers: {
+        "Content-Type": "application/json"
+      }
+    });
+
+
+    spModal.open({
+      title: 'Se envio la evaluación con éxito',
+      message: 'Se envio la evaluación con éxito',
+      buttons: [
+        { label: '${Cerrar}', cancel: true },
+
+      ]
+    });
+
+
+    await c.init();
+    c.closeModalSendEvaluacionYe();
+
+
+
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  // u_ye_colaborator_comments
+  // u_ye_thecnical_leader_comments
+
+  $scope.$watch('c.formIniciativeYe.fields.ye_collaborator_evaluation', async function (newValue) {
+
+    c.formIniciativeYe.errors.ye_collaborator_evaluation = '';
+    c.formIniciativeYe.errors.ye_collaborator_evaluation = await ipsValidator.validate(
+      newValue,
+      'evaluación',
+      c.formIniciativeYe.validations.ye_collaborator_evaluation
+    );
+
+    $scope.$apply();
+  });
+
+  $scope.$watch('c.formIniciativeYe.fields.ye_contributor_comment', async function (newValue) {
+    c.formIniciativeYe.errors.ye_contributor_comment = '';
+    c.formIniciativeYe.errors.ye_contributor_comment = await ipsValidator.validate(
+      newValue,
+      'evaluación',
+      c.formIniciativeYe.validations.ye_contributor_comment
+    );
+    $scope.$apply();
+  });
+
+  $scope.$watch('c.formIniciativeYe.fields.ye_leader_evaluation', async function (newValue) {
+    c.formIniciativeYe.errors.ye_leader_evaluation = '';
+    c.formIniciativeYe.errors.ye_leader_evaluation = await ipsValidator.validate(
+      newValue,
+      'evaluación',
+      c.formIniciativeYe.validations.ye_leader_evaluation
+    );
+
+
+  });
+
+  $scope.$watch('c.formIniciativeYe.fields.ye_leader_comment', async function (newValue) {
+    c.formIniciativeYe.errors.ye_leader_comment = '';
+    c.formIniciativeYe.errors.ye_leader_comment = await ipsValidator.validate(
+      newValue,
+      'evaluación',
+      c.formIniciativeYe.validations.ye_leader_comment
+    );
+
+
+  });
+
+
+  c.evaluarYE = function (iniciativa) {
+
+    c.formIniciativeYe = {
+      fields: {
+        iniciativa_id: iniciativa.sys_id,
+        ye_collaborator_evaluation: iniciativa.ye_collaborator_evaluation,
+        ye_contributor_comment: iniciativa.ye_contributor_comment,
+        ye_leader_evaluation: iniciativa.ye_leader_evaluation,
+        ye_leader_comment: iniciativa.ye_leader_comment,
+      },
+      validations: {
+        ye_collaborator_evaluation: ['required', 'required', 'is_number'],
+        ye_contributor_comment: ['required', 'required', 'string', 'min:3'],
+        ye_leader_evaluation: ['required', 'required', 'is_number'],
+        ye_leader_comment: ['required', 'required', 'string', 'min:3'],
+      },
+      iniciativa: iniciativa,
+      errors: {
+
+      },
+      state: false
+    };
+
+    c.modalEvaluacioYe = $uibModal.open({
+      templateUrl: 'modalEvaluacionAno',
+      scope: $scope,
+      backdrop: 'static',
+      size: 'md'
+    });
+  }
+
+  c.closeEvaluacionYe = function () {
+    c.modalEvaluacioYe.dismiss();
+  }
+
+  c.saveEvaluacionYe = async function (colaborator) {
+
+    if (colaborator) {
+      c.formIniciativeYe.errors.ye_collaborator_evaluation = await ipsValidator.validate(
+        c.formIniciativeYe.fields.ye_collaborator_evaluation,
+        'evaluación',
+        c.formIniciativeYe.validations.ye_collaborator_evaluation
+      );
+      c.formIniciativeYe.errors.ye_contributor_comment = await ipsValidator.validate(
+        c.formIniciativeYe.fields.ye_contributor_comment,
+        'evaluación',
+        c.formIniciativeYe.validations.ye_contributor_comment
+      );
+    }
+
+    if (c.formIniciativeYe.errors.ye_collaborator_evaluation || c.formIniciativeYe.errors.ye_contributor_comment) {
+
+      $scope.$apply();
+      return;
+    }
+
+
+    if (!colaborator) {
+      c.formIniciativeYe.errors.ye_leader_evaluation = await ipsValidator.validate(
+        c.formIniciativeYe.fields.ye_leader_evaluation,
+        'evaluación',
+        c.formIniciativeYe.validations.ye_leader_evaluation
+      );
+      c.formIniciativeYe.errors.ye_leader_comment = await ipsValidator.validate(
+        c.formIniciativeYe.fields.ye_leader_comment,
+        'evaluación',
+        c.formIniciativeYe.validations.ye_leader_comment
+      );
+
+      if (c.formIniciativeYe.errors.ye_leader_evaluation || c.formIniciativeYe.errors.ye_leader_comment) {
+
+        $scope.$apply();
+        return;
+      }
+    }
+
+
+    if (c.formIniciativeYe.state) return;
+
+    var res = await $http({
+      url: '/api/x_ipsu2_ips_perfor/v1/ips_assessments_evaluation/save-ye-iniciative/' + c.formIniciativeYe.fields.iniciativa_id,
+      method: 'POST',
+      data: {
+        ye_contributor_comment: c.formIniciativeYe.fields.ye_contributor_comment,
+        ye_collaborator_evaluation: c.formIniciativeYe.fields.ye_collaborator_evaluation,
+        ye_leader_comment: c.formIniciativeYe.fields.ye_leader_comment,
+        ye_leader_evaluation: c.formIniciativeYe.fields.ye_leader_evaluation
+      },
+      headers: {
+        "Content-Type": "application/json"
+      }
+    });
+
+
+
+
+    // falta pop up de exito
+
+    await c.init();
+    c.closeEvaluacionYe();
+
+  }
+
+
+
+
+
+
+
+  /**
+    * Evaluacion anual
+    * 
+    */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  /**
+   * Evaluacion medio año
+   * 
+   */
+
+
+
+
+  $scope.$watch('c.data.evaluation.my_colaborator_comments', async function (newValue) {
+    c.data.evaluation.my_colaborator_comments_error = await ipsValidator.validate(newValue, 'comentario', ['required', 'required', 'min:3']);
+    return $scope.$apply();
+  })
+  $scope.$watch('c.data.evaluation.actions_objectives_patch_colaborator', async function (newValue) {
+    c.data.evaluation.actions_objectives_patch_colaborator_error = '';
+    if (c.data.evaluation.actions_objectives_patch_colaborator.length > 0) {
+
+      c.data.evaluation.actions_objectives_patch_colaborator_error = await ipsValidator.validate(newValue, 'acciones u ajustes a objetivos', ['min:3', 'min:3']);
+      return $scope.$apply();
+    }
+  })
+
+  $scope.$watch('c.data.evaluation.my_leader_comments', async function (newValue) {
+    c.data.evaluation.my_leader_comments_error = await ipsValidator.validate(newValue, 'comentario', ['required', 'required', 'min:3']);
+    return $scope.$apply();
+  })
+  $scope.$watch('c.data.evaluation.actions_objectives_patch_leader', async function (newValue) {
+
+    c.data.evaluation.actions_objectives_patch_leader_error = '';
+    if (c.data.evaluation.actions_objectives_patch_leader.length > 0) {
+      c.data.evaluation.actions_objectives_patch_leader_error = await ipsValidator.validate(newValue, 'acciones u ajustes a objetivos', ['min:3', 'min:3']);
+      return $scope.$apply();
+    }
+  })
+
+  c.closeModalSendEvaluacionMy = function () {
+    c.modalSendEvaluacionMy.dismiss();
+  }
+
+
+  c.sendEvaluacionMy = function () {
+
+    c.modalSendEvaluacionMy = $uibModal.open({
+      templateUrl: 'modalSendEvaluacionMedioAno',
+      scope: $scope,
+      backdrop: 'static',
+      size: 'md'
+    });
+  }
+
+
+
+
+  c.saveEvaluationMy = async function (colaborator) {
+    if (c.data.evaluation.user.sys_id == c.data.current_user) {
+
+      c.data.evaluation.my_colaborator_comments_error = await ipsValidator.validate(c.data.evaluation.my_colaborator_comments, 'comentario', ['required', 'required', 'min:3']);
+
+      if (c.data.evaluation.my_colaborator_comments_error) {
+        return;
+      }
+    }
+
+
+    if (c.data.evaluation.lead.sys_id == c.data.current_user) {
+      c.data.evaluation.my_leader_comments_error = await ipsValidator.validate(c.data.evaluation.my_leader_comments, 'comentario', ['required', 'required', 'min:3']);
+
+      if (c.data.evaluation.my_leader_comments_error) {
+        return;
+      }
+    }
+
+
+    var res = await $http({
+      url: '/api/x_ipsu2_ips_perfor/v1/ips_assessments_evaluation/send-evaluation-my/' + c.data.evaluation_id,
+      method: 'POST',
+      data: {
+        my_colaborator_comments: c.data.evaluation.my_colaborator_comments,
+        actions_objectives_patch_colaborator: c.data.evaluation.actions_objectives_patch_colaborator,
+        my_leader_comments: c.data.evaluation.my_leader_comments,
+        actions_objectives_patch_leader: c.data.evaluation.actions_objectives_patch_leader,
+        colaborator: colaborator
+      },
+      headers: {
+        "Content-Type": "application/json"
+      }
+    });
+
+    // notificar que la auto evalaucion fue enviada
+
+
+    spModal.open({
+      title: 'Se ha enviado tu autoevaluación',
+      message: '<div class="text-center">Se envió con éxito tu autoevaluación</div>',
+      buttons: [
+        { label: '${Cerrar}', cancel: true },
+
+      ]
+    });
+
+    await c.init();
+    c.closeModalSendEvaluacionMy();
+
+  }
+
+
+
+
+
+  c.closeModalSendEvaluacionMy = function () {
+    c.modalSendEvaluacionMy.dismiss();
+    c.modalSendEvaluacionMy = null;
+  }
+
+
+  c.formIniciativeMy = {
+    fields: {
+
+    },
+    validations: {
+
+    },
+    errors: {
+
+    },
+    objetivo: {
+
+    }
+  }
+
+
+
+
+
+  c.evaluarMedioAno = function (initiative) {
+    console.log(initiative);
+    c.formIniciativeMy = {
+      fields: {
+        initiative_id: initiative.sys_id,
+        my_contributor_comment: initiative.my_contributor_comment,
+        my_collaborator_evaluation: initiative.my_collaborator_evaluation,
+        my_leader_comment: initiative.my_leader_comment,
+        my_leader_evaluation: initiative.my_leader_evaluation,
+      },
+      errors: {
+
+      },
+      initiative: initiative,
+      objetivo: {
+
+      }
+    };
+
+
+    c.modalEvaluacionMy = $uibModal.open({
+      templateUrl: 'modalEvaluacionMedioAno',
+      scope: $scope,
+      backdrop: 'static',
+      size: 'md'
+    });
+
+  }
+
+  $scope.$watch('c.formIniciativeMy.fields.my_collaborator_evaluation', async function (newValue) {
+    c.formIniciativeMy.state = false;
+    c.formIniciativeMy.errors.my_collaborator_evaluation = await ipsValidator.validate(newValue, 'evaluacion de medio año', ['required', 'required']);
+    if (c.formIniciativeMy.errors.my_collaborator_evaluation) {
+      c.formIniciativeMy.state = true;
+    }
+    $scope.$apply();
+  });
+
+  $scope.$watch('c.formIniciativeMy.fields.my_contributor_comment', async function (newValue) {
+    c.formIniciativeMy.state = false;
+    c.formIniciativeMy.errors.my_contributor_comment = await ipsValidator.validate(newValue, 'comentario', ['required', 'required', 'string', 'min:3']);
+    if (c.formIniciativeMy.errors.my_contributor_comment) {
+      c.formIniciativeMy.state = true;
+    }
+    $scope.$apply();
+  });
+
+
+
+  $scope.$watch('c.formIniciativeMy.fields.my_leader_evaluation', async function (newValue) {
+    c.formIniciativeMy.state = false;
+    c.formIniciativeMy.errors.my_leader_evaluation = await ipsValidator.validate(newValue, 'evaluacion de medio año', ['required', 'required']);
+    if (c.formIniciativeMy.errors.my_leader_evaluation) {
+      c.formIniciativeMy.state = true;
+    }
+    $scope.$apply();
+  });
+
+  $scope.$watch('c.formIniciativeMy.fields.my_leader_comment', async function (newValue) {
+    c.formIniciativeMy.state = false;
+    c.formIniciativeMy.errors.my_leader_comment = await ipsValidator.validate(newValue, 'comentario', ['required', 'required', 'string', 'min:3']);
+    if (c.formIniciativeMy.errors.my_leader_comment) {
+      c.formIniciativeMy.state = true;
+    }
+    $scope.$apply();
+  });
+
+  c.saveEvaluacionMy = async function () {
+    if (c.data.evaluation.user.sys_id == c.data.current_user) {
+
+      c.formIniciativeMy.state = false;
+      c.formIniciativeMy.errors.my_contributor_comment = await ipsValidator.validate(c.formIniciativeMy.fields.my_contributor_comment, 'comentario', ['required', 'required', 'string', 'min:3']);
+      c.formIniciativeMy.errors.my_collaborator_evaluation = await ipsValidator.validate(c.formIniciativeMy.fields.my_collaborator_evaluation, 'comentario', ['required', 'required']);
+      if (c.formIniciativeMy.errors.my_contributor_comment || c.formIniciativeMy.errors.my_collaborator_evaluation) {
+        c.formIniciativeMy.state = true;
+        $scope.$apply();
+        return;
+      }
+    }
+
+    if (c.data.evaluation.lead.sys_id == c.data.current_user) {
+
+      c.formIniciativeMy.state = false;
+      c.formIniciativeMy.errors.my_leader_comment = await ipsValidator.validate(c.formIniciativeMy.fields.my_leader_comment, 'comentario', ['required', 'required', 'string', 'min:3']);
+      c.formIniciativeMy.errors.my_leader_evaluation = await ipsValidator.validate(c.formIniciativeMy.fields.my_leader_evaluation, 'comentario', ['required', 'required']);
+      if (c.formIniciativeMy.errors.my_leader_comment || c.formIniciativeMy.errors.my_leader_evaluation) {
+        c.formIniciativeMy.state = await true;
+        $scope.$apply();
+        return;
+      }
+    }
+
+    var res = await $http({
+      url: '/api/x_ipsu2_ips_perfor/v1/ips_assessments_evaluation/save-my-iniciative/' + c.formIniciativeMy.fields.initiative_id,
+      method: 'POST',
+      data: {
+        my_contributor_comment: c.formIniciativeMy.fields.my_contributor_comment,
+        my_collaborator_evaluation: c.formIniciativeMy.fields.my_collaborator_evaluation,
+        my_leader_evaluation: c.formIniciativeMy.fields.my_leader_evaluation,
+        my_leader_comment: c.formIniciativeMy.fields.my_leader_comment
+      },
+      headers: {
+        "Content-Type": "application/json"
+      }
+    });
+
+    await c.init();
+    c.closeEvaluacionMy();
+  }
+
+  c.closeEvaluacionMy = function () {
+    c.modalEvaluacionMy.dismiss();
+    c.formIniciativeMy = {
+      fields: {
+
+      },
+      validations: {
+
+      },
+      errors: {
+
+      },
+      objetivo: {
+
+      }
+    }
+
+  }
+
+
+
+
+  /**
+   * Evaluacion medio año
+   * 
+   */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  /**
+   * aprobar/ rechazar
+   * 
+   */
+
+
+  c.updates = '';
+
+
+
+  c.aprobarRechazar = function () {
+    c.last_comment = c.updates || '¡De acuerdo!';
+
+    c.last_comment_error = '';
+    c.modalAprobarRechazar = $uibModal.open({
+      templateUrl: 'modalAprobarRechazar',
+      scope: $scope,
+      backdrop: 'static',
+      size: 'md'
+    });
+
+  }
+
+  c.sendAprobarRechazar = async function (response) {
+    c.last_comment_error = await ipsValidator.validate(c.last_comment, 'comentario', ['required', 'required']);
+
+    if (c.last_comment_error != '') {
+      $scope.$apply();
+      return
+    }
+    var res = await $http({
+      url: '/api/x_ipsu2_ips_perfor/v1/ips_assessments_evaluation/send-approval-evaluation/' + c.data.evaluation_id,
+      method: 'POST',
+      data: {
+        response: response,
+        comment: c.last_comment
+      },
+      headers: {
+        "Content-Type": "application/json"
+      }
+    });
+
+    spModal.open({
+      title: 'Se ha enviado la respuesta',
+      message: '<div class="text-center"><img margin="auto" width="60px" src="https://thumbs.dreamstime.com/b/s%C3%ADmbolo-del-vector-icono-de-la-se%C3%B1al-marca-cotejo-aislada-en-el-fondo-blanco-bot%C3%B3n-lista-verificaci%C3%B3n-muestra-redonda-135060048.jpg"><br>Se envió con éxito la respuesta de aprobación: <br> <b>Respuesta</b>: ' + response + '</div>',
+      buttons: [
+        { label: '${Cerrar}', cancel: true },
+
+      ]
+    });
+
+    c.init();
+    c.closeAprobarRechazar();
+
+  }
+
+  c.closeAprobarRechazar = function (params) {
+    c.modalAprobarRechazar.dismiss();
+    c.modalAprobarRechazar = null;
+  }
+
+  $scope.$watch('c.last_comment', async function (newValue) {
+
+    c.last_comment_error = await ipsValidator.validate(newValue, 'comentario', ['required', 'required']);
+  });
+
+  c.saveComments = async function (newValue) {
+    var res = await $http({
+      url: '/api/x_ipsu2_ips_perfor/v1/ips_assessments_evaluation/add-comment-evaluation/' + c.data.evaluation_id,
+      method: 'POST',
+      data: {
+        comment: (newValue + '\n\n')
+      },
+      headers: {
+        "Content-Type": "application/json"
+      }
+    });
+  }
+
+
+
+  /**
+   * aprobar/ rechazar
+   * 
+   */
+
+
+
 
 
 
@@ -221,7 +876,15 @@
       }
     });
 
+    if (c.objetiveForm.lider) {
+      c.saveComments('Se modificó el objetivo: ' + c.objetiveForm.fields.u_no_objective +
+        '\nDescripción: ' + c.objetiveForm.fields.objetivo +
+        '\nPeso: ' + c.objetiveForm.fields.peso +
+        '\nActualizada el: ' + $filter('date')(new Date(), 'dd-MM-yyyy hh:mm:ss'));
+    }
     await c.init();
+
+
 
     c.closeObjetive();
     c.saveObjetivoLoader = false;
@@ -487,11 +1150,11 @@
     //   if (!c.evaluacion.u_my_colaborator_comments && c.evaluacion.colaborador.sys_id == c.data.user_id) {
 
     //     console.log();
-    //     if (!iniciativa.u_my_contributor_comment) {
+    //     if (!iniciativa.my_contributor_comment) {
     //       errors.push('El comentario de la evaluacion de medio año es requerido');
     //     }
 
-    //     if (!iniciativa.u_my_contributor_evaluation) {
+    //     if (!iniciativa.my_collaborator_evaluation) {
     //       errors.push('La evaluación de medio año es requerida');
     //     }
 
@@ -502,11 +1165,11 @@
 
 
     //     if (c.evaluacion.u_my_colaborator_comments) {
-    //       if (!iniciativa.u_my_leader_comment) {
+    //       if (!iniciativa.my_leader_comment) {
     //         errors.push('El comentario de la evaluacion de medio año es requerido');
     //       }
 
-    //       if (!iniciativa.u_my_leader_evaluation) {
+    //       if (!iniciativa.my_leader_comment) {
     //         errors.push('La evaluación de medio año es requerida');
     //       }
     //     } else {
@@ -519,7 +1182,7 @@
 
     // if (c.evaluacion.state == 4) {
 
-    //   if (!c.evaluacion.u_ye_colaborator_comments && c.evaluacion.colaborador.sys_id == c.data.user_id) {
+    //   if (!c.data.evaluation.ye_colaborator_comments && c.evaluacion.colaborador.sys_id == c.data.user_id) {
 
 
     //     if (!iniciativa.u_ye_contributor_comment) {
@@ -536,7 +1199,7 @@
     //   if (c.evaluacion.liber.sys_id == c.data.user_id) {
 
 
-    //     if (c.evaluacion.u_ye_colaborator_comments) {
+    //     if (c.data.evaluation.ye_colaborator_comments) {
     //       if (!iniciativa.u_ye_leader_comment) {
     //         errors.push('El comentario de la evaluacion anual es requerido');
     //       }
@@ -797,7 +1460,15 @@
     });
 
 
-
+    if (c.iniciativeForm.lider) {
+      c.saveComments('Se modificó una iniciativa en el objetivo ' + c.iniciativeForm.objetivo.no_goal + '.- ' + c.iniciativeForm.objetivo.target +
+        '\nNo Iniciativa: ' + c.iniciativeForm.fields.numero +
+        '\nIniciativa: ' + c.iniciativeForm.fields.iniciativa +
+        '\nEntregable: ' + c.iniciativeForm.fields.entregable +
+        '\nFecha de entrega: ' + $filter('date')(c.iniciativeForm.fields.fecha_entrega, 'yyyy-MM-dd') +
+        '\nPeso Iniciativa: ' + c.iniciativeForm.fields.peso +
+        '\nActualizada el: ' + $filter('date')(new Date(), 'dd-MM-yyyy hh:mm:ss'));
+    }
 
     c.init();
 
@@ -932,8 +1603,8 @@
         "Content-Type": "application/json"
       }
     });
-
     c.data.evaluation = res.data.result;
+    c.updates = res.data.result.lead.settings.comments;
     c.validateObjetives();
     c.preloader = false;
     $scope.$apply();
@@ -1642,14 +2313,14 @@ $error: rgb(239, 68, 56);&#13;
         <sys_created_by>admin</sys_created_by>
         <sys_created_on>2024-04-29 06:43:21</sys_created_on>
         <sys_id>6d1e61e6477902102d16d9ce316d434b</sys_id>
-        <sys_mod_count>434</sys_mod_count>
+        <sys_mod_count>619</sys_mod_count>
         <sys_name>IPS selft Assesment</sys_name>
         <sys_package display_value="IPS Performance Assessments" source="x_ipsu2_ips_perfor">948629663328c210061636c24d5c7bfc</sys_package>
         <sys_policy/>
         <sys_scope display_value="IPS Performance Assessments">948629663328c210061636c24d5c7bfc</sys_scope>
         <sys_update_name>sp_widget_6d1e61e6477902102d16d9ce316d434b</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2024-08-13 23:51:23</sys_updated_on>
+        <sys_updated_on>2024-08-19 15:38:39</sys_updated_on>
         <template><![CDATA[<div>
 
     <style>
@@ -1674,7 +2345,7 @@ $error: rgb(239, 68, 56);&#13;
     <!-- preloader -->
 
 
-    <ips-stepper assessment="data.evaluation_id"></ips-stepper>
+    <ips-stepper state="c.data.evaluation.state" assessment="data.evaluation_id"></ips-stepper>
 
 
     <div ng-if="c.data.evaluation.state == 10 || c.data.evaluation.state == 20 || c.data.evaluation.state == 40">
@@ -1692,9 +2363,15 @@ $error: rgb(239, 68, 56);&#13;
         <hr>
     </div>
 
+    <div ng-if="c.data.evaluation.user.settings.reject_reason">
+
+        <h2>
+            ${Observations or modifications have been made to your goals and initiatives}</h2>
 
 
+        <textarea class="form-control" rows="8" disabled>{{ c.data.evaluation.user.settings.reject_reason }}</textarea>
 
+    </div>
 
     <div ng-if="c.data.evaluation.objetives.length > 0">
         <ul class="list-group">
@@ -1809,9 +2486,10 @@ $error: rgb(239, 68, 56);&#13;
                     <!-- Botones de Edicion objetives de lider -->
 
                     <section
-                        ng-if="c.data.evaluation.liber.sys_id == c.data.user_id && (c.data.evaluation.state == 2 || c.data.evaluation.state == 3)">
+                        ng-if="c.data.evaluation.lead.sys_id == c.data.current_user && (c.data.evaluation.state == 30 || c.data.evaluation.state == 50)">
 
-                        <button ng-if="(objetive.initiative.length < 5 && objetive.suma < objetive.u_objetive_weight)"
+                        <button
+                            ng-if="(objetive.initiatives.length < 5 && objetive.suma < objetive.collaborator_goal_weight)"
                             tooltip-placement="${Crear iniciative}" uib-tooltip="${Crear iniciative}" type="button"
                             class="btn btn-default mx-1" ng-click="c.newIniciative(objetive)">
                             <i class="fa fa-plus" aria-hidden="true"></i>
@@ -1955,12 +2633,12 @@ $error: rgb(239, 68, 56);&#13;
 
                                 <div class="col-sm-12 col-md-1 "
                                     ng-if="c.data.evaluation.user.sys_id == c.data.current_user && 
-                                         (c.data.evaluation.state == 10 ||  c.data.evaluation.state == 20 || c.data.evaluation.state == 30  || c.data.evaluation.state == 40  )"
+                                         (c.data.evaluation.state == 10 ||  c.data.evaluation.state == 20 || c.data.evaluation.state == 30  || c.data.evaluation.state == 40  || c.data.evaluation.state == 60  )"
                                     style="display: flex; justify-content: center; align-items: center; flex-direction: column;">
 
                                     <!-- Boton de edicion -->
 
-                                    <button ng-if="c.data.evaluation.state != 40"
+                                    <button ng-if="c.data.evaluation.state != 60"
                                         tooltip-placement="${Editar iniciative}" uib-tooltip="${Editar iniciative}"
                                         type="button" class="btn btn-default"
                                         ng-click="c.editIniciative(objetive, iniciative)">
@@ -1969,7 +2647,7 @@ $error: rgb(239, 68, 56);&#13;
                                     </button>
 
                                     <!-- Boton de borrado -->
-                                    <button ng-if="c.data.evaluation.state != 40"
+                                    <button ng-if="c.data.evaluation.state != 60"
                                         tooltip-placement="${Borrar iniciative}" uib-tooltip="${Borrar iniciative}"
                                         type="button" class="btn btn-default"
                                         ng-click="c.deleteIniciative(objetive, iniciative)">
@@ -1979,18 +2657,22 @@ $error: rgb(239, 68, 56);&#13;
 
                                     <!-- Boton evaluacion medio año -->
                                     <button tooltip-placement="${Evaluar Iniciative}"
-                                        uib-tooltip="${Evaluar Iniciative}" type="button" class="btn btn-success"
-                                        ng-click="c.evaluarMedioAno(iniciative)" ng-if="c.data.evaluation.state == 40">
-                                        <img src="task.png" width="20" height="auto" />
+                                        style="margin-top: 2px; margin-bottom: 2px;" uib-tooltip="${Evaluar Iniciative}"
+                                        type="button" class="btn btn-success" ng-click="c.evaluarMedioAno(iniciative)"
+                                        ng-if="c.data.evaluation.state == 40">
+                                        <i class="fa fa-pencil-square-o" style="font-size: 2.5rem;"
+                                            aria-hidden="true"></i>
                                         <!-- ${Evaluar MY} -->
-                                        esta
+
                                     </button>
 
                                     <!-- boton evaluacion de año -->
                                     <button tooltip-placement="${Evaluar Iniciative}"
-                                        uib-tooltip="${Evaluar Iniciative}" type="button" class="btn btn-success"
-                                        ng-click="c.evaluarYE(iniciative)" ng-if="c.data.evaluation.state == '60'  ">
-                                        <img src="task.png" width="20" height="auto" />
+                                        style="margin-top: 2px; margin-bottom: 2px;" uib-tooltip="${Evaluar Iniciative}"
+                                        type="button" class="btn btn-success" ng-click="c.evaluarYE(iniciative)"
+                                        ng-if="c.data.evaluation.state == 60 ">
+                                        <i class="fa fa-pencil-square-o" style="font-size: 2.5rem;"
+                                            aria-hidden="true"></i>
                                         <!-- ${Evaluar YE} -->
                                     </button>
 
@@ -2006,34 +2688,36 @@ $error: rgb(239, 68, 56);&#13;
                                     <button tooltip-placement=" ${Editar iniciative}" uib-tooltip="${Editar iniciative}"
                                         type="button" class="btn btn-default"
                                         ng-click="c.editIniciative(objetive, iniciative, true)"
-                                        ng-if="c.evaluacion.state == 2 || c.evaluacion.state == 3">
+                                        ng-if="c.data.evaluation.state == 30 || c.data.evaluation.state == 50">
                                         <i class="fa fa-pencil" aria-hidden="true"></i>
                                         <!-- ${Editar} -->
                                     </button>
 
 
                                     <button tooltip-placement="${Borrar iniciative}" uib-tooltip="${Borrar iniciative}"
-                                        type="button" ng-if="c.evaluacion.state == 2 || c.evaluacion.state == 3"
+                                        type="button"
+                                        ng-if="c.data.evaluation.state == 30 || c.data.evaluation.state == 50"
                                         class="btn btn-default" ng-click="c.deleteIniciative(objetive, iniciative)">
                                         <i class="fa fa-trash" aria-hidden="true"></i>
                                         <!-- ${Borrar} -->
                                     </button>
-                                    <!-- Boton evaluacion medio año -->
+
+                                    <!-- Boton data.evaluation medio año -->
                                     <button tooltip-placement="${Evaluar Iniciative}"
                                         uib-tooltip="${Evaluar Iniciative}" type="button" class="btn btn-success"
-                                        ng-click="c.evaluarMedioAno(iniciative)"
-                                        ng-if="c.evaluacion.state == '50' && c.evaluacion.u_my_colaborator_comments ">
-                                        <img src="task.png" width="20" height="auto" />
+                                        ng-click="c.evaluarMedioAno(iniciative)" ng-if="c.data.evaluation.state == 50">
+                                        <i class="fa fa-pencil-square-o" style="font-size: 2.5rem;"
+                                            aria-hidden="true"></i>
                                         <!-- ${Evaluar MY} -->
                                     </button>
 
 
-                                    <!-- boton evaluacion de año -->
+                                    <!-- boton data.evaluation de año -->
                                     <button tooltip-placement="${Evaluar Iniciative}"
                                         uib-tooltip="${Evaluar Iniciative}" type="button" class="btn btn-success"
-                                        ng-click="c.evaluarYE(iniciative)"
-                                        ng-if="c.evaluacion.state == '70' && c.evaluacion.u_ye_colaborator_comments ">
-                                        <img src="task.png" width="20" height="auto" />
+                                        ng-click="c.evaluarYE(iniciative)" ng-if="c.data.evaluation.state == 70 ">
+                                        <i class="fa fa-pencil-square-o" style="font-size: 2.5rem;"
+                                            aria-hidden="true"></i>
                                         <!-- ${Evaluar YE} -->
                                     </button>
 
@@ -2063,11 +2747,12 @@ $error: rgb(239, 68, 56);&#13;
 
     </ul>
 
-    <br><br>
-    <div class="d-flex justify-center">
-        <button tooltip-placement="${Crear objetivo}" uib-tooltip="${Crear objetivo}" type="button"
+    <div class="d-flex justify-center" ng-if="!['60','70','80'].includes(c.data.evaluation.state) ">
+        <br><br>
+
+        <button tooltip-placement=" ${Crear objetivo}" uib-tooltip="${Crear objetivo}" type="button"
             class="btn btn-default" ng-click="c.newObjective()"
-            ng-disabled="c.data.evaluation.objetives.length >= 5 || c.progressBar.complete == 100">
+            ng-disabled="  c.data.evaluation.objetives.length >= 5 || c.progressBar.complete == 100">
             <i class="fa fa-plus" aria-hidden="true"></i> Crear nuevo objetivo
         </button>
     </div>
@@ -2077,24 +2762,24 @@ $error: rgb(239, 68, 56);&#13;
     </div>
 
     <div class="row d-flex" style="    justify-content: center;
-        align-items: center;
+        align-items: center;  
         align-content: center;
         flex-direction: row;
     ">
 
-        <div class="mx-1" ng-if="c.evaluacion.state == 4 || c.evaluacion.state == 5 "
+        <div class="mx-1" ng-if="['60','70','80'].includes(c.data.evaluation.state)  "
             style="display: flex; justify-content: center; align-items: center; flex-direction: column;">
             <h3 class="">Rating Colaborador</h3>
 
-            <ips-rating type="1" averange-colaborador="c.evaluacion.u_averange_colaborador"></ips-rating>
+            <ips-rating type="1" averange-colaborador="c.data.evaluation.collaborator_averange_evaluation"></ips-rating>
 
         </div>
         <div class="mx-1"
-            ng-if="(c.evaluacion.state == 4 || c.evaluacion.state == 5) && c.evaluacion.u_averange_evaluation > 0"
+            ng-if="['70','80'].includes(c.data.evaluation.state) && c.data.evaluation.leader_averange_evaluation > 0"
             style="display: flex; justify-content: center; align-items: center; flex-direction: column;">
             <h3 class="">Rating Líder</h3>
 
-            <ips-rating averange-evaluation="c.evaluacion.u_averange_evaluation" type="2"></ips-rating>
+            <ips-rating averange-evaluation="c.data.evaluation.leader_averange_evaluation" type="2"></ips-rating>
 
         </div>
     </div>
@@ -2116,21 +2801,21 @@ $error: rgb(239, 68, 56);&#13;
             </button>
 
 
-            <button ng-if=" c.data.evaluation.state == '4' && !c.data.evaluation.u_ye_colaborator_comments "
-                tooltip-placement="${Envia tu evaluación anual}" uib-tooltip="${Envia tu evaluación anual}"
-                type="button" class="btn btn-primary mx-1" ng-click="c.senddata.evaluationYE()"
-                ng-disabled="!c.data.evaluation.state_valiadations || c.progressBar.complete < 100">
-                Enviar autoevaluación YE
-            </button>
 
-            <button ng-if=" c.data.evaluation.state == '3' && !c.data.evaluation.u_my_colaborator_comments "
-                tooltip-placement="${Envia tu eveluación de medio año}"
+
+            <button ng-if=" c.data.evaluation.state == 40" tooltip-placement="${Envia tu eveluación de medio año}"
                 uib-tooltip="${Envia tu eveluación de medio año}" type="button" class="btn btn-primary mx-1"
-                ng-click="c.senddata.evaluationMy()"
+                ng-click="c.sendEvaluacionMy()"
                 ng-disabled="!c.data.evaluation.state_valiadations || c.progressBar.complete < 100">
                 Enviar autoevaluación MY
             </button>
 
+            <button ng-if=" c.data.evaluation.state == '60' " tooltip-placement="${Envia tu evaluación anual}"
+                uib-tooltip="${Envia tu evaluación anual}" type="button" class="btn btn-primary mx-1"
+                ng-click="c.sendEvaluacionYE()"
+                ng-disabled="!c.data.evaluation.state_valiadations || c.progressBar.complete < 100">
+                Enviar autoevaluación YE
+            </button>
 
 
         </section>
@@ -2138,24 +2823,24 @@ $error: rgb(239, 68, 56);&#13;
 
         <!-- botones de data.evaluation lider -->
 
-        <section ng-if="c.data.evaluation.lead.sys_id == c.data.user_id">
+        <section ng-if="c.data.evaluation.lead.sys_id == c.data.current_user">
 
-            <button ng-if=" c.data.evaluation.state == '4' && c.data.evaluation.u_ye_colaborator_comments != ''"
-                tooltip-placement="${Enviar evaluación anual}" uib-tooltip="${Enviar evaluación anual}" type="button"
-                class="btn btn-primary mx-1" ng-click="c.senddata.evaluationYE()"
+            <button ng-if=" c.data.evaluation.state == '70'" tooltip-placement="${Enviar evaluación anual}"
+                uib-tooltip="${Enviar evaluación anual}" type="button" class="btn btn-primary mx-1"
+                ng-click="c.sendEvaluacionYE()"
                 ng-disabled="!c.data.evaluation.state_valiadations || c.progressBar.complete < 100">
                 Enviar evaluación YE
             </button>
 
-            <button ng-if="c.data.evaluation.state == '3' && c.data.evaluation.u_my_colaborator_comments != ''"
-                tooltip-placement="${Enviar evaluación de medio año}" uib-tooltip="${Enviar evaluación de medio año}"
-                type="button" class="btn btn-primary mx-1" ng-click="c.senddata.evaluationMy()"
+            <button ng-if="c.data.evaluation.state == '50' " tooltip-placement="${Enviar evaluación de medio año}"
+                uib-tooltip="${Enviar evaluación de medio año}" type="button" class="btn btn-primary mx-1"
+                ng-click="c.sendEvaluacionMy()"
                 ng-disabled="!c.data.evaluation.state_valiadations || c.progressBar.complete < 100">
                 Enviar data.evaluation MY
             </button>
 
 
-            <button ng-if=" c.data.evaluation.state == '2' "
+            <button ng-if=" c.data.evaluation.state == 30 "
                 tooltip-placement="${Con este botón puedes aprobar o regresar los objetivos al colaborador}"
                 uib-tooltip="${Con este botón puedes aprobar o regresar los objetivos al colaborador}" type="button"
                 class="btn btn-primary mx-1" ng-click="c.aprobarRechazar()"
@@ -2167,23 +2852,20 @@ $error: rgb(239, 68, 56);&#13;
         <!-- botones de data.evaluation lider -->
         <a tooltip-placement="${Exporta a PDF la evaluación}" uib-tooltip="${Exporta a PDF la evaluación}" type="button"
             class="btn btn-primary mx-1" ng-disabled="!c.data.evaluation.state_valiadations"
-            ng-href="/ui_page.do?sys_id=10761cac97db9910a0687cd11153af5b&sysparm_sys_id={{c.data.evaluation_id}}"
-            target="_blank">
+            ng-href="{{ c.data.evaluation.pdf }}" target="_blank">
             Exportar a PDF
         </a>
         <!-- ng-disabled="!(c.data.evaluation.state == 4 || c.data.evaluation.state == 5 ) || ((!c.data.evaluation.state_valiadations ||
     c.progressBar.complete < 100) && c.evaluacion.state !=4)" -->
-        <button tooltip-placement="${Mostrar las instrucciones para la captura de la evaluación de desempeño}"
+        <!-- <button tooltip-placement="${Mostrar las instrucciones para la captura de la evaluación de desempeño}"
             uib-tooltip="${Mostrar las instrucciones para la captura de la evaluación de desempeño}" type="button"
             class="btn btn-primary mx-1" ng-click="c.showIntrucciones()">
             Instrucciones
-        </button>
+        </button> -->
     </div>
 
     <br><br>
 
-
-    <pre>{{ data | json}}</pre>
 
 </div>]]></template>
     </sp_widget>

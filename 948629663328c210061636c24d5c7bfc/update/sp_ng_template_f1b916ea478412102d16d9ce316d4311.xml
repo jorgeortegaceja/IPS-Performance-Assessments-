@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_ng_template">
+    <sp_ng_template action="INSERT_OR_UPDATE">
+        <id>modalSendEvaluacionMedioAno</id>
+        <sp_widget display_value="IPS selft Assesment">6d1e61e6477902102d16d9ce316d434b</sp_widget>
+        <sys_class_name>sp_ng_template</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2024-08-19 06:15:21</sys_created_on>
+        <sys_id>f1b916ea478412102d16d9ce316d4311</sys_id>
+        <sys_mod_count>13</sys_mod_count>
+        <sys_name>modalSendEvaluacionMedioAno</sys_name>
+        <sys_package display_value="IPS Performance Assessments" source="x_ipsu2_ips_perfor">948629663328c210061636c24d5c7bfc</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="IPS Performance Assessments">948629663328c210061636c24d5c7bfc</sys_scope>
+        <sys_update_name>sp_ng_template_f1b916ea478412102d16d9ce316d4311</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2024-08-19 07:29:23</sys_updated_on>
+        <template><![CDATA[<style>
+    .ma-3 {
+        margin: 3rem;
+    }
+
+    .d-flex {
+        display: flex;
+    }
+
+    .justify-center {
+        justify-content: center;
+    }
+
+    .mr-1 {
+        margin-right: 1rem;
+    }
+
+    .mx-1 {
+        margin-right: 1rem;
+        margin-left: 1rem;
+    }
+
+    .invalid-feedback {
+        font-size: 11px;
+        color: #ff0000;
+    }
+</style>
+<div class="ma-3 " ng-if="c.data.evaluation.user.sys_id == c.data.current_user">
+    <h2 class="text-center">
+        Enviar autoevaluación de medio año
+    </h2>
+    <form>
+        <div class="form-group">
+            <label for="comentarios">${Comentarios}</label>
+            <textarea class="form-control" id="comentarios" rows="3"
+                ng-model="c.data.evaluation.my_colaborator_comments" ng-model-options="{ debounce: 100 }"></textarea>
+            <small class="invalid-feedback">{{c.data.evaluation.my_colaborator_comments_error}}</small>
+        </div>
+        <div class="form-group">
+            <label for="ACCIONES/AJUSTES A OBJETIVOS">${ACCIONES/AJUSTES A OBJETIVOS}</label>
+            <textarea class="form-control" id="ACCIONES/AJUSTES A OBJETIVOS" rows="3"
+                ng-model="c.data.evaluation.actions_objectives_patch_colaborator"
+                ng-model-options="{ debounce: 100 }"></textarea>
+            <small class="invalid-feedback">{{c.data.evaluation.actions_objectives_patch_colaborator_error}}</small>
+        </div>
+    </form>
+
+    <div class="d-flex justify-center">
+
+        <button class="btn btn-default" ng-click="c.closeModalSendEvaluacionMy()">Cerrar</button>
+
+        <button class="mr-1 btn btn-success" ng-click="c.saveEvaluationMy(true)"
+            ng-disabled="!(!c.data.evaluation.my_colaborator_comments_error && !c.data.evaluation.actions_objectives_patch_colaborator_error)">
+            Enviar autoevaluación
+        </button>
+
+
+    </div>
+
+
+
+</div>
+
+<div class="ma-3 " ng-if="c.data.evaluation.lead.sys_id == c.data.current_user">
+    <h2 class="text-center">
+        Enviar evaluación de medio año
+    </h2>
+    <form>
+
+        <h2>Comentarios de autoevaluación (Colaborador)</h2>
+        <div class="form-group">
+            <label for="comentarios">${Comentarios del colaborador}</label>
+            <textarea class="form-control" id="comentarios" rows="3"
+                ng-model="c.data.evaluation.my_colaborator_comments" disabled></textarea>
+
+
+        </div>
+
+        <div class="form-group">
+            <label for="comentarios">${ACCIONES/AJUSTES A OBJETIVOS del colaborador}</label>
+            <textarea class="form-control" id="ACCIONES/AJUSTES A OBJETIVOS" rows="3"
+                ng-model="c.data.evaluation.actions_objectives_patch_colaborator" disabled></textarea>
+        </div>
+
+        <hr>
+        <h2>Comentarios de evaluación MY (Lider)</h2>
+        <div class="form-group">
+
+
+            <label for="comentarios">${Comentarios}</label>
+            <textarea class="form-control" id="comentarios" rows="3" ng-model="c.data.evaluation.my_leader_comments"
+                ng-model-options="{ debounce: 300 }"></textarea>
+            <small class="invalid-feedback">{{c.data.evaluation.my_leader_comments_error}}</small>
+        </div>
+        <div class="form-group">
+
+
+            <label for="ACCIONES/AJUSTES A OBJETIVOS">${ACCIONES/AJUSTES A OBJETIVOS}</label>
+            <textarea class="form-control" id="ACCIONES/AJUSTES A OBJETIVOS" rows="3"
+                ng-model="c.data.evaluation.actions_objectives_patch_leader"
+                ng-model-options="{ debounce: 300 }"></textarea>
+            <small class="invalid-feedback">{{c.data.evaluation.actions_objectives_patch_leader_error}}</small>
+        </div>
+    </form>
+
+    <div class="d-flex justify-center">
+        <button class="mr-1 btn btn-success" ng-click="c.saveEvaluationMy()"
+            ng-disabled="!(!c.data.evaluation.my_leader_comments_error && !c.data.evaluation.actions_objectives_patch_leader_error)">
+            Enviar evaluación de medio año
+        </button>
+
+        <button class="btn btn-default" ng-click="c.closeModalSendEvaluacionMy()">Cerrar</button>
+
+    </div>
+
+
+
+</div>]]></template>
+    </sp_ng_template>
+</record_update>

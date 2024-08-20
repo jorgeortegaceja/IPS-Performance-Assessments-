@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_ng_template">
+    <sp_ng_template action="INSERT_OR_UPDATE">
+        <id>modalSendEvaluacionAnual</id>
+        <sp_widget display_value="IPS selft Assesment">6d1e61e6477902102d16d9ce316d434b</sp_widget>
+        <sys_class_name>sp_ng_template</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2024-08-19 08:35:31</sys_created_on>
+        <sys_id>3ac972ee470812102d16d9ce316d4353</sys_id>
+        <sys_mod_count>9</sys_mod_count>
+        <sys_name>modalSendEvaluacionAnual</sys_name>
+        <sys_package display_value="IPS Performance Assessments" source="x_ipsu2_ips_perfor">948629663328c210061636c24d5c7bfc</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="IPS Performance Assessments">948629663328c210061636c24d5c7bfc</sys_scope>
+        <sys_update_name>sp_ng_template_3ac972ee470812102d16d9ce316d4353</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2024-08-19 08:53:00</sys_updated_on>
+        <template><![CDATA[<style>
+    .ma-3 {
+        margin: 3rem;
+    }
+
+    .d-flex {
+        display: flex;
+    }
+
+    .justify-center {
+        justify-content: center;
+    }
+
+    .mr-1 {
+        margin-right: 1rem;
+    }
+
+    .mx-1 {
+        margin-right: 1rem;
+        margin-left: 1rem;
+    }
+
+    .invalid-feedback {
+        font-size: 11px;
+        color: #ff0000;
+    }
+</style>
+<div class="ma-3 " ng-if="c.data.evaluation.user.sys_id == c.data.current_user">
+    <h2 class="text-center">
+        Enviar autoevaluación anual
+    </h2>
+    <form>
+        <div class="form-group">
+            <label for="comentarios">${Comentarios finales}</label>
+            <textarea class="form-control" id="comentarios" rows="3"
+                ng-model="c.data.evaluation.ye_colaborator_comments" ng-model-options="{ debounce: 100 }"></textarea>
+            <small class="invalid-feedback">{{c.data.evaluation.ye_colaborator_comments_error}}</small>
+        </div>
+
+    </form>
+
+    <div class="d-flex justify-center">
+
+
+        <button class="btn btn-default" ng-click="c.closeModalSendEvaluacionYe(true)">Cerrar</button>
+        <button class="mr-1 btn btn-success" ng-click="c.saveEvaluationYe(true)"
+            ng-disabled="c.data.evaluation.ye_colaborator_comments_error">Enviar
+            autoevaluación</button>
+
+    </div>
+
+
+
+</div>
+
+<div class="ma-3 " ng-if="c.data.evaluation.lead.sys_id == c.data.current_user">
+    <h2 class="text-center">
+        Enviar evaluación anual
+    </h2>
+    <form>
+        <div class="form-group">
+            <label for="comentarios">${Comentarios finales}</label>
+            <textarea class="form-control" id="comentarios" rows="3" ng-model="c.data.evaluation.ye_leader_comments"
+                ng-model-options="{ debounce: 100 }"></textarea>
+            <small class="invalid-feedback">{{c.data.evaluation.ye_leader_comments_error}}</small>
+        </div>
+
+    </form>
+
+    <div class="d-flex justify-center">
+
+        <button class="mr-1 btn btn-success" ng-click="c.saveEvaluationYe(false)"
+            ng-disabled="!(!c.data.evaluation.ye_leader_comments_error)">Enviar
+            evaluacion anual</button>
+
+        <button class="btn btn-default" ng-click="c.closeModalSendEvaluacionYe()">Cerrar</button>
+
+    </div>
+
+
+
+</div>]]></template>
+    </sp_ng_template>
+</record_update>

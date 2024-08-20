@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_ws_operation">
+    <sys_ws_operation action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <consumes>application/json,application/xml,text/xml</consumes>
+        <consumes_customized>false</consumes_customized>
+        <default_operation_uri>/api/x_ipsu2_ips_perfor/ips_assessments_evaluation/send-approval-evaluation/{sys_id}</default_operation_uri>
+        <enforce_acl>cf9d01d3e73003009d6247e603f6a990</enforce_acl>
+        <http_method>POST</http_method>
+        <name>Send approval evaluation</name>
+        <operation_script><![CDATA[(function process(/*RESTAPIRequest*/ request, /*RESTAPIResponse*/ response) {
+
+    var today = new GlideDateTime();
+    var send_notifications = JSON.parse(gs.getProperty('x_ipsu2_ips_perfor.ips.status_my_evaluation_notifications'));
+
+    var start_my = new GlideDateTime(gs.getProperty('x_ipsu2_ips_perfor.ips.evaluation_period.my_start') + ' 00:00:00');
+    var end_my = new GlideDateTime(gs.getProperty('x_ipsu2_ips_perfor.ips.evaluation_period.my_end') + ' 00:00:00');
+
+    var evaluationModel = new IPSEvaluationsModel();
+    var evaluacion = evaluationModel.find(request.pathParams.sys_id);
+    var collaborator_settings = evaluacion.collaborator_settings.getDisplayValue() ?
+        JSON.parse(evaluacion.collaborator_settings.getDisplayValue()) :
+        { reject_reason: request.body.data.comment };
+
+    var state = 20;
+    var is_active = false;
+
+    if (request.body.data.response == 'Aprobado') {
+        if (send_notifications && today.compareTo(start_my) >= 0 && today.compareTo(end_my) <= 0) {
+            is_active = true;
+        }
+        collaborator_settings.reject_reason = '';
+        collaborator_settings = JSON.stringify(collaborator_settings);
+        state = 40;
+    }
+
+
+    evaluationModel.update({
+        sys_id: request.pathParams.sys_id,
+        collaborator_settings: JSON.stringify(collaborator_settings),
+        is_active: is_active,
+        state: state,
+        work_notes: gs.getMessage("Rejected for: {0}", gs.getUserName()) + '\n\n' + gs.getMessage('Comment: {0}', request.body.data.comment)
+    });
+
+    var aprobacion = new GlideRecord('sysapproval_approver');
+    aprobacion.addQuery('approver', evaluacion.u_jefe_del_empleado);
+    aprobacion.addQuery('sysapproval', evaluacion.sys_id);
+    aprobacion.setLimit(1);
+    aprobacion.orderByDesc('sys_created_on');
+    aprobacion.query();
+    if (aprobacion.next()) {
+
+        if (request.body.data.response == 'Aprobado') {
+            aprobacion.state = 'approved';
+        } else {
+            aprobacion.state = 'rejected';
+        }
+
+        aprobacion.comments.setJournalEntry(request.body.data.comment);
+        aprobacion.update();
+    }
+
+    return request.body.data;
+})(request, response);]]></operation_script>
+        <operation_uri>/api/x_ipsu2_ips_perfor/v1/ips_assessments_evaluation/send-approval-evaluation/{sys_id}</operation_uri>
+        <produces>application/json,application/xml,text/xml</produces>
+        <produces_customized>false</produces_customized>
+        <relative_path>/send-approval-evaluation/{sys_id}</relative_path>
+        <request_example/>
+        <requires_acl_authorization>true</requires_acl_authorization>
+        <requires_authentication>true</requires_authentication>
+        <requires_snc_internal_role>true</requires_snc_internal_role>
+        <short_description/>
+        <sys_class_name>sys_ws_operation</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2024-08-15 05:47:48</sys_created_on>
+        <sys_id>c7fc6d1147c0d2102d16d9ce316d43f5</sys_id>
+        <sys_mod_count>10</sys_mod_count>
+        <sys_name>Send approval evaluation</sys_name>
+        <sys_package display_value="IPS Performance Assessments" source="x_ipsu2_ips_perfor">948629663328c210061636c24d5c7bfc</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="IPS Performance Assessments">948629663328c210061636c24d5c7bfc</sys_scope>
+        <sys_update_name>sys_ws_operation_c7fc6d1147c0d2102d16d9ce316d43f5</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2024-08-19 02:44:44</sys_updated_on>
+        <web_service_definition display_value="IPS Assessments Evaluation">7782aaf247f942102d16d9ce316d43e5</web_service_definition>
+        <web_service_version display_value="v1">a9f2ee7247f942102d16d9ce316d43a9</web_service_version>
+    </sys_ws_operation>
+</record_update>

@@ -3,56 +3,84 @@
         <sys_ui_element action="INSERT_OR_UPDATE">
             <element>show_instructions</element>
             <position>0</position>
-            <sys_created_by>jorge.ortega</sys_created_by>
-            <sys_created_on>2024-04-28 20:02:04</sys_created_on>
-            <sys_id>fb4bdb1ec3b90a101d04d6ff05013106</sys_id>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2024-08-15 04:19:11</sys_created_on>
+            <sys_id>87c8595d4740d2102d16d9ce316d4337</sys_id>
             <sys_mod_count>0</sys_mod_count>
             <sys_ui_formatter/>
             <sys_ui_section caption="Informative" display_value="Informative" name="x_ipsu2_ips_perfor_performance_evaluation" sys_domain="b3b234dd0fe6ee006dc98fbce1050e6e" view="Default view">0f4b9b1ec3b90a101d04d6ff05013166</sys_ui_section>
-            <sys_updated_by>jorge.ortega</sys_updated_by>
-            <sys_updated_on>2024-04-28 20:02:04</sys_updated_on>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2024-08-15 04:19:11</sys_updated_on>
             <sys_user/>
             <type/>
         </sys_ui_element>
         <sys_ui_element action="INSERT_OR_UPDATE">
             <element>download_self_assessment</element>
             <position>1</position>
-            <sys_created_by>jorge.ortega</sys_created_by>
-            <sys_created_on>2024-04-28 20:02:04</sys_created_on>
-            <sys_id>ff4bdb1ec3b90a101d04d6ff05013106</sys_id>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2024-08-15 04:19:11</sys_created_on>
+            <sys_id>8fc8595d4740d2102d16d9ce316d4337</sys_id>
             <sys_mod_count>0</sys_mod_count>
             <sys_ui_formatter/>
             <sys_ui_section caption="Informative" display_value="Informative" name="x_ipsu2_ips_perfor_performance_evaluation" sys_domain="b3b234dd0fe6ee006dc98fbce1050e6e" view="Default view">0f4b9b1ec3b90a101d04d6ff05013166</sys_ui_section>
-            <sys_updated_by>jorge.ortega</sys_updated_by>
-            <sys_updated_on>2024-04-28 20:02:04</sys_updated_on>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2024-08-15 04:19:11</sys_updated_on>
             <sys_user/>
             <type/>
         </sys_ui_element>
         <sys_ui_element action="INSERT_OR_UPDATE">
             <element>show_leader_information</element>
             <position>2</position>
-            <sys_created_by>jorge.ortega</sys_created_by>
-            <sys_created_on>2024-04-28 20:02:04</sys_created_on>
-            <sys_id>f34bdb1ec3b90a101d04d6ff05013107</sys_id>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2024-08-15 04:19:11</sys_created_on>
+            <sys_id>83c8595d4740d2102d16d9ce316d4338</sys_id>
             <sys_mod_count>0</sys_mod_count>
             <sys_ui_formatter/>
             <sys_ui_section caption="Informative" display_value="Informative" name="x_ipsu2_ips_perfor_performance_evaluation" sys_domain="b3b234dd0fe6ee006dc98fbce1050e6e" view="Default view">0f4b9b1ec3b90a101d04d6ff05013166</sys_ui_section>
-            <sys_updated_by>jorge.ortega</sys_updated_by>
-            <sys_updated_on>2024-04-28 20:02:04</sys_updated_on>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2024-08-15 04:19:11</sys_updated_on>
             <sys_user/>
             <type/>
         </sys_ui_element>
         <sys_ui_element action="INSERT_OR_UPDATE">
             <element>click_on_the_following_link</element>
             <position>3</position>
-            <sys_created_by>jorge.ortega</sys_created_by>
-            <sys_created_on>2024-04-28 20:02:04</sys_created_on>
-            <sys_id>f74bdb1ec3b90a101d04d6ff05013107</sys_id>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2024-08-15 04:19:11</sys_created_on>
+            <sys_id>87c8595d4740d2102d16d9ce316d4338</sys_id>
             <sys_mod_count>0</sys_mod_count>
             <sys_ui_formatter/>
             <sys_ui_section caption="Informative" display_value="Informative" name="x_ipsu2_ips_perfor_performance_evaluation" sys_domain="b3b234dd0fe6ee006dc98fbce1050e6e" view="Default view">0f4b9b1ec3b90a101d04d6ff05013166</sys_ui_section>
-            <sys_updated_by>jorge.ortega</sys_updated_by>
-            <sys_updated_on>2024-04-28 20:02:04</sys_updated_on>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2024-08-15 04:19:11</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>collaborator_settings</element>
+            <position>4</position>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2024-08-15 04:19:11</sys_created_on>
+            <sys_id>8bc8595d4740d2102d16d9ce316d4338</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="Informative" display_value="Informative" name="x_ipsu2_ips_perfor_performance_evaluation" sys_domain="b3b234dd0fe6ee006dc98fbce1050e6e" view="Default view">0f4b9b1ec3b90a101d04d6ff05013166</sys_ui_section>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2024-08-15 04:19:11</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>leader_settings</element>
+            <position>5</position>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2024-08-15 04:19:11</sys_created_on>
+            <sys_id>8fc8595d4740d2102d16d9ce316d4338</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="Informative" display_value="Informative" name="x_ipsu2_ips_perfor_performance_evaluation" sys_domain="b3b234dd0fe6ee006dc98fbce1050e6e" view="Default view">0f4b9b1ec3b90a101d04d6ff05013166</sys_ui_section>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2024-08-15 04:19:11</sys_updated_on>
             <sys_user/>
             <type/>
         </sys_ui_element>
