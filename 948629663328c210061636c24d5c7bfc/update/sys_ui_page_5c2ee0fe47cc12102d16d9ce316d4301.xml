@@ -1,0 +1,713 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_ui_page">
+    <sys_ui_page action="INSERT_OR_UPDATE">
+        <category>general</category>
+        <client_script><![CDATA[jQuery(document).ready(function () {
+    var html = jQuery('#pdf');
+    console.log(html.html());
+})
+]]></client_script>
+        <description/>
+        <direct>false</direct>
+        <endpoint>x_ipsu2_ips_perfor_IPS_Template_assessment_evaluation.do</endpoint>
+        <html><![CDATA[<?xml version="1.0" encoding="utf-8" ?>
+<j:jelly trim="false" xmlns:j="jelly:core" xmlns:g="glide" xmlns:j2="null" xmlns:g2="null">
+
+	<script type="text/javascript" src="/x_ipsu2_ips_perfor.html2pdf.js.jsdbx"></script>
+	<script type="text/javascript" src="/x_ipsu2_ips_perfor.dowload_pdf.js.jsdbx"></script>
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+
+	<g:evaluate var="evaluation_id" jelly="true" object="true">
+		evaluation_id = RP.getParameterValue("sysparm_sys_id");
+	</g:evaluate>
+
+
+
+	<g:evaluate var="evaluation" jelly="true" object="true">
+
+		var evaluation = new GlideRecord('x_ipsu2_ips_perfor_performance_evaluation');
+		evaluation.get(evaluation_id);
+		evaluation;
+	</g:evaluate>
+
+
+
+	<g:evaluate var="objetive" jelly="true" object="true">
+
+		var objetive = new GlideRecord('x_ipsu2_ips_perfor_goal');
+		objetive.addQuery("evaluation",evaluation_id);
+		objetive.orderBy('no_goal');
+		objetive.setLimit(5);
+		objetive.query();
+		objetive;
+	</g:evaluate>
+
+	<g:evaluate var="jvar_SumObj" jelly="true" object="true">
+		var sumatoria = 0;
+		var objetive2 = new GlideRecord('x_ipsu2_ips_perfor_goal');
+		objetive2.addQuery("evaluation",evaluation_id);
+		objetive2.orderBy('no_goal');
+		objetive2.setLimit(5);
+		objetive2.query();
+		while(objetive2.next()){
+		sumatoria = sumatoria + parseInt(objetive2.collaborator_evaluation);
+		}
+		sumatoria;
+	</g:evaluate>
+
+	<style>
+		.title {
+			font-size: medium;
+			color: rgb(59, 134, 199);
+		}
+
+		.text-right {
+			text-align: right;
+		}
+
+		td {
+			padding: .8rem;
+		}
+
+		.border {
+			border-top: 1px solid #7f7f7f !important;
+			border-bottom: 1px solid #7f7f7f !important;
+			border-left: 1px solid #7f7f7f !important;
+			border-right: 1px solid #7f7f7f !important
+		}
+
+		.text-white {
+			color: #fff !important;
+		}
+
+		.text-blue {
+			color: rgb(59, 134, 199);
+		}
+
+		.text-black {
+			color: #000;
+		}
+
+		.text-dark-blue {
+			margin-right: 5px;
+			color: rgb(44, 98, 110)
+		}
+	</style>
+
+	<input id="title" type="hidden"
+		value="OBJETIVOS INDIVIDUALES ${ evaluation.getDisplayValue('u_a_o_de_evaluaci_n') }" />
+
+	<body style="display: flex; justify-content: center; ">
+		<div style="max-width: 1000px; width: 100%;">
+
+
+			<div id="pdf">
+
+
+				<div>
+
+					<img style="display: block; 	" src="x_ipsu2_ips_perfor.header.png" width="100%" height="auto"
+						hspace="18" vspace="6" />
+				</div>
+
+				<div>
+					<h3 class="text-center text-blue">
+
+						${evaluation.getDisplayValue('number')} -
+						${evaluation.getDisplayValue('performance_evaluation') }
+					</h3>
+					<h4 class="text-center text-blue">
+						Ipsum Technology
+					</h4>
+				</div>
+
+
+
+
+				<div class="row" style="display: flex; flex-direction: row;  align-items: flex-end; width: 100%;">
+					<div class="col-6" style="width: 50%;">
+						<table>
+							<tr>
+								<td class="title text-right">
+									<strong>Nombre Colaborador:</strong>
+								</td>
+								<td style="padding-left: 10px; border-bottom:1pt solid black;">
+									${evaluation.getDisplayValue("assigned_to")}
+								</td>
+							</tr>
+							<tr>
+								<td class="title text-right">
+									<strong>Posición:</strong>
+								</td>
+								<td style="padding-left: 10px ; border-bottom:1pt solid black;">
+									${evaluation.getDisplayValue("assigned_to.title")}
+								</td>
+							</tr>
+							<tr>
+								<td class="title text-right">
+									<strong>Líder Directo:</strong>
+								</td>
+								<td style="padding-left: 10px; border-bottom:1pt solid black; ">
+									${evaluation.getDisplayValue("leader")}
+								</td>
+							</tr>
+
+						</table>
+					</div>
+					<div class="col-6"
+						style="width: 50%; display: flex; align-items: end; text-align: right; justify-content: end;">
+						<div>
+							<table class="table" width="8.33%">
+								<tr>
+									<td align="center">
+										<b class="text-blue">RATING</b>
+									</td>
+								</tr>
+								<tr>
+									<td align="center" class="border">
+
+
+
+										<b>${evaluation.getDisplayValue("leader_averange_evaluation") } %</b>
+
+									</td>
+								</tr>
+							</table>
+						</div>
+					</div>
+				</div>
+
+
+				<table class="table table-bordered" style="margin-top: 3rem;">
+					<thead>
+						<tr>
+							<th scope="col" width="25%">
+								<h5 class="text-center text-blue">
+									<strong>OBJETIVOS / INICIATIVAS</strong>
+								</h5>
+							</th>
+							<th scope="col" width="25%">
+								<h5 class="text-center text-blue">
+									<strong>ENTREGABLES</strong>
+								</h5>
+							</th>
+							<th scope="col" width="8.33%">
+								<h5 class="text-center text-blue">
+									<strong>FECHA DE ENTREGA</strong>
+								</h5>
+							</th>
+							<th scope="col" width="25%">
+								<h5 class="text-center text-blue">
+									<strong>AVANCE DE OBJETIVOS</strong>
+								</h5>
+							</th>
+							<th scope="col" width="8.33%" style="padding: 0;">
+								<table width="100%" class="text-center text-white">
+									<tr>
+										<td bgcolor="#3B86C7" class="text-white">Peso</td>
+									</tr>
+									<tr>
+										<td class="text-black">
+											<b>
+												${jvar_SumObj}%
+											</b>
+										</td>
+									</tr>
+								</table>
+							</th>
+							<th scope="col" width="8.33%" style="padding: 0; background: #3B86C7;"
+								class="text-center text-white">
+								<strong class="text-white">Evaluación</strong>
+							</th>
+						</tr>
+					</thead>
+
+					<j:if test="${objetive.next()}">
+
+						<tbody>
+							<tr>
+								<td bgcolor="#3B86C7" colspan="4" class="text-white">
+									<b>
+										${objetive.getDisplayValue('no_goal')}.-
+										${objetive.getDisplayValue("target")}
+									</b>
+								</td>
+								<td align="center">
+									<b>
+										${ objetive.getDisplayValue('collaborator_evaluation') }%
+									</b>
+								</td>
+								<td align="center">
+									<b>
+										${objetive.getDisplayValue("leader_evaluation")}%
+									</b>
+								</td>
+							</tr>
+
+							<g:evaluate var="iniciative" jelly="true" object="true">
+								var iniciative = new GlideRecord('x_ipsu2_ips_perfor_initiatives');
+								iniciative.addQuery("goal",objetive.sys_id);
+								iniciative.orderBy('no_iniciative');
+								iniciative.setLimit(5);
+								iniciative.query();
+								iniciative;
+							</g:evaluate>
+
+
+
+							<j:while test="${iniciative.next()}">
+
+								<tr>
+
+									<td rowspan="4">
+										<b>${iniciative.getDisplayValue("no_iniciative")}</b>.-
+										${iniciative.getDisplayValue("iniciative")}
+									</td>
+									<td rowspan="4">
+										${iniciative.getDisplayValue("deliverable")}
+									</td>
+									<td rowspan="4">
+										${iniciative.getDisplayValue('work_end')}
+									</td>
+									<td rowspan="1">
+										<b class="text-dark-blue">Colaborador MY: </b>
+										${iniciative.getDisplayValue("my_contributor_comment")}
+									</td>
+
+									<td rowspan="4" align="center">
+										<b>
+											${iniciative.getDisplayValue("collaborator_initiative_weight")}%
+										</b>
+									</td>
+
+
+									<td rowspan="1" align="center">
+										<j:if test="${iniciative.getValue('my_collaborator_evaluation') == 1}">
+											<div align="center"
+												style="height: 15px; width: 15px; background-color: #41A317; border-radius: 50%; display: inline-block;">
+											</div>
+										</j:if>
+										<j:if test="${iniciative.getValue('my_collaborator_evaluation') == 2}">
+											<div align="center"
+												style="height: 15px; width: 15px; background-color: #FFE87C; border-radius: 50%; display: inline-block;">
+											</div>
+										</j:if>
+										<j:if test="${iniciative.getValue('my_collaborator_evaluation') == 3}">
+											<div align="center"
+												style="height: 15px; width: 15px; background-color: #7C0A02; border-radius: 50%; display: inline-block;">
+											</div>
+										</j:if>
+										<j:if test="${iniciative.getValue('my_collaborator_evaluation') == 4}">
+											<div align="center"
+												style="height: 15px; width: 15px; background-color: #808080; border-radius: 50%; display: inline-block;">
+											</div>
+										</j:if>
+										<j:if test="${iniciative.getValue('my_collaborator_evaluation') == '' }">
+											<b>
+												N/A
+											</b>
+										</j:if>
+									</td>
+								</tr>
+								<tr>
+
+									<td rowspan="1">
+										<b class="text-dark-blue">Líder MY:</b>
+										${iniciative.getDisplayValue("my_leader_comment")}
+									</td>
+
+									<td rowspan="1" align="center">
+										<j:if test="${iniciative.getValue('my_leader_evaluation') == 1}">
+											<div
+												style="height: 15px; width: 15px; background-color: #41A317; border-radius: 50%; display: inline-block;">
+											</div>
+										</j:if>
+										<j:if test="${iniciative.getValue('my_leader_evaluation') == 2}">
+											<div
+												style="height: 15px; width: 15px; background-color: #FFE87C; border-radius: 50%; display: inline-block;">
+											</div>
+										</j:if>
+										<j:if test="${iniciative.getValue('my_leader_evaluation') == 3}">
+											<div
+												style="height: 15px; width: 15px; background-color: #7C0A02; border-radius: 50%; display: inline-block;">
+											</div>
+										</j:if>
+										<j:if test="${iniciative.getValue('my_leader_evaluation') == 4}">
+											<div
+												style="height: 15px; width: 15px; background-color: #808080; border-radius: 50%; display: inline-block;">
+											</div>
+										</j:if>
+										<j:if test="${iniciative.getValue('my_leader_evaluation') == ''}">
+											<b>N/A</b>
+										</j:if>
+									</td>
+								</tr>
+								<tr>
+
+									<td rowspan="1">
+										<b class="text-dark-blue">Colaborador YE:</b>
+										${iniciative.getDisplayValue("ye_contributor_comment")}
+									</td>
+
+									<td rowspan="1" align="center">
+										<b>
+											<j:if test="${iniciative.getValue('ye_collaborator_evaluation') == ''}">
+												0%
+											</j:if>
+											<j:if test="${iniciative.getValue('ye_collaborator_evaluation') != ''}">
+												${iniciative.getDisplayValue("ye_collaborator_evaluation")}%
+											</j:if>
+										</b>
+
+									</td>
+								</tr>
+								<tr>
+
+									<td rowspan="1">
+										<b class="text-dark-blue">Líder YE:</b>
+										${iniciative.getDisplayValue("ye_leader_comment")}
+									</td>
+
+									<td rowspan="1" align="center">
+										<b>${iniciative.getDisplayValue("ye_leader_evaluation")}%</b>
+									</td>
+								</tr>
+
+							</j:while>
+						</tbody>
+					</j:if>
+				</table>
+
+
+				<div class="html2pdf__page-break"></div>
+
+
+				<j:while test="${objetive.next()}">
+
+					<table class="table table-bordered" style="margin-top: 2rem;">
+						<thead style="visibility: collapse;">
+							<tr>
+								<th scope="col" width="25%">
+								</th>
+								<th scope="col" width="25%">
+								</th>
+								<th scope="col" width="8.33%">
+								</th>
+								<th scope="col" width="25%">
+								</th>
+								<th scope="col" width="8.33%" style="padding: 0;">
+								</th>
+								<th scope="col" width="8.33%" style="padding: 0; background: #3B86C7;"
+									class="text-center text-white">
+								</th>
+							</tr>
+						</thead>
+
+
+
+						<tbody>
+							<tr>
+								<td bgcolor="#3B86C7" colspan="4">
+									<b class="text-white">
+										${objetive.getDisplayValue('no_goal')}
+										.- ${objetive.getDisplayValue("target")}
+									</b>
+
+								</td>
+								<td align="center">
+
+
+									${ objetive.getDisplayValue('collaborator_evaluation') }%
+								</td>
+								<td align="center">
+									${objetive.getDisplayValue("leader_evaluation")}%
+								</td>
+							</tr>
+
+							<g:evaluate var="iniciative" jelly="true" object="true">
+								var iniciative = new GlideRecord('x_ipsu2_ips_perfor_initiatives');
+								iniciative.addQuery("goal",objetive.sys_id);
+								iniciative.orderBy('no_iniciative');
+								iniciative.setLimit(5);
+								iniciative.query();
+								iniciative;
+							</g:evaluate>
+
+
+
+							<j:while test="${iniciative.next()}">
+
+								<tr>
+									<td rowspan="4">
+										<b>${iniciative.getDisplayValue("no_iniciative")}</b>.-
+										${iniciative.getDisplayValue("iniciative")}
+									</td>
+									<td rowspan="4">
+										${iniciative.getDisplayValue("deliverable")}
+									</td>
+									<td rowspan="4">
+										${iniciative.getDisplayValue('work_end')}
+									</td>
+									<td rowspan="1">
+										<b class="text-dark-blue">Colaborador MY:</b>
+										${iniciative.getDisplayValue("my_contributor_comment")}
+									</td>
+									<td rowspan="4" align="center">
+										<b>
+											${iniciative.getDisplayValue("collaborator_initiative_weight")}%
+										</b>
+									</td>
+									<td rowspan="1" align="center">
+										<j:if test="${iniciative.getValue('my_collaborator_evaluation') == 1}">
+											<div align="center"
+												style="height: 15px; width: 15px; background-color: #41A317; border-radius: 50%; display: inline-block;">
+											</div>
+										</j:if>
+										<j:if test="${iniciative.getValue('my_collaborator_evaluation') == 2}">
+											<div align="center"
+												style="height: 15px; width: 15px; background-color: #FFE87C; border-radius: 50%; display: inline-block;">
+											</div>
+										</j:if>
+										<j:if test="${iniciative.getValue('my_collaborator_evaluation') == 3}">
+											<div align="center"
+												style="height: 15px; width: 15px; background-color: #7C0A02; border-radius: 50%; display: inline-block;">
+											</div>
+										</j:if>
+										<j:if test="${iniciative.getValue('my_collaborator_evaluation') == 4}">
+											<div align="center"
+												style="height: 15px; width: 15px; background-color: #808080; border-radius: 50%; display: inline-block;">
+											</div>
+										</j:if>
+										<j:if test="${iniciative.getValue('my_collaborator_evaluation') == ''}">
+											<b>
+												N/A
+											</b>
+										</j:if>
+									</td>
+								</tr>
+								<tr>
+									<td rowspan="1">
+										<b class="text-dark-blue">Líder MY:</b>
+										${iniciative.getDisplayValue("my_leader_comment")}
+									</td>
+									<td rowspan="1" align="center">
+
+										<j:if test="${iniciative.getValue('my_leader_evaluation') == 1}">
+											<div
+												style="height: 15px; width: 15px; background-color: #41A317; border-radius: 50%; display: inline-block;">
+											</div>
+										</j:if>
+										<j:if test="${iniciative.getValue('my_leader_evaluation') == 2}">
+											<div
+												style="height: 15px; width: 15px; background-color: #FFE87C; border-radius: 50%; display: inline-block;">
+											</div>
+										</j:if>
+										<j:if test="${iniciative.getValue('my_leader_evaluation') == 3}">
+											<div
+												style="height: 15px; width: 15px; background-color: #7C0A02; border-radius: 50%; display: inline-block;">
+											</div>
+										</j:if>
+										<j:if test="${iniciative.getValue('my_leader_evaluation') == 4}">
+											<div
+												style="height: 15px; width: 15px; background-color: #808080; border-radius: 50%; display: inline-block;">
+											</div>
+										</j:if>
+										<j:if test="${iniciative.getValue('my_leader_evaluation') == ''}">
+											<b>N/A</b>
+										</j:if>
+									</td>
+
+								</tr>
+								<tr>
+									<td rowspan="1">
+										<b class="text-dark-blue">Colaborador YE:</b>
+										${iniciative.getDisplayValue("ye_contributor_comment")}
+									</td>
+									<td rowspan="1" align="center">
+										<b>
+
+											<j:if
+												test="${iniciative.getDisplayValue('ye_collaborator_evaluation') == ''}">
+												0%
+											</j:if>
+											<j:if
+												test="${iniciative.getDisplayValue('ye_collaborator_evaluation') != ''}">
+												${iniciative.getDisplayValue("ye_collaborator_evaluation")}%
+											</j:if>
+										</b>
+									</td>
+
+								</tr>
+								<tr>
+									<td rowspan="1">
+										<b class="text-dark-blue">Líder YE:</b>
+										${iniciative.getDisplayValue("ye_leader_comment")}
+									</td>
+									<td rowspan="1" align="center">
+										<b>${iniciative.getDisplayValue("ye_leader_evaluation")}%</b>
+									</td>
+
+								</tr>
+
+							</j:while>
+						</tbody>
+					</table>
+					<j:if test="${objetive.hasNext()}">
+						<div class="html2pdf__page-break"></div>
+
+					</j:if>
+				</j:while>
+
+				<br />
+				<br />
+				<br />
+
+
+				<h4 class="text-center text-blue">
+					APROBACIONES
+				</h4>
+
+				<br />
+
+				<div style="display: flex; justify-content: center;">
+					<div style="padding-right: 3rem; width: 350px; text-align: center;">
+						<hr
+							style="margin-end: 0px; border: 2px solid RGB(var(--now-color_border--secondary,var(--now-color--neutral-5,172,180,181)));" />
+						<b>
+							${evaluation.getDisplayValue("assigned_to")}
+						</b>
+					</div>
+					<div style="padding-left: 3rem; width: 350px; text-align: center;">
+						<hr
+							style="margin-end: 0px; border: 2px solid RGB(var(--now-color_border--secondary,var(--now-color--neutral-5,172,180,181)));" />
+						<b>
+							${evaluation.getDisplayValue("leader")}
+						</b>
+					</div>
+				</div>
+
+				<div class="html2pdf__page-break"></div>
+
+				<table width="100%" style="margin-top: 3rem;">
+					<tr>
+						<td bgcolor="#3B86C7">
+							<h4 class="text-white text-center">
+								REVISION DE MEDIO AÑO (MY)
+							</h4>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<h4 class="text-blue text-center">
+								COMENTARIOS
+							</h4>
+						</td>
+					</tr>
+					<tr>
+						<td align="left" valign="top" height="133" class="border">
+							<b>Colaborador:</b> ${evaluation.getDisplayValue("my_colaborator_comments")}
+						</td>
+					</tr>
+					<tr>
+						<td align="left" valign="top" height="133" class="border">
+							<b>Jefe inmediato:</b> ${evaluation.getDisplayValue("my_leader_comments")}
+						</td>
+					</tr>
+
+					<tr>
+						<td>
+							<h4 class="text-blue text-center">
+								ACCIONES/AJUSTES A OBJETIVOS
+							</h4>
+						</td>
+					</tr>
+
+					<tr>
+						<td align="left" valign="top" height="133" class="border">
+							<b>Colaborador:</b> ${evaluation.getDisplayValue("actions_objectives_patch_colaborator")}
+						</td>
+					</tr>
+					<tr>
+						<td align="left" valign="top" height="133" class="border">
+							<b>Jefe inmediato:</b>
+							${evaluation.getDisplayValue("actions_objectives_patch_leader")}
+						</td>
+					</tr>
+				</table>
+
+				<table width="100%" style="margin-top: 3rem;">
+					<tr>
+						<td bgcolor="#3B86C7">
+							<h4 class="text-white text-center">
+								REVISION DE MEDIO AÑO (MY)
+							</h4>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<h4 class="text-blue text-center">
+								COMENTARIOS
+							</h4>
+						</td>
+					</tr>
+					<tr>
+						<td align="left" valign="top" height="133" class="border">
+							<b>Colaborador:</b> ${evaluation.getDisplayValue("ye_colaborator_comments")}
+						</td>
+					</tr>
+					<tr>
+						<td align="left" valign="top" height="133" class="border">
+							<b>Jefe inmediato:</b> ${evaluation.getDisplayValue("ye_leader_comments")}
+						</td>
+					</tr>
+
+
+				</table>
+
+
+
+
+
+
+				<div class="html2pdf__page-break"></div>
+				<div>
+					<h2>Historial de cambios</h2>
+
+					<pre>
+							${ evaluation.work_notes.getJournalEntry(1).replace('code', '') }
+						
+						</pre>
+					<pre>
+							${ evaluation.work_notes.getJournalEntry(2).replace('code', '') }
+						</pre>
+					<pre>
+							${ evaluation.work_notes.getJournalEntry(3).replace('code', '') }
+						</pre>
+
+				</div>
+				<h3>Para ver el historial completo, por favor ingresa a la pestaña de actividad ubicada en la pantalla
+					principal
+					de tu evaluación de desempeño.</h3>
+				<a
+					href="/esc?sys_id=${evaluation_id}${AMP}view=sp${AMP}id=ticket${AMP}table=x_ipsu2_ips_perfor_performance_evaluation">
+					Da clic aquí para ver tu evaluación de desempeño
+				</a>
+			</div>
+		</div>
+	</body>
+</j:jelly>]]></html>
+        <name>IPS_Template_assessment_evaluation</name>
+        <processing_script><![CDATA[alert();]]></processing_script>
+        <sys_class_name>sys_ui_page</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2024-08-19 17:04:26</sys_created_on>
+        <sys_id>5c2ee0fe47cc12102d16d9ce316d4301</sys_id>
+        <sys_mod_count>101</sys_mod_count>
+        <sys_name>IPS_Template_assessment_evaluation</sys_name>
+        <sys_package display_value="IPS Performance Assessments" source="x_ipsu2_ips_perfor">948629663328c210061636c24d5c7bfc</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="IPS Performance Assessments">948629663328c210061636c24d5c7bfc</sys_scope>
+        <sys_update_name>sys_ui_page_5c2ee0fe47cc12102d16d9ce316d4301</sys_update_name>
+        <sys_updated_by>jorge.ortega</sys_updated_by>
+        <sys_updated_on>2024-08-20 03:15:11</sys_updated_on>
+    </sys_ui_page>
+</record_update>
