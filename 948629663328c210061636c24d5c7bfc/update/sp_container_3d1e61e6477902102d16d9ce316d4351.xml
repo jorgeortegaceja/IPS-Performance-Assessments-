@@ -8,6 +8,7 @@
         <container_class_name/>
         <name>IPS selft Assesment - Test Page - Container 1</name>
         <order>1</order>
+        <semantic_tag/>
         <sp_page display_value="ips_selft_assesment">e51e61e6477902102d16d9ce316d434e</sp_page>
         <subheader>false</subheader>
         <sys_class_name>sp_container</sys_class_name>

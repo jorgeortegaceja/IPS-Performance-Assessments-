@@ -62,7 +62,7 @@
         <update_guid_history>53a1e3961331021042571a0ae214b1e0:1861586524</update_guid_history>
     </sys_update_version>
     <sys_metadata_delete action="INSERT_OR_UPDATE">
-        <sys_audit_delete display_value="x_ipsu2_ips_perfor_goals.x_ipsu2_ips_perfor.user">9b52e71a473102102d16d9ce316d4348</sys_audit_delete>
+        <sys_audit_delete display_value="">9b52e71a473102102d16d9ce316d4348</sys_audit_delete>
         <sys_class_name>sys_metadata_delete</sys_class_name>
         <sys_created_by>admin</sys_created_by>
         <sys_created_on>2024-04-28 20:32:53</sys_created_on>

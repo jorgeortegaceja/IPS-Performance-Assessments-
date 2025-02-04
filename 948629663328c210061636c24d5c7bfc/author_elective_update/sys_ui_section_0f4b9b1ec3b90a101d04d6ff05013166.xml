@@ -1,0 +1,270 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update>
+    <sys_ui_section action="DELETE" caption="Informative" section_id="0f4b9b1ec3b90a101d04d6ff05013166" sys_domain="b3b234dd0fe6ee006dc98fbce1050e6e" table="x_ipsu2_ips_perfor_performance_evaluation" version="3" view="">
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>show_instructions</element>
+            <position>0</position>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2024-08-15 04:19:11</sys_created_on>
+            <sys_id>87c8595d4740d2102d16d9ce316d4337</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="Informative" display_value="Informative" name="x_ipsu2_ips_perfor_performance_evaluation" sys_domain="b3b234dd0fe6ee006dc98fbce1050e6e" view="Default view">0f4b9b1ec3b90a101d04d6ff05013166</sys_ui_section>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2024-08-15 04:19:11</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>download_self_assessment</element>
+            <position>1</position>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2024-08-15 04:19:11</sys_created_on>
+            <sys_id>8fc8595d4740d2102d16d9ce316d4337</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="Informative" display_value="Informative" name="x_ipsu2_ips_perfor_performance_evaluation" sys_domain="b3b234dd0fe6ee006dc98fbce1050e6e" view="Default view">0f4b9b1ec3b90a101d04d6ff05013166</sys_ui_section>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2024-08-15 04:19:11</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>show_leader_information</element>
+            <position>2</position>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2024-08-15 04:19:11</sys_created_on>
+            <sys_id>83c8595d4740d2102d16d9ce316d4338</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="Informative" display_value="Informative" name="x_ipsu2_ips_perfor_performance_evaluation" sys_domain="b3b234dd0fe6ee006dc98fbce1050e6e" view="Default view">0f4b9b1ec3b90a101d04d6ff05013166</sys_ui_section>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2024-08-15 04:19:11</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>click_on_the_following_link</element>
+            <position>3</position>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2024-08-15 04:19:11</sys_created_on>
+            <sys_id>87c8595d4740d2102d16d9ce316d4338</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="Informative" display_value="Informative" name="x_ipsu2_ips_perfor_performance_evaluation" sys_domain="b3b234dd0fe6ee006dc98fbce1050e6e" view="Default view">0f4b9b1ec3b90a101d04d6ff05013166</sys_ui_section>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2024-08-15 04:19:11</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>collaborator_settings</element>
+            <position>4</position>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2024-08-15 04:19:11</sys_created_on>
+            <sys_id>8bc8595d4740d2102d16d9ce316d4338</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="Informative" display_value="Informative" name="x_ipsu2_ips_perfor_performance_evaluation" sys_domain="b3b234dd0fe6ee006dc98fbce1050e6e" view="Default view">0f4b9b1ec3b90a101d04d6ff05013166</sys_ui_section>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2024-08-15 04:19:11</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>leader_settings</element>
+            <position>5</position>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2024-08-15 04:19:11</sys_created_on>
+            <sys_id>8fc8595d4740d2102d16d9ce316d4338</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="Informative" display_value="Informative" name="x_ipsu2_ips_perfor_performance_evaluation" sys_domain="b3b234dd0fe6ee006dc98fbce1050e6e" view="Default view">0f4b9b1ec3b90a101d04d6ff05013166</sys_ui_section>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2024-08-15 04:19:11</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_section action="DELETE">
+            <caption>Informative</caption>
+            <header>false</header>
+            <name>x_ipsu2_ips_perfor_performance_evaluation</name>
+            <roles/>
+            <sys_class_name>sys_ui_section</sys_class_name>
+            <sys_created_by>jorge.ortega</sys_created_by>
+            <sys_created_on>2024-04-28 20:02:01</sys_created_on>
+            <sys_domain>b3b234dd0fe6ee006dc98fbce1050e6e</sys_domain>
+            <sys_domain_path/>
+            <sys_id>0f4b9b1ec3b90a101d04d6ff05013166</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_name>x_ipsu2_ips_perfor_performance_evaluation</sys_name>
+            <sys_overrides/>
+            <sys_package display_value="IPS Performance Assessments" source="x_ipsu2_ips_perfor">948629663328c210061636c24d5c7bfc</sys_package>
+            <sys_policy/>
+            <sys_scope display_value="IPS Performance Assessments">948629663328c210061636c24d5c7bfc</sys_scope>
+            <sys_update_name>sys_ui_section_0f4b9b1ec3b90a101d04d6ff05013166</sys_update_name>
+            <sys_updated_by>jorge.ortega</sys_updated_by>
+            <sys_updated_on>2024-04-28 20:02:01</sys_updated_on>
+            <sys_user/>
+            <title>false</title>
+            <view display_value="Default view" name="NULL">Default view</view>
+            <view_name/>
+        </sys_ui_section>
+    </sys_ui_section>
+<sys_update_version action="INSERT_OR_UPDATE">
+        <action>DELETE</action>
+        <application display_value="IPS Performance Assessments">948629663328c210061636c24d5c7bfc</application>
+        <file_path/>
+        <instance_id>606bf9481b958a9c65324089bd4bcb9d</instance_id>
+        <instance_name>dev249884</instance_name>
+        <name>sys_ui_section_0f4b9b1ec3b90a101d04d6ff05013166</name>
+        <payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update>
+    <sys_ui_section caption="Informative" section_id="0f4b9b1ec3b90a101d04d6ff05013166" sys_domain="b3b234dd0fe6ee006dc98fbce1050e6e" table="x_ipsu2_ips_perfor_performance_evaluation" version="3" view="">
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>show_instructions</element>
+            <position>0</position>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2024-08-15 04:19:11</sys_created_on>
+            <sys_id>87c8595d4740d2102d16d9ce316d4337</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="Informative" display_value="Informative" name="x_ipsu2_ips_perfor_performance_evaluation" sys_domain="b3b234dd0fe6ee006dc98fbce1050e6e" view="Default view">0f4b9b1ec3b90a101d04d6ff05013166</sys_ui_section>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2024-08-15 04:19:11</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>download_self_assessment</element>
+            <position>1</position>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2024-08-15 04:19:11</sys_created_on>
+            <sys_id>8fc8595d4740d2102d16d9ce316d4337</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="Informative" display_value="Informative" name="x_ipsu2_ips_perfor_performance_evaluation" sys_domain="b3b234dd0fe6ee006dc98fbce1050e6e" view="Default view">0f4b9b1ec3b90a101d04d6ff05013166</sys_ui_section>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2024-08-15 04:19:11</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>show_leader_information</element>
+            <position>2</position>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2024-08-15 04:19:11</sys_created_on>
+            <sys_id>83c8595d4740d2102d16d9ce316d4338</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="Informative" display_value="Informative" name="x_ipsu2_ips_perfor_performance_evaluation" sys_domain="b3b234dd0fe6ee006dc98fbce1050e6e" view="Default view">0f4b9b1ec3b90a101d04d6ff05013166</sys_ui_section>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2024-08-15 04:19:11</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>click_on_the_following_link</element>
+            <position>3</position>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2024-08-15 04:19:11</sys_created_on>
+            <sys_id>87c8595d4740d2102d16d9ce316d4338</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="Informative" display_value="Informative" name="x_ipsu2_ips_perfor_performance_evaluation" sys_domain="b3b234dd0fe6ee006dc98fbce1050e6e" view="Default view">0f4b9b1ec3b90a101d04d6ff05013166</sys_ui_section>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2024-08-15 04:19:11</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>collaborator_settings</element>
+            <position>4</position>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2024-08-15 04:19:11</sys_created_on>
+            <sys_id>8bc8595d4740d2102d16d9ce316d4338</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="Informative" display_value="Informative" name="x_ipsu2_ips_perfor_performance_evaluation" sys_domain="b3b234dd0fe6ee006dc98fbce1050e6e" view="Default view">0f4b9b1ec3b90a101d04d6ff05013166</sys_ui_section>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2024-08-15 04:19:11</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>leader_settings</element>
+            <position>5</position>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2024-08-15 04:19:11</sys_created_on>
+            <sys_id>8fc8595d4740d2102d16d9ce316d4338</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="Informative" display_value="Informative" name="x_ipsu2_ips_perfor_performance_evaluation" sys_domain="b3b234dd0fe6ee006dc98fbce1050e6e" view="Default view">0f4b9b1ec3b90a101d04d6ff05013166</sys_ui_section>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2024-08-15 04:19:11</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_section action="INSERT_OR_UPDATE">
+            <caption>Informative</caption>
+            <header>false</header>
+            <name>x_ipsu2_ips_perfor_performance_evaluation</name>
+            <roles/>
+            <sys_class_name>sys_ui_section</sys_class_name>
+            <sys_created_by>jorge.ortega</sys_created_by>
+            <sys_created_on>2024-04-28 20:02:01</sys_created_on>
+            <sys_domain>b3b234dd0fe6ee006dc98fbce1050e6e</sys_domain>
+            <sys_domain_path/>
+            <sys_id>0f4b9b1ec3b90a101d04d6ff05013166</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_name>x_ipsu2_ips_perfor_performance_evaluation</sys_name>
+            <sys_overrides/>
+            <sys_package display_value="IPS Performance Assessments" source="x_ipsu2_ips_perfor">948629663328c210061636c24d5c7bfc</sys_package>
+            <sys_policy/>
+            <sys_scope display_value="IPS Performance Assessments">948629663328c210061636c24d5c7bfc</sys_scope>
+            <sys_update_name>sys_ui_section_0f4b9b1ec3b90a101d04d6ff05013166</sys_update_name>
+            <sys_updated_by>jorge.ortega</sys_updated_by>
+            <sys_updated_on>2024-04-28 20:02:01</sys_updated_on>
+            <sys_user/>
+            <title>false</title>
+            <view display_value="Default view" name="NULL">Default view</view>
+            <view_name/>
+        </sys_ui_section>
+    </sys_ui_section>
+</record_update>]]></payload>
+        <payload_hash>270144338</payload_hash>
+        <record_name>Performance evaluation</record_name>
+        <reverted_from/>
+        <source>f6b06103c39f12106068be3ed401314d</source>
+        <source_table>sys_upgrade_history</source_table>
+        <state>previous</state>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2025-01-29 04:47:54</sys_created_on>
+        <sys_id>a3d02143c39f12106068be3ed401312a</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_recorded_at>194b06321530000001</sys_recorded_at>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2025-01-29 04:47:54</sys_updated_on>
+        <type>Form Layout</type>
+        <update_guid>63d02143449f1210f0e21a87d664532a</update_guid>
+        <update_guid_history>63d02143449f1210f0e21a87d664532a:270144338</update_guid_history>
+    </sys_update_version>
+    <sys_metadata_delete action="INSERT_OR_UPDATE">
+        <sys_audit_delete/>
+        <sys_class_name>sys_metadata_delete</sys_class_name>
+        <sys_created_by>jorge.ortega</sys_created_by>
+        <sys_created_on>2025-01-29 05:49:13</sys_created_on>
+        <sys_db_object display_value="" name="sys_ui_section">sys_ui_section</sys_db_object>
+        <sys_id>d84de1a5b31f4814af63955774090e29</sys_id>
+        <sys_metadata>0f4b9b1ec3b90a101d04d6ff05013166</sys_metadata>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>x_ipsu2_ips_perfor_performance_evaluation</sys_name>
+        <sys_package display_value="IPS Performance Assessments" source="x_ipsu2_ips_perfor">948629663328c210061636c24d5c7bfc</sys_package>
+        <sys_parent display_value="">adb17e8ec3f9c6101d04d6ff050131f8</sys_parent>
+        <sys_policy/>
+        <sys_scope display_value="IPS Performance Assessments">948629663328c210061636c24d5c7bfc</sys_scope>
+        <sys_scope_delete display_value="">2ca5452e23e4451ca60ab6cf0b82cec9</sys_scope_delete>
+        <sys_update_name>sys_ui_section_0f4b9b1ec3b90a101d04d6ff05013166</sys_update_name>
+        <sys_update_version display_value="sys_ui_section_0f4b9b1ec3b90a101d04d6ff05013166">a3d02143c39f12106068be3ed401312a</sys_update_version>
+        <sys_updated_by>jorge.ortega</sys_updated_by>
+        <sys_updated_on>2025-01-29 05:49:13</sys_updated_on>
+    </sys_metadata_delete>
+</record_update>

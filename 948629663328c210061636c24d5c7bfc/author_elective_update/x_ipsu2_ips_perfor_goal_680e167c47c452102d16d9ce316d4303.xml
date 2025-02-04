@@ -53,7 +53,7 @@
         <update_guid_history>ac4e1a7c79c45210cb2e0a00e4374f05:-593323374,640e167c23c45210146f14495b075008:-201839221</update_guid_history>
     </sys_update_version>
     <sys_metadata_delete action="INSERT_OR_UPDATE">
-        <sys_audit_delete display_value="casd">b2cf92fc47c452102d16d9ce316d4374</sys_audit_delete>
+        <sys_audit_delete display_value="">b2cf92fc47c452102d16d9ce316d4374</sys_audit_delete>
         <sys_class_name>sys_metadata_delete</sys_class_name>
         <sys_created_by>admin</sys_created_by>
         <sys_created_on>2024-08-13 20:12:25</sys_created_on>

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?><record_update table="sn_ex_sp_todo_config_detail">
     <sn_ex_sp_todo_config_detail action="INSERT_OR_UPDATE">
+        <action_group_record/>
         <active>true</active>
         <conditions table="sysapproval_approver">source_table=x_ipsu2_ips_perfor_performance_evaluation^state=requested^EQ<item endquery="false" field="source_table" goto="false" newquery="false" operator="=" or="false" value="x_ipsu2_ips_perfor_performance_evaluation"/>
             <item display_value="Requested" endquery="false" field="state" goto="false" newquery="false" operator="=" or="false" value="requested"/>

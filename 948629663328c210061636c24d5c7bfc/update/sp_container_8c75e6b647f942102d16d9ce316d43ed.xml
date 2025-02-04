@@ -8,6 +8,7 @@
         <container_class_name/>
         <name>IPS Stepper - Test Page - Container 1</name>
         <order>1</order>
+        <semantic_tag/>
         <sp_page display_value="ips_stepper">7765e6b647f942102d16d9ce316d43eb</sp_page>
         <subheader>false</subheader>
         <sys_class_name>sp_container</sys_class_name>

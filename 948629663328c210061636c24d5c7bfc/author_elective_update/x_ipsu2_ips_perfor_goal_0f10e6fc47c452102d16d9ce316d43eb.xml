@@ -53,7 +53,7 @@
         <update_guid_history>6fcbe2b84e085210716cec5f46b8918d:-670687155,0dbba2b81f085210b1e47cde86b24c3d:-652260402,fa306afcbdc4521019ec1ea4dd1cc941:-2145422955,ae20a6fce6c452103a402335175eaae3:2118511312,0710e6fc65c45210aa645f567d0a40ed:1878695434</update_guid_history>
     </sys_update_version>
     <sys_metadata_delete action="INSERT_OR_UPDATE">
-        <sys_audit_delete display_value="hola mundo">6a7fea7c470852102d16d9ce316d4325</sys_audit_delete>
+        <sys_audit_delete display_value="">6a7fea7c470852102d16d9ce316d4325</sys_audit_delete>
         <sys_class_name>sys_metadata_delete</sys_class_name>
         <sys_created_by>admin</sys_created_by>
         <sys_created_on>2024-08-13 21:20:56</sys_created_on>

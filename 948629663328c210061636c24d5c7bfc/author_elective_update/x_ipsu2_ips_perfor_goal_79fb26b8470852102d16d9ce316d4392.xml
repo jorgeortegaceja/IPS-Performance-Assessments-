@@ -53,7 +53,7 @@
         <update_guid_history>5b803ebc940852105c5e40a126ab6e3d:600621110,377fea7c76085210ad05073d48d881ca:619047863,0f7fea7cb8085210257af52c56128e64:637474616,e27fea7c81085210bf7ce657e4f68622:655901369,ab6f6a7c6b0852101fce7050e031319e:674328122,b9fbe6b86e08521022736642239f0c5c:-696662930</update_guid_history>
     </sys_update_version>
     <sys_metadata_delete action="INSERT_OR_UPDATE">
-        <sys_audit_delete display_value="asd asdasd">6c903ebc470852102d16d9ce316d43a2</sys_audit_delete>
+        <sys_audit_delete display_value="">6c903ebc470852102d16d9ce316d43a2</sys_audit_delete>
         <sys_class_name>sys_metadata_delete</sys_class_name>
         <sys_created_by>admin</sys_created_by>
         <sys_created_on>2024-08-13 21:25:44</sys_created_on>

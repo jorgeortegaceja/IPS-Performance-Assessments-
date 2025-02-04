@@ -2,6 +2,7 @@
     <sp_row action="INSERT_OR_UPDATE">
         <class_name/>
         <order>1</order>
+        <semantic_tag/>
         <sp_column/>
         <sp_container display_value="My self assessments - Test Page - Container 1">11a9be46c33dc6101d04d6ff0501315c</sp_container>
         <sys_class_name>sp_row</sys_class_name>

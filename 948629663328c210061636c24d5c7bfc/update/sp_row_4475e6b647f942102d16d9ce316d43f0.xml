@@ -2,6 +2,7 @@
     <sp_row action="INSERT_OR_UPDATE">
         <class_name/>
         <order>1</order>
+        <semantic_tag/>
         <sp_column/>
         <sp_container display_value="IPS Stepper - Test Page - Container 1">8c75e6b647f942102d16d9ce316d43ed</sp_container>
         <sys_class_name>sp_row</sys_class_name>

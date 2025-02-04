@@ -15,8 +15,8 @@
         <condition/>
         <description/>
         <execute_function>false</execute_function>
-        <filter_condition table="x_ipsu2_ips_perfor_performance_evaluation">stateCHANGESFROM30^stateCHANGESTO20^EQ<item display_value="Authorization" endquery="false" field="state" goto="false" newquery="false" operator="CHANGESFROM" or="false" value="30"/>
-            <item display_value="Goal correction" endquery="false" field="state" goto="false" newquery="false" operator="CHANGESTO" or="false" value="20"/>
+        <filter_condition table="x_ipsu2_ips_perfor_performance_evaluation">stateCHANGESFROM30^stateCHANGESTO20^EQ<item endquery="false" field="state" goto="false" newquery="false" operator="CHANGESFROM" or="false" value="30"/>
+            <item endquery="false" field="state" goto="false" newquery="false" operator="CHANGESTO" or="false" value="20"/>
             <item endquery="true" field="" goto="false" newquery="false" operator="=" or="false" value=""/>
         </filter_condition>
         <is_rest>false</is_rest>

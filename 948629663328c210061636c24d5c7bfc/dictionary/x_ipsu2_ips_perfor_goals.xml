@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element label="Goal" max_length="40" name="x_ipsu2_ips_perfor_goals" type="collection">
+        <element attributes="edge_encryption_enabled=true" default="javascript:global.getNextObjNumberPadded();" label="Number" max_length="40" name="number" type="string"/>
+        <element label="Collaborator goal weight" max_length="40" name="collaborator_goal_weight" type="float"/>
+        <element label="Leader goal weight" max_length="40" name="leader_goal_weight" type="float"/>
+        <element label="Target" max_length="40" name="target" type="string"/>
+        <element default="javascript:current.getTableName();" label="Class" max_length="80" name="sys_class_name" type="sys_class_name"/>
+        <element label="No Goal" max_length="40" name="no_goal" type="integer"/>
+        <element label="State" max_length="40" name="state" type="choice">
+            <choice>
+                <element inactive_on_update="false" label="a" sequence="0" value="a"/>
+            </choice>
+        </element>
+        <element label="Leader evaluation" max_length="40" name="leader_evaluation" type="float"/>
+        <element label="Evaluation" max_length="32" name="evaluation" reference="x_ipsu2_ips_perfor_performance_evaluation" type="reference"/>
+        <element label="Collaborator evaluation" max_length="40" name="collaborator_evaluation" type="float"/>
+        <element label="Priority" max_length="40" name="priority" type="choice">
+            <choice>
+                <element inactive_on_update="false" label="q" sequence="0" value="q"/>
+            </choice>
+        </element>
+        <element label="Work notes" max_length="40" name="work_notes" type="journal"/>
+        <element label="Comments" max_length="40" name="comments" type="journal"/>
+        <index name="index">
+            <element name="evaluation"/>
+        </index>
+        <index name="index2">
+            <element name="sys_class_name"/>
+        </index>
+    </element>
+</database>

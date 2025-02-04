@@ -2,6 +2,7 @@
     <sp_row action="INSERT_OR_UPDATE">
         <class_name/>
         <order>1</order>
+        <semantic_tag/>
         <sp_column/>
         <sp_container display_value="IPS selft Assesment - Test Page - Container 1">3d1e61e6477902102d16d9ce316d4351</sp_container>
         <sys_class_name>sp_row</sys_class_name>

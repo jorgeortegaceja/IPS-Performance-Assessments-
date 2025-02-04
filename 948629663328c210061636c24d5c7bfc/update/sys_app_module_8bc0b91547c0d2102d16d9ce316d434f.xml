@@ -17,6 +17,7 @@
         <override_menu_roles>false</override_menu_roles>
         <query>system_properties_ui.do?sysparm_title=Performance evaluation settings&amp;sysparm_category=Performance_Evaluation,Performance Evaluation State,Mid-year evaluation,Year evaluation</query>
         <report/>
+        <require_confirmation>false</require_confirmation>
         <roles>x_ipsu2_ips_perfor.admin</roles>
         <sys_class_name>sys_app_module</sys_class_name>
         <sys_created_by>admin</sys_created_by>

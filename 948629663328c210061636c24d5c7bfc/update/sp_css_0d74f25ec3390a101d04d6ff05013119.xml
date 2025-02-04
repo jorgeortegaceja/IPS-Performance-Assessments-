@@ -13907,5 +13907,6 @@ fieldset:disabled .btn {&#13;
         <sys_update_name>sp_css_0d74f25ec3390a101d04d6ff05013119</sys_update_name>
         <sys_updated_by>jorge.ortega</sys_updated_by>
         <sys_updated_on>2024-04-28 17:12:38</sys_updated_on>
+        <turn_off_scss_compilation>false</turn_off_scss_compilation>
     </sp_css>
 </record_update>
