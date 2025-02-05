@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_db_object">
+    <sys_db_object action="DELETE">
+        <access/>
+        <actions_access>false</actions_access>
+        <alter_access>false</alter_access>
+        <caller_access/>
+        <client_scripts_access>false</client_scripts_access>
+        <configuration_access>false</configuration_access>
+        <create_access>false</create_access>
+        <create_access_controls>false</create_access_controls>
+        <delete_access>false</delete_access>
+        <is_extendable>false</is_extendable>
+        <label>Goals</label>
+        <live_feed_enabled>false</live_feed_enabled>
+        <name>x_ipsu2_ips_perfor_goal</name>
+        <number_ref/>
+        <provider_class/>
+        <read_access>true</read_access>
+        <scriptable_table>false</scriptable_table>
+        <super_class display_value="Data Lookup Matcher Rules" name="dl_matcher">86aeb7f4db221200b5e25aa9bf961946</super_class>
+        <sys_class_name>sys_db_object</sys_class_name>
+        <sys_created_by>jorge.ortega</sys_created_by>
+        <sys_created_on>2025-02-05 13:20:54</sys_created_on>
+        <sys_customer_update>false</sys_customer_update>
+        <sys_id>4c34ae82c3f9c6101d04d6ff050131e8</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Ips Perfor Goal</sys_name>
+        <sys_package display_value="IPS Performance Assessments" source="x_ipsu2_ips_perfor">948629663328c210061636c24d5c7bfc</sys_package>
+        <sys_policy/>
+        <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
+        <sys_scope display_value="IPS Performance Assessments">948629663328c210061636c24d5c7bfc</sys_scope>
+        <sys_update_name>sys_db_object_4c34ae82c3f9c6101d04d6ff050131e8</sys_update_name>
+        <sys_updated_by>jorge.ortega</sys_updated_by>
+        <sys_updated_on>2025-02-05 13:20:54</sys_updated_on>
+        <update_access>false</update_access>
+        <user_role/>
+        <ws_access>true</ws_access>
+    </sys_db_object>
+    <sys_update_version action="INSERT_OR_UPDATE">
+        <action>DELETE</action>
+        <application display_value="IPS Performance Assessments">948629663328c210061636c24d5c7bfc</application>
+        <file_path/>
+        <instance_id>4d0a6ffc6fae9ac0869e7b2f5d3ee49b</instance_id>
+        <instance_name>myplatform</instance_name>
+        <name>sys_db_object_4c34ae82c3f9c6101d04d6ff050131e8</name>
+        <payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_db_object"><sys_db_object action="INSERT_OR_UPDATE"><access/><actions_access>false</actions_access><alter_access>false</alter_access><caller_access/><client_scripts_access>false</client_scripts_access><configuration_access>false</configuration_access><create_access>false</create_access><create_access_controls>false</create_access_controls><delete_access>false</delete_access><is_extendable>false</is_extendable><label>Goals</label><live_feed_enabled>false</live_feed_enabled><name>x_ipsu2_ips_perfor_goal</name><number_ref/><provider_class/><read_access>true</read_access><scriptable_table>false</scriptable_table><super_class display_value="Data Lookup Matcher Rules" name="dl_matcher">86aeb7f4db221200b5e25aa9bf961946</super_class><sys_class_name>sys_db_object</sys_class_name><sys_created_by>jorge.ortega</sys_created_by><sys_created_on>2025-02-05 13:20:54</sys_created_on><sys_customer_update>false</sys_customer_update><sys_id>4c34ae82c3f9c6101d04d6ff050131e8</sys_id><sys_mod_count>0</sys_mod_count><sys_name>Ips Perfor Goal</sys_name><sys_package display_value="IPS Performance Assessments" source="x_ipsu2_ips_perfor">948629663328c210061636c24d5c7bfc</sys_package><sys_policy/><sys_replace_on_upgrade>false</sys_replace_on_upgrade><sys_scope display_value="IPS Performance Assessments">948629663328c210061636c24d5c7bfc</sys_scope><sys_update_name>sys_db_object_4c34ae82c3f9c6101d04d6ff050131e8</sys_update_name><sys_updated_by>jorge.ortega</sys_updated_by><sys_updated_on>2025-02-05 13:20:54</sys_updated_on><update_access>false</update_access><user_role/><ws_access>true</ws_access></sys_db_object></record_update>]]></payload>
+        <payload_hash>456749431</payload_hash>
+        <record_name>Goals</record_name>
+        <reverted_from/>
+        <source>4894f43383031210d6ac6250ceaad3ce</source>
+        <source_table>sys_upgrade_history</source_table>
+        <state>previous</state>
+        <sys_created_by/>
+        <sys_created_on>2025-01-18 23:14:04</sys_created_on>
+        <sys_id>6769df9147a3965022b664d3426d43e5</sys_id>
+        <sys_mod_count/>
+        <sys_recorded_at>1947bb1e6600000000</sys_recorded_at>
+        <sys_updated_by/>
+        <sys_updated_on/>
+        <type>Table</type>
+        <update_guid>6369df91bea396508741c639f8c958e5</update_guid>
+        <update_guid_history>6369df91bea396508741c639f8c958e5:0,4ed8db1165a3965051bcd4fc19e60c97:-996071524,d9d89b116ea39650641e8dc1d53b6d89:0,13e9620a5bf9c6106dbe2744f9127078:-1642110740,dbe9620a89f9c61092a211ed254be46f:-1738712991</update_guid_history>
+    </sys_update_version>
+    <sys_metadata_delete action="INSERT_OR_UPDATE">
+        <sys_audit_delete/>
+        <sys_class_name>sys_metadata_delete</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2025-02-05 13:22:28</sys_created_on>
+        <sys_customer_update>false</sys_customer_update>
+        <sys_db_object display_value="" name="sys_db_object">sys_db_object</sys_db_object>
+        <sys_id>17e2a970090d437ca277c3b4d2952ee4</sys_id>
+        <sys_metadata>4c34ae82c3f9c6101d04d6ff050131e8</sys_metadata>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Goals</sys_name>
+        <sys_package display_value="IPS Performance Assessments" source="x_ipsu2_ips_perfor">948629663328c210061636c24d5c7bfc</sys_package>
+        <sys_parent/>
+        <sys_policy/>
+        <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
+        <sys_scope display_value="IPS Performance Assessments">948629663328c210061636c24d5c7bfc</sys_scope>
+        <sys_scope_delete display_value="">2ca5452e23e4451ca60ab6cf0b82cec9</sys_scope_delete>
+        <sys_update_name>sys_db_object_4c34ae82c3f9c6101d04d6ff050131e8</sys_update_name>
+        <sys_update_version display_value="sys_db_object_4c34ae82c3f9c6101d04d6ff050131e8">6769df9147a3965022b664d3426d43e5</sys_update_version>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2025-02-05 13:22:28</sys_updated_on>
+    </sys_metadata_delete>
+</record_update>
